@@ -5,7 +5,7 @@ export async function fetchUserProfile() {
     const token = getToken();
 
     try {
-        const response = await fetch('http://localhost:8086/api/auth/perfil', {
+        const response = await fetch('http://127.0.0.1:5000/api/usuarios/perfil', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`, // Validar el token

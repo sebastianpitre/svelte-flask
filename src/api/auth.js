@@ -3,18 +3,18 @@ import { user } from '../stores/user';
 
 // Función para guardar el token en localStorage
 export function saveToken(token) {
-    localStorage.setItem('accessToken', token);
+    localStorage.setItem('access_token', token);
 }
 
 // Función para obtener el token desde localStorage
 export function getToken() {
-    return localStorage.getItem('accessToken');
+    return localStorage.getItem('access_token');
 }
 
 // Función para realizar el login y guardar el token
 export async function login(credentials) {
     try {
-        const response = await fetch('http://localhost:8086/api/auth/admin/login', {
+        const response = await fetch('http://127.0.0.1:5000/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ export async function login(credentials) {
 
         if (response.ok) {
             const data = await response.json();
-            saveToken(data.accessToken);
+            saveToken(data.access_token);
             return data;
         } else {
             throw new Error('Login fallido');
@@ -64,14 +64,21 @@ export async function fetchWithAuth(url, options = {}) {
 
 export async function logout() {
     try {
-        // Realizar la solicitud de logout al backend
-        const response = await fetch('http://localhost:8086/api/auth/admin/logout', {
+        // Obtener el token de acceso desde localStorage
+        const token = localStorage.getItem('access_token');
+
+        // Realizar la solicitud de logout al backend con el token en el encabezado
+        const response = await fetch('http://127.0.0.1:5000/api/auth/logout', {
             method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`, // Enviar el token en los encabezados
+                'Content-Type': 'application/json',
+            },
         });
 
         if (response.ok) {
             // Limpiar el token y los datos del usuario
-            localStorage.removeItem('accessToken');
+            localStorage.removeItem('access_token');
             user.set(null); // Limpiar la tienda de usuario
 
             // Redirigir al usuario a la página de inicio de sesión
@@ -83,3 +90,4 @@ export async function logout() {
         console.error('Error en el logout:', error.message || error);
     }
 }
+

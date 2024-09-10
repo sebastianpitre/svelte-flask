@@ -20,11 +20,11 @@
   onMount(async () => {
     try {
       // Obtener productos
-      const responseProductos = await fetch("http://localhost:8086/api/publico/productos");
+      const responseProductos = await fetch("http://127.0.0.1:5000/api/publico/productos");
       listProductos = await responseProductos.json();
       
       // Obtener categorías
-      const responseCategorias = await fetch("http://localhost:8086/api/publico/categorias");
+      const responseCategorias = await fetch("http://127.0.0.1:5000/api/publico/categorias");
       categorias = await responseCategorias.json();
       
     } catch (error) {
@@ -37,16 +37,16 @@
     ? listProductos
     : listProductos.filter(producto => {
         const categoria = categorias.find(cat => cat.nombre === $selectedCategory);
-        return categoria ? producto.idCategoria === categoria.id : false;
+        return categoria ? producto.id_categorias === categoria.id_categorias : false;
       });
 
   // Filtrar categorías que tienen productos filtrados
   $: categoriasConProductos = categorias.filter(categoria =>
-    filteredProducts.some(producto => producto.idCategoria === categoria.id)
+    filteredProducts.some(producto => producto.id_categorias === categoria.id_categorias)
   );
 
   // Verificar si hay productos en promoción
-  $: productosEnPromocion = filteredProducts.filter(producto => producto.activo && producto.promocion);
+  $: productosEnPromocion = filteredProducts.filter(producto => producto.is_activo && producto.is_promocion);
 
   // Verificar si hay productos después del filtrado
   $: noProducts = filteredProducts.length === 0;
@@ -56,7 +56,7 @@
   // Lógica para obtener productos desde API u otra fuente
   onMount(async () => {
     try {
-      const responseProductos = await fetch("http://localhost:8086/api/publico/productos");
+      const responseProductos = await fetch("http://127.0.0.1:5000/api/publico/productos");
       listProductos = await responseProductos.json();
     } catch (error) {
       console.error('Error al obtener productos:', error);
@@ -79,7 +79,7 @@
 
     <div class="card-body mx-3 mx-md-5">
     
-        {#if productosEnPromocion.length > 0 && $selectedCategory === 'all'}
+        <!-- {#if productosEnPromocion.length > 0 && $selectedCategory === 'all'}
           <div class="row mt-1">
             <div class="row">
               <h5 class="text-dark">Ofertas</h5>
@@ -91,7 +91,7 @@
             {/each}
     
           </div>
-        {/if}
+        {/if} -->
     
         {#if noProducts}
           <div class="text-center my-5">
@@ -99,25 +99,40 @@
             <p class="text-muted mt-3">No hay productos disponibles en esta categoría.</p>
           </div>
         {/if}
-    
-        {#each categoriasConProductos as categoria}
+
+        <!-- Mostrar productos juntos cuando se selecciona "Todos" -->
+        {#if productosEnPromocion.length > 0 && $selectedCategory === 'all'}
           <div class="row">
-            <div class="col-md-12 col-lg-12">
-              <div class="row">
-                <h5 class="col text-dark">{categoria.nombre}</h5>
+            <h5 class="col-12 text-dark">Todos los productos</h5>
+            {#each filteredProducts as producto (producto.id)}
+              <div class="{clasesCard}">
+                <Card {producto} addToCart={handleAddToCart}/>
               </div>
-              <div class="row">
-                {#each filteredProducts as producto (producto.id)}
-                  {#if producto.idCategoria === categoria.id}
-                    <div class="{clasesCard}">
-                      <Card {producto} addToCart={handleAddToCart}/>
-                    </div>
-                  {/if}
-                {/each}
+            {/each}
+          </div>
+        {/if}
+
+        <!-- Mostrar productos agrupados por categoría cuando no es "Todos" -->
+        {#if $selectedCategory !== 'all'}
+          {#each categoriasConProductos as categoria}
+            <div class="row">
+              <div class="col-md-12 col-lg-12">
+                <div class="row">
+                  <h5 class="col text-dark">{categoria.nombre}</h5>
+                </div>
+                <div class="row">
+                  {#each filteredProducts as producto (producto.id)}
+                    {#if producto.id_categorias === categoria.id_categorias}
+                      <div class="{clasesCard}">
+                        <Card {producto} addToCart={handleAddToCart}/>
+                      </div>
+                    {/if}
+                  {/each}
+                </div>
               </div>
             </div>
-          </div>
-        {/each}
+          {/each}
+        {/if}
       </div>
 
     <Menufooter/>

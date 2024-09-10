@@ -20,10 +20,6 @@
         }
     });
 
-    // Obtener el ID del primer rol (si existe)
-    $: roleId = userProfile.roles?.[0]?.id ?? 'No tiene roles asignados';
-    $: roleName = userProfile.roles?.[0]?.nombre ?? 'Sin rol';
-
     function openModal() {
         isModalOpen.set(true);
     }
@@ -52,7 +48,7 @@
                 {#if userProfile && userProfile.nombres}
 
                     <!-- ADMIN -->
-                    {#if roleId === 1}
+                    {#if userProfile.rol === "ADMIN"}
                         <a class="col p-1 text-center" href="/cuenta" on:click={() => updatePath('/cuenta')}>
                             <div class="{isActive('/cuenta')}">
                                 <span class="material-symbols-outlined text-white " style="border-radius: 50%; font-size: 28px;">person</span>
@@ -78,7 +74,7 @@
                         </button>
 
                         <!-- USUARIO -->
-                        {:else if roleId === 2}
+                        {:else if userProfile.rol === "CLIENTE"}
                         <a class="col p-1 text-center" href="/cuenta" on:click={() => updatePath('/cuenta')}>
                             <div class="{isActive('/cuenta')}">
                                 <span class="material-symbols-outlined text-white " style="border-radius: 50%; font-size: 28px;">person</span>

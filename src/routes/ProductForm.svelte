@@ -3,6 +3,19 @@
   import Swal from "sweetalert2";
   import Nav from "../components/nav.svelte";
 
+  import { getCategorias } from '../api/categorias';
+
+    let categorias = [];
+    let errorMessage = '';
+
+    onMount(async () => {
+        try {
+            categorias = await getCategorias();
+        } catch (error) {
+            errorMessage = 'No se pudieron cargar los productos.';
+        }
+    });
+
   export let id;
 
   let sku = "";
@@ -10,19 +23,19 @@
   let descripcion = "";
   let urlImagen = "";
   let urlFichaTecnica = null; // Puede ser null
-  let unidadProducto = "GR";
+  let unidadProducto = "";
   let cantidad = 0;
   let precio = 0;
   let promocion = false;
   let descuento = 0;
   let stock = 0;
   let activo = true;
-  let idCategoria = 0;
+  let id_categorias = 0;
   let idUsuario = 0;
 
   onMount(async () => {
     if (id) {
-      const response = await fetch(`http://localhost:8086/api/publico/productos/${id}`);
+      const response = await fetch(`http://127.0.0.1:5000/api/publico/productos/${id}`);
       const product = await response.json();
       
       sku = product.sku || "";
@@ -30,14 +43,14 @@
       descripcion = product.descripcion || "";
       urlImagen = product.urlImagen || "";
       urlFichaTecnica = product.urlFichaTecnica || null;
-      unidadProducto = product.unidadProducto || "GR";
+      unidadProducto = product.unidadProducto || "";
       cantidad = product.cantidad || 0;
       precio = product.precio || 0;
       promocion = product.promocion || false;
       descuento = product.descuento;
       stock = product.stock || 0;
       activo = product.activo;
-      idCategoria = product.idCategoria || 0;
+      id_categorias = product.idCategoria || 0;
       idUsuario = product.idUsuario || 0;
     }
   });
@@ -58,13 +71,13 @@
       descuento,
       stock,
       activo,
-      idCategoria,
+      id_categorias,
       idUsuario,
     };
 
     try {
       const method = id ? "PATCH" : "POST";
-      const url = id ? `http://localhost:8086/api/publico/productos/${id}` : "http://localhost:8086/api/publico/productos";
+      const url = id ? `http://127.0.0.1:5000/api/publico/productos/${id}` : "http://127.0.0.1:5000/api/publico/productos";
 
       const response = await fetch(url, {
         method,
@@ -192,10 +205,14 @@
             </div>
           </div>
 
-          <div class="col-12 col-md-6">
+          <div class="col-6">
             <div class="input-group input-group-static my-2">
-              <label for="ID Categoría">ID Categoría</label>
-              <input type="number" class="form-control" bind:value={idCategoria} required />
+              <h6 class="">Categoría</h6>
+              <select class="form-select form-select-lg form-control mt-n4" bind:value={id_categorias}>
+                {#each categorias as item}
+                  <option value={item.nombre}>{item.nombre}</option>
+                {/each}
+              </select>
             </div>
           </div>
 

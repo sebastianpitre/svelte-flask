@@ -21,8 +21,8 @@
         <div class="card border mx-0 px-3 py-2">
           <div class="row">
 
-            <div class="col-12 col-md-auto text-center my-auto">
-              <img src="{item.urlImagen}" alt="" width="150px" height="120px" class="border-radius-lg icon-md-xl">
+            <div class="col-12 col-md-auto text-center my-auto d-none d-md-block">
+              <img src="{item.url_imagen}" alt="" width="150px" height="120px" class="border-radius-lg icon-md-xl">
             </div>
 
             <div class="col">

@@ -8,7 +8,7 @@
   // Obtener categorías cuando el componente se monta
   onMount(async () => {
     try {
-      const response = await fetch('http://localhost:8086/api/publico/categorias');
+      const response = await fetch('http://127.0.0.1:5000/api/publico/categorias');
       if (!response.ok) {
         throw new Error('Error al obtener las categorías');
       }
@@ -34,7 +34,7 @@
       {#each $listCategorias as values}
         <li class="li ">
           <a class="carta { $selectedCategory === values.nombre ? 'selected' : '' }" href="/estilos/{values.nombre}/" on:click|preventDefault={() => selectCategory(values.nombre)}>
-            <img class="icon opacity-9 bg-white" src="{values.imagen}" alt="icon" width="30px" height="100%">
+            <img class="icon opacity-9 bg-white" src="{values.url_imagen}" alt="icon" width="30px" height="100%">
             <span class="ms-2 text-dark me-3 me-xl-0">{values.nombre}</span>
           </a>
         </li>

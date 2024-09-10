@@ -71,7 +71,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             
-                                            <img src="{values.urlImagen}" class="avatar-xl me-3" alt="img" >
+                                            <img src="{values.url_imagen}" class="avatar-xl me-3" alt="img" >
                                             
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h5 class="mb-0 text-sm">{values.nombre}</h5>
@@ -86,22 +86,22 @@
                                     </td>
         
                                     <td>
-                                        <p class="text-sm mb-0">Precio: <span class="text-success font-weight-bold">$ {values.precio}  </span>{values.unidadProducto}</p>
-                                        {#if values.promocion === true}
-                                        <p class="text-sm mb-0">Precio con oferta: <span class="text-warning font-weight-bold">{values.precio-values.precio*values.descuento/100}</span> {values.unidadProducto}</p>
+                                        <p class="text-sm mb-0">Precio: <span class="text-success font-weight-bold">$ {values.precio}  </span>{values.unidad_producto}</p>
+                                        {#if values.is_promocion === true}
+                                        <p class="text-sm mb-0">Precio con oferta: <span class="text-warning font-weight-bold">{values.precio-values.precio*values.descuento/100}</span> {values.unidad_producto}</p>
                                         {/if}
                                         
                                     </td>
         
                                     <td>
                                         
-                                        {#if values.activo === true}
+                                        {#if values.is_activo === true}
                                         <p class="text-sm mb-0 text-center mx-5 bg-success border-radius-2xl text-white font-weight-bold">Activo</p>
                                         {:else}
                                         <p class="text-sm mb-0 text-center mx-5 bg-danger border-radius-2xl text-white font-weight-bold">No activo</p>
                                         {/if}
-                                        {#if values.promocion === true}
-                                        <p class="text-sm mt-1 text-center mb-0"><span class="text-success font-weight-bold">En Oferta <span class="text-warning">{values.descuento}%</span></span></p>
+                                        {#if values.is_promocion === true}
+                                        <p class="text-sm mt-1 text-center mb-0"><span class="text-success font-weight-bold">En Oferta <span class="text-warning">{Math.trunc(values.descuento)}%</span></span></p>
                                         {:else}
                                         <p class="text-sm mt-1 text-center mb-0"><span class="text-danger font-weight-bold">Sin oferta</span></p>
                                         {/if}

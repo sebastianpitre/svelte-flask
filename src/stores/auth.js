@@ -1,13 +1,13 @@
-let token = localStorage.getItem('accessToken') || null;
+let token = localStorage.getItem('access_token') || null;
 
 export function isAuthenticated() {
     // Leer directamente desde localStorage para asegurarse de que siempre es el valor más actualizado
-    return localStorage.getItem('accessToken') !== null;
+    return localStorage.getItem('access_token') !== null;
 }
 
 export async function checkAuth() {
     // Leer directamente desde localStorage para validación
-    return localStorage.getItem('accessToken') !== null;
+    return localStorage.getItem('access_token') !== null;
 }
 
 export async function login({ email, password }) {
@@ -24,9 +24,9 @@ export async function login({ email, password }) {
     // Aquí mostramos la respuesta completa en la consola
   
     if (response.ok) {
-        token = data.accessToken;
+        token = data.access_token;
         
-        localStorage.setItem('accessToken', token);
+        localStorage.setItem('access_token', token);
 
     } else {
         throw new Error(data.message || 'Login fallido');
@@ -35,6 +35,6 @@ export async function login({ email, password }) {
 
 export function logout() {
     token = null;
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('access_token');
 
 }

@@ -26,9 +26,6 @@
       }
   });
 
-  // Obtener el ID del primer rol (si existe)
-  $: roleId = userProfile.roles?.[0]?.id ?? 'No tiene roles asignados';
-  $: roleName = userProfile.roles?.[0]?.nombre ?? 'Sin rol';
 </script>
 
 <main>

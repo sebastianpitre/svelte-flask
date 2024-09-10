@@ -74,7 +74,7 @@
                             {#each productosEnCarrito as producto (producto.id)}
                                 <tr>
                                     <td class="text-xs font-weight-bolder border-0 ps-4">{carrito.find(item => item.id === producto.id).quantity}</td>
-                                    <td class="text-xs font-weight-bolder border-0">{producto.nombre}</td>
+                                    <td class="text-xs font-weight-bolder border-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre}</td>
                                     <td class="text-xs font-weight-bolder border-0 text-end pe-4">$ {producto.precio.toFixed(2)}</td>
                                     <td class="text-xs font-weight-bolder border-0 text-end pe-4">$ {(producto.precio * carrito.find(item => item.id === producto.id).quantity).toFixed(2)}</td>
                                 </tr>

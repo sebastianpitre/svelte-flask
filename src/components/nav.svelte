@@ -17,10 +17,6 @@
       }
   });
 
-  // Obtener el ID del primer rol (si existe)
-  $: roleId = userProfile.roles?.[0]?.id ?? 'No tiene roles asignados';
-  $: roleName = userProfile.roles?.[0]?.nombre ?? 'Sin rol';
-
   // modal carrito
   import { isModalOpen } from '../stores/modalStore.js';
 
@@ -67,7 +63,7 @@
 
               {#if userProfile && userProfile.nombres}
 
-                {#if roleId === 1}
+                {#if userProfile.rol === "ADMIN"}
                 
                 <li class="nav-item ">
                       
@@ -124,7 +120,7 @@
                     </div>
                   </div>
                 </li>
-                {:else if roleId === 2}
+                {:else if userProfile.rol === "CLIENTE"}
                   <li class="nav-item ">
                       
                     <button class="btn btn-sm btn-success mb-0" on:click={openModal}>
@@ -136,7 +132,7 @@
                   <li class="nav-item dropdown dropdown-hover ms-2">
                     <a role="button" class=" btn btn-sm btn-blue mb-0" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
                       <img class="icon opacity-9 mt-n1" src="/img/icon/user.svg" alt="icon" width="20px">
-                      {roleName}
+                      {userProfile.nombres}
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animation dropdown-md mt-0 mt-lg-3 p-3 border-radius-lg" aria-labelledby="dropdownMenuDocs">
                       <div class="d-none d-lg-block">

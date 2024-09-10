@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 let listProductos = [];
 export async function getProductos() {
     try {
-        const productos = await fetchWithAuth('http://localhost:8086/api/admin/productos');
+        const productos = await fetchWithAuth('http://127.0.0.1:5000/api/admin/productos');
         return productos;
     } catch (error) {
         console.error('Error fetching productos:', error);

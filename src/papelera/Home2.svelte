@@ -26,7 +26,7 @@
   onMount(async () => {
     try {
       // Obtener productos
-      const responseProductos = await fetch("http://localhost:8086/api/publico/productos");
+      const responseProductos = await fetch("");
       listProductos = await responseProductos.json();
       
       // Obtener categorías
@@ -69,7 +69,7 @@
   // Lógica para obtener productos desde API u otra fuente
   onMount(async () => {
     try {
-      const responseProductos = await fetch("http://localhost:8086/api/publico/productos");
+      const responseProductos = await fetch("");
       listProductos = await responseProductos.json();
     } catch (error) {
       console.error('Error al obtener productos:', error);
