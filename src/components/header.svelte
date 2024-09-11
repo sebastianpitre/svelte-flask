@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { fetchWithAuth } from '../api/auth'; // Verifica que la ruta sea correcta
 
   let photos = [];
   let currentIndex = 0;
@@ -9,23 +10,23 @@
   // Función para cambiar la foto actual cada 10 segundos
   function changePhoto() {
       currentIndex = (currentIndex + 1) % photos.length;
-      const { urlImagen, posicionY } = photos[currentIndex];
-      currentPhoto = urlImagen;
-      backgroundStyle = `background-image: url("${currentPhoto}"); background-position-y: ${posicionY}%; background-size: cover; background-position-x: 1%;`;
+      const { url_imagen, posicion_y } = photos[currentIndex];
+      currentPhoto = url_imagen;
+      backgroundStyle = `background-image: url("${currentPhoto}"); background-position-y: ${posicion_y}%; background-size: cover; background-position-x: 1%;`;
   }
 
   // Fetch para obtener las categorías y sus URLs de las imágenes
-  async function fetchPhotos() {
+  async function getBanner() {
       try {
-          const response = await fetch('http://localhost:8080/header/');
+          const response = await fetchWithAuth('http://127.0.0.1:5000/api/admin/banner');
           const data = await response.json();
 
-          // Suponiendo que el JSON tiene una estructura como: [{urlImagen: 'ruta1', posicionY: 80}, {urlImagen: 'ruta2', posicionY: 50}, ...]
+          // Suponiendo que el JSON tiene una estructura como: [{url_imagen: 'ruta1', posicion_y: 80}, {url_imagen: 'ruta2', posicion_y: 50}, ...]
           photos = data;
           if (photos.length > 0) {
-              const { urlImagen, posicionY } = photos[0];
-              currentPhoto = urlImagen;
-              backgroundStyle = `background-image: url("${currentPhoto}"); background-position-y: ${posicionY}%; background-size: cover; background-position-x: 50%;`;
+              const { url_imagen, posicion_y } = photos[0];
+              currentPhoto = url_imagen;
+              backgroundStyle = `background-image: url("${currentPhoto}"); background-position-y: ${posicion_y}%; background-size: cover; background-position-x: 50%;`;
           }
       } catch (error) {
           console.error('Error al obtener las fotos:', error);
@@ -34,7 +35,7 @@
 
   // Establecer el intervalo al montar el componente
   onMount(() => {
-      fetchPhotos();
+      getBanner();
       const interval = setInterval(changePhoto, 5000);
 
       // Limpiar el intervalo cuando se desmonte el componente
@@ -52,7 +53,7 @@
             <img class="avatar-lg avatar-md-xxl opacity-9" src="/img/logo.png" alt="">
           </div>
           <p class="text-edo mb-4 text-white mt-3">
-            <span class="bg-success opacity-9 font-weight-bold card col-lg-4 col-md-6 col-sm-7 col-10 mx-auto">SENA EMPRESA VITRINA WEB</span>
+            <span class="bg-success opacity-9 font-weight-bold card col-lg-6 col-md-6 col-sm-8 col-10 mx-auto">SENA EMPRESA VITRINA WEB</span>
           </p>
         </div>
       </div>

@@ -10,6 +10,9 @@
   import { cart, addToCart, incrementQuantity, decrementQuantity } from './stores/cart';
   import Footer from './components/footer.svelte';
   import Card from './components/card.svelte';
+  import Ofertas from './components/ofertas.svelte';
+  import OfertaSlider from './components/OfertaSlider.svelte';
+  import Sliderly from './components/Sliderly.svelte';
 
   let categorias = [];
 
@@ -74,7 +77,15 @@
     
     <Nav/>
     <Header/>
+    <div class="mx-0 mx-md-5">
+      {#if productosEnPromocion.length > 0 }
+      <h5 class="text-dark ms-3 mt-2 mb-2">🌟 Ofertas</h5>
+      <Sliderly/>
+      {/if}
+    </div>
     <Category/>
+
+    
     <Car/>
 
     <div class="card-body mx-3 mx-md-5">
@@ -85,8 +96,8 @@
               <h5 class="text-dark">Ofertas</h5>
             </div>
             {#each productosEnPromocion as producto (producto.id)}
-              <div class="{clasesCard}">
-                <Card {producto} addToCart={handleAddToCart}/>
+              <div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-2 col-xxl-3 mb-3 px-2">
+                <Ofertas {producto} addToCart={handleAddToCart}/>
               </div>
             {/each}
     
