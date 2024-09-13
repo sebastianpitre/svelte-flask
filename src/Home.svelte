@@ -11,7 +11,7 @@
   import Footer from './components/footer.svelte';
   import Card from './components/card.svelte';
   import Ofertas from './components/ofertas.svelte';
-  import OfertaSlider from './components/OfertaSlider.svelte';
+  import OfertaSlider from './papelera/OfertaSlider.svelte';
   import Sliderly from './components/Sliderly.svelte';
 
   let categorias = [];
@@ -77,7 +77,7 @@
     
     <Nav/>
     <Header/>
-    <div class="mx-0 mx-md-5">
+    <div class="mx-0 mx-md-5 mb-4">
       {#if productosEnPromocion.length > 0 }
       <h5 class="text-dark ms-3 mt-2 mb-2">🌟 Ofertas</h5>
       <Sliderly/>
@@ -113,7 +113,7 @@
 
         <!-- Mostrar productos juntos cuando se selecciona "Todos" -->
         {#if productosEnPromocion.length > 0 && $selectedCategory === 'all'}
-          <div class="row">
+          <div class="row my-2">
             <h5 class="col-12 text-dark">Todos los productos</h5>
             {#each filteredProducts as producto (producto.id)}
               <div class="{clasesCard}">
@@ -128,8 +128,9 @@
           {#each categoriasConProductos as categoria}
             <div class="row">
               <div class="col-md-12 col-lg-12">
-                <div class="row">
-                  <h5 class="col text-dark">{categoria.nombre}</h5>
+                <div class="row my-2">
+                  <img class="sin-fondo" src="{categoria.url_imagen}" alt="" style="width: 60px;">
+                  <h5 class="col my-auto text-dark ms-n3">{categoria.nombre}</h5>
                 </div>
                 <div class="row">
                   {#each filteredProducts as producto (producto.id)}
@@ -150,3 +151,10 @@
 
     <Footer/>
 </main>
+
+<style>
+  .sin-fondo{
+    filter: brightness(1.1);
+    mix-blend-mode: multiply;
+  }
+</style>

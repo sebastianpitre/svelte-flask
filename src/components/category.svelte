@@ -26,7 +26,7 @@
 </script>
 
 
-  <div class="div ">
+  <div class="div border-bottom border-top border-2 pb-1">
     <ul class="ul mb-0 py-2 mt-1 border-radius-lg">
       <li class="li ms-n4">
         <a class="carta text-dark { $selectedCategory === 'all' ? 'selected' : '' }" href="/" on:click|preventDefault={() => selectCategory('all')}>Todos</a>
@@ -73,7 +73,6 @@
     box-shadow: 0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
     box-sizing: border-box;
     display: flex;
-    font-family: Roboto,Helvetica,Arial,sans-serif;
     font-size: 14px;
     font-weight: 500;
     padding: 8px 16px;
@@ -94,10 +93,8 @@ li, ul {
 }
 
 .selected {
-    border: 1px groove #151515;
-    
+    border: 1px groove #eee;
+    box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
 }
-
-
 
 </style>

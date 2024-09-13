@@ -70,7 +70,7 @@
   <div class="card bg-gray {noDisponible ? 'bg-gray-200 ' : ''} position-relative">
     
     {#if producto.is_promocion === true && producto.is_activo === true}
-        <span class="bg-warning col-6 col-sm-4 text-white text-center position-absolute" style="z-index: 3; border-radius: 10px 0px 20px 0px;">
+        <span class="bg-success opacity-9 col-6 col-sm-4 text-white text-center position-absolute" style="z-index: 3; border-radius: 10px 0px 20px 0px;">
           - {Math.trunc(producto.descuento)}%
         </span>
     {/if}

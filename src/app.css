@@ -1,26 +1,3 @@
-/*!
-
-=========================================================
-* Material Kit - v3.0.4
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (site.license)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*!
-   * Bootstrap  v5.2.3 (https://getbootstrap.com/)
-   * Copyright 2011-2022 The Bootstrap Authors
-   * Copyright 2011-2022 Twitter, Inc.
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   */
    :root {
     --bs-blue: #63B3ED;
     --bs-indigo: #596CFF;
@@ -71,7 +48,7 @@
     --bs-font-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-    --bs-body-font-family: var(--bs-font-sans-serif);
+    --bs-body-font-family: 'MiFuente';
     --bs-body-font-size: 1rem;
     --bs-body-font-weight: 400;
     --bs-body-line-height: 1.5;
@@ -92,6 +69,19 @@
     --bs-code-color: #d63384;
     --bs-highlight-bg: #fcf8e3;
   }
+
+  @font-face {
+    font-family: 'MiFuente';
+    src: url('../public/fonts/WorkSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  /* .text-edo{
+    font-family: 'MiFuente', "Caveat";
+    font-weight: normal;
+    font-style: normal;
+  } */
   
   *,
   *::before,
@@ -295,7 +285,6 @@
   }
   
   a:hover {
-    color: var(--bs-orange);
     text-decoration: none;
   }
   

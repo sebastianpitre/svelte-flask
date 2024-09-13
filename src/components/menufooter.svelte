@@ -52,7 +52,7 @@
                         <a class="col p-1 text-center" href="/cuenta" on:click={() => updatePath('/cuenta')}>
                             <div class="{isActive('/cuenta')}">
                                 <span class="material-symbols-outlined text-white " style="border-radius: 50%; font-size: 28px;">person</span>
-                                <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Mi cuenta</p>
+                                <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Cuenta</p>
                             </div>
                         </a>
 
@@ -78,7 +78,7 @@
                         <a class="col p-1 text-center" href="/cuenta" on:click={() => updatePath('/cuenta')}>
                             <div class="{isActive('/cuenta')}">
                                 <span class="material-symbols-outlined text-white " style="border-radius: 50%; font-size: 28px;">person</span>
-                                <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Mi cuenta</p>
+                                <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Cuenta</p>
                             </div>
                         </a>
                         <!-- carrito -->
@@ -100,7 +100,7 @@
                 <a class="col p-1 text-center" href="/login" on:click={() => updatePath('/cuenta')}>
                     <div class="{isActive('/cuenta')}">
                         <span class="material-symbols-outlined text-white " style="border-radius: 50%; font-size: 28px;">person</span>
-                        <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Mi cuenta</p>
+                        <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Cuenta</p>
                     </div>
                 </a>
 
