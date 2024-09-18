@@ -12,6 +12,7 @@
   import UsuarioForm from './routes/usuarioForm.svelte';
   import Pedido from './routes/pedido.svelte';
     import Registro from './routes/Registro.svelte';
+  import PedidosAdmin from './routes/PedidosAdmin.svelte';
 
 </script>
 
@@ -38,6 +39,8 @@
     <Route path="/usuario/editar/:id" component={UsuarioForm} />
     
     <Route path="/pedido" component={Pedido} />
+    <Route path="/admin/pedidos" component={PedidosAdmin} />
+
   </Router>
 
 </main>
