@@ -50,7 +50,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center mx-auto my-auto">
           <div class="warning-horizontal justify-content-center">
-            <img class="avatar-lg avatar-md-xxl opacity-9" src="/img/logo.png" alt="">
+            <img class="avatar-xxl avatar-md-xxl opacity-9" src="/illustrator/PNG/logo.png" alt="">
           </div>
           <p class="text-edo mb-4 text-white mt-3">
             <span class="bg-success opacity-9 font-weight-bold card col-lg-6 col-md-6 col-sm-8 col-10 mx-auto">SENA EMPRESA VITRINA WEB</span>

@@ -5,6 +5,42 @@
   import Carrito from "./carrito.svelte";
   import { vaciarCarrito } from '../stores/cart';
 
+  import { onMount } from "svelte";
+  import { fetchUserProfile } from '../api/user';
+  import { user } from '../stores/user'; // Store para guardar los datos del usuario
+
+  let userProfile = {};
+
+  // Llamar a la función al montar el componente
+  onMount(async () => {
+      try {
+          userProfile = await fetchUserProfile();
+          user.set(userProfile); // Guardar los datos en el store
+      } catch (error) {
+          console.error('No se pudo obtener el perfil del usuario:', error);
+      }
+  });
+
+  import Swal from 'sweetalert2';
+
+  function login() {
+    Swal.fire({
+      title: "Debes iniciar sesión para continuar con tu pedido.",
+      icon: "warning",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: '#4CAF50',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Inicar sesión',
+      cancelButtonText: 'volver'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirigir a otra página
+        window.location.href = '/login'; // Cambia por la URL deseada
+      }
+    });
+  }
+  
   // Función para cerrar el modal al hacer clic fuera del contenido
   function handleClickOutside(event) {
     if (event.target.classList.contains("modal")) {
@@ -13,6 +49,8 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <div class="modal" class:open={$isModalOpen} on:click={handleClickOutside} role="dialog" aria-modal="true">
   <div class="modal-content">
     <div class="col">
@@ -25,9 +63,15 @@
         <div class="col-6">
           <button class="btn btn-sm btn-danger" on:click={vaciarCarrito}>vaciar carrito</button>
         </div>
+        {#if userProfile.rol === "ADMIN" && "CLIENTE"}
         <a use:link href="/pedido" class="col-6">
           <button class="btn btn-sm btn-success">Confirmar pedido</button>
         </a>
+        {:else}
+        <div class="col-6">
+          <button class="btn btn-sm btn-success"  on:click={login} on:click={() => isModalOpen.set(false)}>Confirmar pedido</button>
+        </div>
+        {/if}
       </div>
     </div>
   </div>

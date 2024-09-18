@@ -91,3 +91,28 @@ export async function logout() {
     }
 }
 
+
+
+//POST Función para crear un nuevo usuario 🚩...
+
+export async function createPedido(userData) {
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/auth/registro', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+
+        if (response.ok) {
+            return await response.json();
+        } else {
+            const errorMessage = await response.text();
+            throw new Error(errorMessage || 'Error al crear el usuario');
+        }
+    } catch (error) {
+        console.error('Error en la creación del usuario:', error);
+        throw error;
+    }
+}

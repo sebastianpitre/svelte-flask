@@ -403,6 +403,7 @@
   button,
   select {
     text-transform: none;
+    font-family: "MiFuente";
   }
   
   [role="button"] {
@@ -2714,6 +2715,7 @@
     font-size: 0.875rem;
     font-weight: 400;
     color: #7b809a;
+    font-family: "MiFuente";
   }
   
   .col-form-label {
@@ -3704,7 +3706,7 @@
   .btn.disabled,
   fieldset:disabled .btn {
     color: var(--bs-btn-disabled-color);
-    pointer-events: none;
+    /* pointer-events: none; */
     background-color: var(--bs-btn-disabled-bg);
     border-color: var(--bs-btn-disabled-border-color);
     opacity: var(--bs-btn-disabled-opacity);

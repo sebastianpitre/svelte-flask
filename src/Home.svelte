@@ -10,9 +10,10 @@
   import { cart, addToCart, incrementQuantity, decrementQuantity } from './stores/cart';
   import Footer from './components/footer.svelte';
   import Card from './components/card.svelte';
-  import Ofertas from './components/ofertas.svelte';
+  import Ofertas from './papelera/ofertas.svelte';
   import OfertaSlider from './papelera/OfertaSlider.svelte';
   import Sliderly from './components/Sliderly.svelte';
+    import NoDisponibles from './papelera/NoDisponibles.svelte';
 
   let categorias = [];
 
@@ -50,6 +51,8 @@
 
   // Verificar si hay productos en promoción
   $: productosEnPromocion = filteredProducts.filter(producto => producto.is_activo && producto.is_promocion);
+  $: productosNoactivos = filteredProducts.filter(producto => producto.is_activo === false);
+
 
   // Verificar si hay productos después del filtrado
   $: noProducts = filteredProducts.length === 0;
@@ -77,75 +80,92 @@
     
     <Nav/>
     <Header/>
+    
     <div class="mx-0 mx-md-5 mb-4">
       {#if productosEnPromocion.length > 0 }
       <h5 class="text-dark ms-3 mt-2 mb-2">🌟 Ofertas</h5>
       <Sliderly/>
       {/if}
     </div>
-    <Category/>
-
     
     <Car/>
 
     <div class="card-body mx-3 mx-md-5">
-    
-        <!-- {#if productosEnPromocion.length > 0 && $selectedCategory === 'all'}
-          <div class="row mt-1">
-            <div class="row">
-              <h5 class="text-dark">Ofertas</h5>
-            </div>
-            {#each productosEnPromocion as producto (producto.id)}
-              <div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-2 col-xxl-3 mb-3 px-2">
-                <Ofertas {producto} addToCart={handleAddToCart}/>
-              </div>
-            {/each}
-    
-          </div>
-        {/if} -->
-    
-        {#if noProducts}
-          <div class="text-center my-5">
-            <img class="opacity-4" src="./img/unavailable_icon.webp" alt="No products available" style="width: 50px; height: auto;">
-            <p class="text-muted mt-3">No hay productos disponibles en esta categoría.</p>
-          </div>
-        {/if}
 
-        <!-- Mostrar productos juntos cuando se selecciona "Todos" -->
-        {#if productosEnPromocion.length > 0 && $selectedCategory === 'all'}
-          <div class="row my-2">
-            <h5 class="col-12 text-dark">Todos los productos</h5>
-            {#each filteredProducts as producto (producto.id)}
-              <div class="{clasesCard}">
-                <Card {producto} addToCart={handleAddToCart}/>
-              </div>
-            {/each}
-          </div>
-        {/if}
+      <Category/>
 
-        <!-- Mostrar productos agrupados por categoría cuando no es "Todos" -->
-        {#if $selectedCategory !== 'all'}
-          {#each categoriasConProductos as categoria}
-            <div class="row">
-              <div class="col-md-12 col-lg-12">
-                <div class="row my-2">
-                  <img class="sin-fondo" src="{categoria.url_imagen}" alt="" style="width: 60px;">
-                  <h5 class="col my-auto text-dark ms-n3">{categoria.nombre}</h5>
-                </div>
-                <div class="row">
-                  {#each filteredProducts as producto (producto.id)}
-                    {#if producto.id_categorias === categoria.id_categorias}
-                      <div class="{clasesCard}">
-                        <Card {producto} addToCart={handleAddToCart}/>
-                      </div>
-                    {/if}
-                  {/each}
-                </div>
-              </div>
+      {#if noProducts}
+        <div class="text-center my-5">
+          <img class="opacity-4" src="./img/unavailable_icon.webp" alt="No products available" style="width: 50px; height: auto;">
+          <p class="text-muted mt-3">No hay productos disponibles en esta categoría.</p>
+        </div>
+      {/if}
+
+      <!-- Mostrar productos juntos cuando se selecciona "Todos" -->
+      {#if productosEnPromocion.length > 0 && $selectedCategory === 'all'}
+        <div class="row my-2">
+          <span class="material-symbols-outlined text-dark my-auto col-auto">
+            dashboard
+            </span>
+          <h5 class="col-auto my-auto text-dark ms-n3">Todos los disponibles</h5>
+          <hr class="bg-gray-600 opacity-1 col mt-3 me-2" style="padding-top: 1.7px ;">
+        </div>
+        <div class="row my-2">
+          {#each filteredProducts as producto (producto.id)}
+          {#if producto.is_activo === true}
+            <div class="{clasesCard}">
+              <Card {producto} addToCart={handleAddToCart}/>
             </div>
+            {/if}
           {/each}
-        {/if}
+        </div>
+      {/if}
+
+      <!-- Mostrar productos agrupados por categoría cuando no es "Todos" -->
+      {#if $selectedCategory !== 'all'}
+        {#each categoriasConProductos as categoria}
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="row my-2">
+                <img class="sin-fondo" src="{categoria.url_imagen}" alt="" style="width: 60px;">
+                <h5 class="col my-auto text-dark ms-n3">{categoria.nombre}</h5>
+              </div>
+              <div class="row">
+                {#each filteredProducts as producto (producto.id)}
+                  {#if producto.id_categorias === categoria.id_categorias && producto.is_activo === true}
+                    <div class="{clasesCard}">
+                      <Card {producto} addToCart={handleAddToCart}/>
+                    </div>
+                  {/if}
+                {/each}
+              </div>
+            </div>
+          </div>
+        {/each}
+
+
+      {/if}
+      
+      <div class="row my-2">
+        <span class="material-symbols-outlined text-dark my-auto col-auto">
+          update
+          </span>
+        <h5 class="col-auto my-auto text-dark ms-n3">Disponibles pronto</h5>
+        <hr class="bg-gray-600 opacity-1 col mt-3 me-2" style="padding-top: 1.7px ;">
       </div>
+      <div class="row">
+        {#each filteredProducts as producto (producto.id)}
+        {#if producto.is_activo === false}
+
+            <div class="{clasesCard}">
+              <Card {producto} addToCart={handleAddToCart}/>
+            </div>
+            {/if}
+
+        {/each}
+      </div>
+
+    </div>
 
     <Menufooter/>
 

@@ -11,6 +11,7 @@
   import Usuarios from './routes/usuarios.svelte';
   import UsuarioForm from './routes/usuarioForm.svelte';
   import Pedido from './routes/pedido.svelte';
+    import Registro from './routes/Registro.svelte';
 
 </script>
 
@@ -19,6 +20,7 @@
       <Route path="/" component={Home} exact />
 
       <Route path="/login" component={Login} />
+      <Route path="/registro" component={Registro} />
       <Route path="/cuenta" component={Cuenta} />
       <Route path="/perfil" component={Perfil} />
 

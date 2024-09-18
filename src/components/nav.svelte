@@ -44,7 +44,7 @@
           <a class="col-9 col-sm-7 col-md-5 col-lg-4 col-xl-4 col-xxl-3 font-weight-bolder " use:link href="/" rel="tooltip" data-placement="bottom">
             <div class="row">
               <div class="col-3 text-end">
-                <img class="avatar-sm my-2" src="/img/logo.png" alt="imglogo">
+                <img class="avatar-sm my-2" src="/illustrator/PNG/logotipo.png" alt="imglogo">
               </div>
               <p class="col-9 border-start border-2 text-dark my-auto font-weight-bold">SENA Empresa vitrina web</p>
             </div>
@@ -67,8 +67,8 @@
                 
                 <li class="nav-item ">
                       
-                  <button class="btn btn-sm btn-success mb-0" on:click={openModal}>
-                    <img class="icon opacity-9 mt-n1" src="/img/icon/cart.svg" alt="icon" width="20px">
+                  <button class="btn btn-sm btn-outline-success mb-0" on:click={openModal}>
+                    <img class="icon opacity-9 mt-n1" src="/img/icon/carrito.svg" alt="icon" width="20px">
                     <span class=" me-xl-0">carrito</span>
                   </button>
                 </li> 
@@ -123,8 +123,8 @@
                 {:else if userProfile.rol === "CLIENTE"}
                   <li class="nav-item ">
                       
-                    <button class="btn btn-sm btn-success mb-0" on:click={openModal}>
-                      <img class="icon opacity-9 mt-n1" src="/img/icon/cart.svg" alt="icon" width="20px">
+                    <button class="btn btn-sm btn-outline-success mb-0" on:click={openModal}>
+                      <img class="icon opacity-9 mt-n1" src="/img/icon/carrito.svg" alt="icon" width="20px">
                       <span class=" me-xl-0">carrito</span>
                     </button>
                   </li>
@@ -168,8 +168,8 @@
                   {:else}
                   <li class="nav-item dropdown dropdown-hover">
                       
-                    <button class="btn btn-sm btn-success mb-0" on:click={openModal}>
-                      <img class="icon opacity-9 mt-n1" src="/img/icon/cart.svg" alt="icon" width="20px">
+                    <button class="btn btn-sm btn-outline-success mb-0" on:click={openModal}>
+                      <img class="icon opacity-9 mt-n1" src="/img/icon/carrito.svg" alt="icon" width="20px">
                       <span class=" me-xl-0">carrito</span>
                     </button>
                   </li>
@@ -181,8 +181,8 @@
                 {:else}
                 <li class="nav-item dropdown dropdown-hover">
                     
-                  <button class="btn btn-sm btn-success mb-0" on:click={openModal}>
-                    <img class="icon opacity-9 mt-n1" src="/img/icon/cart.svg" alt="icon" width="20px">
+                  <button class="btn btn-sm btn-outline-success mb-0" on:click={openModal}>
+                    <img class="icon opacity-9 mt-n1" src="/img/icon/carrito.svg" alt="icon" width="20px">
                     <span class=" me-xl-0">carrito</span>
                   </button>
                 </li>

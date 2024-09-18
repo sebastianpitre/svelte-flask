@@ -37,34 +37,25 @@
       addToCart(producto);
     }
 
-    // alerta de ver producto
+    // Modal de ver producto
 
-    const mostrarAlertaVisibilidad = () => {
-        // Mostrar alerta de SweetAlert
-        Swal.fire({
-            html: `
-            <div class="">
-              <div class="row mt-4">
+    import ProductModal from "./ProductModal.svelte";
+    let showModal = false; // Controla la visibilidad del modal
+    let selectedProductId = null; // Almacena el ID del producto seleccionado
 
-                <div class="col-12 col-lg-12 col-xl-5 col-xxl-5 ">
-                  <img src="${producto.url_imagen}" width="100%" height="180vh" alt="imagen" class="shadow border-radius-2xl img" >
-                </div>
-
-                <div class="col-12 text-start col-lg-12 col-xl-7 col-xxl-7">
-                  <h5>${producto.nombre}</h5> 
-                  <p>${producto.descripcion}</p>
-                  
-                  <p class="text-success">$ ${producto.precio}</p>
-                </div>
-              </div>
-                <p class="">Este producto es vendido, facturado y entregado por SENA - CBC</p>
-            </div>
-            `,
-            confirmButtonText: 'Cerrar',
-            showCloseButton: true,
-            showConfirmButton: false,
-        });
+    // Función para abrir el modal con el ID del producto
+    function openModal(productId) {
+      selectedProductId = productId;
+      showModal = true;
     }
+
+    // Función para cerrar el modal
+    function closeModal() {
+      showModal = false;
+      selectedProductId = null;
+    }
+
+
   </script>
   
   <div class="card bg-gray {noDisponible ? 'bg-gray-200 ' : ''} position-relative">
@@ -84,7 +75,9 @@
     
     <div class="card-header p-0 position-relative z-index-2" style="border-radius: 0.75rem 0.75rem 0px 0px">
       <div class="d-block blur-shadow-image cursor-pointer img-marco" >
-        <img src="{fotoNoDisponible ? '/img/logo.png' : producto.url_imagen}" width="100%" height="160vh" alt="producto" class="shadow img-size {producto.is_promocion ? 'img-oferta' : 'img'} {producto.is_activo ? '' : 'img-no-activo'}" style="border-radius: 0.75rem 0.75rem 0px 0px" on:click={mostrarAlertaVisibilidad}>
+        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <img src="{fotoNoDisponible ? '/img/logo.png' : producto.url_imagen}" width="100%" height="180vh" alt="producto" class="border-bottom img-size {producto.is_promocion ? 'img-oferta' : 'img'} {producto.is_activo ? '' : 'img-no-activo'}" style="border-radius: 0.75rem 0.75rem 0px 0px" on:click={() => openModal(producto.id)}>
       </div>
       {#if producto.is_promocion === true && producto.is_activo === true}
         <div class="blur opacity-9 col-8 col-sm-6 text-dark text-center position-absolute" style="z-index: 3; border-radius: 7px 0px 0px 0px; bottom: 1px; right: 1px; height: 20px; font-size: 15px;">
@@ -98,17 +91,17 @@
       <p class="text-dark text-center text-capitalize mt-1 mb-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre}</p>
 
       {#if producto.is_promocion === true && producto.is_activo === true} 
-        <div class="text-warning text-center border-bottom border-gray mt-1 mb-0">
+        <div class="text-warning text-center border-bottom border-gray mt-1 mb-3 pb-2">
           <del class="text-underline text-start text-dark opacity-9 " style="font-size: 12px;left: 14px;" >$ {producto.precio}</del>
           ${producto.precio-producto.precio*producto.descuento/100} 
           <span class="text-dark text-sm">{producto.unidad_producto}</span>
         </div>
         {:else}
-        <p class="text-success text-center border-bottom border-gray mt-1 mb-0">$ {producto.precio} <span class="text-dark text-sm">{producto.unidad_producto}</span></p>
+        <p class="text-success text-center border-bottom border-gray mt-1 mb-3 pb-2">$ {producto.precio} <span class="text-dark text-sm">{producto.unidad_producto}</span></p>
       {/if}
   
       <div class="row text-center mt-2">
-  
+
         <div class="col-md-10 col-12 mx-auto">
 
           {#if producto.is_activo === true}
@@ -124,15 +117,18 @@
               <button class="btn col-12 btn-sm btn-success" on:click={handleAddToCart}>Agregar </button>
             {/if}
 
-            {:else} <button class="btn col-12 btn-sm bg-info text-white disabled">No disponible</button>
+            {:else} <button class="btn col-12 btn-sm bg-info text-white invalid disabled">Disponible pronto</button>
           {/if}
 
           
         </div>
       </div>
     </div>
+    
   </div>
-  
+  {#if showModal}
+    <ProductModal productId={selectedProductId} closeModal={closeModal} />
+  {/if}
   <style>
     @media (max-width: 768px) {
       .img-size {
@@ -165,5 +161,8 @@
 
     }
   
+    .invalid{
+      cursor: not-allowed;
+    }
   </style>
   
