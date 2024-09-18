@@ -63,7 +63,7 @@
         <div class="col-6">
           <button class="btn btn-sm btn-danger" on:click={vaciarCarrito}>vaciar carrito</button>
         </div>
-        {#if userProfile.rol === "ADMIN" && "CLIENTE"}
+        {#if userProfile && userProfile.nombres}
         <a use:link href="/pedido" class="col-6">
           <button class="btn btn-sm btn-success">Confirmar pedido</button>
         </a>
