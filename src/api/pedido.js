@@ -1,5 +1,5 @@
 // Importamos las funciones necesarias para interactuar con la API y la tienda de Svelte
-import { getProductos } from './productos';
+import { getProductosPublicos } from './productos';
 import { get } from 'svelte/store';
 import { cart } from '../stores/cart';
 import { fetchWithAuth } from './auth'; // Usar fetchWithAuth si ya tienes token, ajustado en el fetch.
@@ -9,21 +9,27 @@ export async function createPedido() {
         // Obtenemos el carrito desde el store de Svelte
         const carrito = get(cart);
 
+        if (carrito.length === 0) {
+            console.warn('El carrito está vacío');
+            return;  // No hacer nada si el carrito está vacío
+        }
+
+
         // Extraemos los IDs de los productos que están en el carrito
         const idsProductos = carrito.map(item => item.id);
 
         // Llamamos a la API para obtener todos los productos, luego filtramos solo los que están en el carrito
-        const productosData = await getProductos();
+        const productosData = await getProductosPublicos();
 
         // Filtramos los productos que están en el carrito
         const productosEnCarrito = productosData.filter(producto => idsProductos.includes(producto.id));
 
-        // Mapeamos el carrito para construir el array de productos que enviará los detalles de cada producto
+        // SE CREA EL ARRAY DE PRODUCTOS
         const pedidoProductosDto = carrito.map(item => {
-            // Buscamos el producto en la lista de productos obtenidos de la API
+            // SE LLAMAN LOS DATOS DEL CARRITO
             const producto = productosEnCarrito.find(p => p.id === item.id);
 
-            // Construimos el objeto para cada producto en el pedido
+            // DATOS A ENVIAR POR PRODUCTO
             return {
                 id: producto.id,  // El ID del producto
                 cantidad: item.quantity,  // Cantidad del producto en el carrito
@@ -33,13 +39,13 @@ export async function createPedido() {
 
         // Calculamos el monto total del pedido sumando el total de cada producto
         const montoTotal = pedidoProductosDto.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+        
 
         // Creamos el objeto del pedido, que contiene todos los datos necesarios para la API
         const pedido = {
             monto_total: montoTotal,  // Monto total del pedido
-            estado_pedido: "PENDIENTE",  // Estado del pedido, en este caso "PENDIENTE"
-            id_pagos: 1,  // Aquí deberías poner el ID del pago si aplica
-            productos: pedidoProductosDto  // Lista de productos en el pedido
+            // estado_pedido: "PENDIENTE",  // Estado del pedido, en este caso "PENDIENTE"
+            productos: pedidoProductosDto  // LISTADO DE DATOS A ENVIAR POR PRODUCTO
         };
 
         // Enviamos el pedido a la API usando fetchWithAuth, que maneja la autenticación

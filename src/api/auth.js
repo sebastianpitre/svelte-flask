@@ -62,6 +62,8 @@ export async function fetchWithAuth(url, options = {}) {
     }
 }
 
+//POST Función cerrar sesión🚩...
+
 export async function logout() {
     try {
         // Obtener el token de acceso desde localStorage
@@ -95,7 +97,7 @@ export async function logout() {
 
 //POST Función para crear un nuevo usuario 🚩...
 
-export async function createPedido(userData) {
+export async function createUser(userData) {
     try {
         const response = await fetch('http://127.0.0.1:5000/api/auth/registro', {
             method: 'POST',

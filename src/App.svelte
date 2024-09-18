@@ -15,28 +15,29 @@
 
 </script>
 
-<Router>
-  <main>
-      <Route path="/" component={Home} exact />
+<main>
 
-      <Route path="/login" component={Login} />
-      <Route path="/registro" component={Registro} />
-      <Route path="/cuenta" component={Cuenta} />
-      <Route path="/perfil" component={Perfil} />
+  <Router>
+    <Route path="/" component={Home} exact />
 
-      <Route path="/categorias" component={Categorias} />
-      <Route path="/categoria/nueva" component={CategoryForm} />
-      <Route path="/categoria/editar/:id" component={CategoryForm} />
+    <Route path="/login" component={Login} />
+    <Route path="/registro" component={Registro} />
+    <Route path="/cuenta" component={Cuenta} />
+    <Route path="/perfil" component={Perfil} />
 
-      <Route path="/productos" component={Productos} />
-      <Route path="/producto/nuevo" component={ProductForm} />
-      <Route path="/producto/editar/:id" component={ProductForm} />
+    <Route path="/categorias" component={Categorias} />
+    <Route path="/categoria/nueva" component={CategoryForm} />
+    <Route path="/categoria/editar/:id" component={CategoryForm} />
 
-      <Route path="/usuarios" component={Usuarios} />
-      <Route path="/usuario/nuevo" component={UsuarioForm} />
-      <Route path="/usuario/editar/:id" component={UsuarioForm} />
-      
-      <Route path="/pedido" component={Pedido} />
+    <Route path="/productos" component={Productos} />
+    <Route path="/producto/nuevo" component={ProductForm} />
+    <Route path="/producto/editar/:id" component={ProductForm} />
 
-  </main>
-</Router>
+    <Route path="/usuarios" component={Usuarios} />
+    <Route path="/usuario/nuevo" component={UsuarioForm} />
+    <Route path="/usuario/editar/:id" component={UsuarioForm} />
+    
+    <Route path="/pedido" component={Pedido} />
+  </Router>
+
+</main>

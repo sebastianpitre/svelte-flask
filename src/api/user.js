@@ -16,9 +16,10 @@ export async function fetchUserProfile() {
         if (response.ok) {
             const userData = await response.json();
             return userData; // Retorna los datos del usuario
-        } else {
-            throw new Error('Error al obtener el perfil del usuario');
-        }
+        } 
+        // else {
+        //     throw new Error('Error al obtener el perfil del usuario');
+        // }
     } catch (error) {
         console.error('Error:', error);
         throw error;

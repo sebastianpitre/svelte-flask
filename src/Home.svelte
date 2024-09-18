@@ -83,17 +83,11 @@
     
     <div class="mx-0 mx-md-5 mb-4">
       {#if productosEnPromocion.length > 0 }
-      <div class="row col-12">
-        <div class="col pt-3 me-n3 text-end">
-          <img class="my-auto " src="./public/img/icon/decorador.webp" alt="" style="width: 100px; transform: scaleX(-1);">
-        </div>
+
         <div class="col-auto">
-          <h5 class="text-dark text-center my-3">ofertas</h5>
+          <h5 class="text-dark mt-2 ms-2 ms-md-0">🌟Ofertas</h5>
         </div>
-        <div class="col pt-3 ms-n3">
-          <img class="my-auto" src="./public/img/icon/decorador.webp" alt="" style="width: 100px;">
-        </div>
-      </div>
+
       
       <Sliderly/>
       {/if}

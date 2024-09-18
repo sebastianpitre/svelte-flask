@@ -489,7 +489,14 @@
     outline-offset: -2px;
     -webkit-appearance: textfield;
   }
-  
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 200,
+  'GRAD' 0,
+  'opsz' 24
+}
   /* rtl:raw:
   [type="tel"],
   [type="url"],

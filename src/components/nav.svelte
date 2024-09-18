@@ -63,8 +63,8 @@
           <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
             <ul class="navbar-nav navbar-nav-hover ms-auto">
 
-              <li class="nav-item ">
-                <button class="btn-sm btn btn-outline-success border-0 border-end border-2 mb-0 p-0 pe-1 pt-1" on:click={openModal} style="border-radius: 0;">
+              <li class="nav-item pt-2">
+                <button class="btn-sm btn btn-outline-success border-0 border-end border-2 mb-0 p-0 mt-n3 pe-1" on:click={openModal} style="border-radius: 0;">
                   <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 105.96 98.45" style="width: 31px;">
                     <defs>
                       <style>
@@ -72,9 +72,13 @@
                   
                         .cls-2 {fill: #38a900a8;}
                   
-                        #cls-3 {fill: #fff;stroke: #38a900a8;stroke-miterlimit: 10;stroke-width: 4px;text-align:center;}
+                        .globo-car {fill: #38a900a8;stroke: #38a900a8;stroke-miterlimit: 10;stroke-width: 4px;text-align: center;}
                   
                         .cls-4 {fill: #38a900a8;}
+
+                        .globo-text{
+                          fill: #fff;
+                        }
                       </style>
                     </defs>
                     <g>
@@ -82,8 +86,8 @@
                       <path class="cls-2" d="M62.23,81.58c4.5-.07,8.48,4.01,8.48,8.69,0,4.44-3.7,8.09-8.28,8.18-4.55.09-8.4-3.5-8.5-7.93-.1-4.62,3.84-8.87,8.29-8.94Z"/>
                       <path class="cls-4" d="M32.24,82.37c4.1.13,7.62,4.07,7.53,8.42-.09,4.53-3.86,7.85-8.68,7.63-4.47-.2-7.67-3.73-7.48-8.23.2-4.55,3.96-7.97,8.62-7.82Z"/>
                       {#if $productCount > 0}
-                        <circle id="cls-3" cx="78.45" cy="27.51" r="24.51"/>
-                        <text class="cls-1" transform="translate(63.32 35.83)"><tspan x="{$productCount < 10 ? "5" : "-6"}" y="5">{$productCount}</tspan></text>
+                        <circle class="globo-car" cx="78.45" cy="27.51" r="24.51"/>
+                        <text class="cls-1" transform="translate(63.32 35.83)"><tspan class="globo-text" x="{$productCount < 10 ? "5" : "-6"}" y="3">{$productCount}</tspan></text>
                       {/if}
                     </g>
                   </svg>

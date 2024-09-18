@@ -15,6 +15,18 @@ export async function getProductos() {
 }
 
 
+export const getProductosPublicos = async () => {
+    try {
+        const productos = await fetchWithAuth('http://127.0.0.1:5000/api/publico/productos');
+        return productos;
+    } catch (error) {
+        console.error('Error fetching productos:', error);
+        throw error;
+    }
+};
+
+
+
 // DELETE PRODUCTOS 🚩...
 
 export async function eliminarProducto(id) {

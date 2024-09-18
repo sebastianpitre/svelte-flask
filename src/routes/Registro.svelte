@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { createPedido } from '../api/auth'; // Cambia esto a la ruta adecuada si es necesario
+    import { createUser } from '../api/auth'; // Cambia esto a la ruta adecuada si es necesario
 
     let nombres = '';
     let apellidos = '';
@@ -36,7 +36,7 @@
                 fecha_creacion: new Date().toISOString(),
                 fecha_actualizacion: new Date().toISOString()
             };
-            await createPedido(data);
+            await createUser(data);
             successMessage = 'Registro exitoso';
             errorMessage = '';
         } catch (error) {
