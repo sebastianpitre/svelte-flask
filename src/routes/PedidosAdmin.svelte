@@ -30,6 +30,17 @@
         }
     });
 
+    // modal carrito
+    import { isModalOpenPedidos } from '../stores/modalStore.js';
+    import ModalPedidos from '../components/ModalPedidos.svelte';
+
+
+    export let id; // Recibe el ID del componente que lo llama
+    function openModal(id) {
+
+    isModalOpenPedidos.set(true);
+    }
+
 </script>
 
 
@@ -37,15 +48,17 @@
 <main>
     <Nav/>
 
+    <ModalPedidos {id}/>
+
     <MenuAcciones/>
     <div class="container-fluid">
         <div class="row">
 
             <div class="col-12 col-md-10 mx-auto mb-4 mb-md-0">
                 
-                <div class="col-12 text-end">
-                    <a href="/producto/nuevo" class="btn btn-sm btn-success">Agregar producto</a>
-                </div>
+                <!-- <div class="col-12 text-end">
+                    <button on:click={() => openModal()} class="btn btn-sm btn-success">Agregar producto</button>
+                </div> -->
                 <div class="card p-2">
                     <div class="table-responsive">
                         <table class="table align-items-center mb-0">
@@ -55,7 +68,8 @@
                                     <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Monto total</th>
                                     <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">estado del pedido</th>
                                     <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">fecha de creacion</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id del usuario</th>
+                                    <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Id del usuario</th>
+                                    <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -104,6 +118,12 @@
                                         <p class="text-sm mb-0 text-center">
                                             <span class=" font-weight-bold"> 1  </span>
                                         </p>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <button on:click={() => openModal(values.id_pedido)} class="btn btn-sm text-white bg-info">Detalles</button>
+                                        <button class="btn btn-sm btn-success">✓</button>
+                                        <button class="btn btn-sm btn-danger">x</button>
                                     </td>
                                 </tr>
                                 {/each}

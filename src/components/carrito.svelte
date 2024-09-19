@@ -11,7 +11,7 @@
   <div class="cart">
     {#if cartItems.length === 0}
     <div class="text-center my-5">
-      <img class="opacity-4" src="./img/carrito-vacio.png" alt="No products available" style="width: 200px; height: auto;">
+      <img class="opacity-4" src="../public/img/carrito-vacio.png" alt="No products available" style="width: 200px; height: auto;">
       <h4 class="text-muted mt-3">El carrito está vacio</h4>
     </div>
     {/if}
