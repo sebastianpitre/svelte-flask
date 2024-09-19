@@ -84,11 +84,12 @@
                                         <p class="text-sm mb-0 text-center">
                                             {#if values.estado_pedido === "PENDIENTE"}
                                             <span class="text-info font-weight-bold"> {values.estado_pedido}  </span>
-                                                
-                                            {/if}
-                                            {#if values.estado_pedido === "APROBADO"}
-                                            <span class="text-success font-weight-bold"> {values.estado_pedido}  </span>
-                                                
+                                                {:else if values.estado_pedido === "APROBADO"}
+                                                <span class="text-success font-weight-bold"> {values.estado_pedido}  </span>
+                                                {:else if values.estado_pedido === "CANCELADO"}
+                                                <span class="text-danger font-weight-bold"> {values.estado_pedido} ❌  </span>
+                                                {:else if values.estado_pedido === "ENTREGADO"}
+                                                <span class="text-success font-weight-bold"> {values.estado_pedido}✅  </span>
                                             {/if}
                                         </p>
                                     </td>
