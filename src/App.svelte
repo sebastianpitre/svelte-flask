@@ -39,7 +39,7 @@
     <Route path="/usuario/editar/:id" component={UsuarioForm} />
     
     <Route path="/pedido" component={Pedido} />
-    <Route path="/admin/pedidos" component={PedidosAdmin} />
+    <Route path="pedidos_admin" component={PedidosAdmin} />
 
   </Router>
 

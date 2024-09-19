@@ -18,6 +18,12 @@
           Usuarios
         </a>
       </div>
+
+      <div class="col-4 col-md-2 my-2 px-1">
+        <a href="pedidos_admin" class="card py-2 text-center" style="border-radius: 0.60rem;">
+          Pedidos
+        </a>
+      </div>
     </div>
   </div>
   

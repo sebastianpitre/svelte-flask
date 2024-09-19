@@ -31,14 +31,12 @@
     });
 
     // modal carrito
-    import { isModalOpenPedidos } from '../stores/modalStore.js';
     import ModalPedidos from '../components/ModalPedidos.svelte';
+    import { idStore, isModalOpenPedidos } from '../stores/modalStore';
 
-
-    export let id; // Recibe el ID del componente que lo llama
     function openModal(id) {
-
-    isModalOpenPedidos.set(true);
+        idStore.set(id); // Asigna el ID al store
+        isModalOpenPedidos.set(true); // Abre el modal
     }
 
 </script>
@@ -48,7 +46,7 @@
 <main>
     <Nav/>
 
-    <ModalPedidos {id}/>
+    <ModalPedidos/>
 
     <MenuAcciones/>
     <div class="container-fluid">

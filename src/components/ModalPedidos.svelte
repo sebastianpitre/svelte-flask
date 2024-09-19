@@ -1,27 +1,50 @@
-<!-- src/components/Modal.svelte -->
 <script>
-  import { link } from 'svelte-routing';
-  import { onMount } from "svelte";
   import { isModalOpenPedidos } from "../stores/modalStore.js";
+  import { onMount, onDestroy } from 'svelte';
+  import { idStore } from '../stores/modalStore.js';
+  import { fetchWithAuth } from '../api/auth'; // Verifica que la ruta sea correcta
 
-  export let id; // ID recibido como prop
-  
-  let producto;
+  let pedido = null;
+  let errorMessage = '';
+  let id;
 
-  // Cargar los datos del producto basado en el ID recibido
-  $: if (id) {
-    fetch(`http://127.0.0.1:5000/api/usuarios/pedidos/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        producto = data;
-      });
+  const unsubscribe = idStore.subscribe(value => {
+    id = value; // Actualiza el ID cuando cambia el valor en el store
+  });
+
+onMount(async () => {
+  if (id) {
+    try {
+      const apiUrl = `http://127.0.0.1:5000/api/usuarios/pedidos/${id}`;
+      console.log('Haciendo solicitud a:', apiUrl); // Verifica la URL
+
+      const response = await fetchWithAuth(apiUrl);
+      if (!response.ok) throw new Error('Error al obtener el pedido');
+
+      const data = await response.json();
+      console.log('Datos recibidos:', data); // Verifica los datos recibidos
+
+      if (!data || !data.id_pedido) {
+        errorMessage = 'No hay información del pedido disponible.';
+      } else {
+        pedido = data; // Asigna el resultado al pedido
+      }
+    } catch (error) {
+      errorMessage = error.message; // Manejo de errores
+      console.error('Error al obtener el pedido:', error);
+    }
   }
+});
 
 
-  // Función para cerrar el modal al hacer clic fuera del contenido
+  // Limpia la suscripción al desmontar el componente
+  onDestroy(() => {
+    unsubscribe();
+  });
+
   function handleClickOutside(event) {
     if (event.target.classList.contains("modal")) {
-      isModalOpenPedidos.set(false);
+      isModalOpenPedidos.set(false); // Cierra el modal
     }
   }
 </script>
@@ -30,12 +53,20 @@
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <div class="modal" class:open={$isModalOpenPedidos} on:click={handleClickOutside} role="dialog" aria-modal="true">
   <div class="modal-content">
-    <div class="col">
-      <span class="close position-absolute text-center text-gray" on:click={() => isModalOpenPedidos.set(false)}>&times;</span>
-    </div>
-    <p class="text-dark text-bold text-2xl">Informacion de pedidos</p>
-
-    {producto}
+    <span class="close" on:click={() => isModalOpenPedidos.set(false)}>&times;</span>
+    <p>Información del pedido</p>
+    id: {id}
+    {#if errorMessage}
+      <p>{errorMessage}</p>
+    {:else if pedido}
+      <p><strong>ID del pedido:</strong> {pedido.id_pedido}</p>
+      <p><strong>Monto total:</strong> {pedido.monto_total}</p>
+      <p><strong>Estado del pedido:</strong> {pedido.estado_pedido}</p>
+      <p><strong>Fecha de creación:</strong> {pedido.fecha_creacion}</p>
+      <p><strong>ID del usuario:</strong> {pedido.id_usuario}</p>
+    {:else}
+      <p>Cargando información del pedido...</p>
+    {/if}
   </div>
 </div>
 
