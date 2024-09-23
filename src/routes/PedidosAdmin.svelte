@@ -2,6 +2,7 @@
 	import Menufooter from '../components/menufooter.svelte';
     import { isAuthenticated, checkAuth } from '../stores/auth';
 	import Footer from '../components/footer.svelte';
+    
 	import Nav from '../components/nav.svelte';
     
     import { onMount } from 'svelte';
@@ -122,6 +123,8 @@
                                         <button on:click={() => openModal(values.id_pedido)} class="btn btn-sm text-white bg-info">Detalles</button>
                                         <button class="btn btn-sm btn-success">✓</button>
                                         <button class="btn btn-sm btn-danger">x</button>
+                                        <a class="btn btn-sm btn-outline-success" href={`/pedidos_admin/${values.id_pedido  }`}>Editar</a>
+
                                     </td>
                                 </tr>
                                 {/each}

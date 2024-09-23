@@ -77,7 +77,7 @@
       <div class="d-block blur-shadow-image cursor-pointer img-marco" >
         <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <img src="{fotoNoDisponible ? '/img/logo.png' : producto.url_imagen}" width="100%" height="180vh" alt="producto" class="border-bottom img-size {producto.is_promocion ? 'img-oferta' : 'img'} {producto.is_activo ? '' : 'img-no-activo'}" style="border-radius: 0.75rem 0.75rem 0px 0px" on:click={() => openModal(producto.id)}>
+        <img src="{fotoNoDisponible ? '/img/logo.png' : producto.url_imagen}" width="100%" height="170vh" alt="producto" class="border-bottom img-size {producto.is_promocion ? 'img-oferta' : 'img'} {producto.is_activo ? '' : 'img-no-activo'}" style="border-radius: 0.75rem 0.75rem 0px 0px" on:click={() => openModal(producto.id)}>
       </div>
       {#if producto.is_promocion === true && producto.is_activo === true}
         <div class="blur opacity-9 col-8 col-sm-6 text-dark text-center position-absolute" style="z-index: 3; border-radius: 7px 0px 0px 0px; bottom: 1px; right: 1px; height: 20px; font-size: 15px;">

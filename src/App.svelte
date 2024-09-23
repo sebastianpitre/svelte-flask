@@ -13,6 +13,8 @@
   import Pedido from './routes/pedido.svelte';
     import Registro from './routes/Registro.svelte';
   import PedidosAdmin from './routes/PedidosAdmin.svelte';
+    import Verpedido from './routes/verpedido.svelte';
+    import VerProducto from './routes/VerProducto.svelte';
 
 </script>
 
@@ -33,13 +35,17 @@
     <Route path="/productos" component={Productos} />
     <Route path="/producto/nuevo" component={ProductForm} />
     <Route path="/producto/editar/:id" component={ProductForm} />
+    <Route path="/producto/:id" component={VerProducto} />
+
 
     <Route path="/usuarios" component={Usuarios} />
     <Route path="/usuario/nuevo" component={UsuarioForm} />
     <Route path="/usuario/editar/:id" component={UsuarioForm} />
     
     <Route path="/pedido" component={Pedido} />
-    <Route path="pedidos_admin" component={PedidosAdmin} />
+    <Route path="/pedidos_admin" component={PedidosAdmin} />
+    <Route path="/pedidos_admin/:id" component={Verpedido} />
+
 
   </Router>
 

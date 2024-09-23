@@ -184,7 +184,7 @@
     <ul class="splide__list">
       {#each listProductos as values}
           <li class="splide__slide px-5">
-            <div class="card position-relative mb-2 mx-n4-5">
+            <a href="{`/producto/${values.id}`}" class="card position-relative mb-2 mx-n4-5">
               <svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 250">
                 <defs>
                   
@@ -233,7 +233,7 @@
                 </g>
                 <text class="cls-25" transform="translate(24.86 206.59)"><tspan x="0" y="0">{values.nombre.split(' ').slice(0, 3).join(' ')}</tspan></text>
               </svg>
-            </div>
+            </a>
           </li>
       {/each}
     </ul>
