@@ -45,25 +45,11 @@
     onMount(() => {
         const tableInterval = setInterval(() => {
             if (pedidos.length > 0) {
-                jQuery('#tablaPedidos').DataTable({
-                    language: {
-                        search: "Buscar:",
-                        lengthMenu: "Mostrar _MENU_ entradas",
-                        info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                        infoEmpty: "No hay entradas disponibles",
-                        infoFiltered: "(filtrado de _MAX_ entradas totales)",
-                        paginate: {
-                            first: "Primero",
-                            last: "Último",
-                            next: "Siguiente",
-                            previous: "Anterior"
-                        },
-                        zeroRecords: "No se encontraron registros coincidentes" // Traducción aquí
-                    }
-                }); // Inicializa DataTable
+                jQuery('#tablaPedidos').DataTable({ }); // Inicializa DataTable
                 clearInterval(tableInterval);
             }
-        }, 300); // Revisa cada 300ms hasta que los pedidos se hayan cargado
+            
+        }, 100); // Revisa cada 100ms hasta que los pedidos se hayan cargado
     });
 </script>
 
@@ -85,8 +71,8 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Id del pedido</th>
                                     <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Monto total</th>
-                                    <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Estado del pedido</th>
-                                    <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Fecha de creación</th>
+                                    <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">estado del pedido</th>
+                                    <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">fecha de creacion</th>
                                     <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Id del usuario</th>
                                     <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Acciones</th>
                                 </tr>
@@ -144,9 +130,11 @@
                                         <button class="btn btn-sm btn-success">✓</button>
                                         <button class="btn btn-sm btn-danger">x</button>
                                         <a class="btn btn-sm btn-outline-success" href={`/pedidos_admin/${values.id_pedido}`}>Editar</a>
+
                                     </td>
                                 </tr>
                                 {/each}
+                                
                             </tbody>
                         </table>
                     </div>

@@ -1,5 +1,5 @@
 <script>
-  import Car from '../components/car.svelte';
+  import Car from '../components/ModalCarrito.svelte';
   import { onMount } from 'svelte';
   import Card from '../components/card.svelte';
   import Category from '../components/category.svelte';

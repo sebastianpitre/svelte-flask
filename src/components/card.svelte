@@ -37,25 +37,6 @@
       addToCart(producto);
     }
 
-    // Modal de ver producto
-
-    import ProductModal from "./ProductModal.svelte";
-    let showModal = false; // Controla la visibilidad del modal
-    let selectedProductId = null; // Almacena el ID del producto seleccionado
-
-    // Función para abrir el modal con el ID del producto
-    function openModal(productId) {
-      selectedProductId = productId;
-      showModal = true;
-    }
-
-    // Función para cerrar el modal
-    function closeModal() {
-      showModal = false;
-      selectedProductId = null;
-    }
-
-
   </script>
   
   <div class="card bg-gray {noDisponible ? 'bg-gray-200 ' : ''} position-relative">
@@ -75,9 +56,10 @@
     
     <div class="card-header p-0 position-relative z-index-2" style="border-radius: 0.75rem 0.75rem 0px 0px">
       <div class="d-block blur-shadow-image cursor-pointer img-marco" >
-        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <img src="{fotoNoDisponible ? '/img/logo.png' : producto.url_imagen}" width="100%" height="170vh" alt="producto" class="border-bottom img-size {producto.is_promocion ? 'img-oferta' : 'img'} {producto.is_activo ? '' : 'img-no-activo'}" style="border-radius: 0.75rem 0.75rem 0px 0px" on:click={() => openModal(producto.id)}>
+        <a href="{`/producto/${producto.id}`}">
+          <img src="{fotoNoDisponible ? '../public/img/sin-productos.webp' : producto.url_imagen}" width="100%" height="170vh" alt="producto" class="border-bottom img-size {producto.is_promocion ? 'img-oferta' : 'img'} {producto.is_activo ? '' : 'img-no-activo'}" style="border-radius: 0.75rem 0.75rem 0px 0px">
+        </a>
+        
       </div>
       {#if producto.is_promocion === true && producto.is_activo === true}
         <div class="blur opacity-9 col-8 col-sm-6 text-dark text-center position-absolute" style="z-index: 3; border-radius: 7px 0px 0px 0px; bottom: 1px; right: 1px; height: 20px; font-size: 15px;">
@@ -126,9 +108,7 @@
     </div>
     
   </div>
-  {#if showModal}
-    <ProductModal productId={selectedProductId} closeModal={closeModal} />
-  {/if}
+
   <style>
     @media (max-width: 768px) {
       .img-size {

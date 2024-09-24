@@ -7,7 +7,7 @@
           <div class="row justify-content-center">
             <div class=" text-center mx-auto my-auto">
               <div class="p-3 warning-horizontal justify-content-center">
-                <img class="avatar-xxl" src="/img/logo.png" alt="">
+                <img class="avatar-xxl" src="/img/logo.svg" alt="">
                 <p class="text-white my-auto font-weight-bold">SENA Empresa vitrina web</p>
               </div>
             </div>

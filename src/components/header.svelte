@@ -43,14 +43,14 @@
   });
 </script>
 
-<header class="bg-gradient-dark mx-2 mt-2 mx-md-2 mx-md-5 border-radius-2xl">
+<header class="bg-gradient-dark mx-2 mt-n1 mx-md-2 mx-md-5 border-radius-2xl">
   <div class="page-header height-responsive border-radius-2xl" style={backgroundStyle}>
     <span class="mask bg-gradient-dark opacity-3"></span>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center mx-auto my-auto">
-          <div class="warning-horizontal justify-content-center">
-            <img class="avatar-xxl avatar-md-xxl opacity-9" src="/illustrator/PNG/logo.png" alt="">
+          <div class="col-2 mx-auto bg-success"style="border-radius: 50%; width:100px; height:100px">
+            <img class="avatar-xl avatar-md-xl mt-2 pt-2 opacity-9" src="/img/logo2.svg" alt="" >
           </div>
           <p class="text-edo mb-4 text-white mt-3">
             <span class="bg-success opacity-9 font-weight-bold card col-lg-6 col-md-6 col-sm-8 col-10 mx-auto">SENA EMPRESA VITRINA WEB</span>

@@ -177,12 +177,14 @@
    .cls-6 {
      font-size: 18px;
    }
- </style>
+</style>
+
 <!-- Estructura HTML del slider con las tarjetas Bootstrap -->
 <div class="splide ">
   <div class="splide__track">
     <ul class="splide__list">
       {#each listProductos as values}
+      {#if values.is_activo === true && values.is_promocion === true}
           <li class="splide__slide px-5">
             <a href="{`/producto/${values.id}`}" class="card position-relative mb-2 mx-n4-5">
               <svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 250">
@@ -235,12 +237,12 @@
               </svg>
             </a>
           </li>
+          {/if}
       {/each}
     </ul>
   </div>
 
   <style>
-    
     .splide__pagination {
       bottom: -1em;
       left: 0;

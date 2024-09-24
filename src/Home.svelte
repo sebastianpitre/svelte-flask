@@ -5,7 +5,7 @@
   import Nav from './components/nav.svelte';
   import Header from './components/header.svelte';
   import Category from './components/category.svelte';
-  import Car from './components/car.svelte';
+  import Car from './components/ModalCarrito.svelte';
   import { selectedCategory } from './stores/stores';
   import { cart, addToCart, incrementQuantity, decrementQuantity } from './stores/cart';
   import Footer from './components/footer.svelte';
@@ -88,8 +88,8 @@
           <h5 class="text-dark mt-2 ms-2 ms-md-0">🌟Ofertas</h5>
         </div>
 
-      
       <Sliderly/>
+
       {/if}
     </div>
     

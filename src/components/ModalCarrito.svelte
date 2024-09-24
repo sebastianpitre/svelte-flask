@@ -3,11 +3,18 @@
   import { Router, Route, link } from 'svelte-routing';
   import { isModalOpen } from "../stores/modalStore.js";
   import Carrito from "./carrito.svelte";
-  import { vaciarCarrito } from '../stores/cart';
+  import { vaciarCarrito } from '../stores/cart.js';
 
   import { onMount } from "svelte";
-  import { fetchUserProfile } from '../api/user';
-  import { user } from '../stores/user'; // Store para guardar los datos del usuario
+  import { fetchUserProfile } from '../api/user.js';
+  import { user } from '../stores/user.js'; // Store para guardar los datos del usuario
+
+  import { cart } from '../stores/cart.js';
+
+  let cartItems = [];
+    cart.subscribe(value => {
+      cartItems = value;
+    });
 
   let userProfile = {};
 
@@ -54,6 +61,7 @@
 <div class="modal" class:open={$isModalOpen} on:click={handleClickOutside} role="dialog" aria-modal="true">
   <div class="modal-content">
     <div class="col">
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
       <span class="close position-absolute text-center text-gray" on:click={() => isModalOpen.set(false)}>&times;</span>
     </div>
     <p class="text-dark text-bold text-2xl">Carrito</p>
@@ -61,16 +69,26 @@
     <div class="barra bg-white">
       <div class="row text-center mt-4 mb-n2">
         <div class="col-6">
-          <button class="btn btn-sm btn-danger" on:click={vaciarCarrito}>vaciar carrito</button>
+          {#if cartItems.length === 0}
+            <button class="btn btn-sm btn-danger" on:click={vaciarCarrito} disabled>vaciar carrito</button>
+          {:else}
+            <button class="btn btn-sm btn-danger" on:click={vaciarCarrito}>vaciar carrito</button>
+          {/if}
         </div>
         {#if userProfile && userProfile.nombres}
-        <a use:link href="/pedido" class="col-6">
-          <button class="btn btn-sm btn-success">Confirmar pedido</button>
-        </a>
+          {#if cartItems.length === 0}
+            <div class="col-6">
+              <button class="btn btn-sm btn-success" disabled>Confirmar pedido</button>
+            </div>
+            {:else}
+            <a use:link href="/pedido" class="col-6">
+              <button class="btn btn-sm btn-success">Confirmar pedido</button>
+            </a>
+          {/if}
         {:else}
-        <div class="col-6">
-          <button class="btn btn-sm btn-success"  on:click={login} on:click={() => isModalOpen.set(false)}>Confirmar pedido</button>
-        </div>
+          <div class="col-6">
+            <button class="btn btn-sm btn-success"  on:click={login} on:click={() => isModalOpen.set(false)} disabled>Confirmar pedido</button>
+          </div>
         {/if}
       </div>
     </div>

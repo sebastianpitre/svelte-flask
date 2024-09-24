@@ -84,17 +84,18 @@
  
 </script>
 
-<main>
+<main class="">
   <Nav/>
-  {#if producto}
-    <h2>Detalles del producto</h2>
-    <div>
+  <div class="container">
+    {#if producto}
+    <h4>Detalles del producto</h4>
+    <div class="card p-4">
       <div class="row">
         <div class="col-12 col-md-4 mb-4">
           <img class="w-100" src="{producto.url_imagen}" alt="">
         </div>
         <div class="col">
-          <p><strong>Nombre del producto:</strong> {producto.nombre}</p>
+          <h5>{producto.nombre}</h5>
           <p><strong>Descripción:</strong> {producto.descripcion}</p>
           <p><strong>Precio:</strong> {producto.precio}</p>
           <p><strong>categoria:</strong> {producto.id_categorias}</p>
@@ -125,5 +126,7 @@
   {:else}
     <p>Cargando el producto...</p>
   {/if}
+  </div>
+  
 </main>
 

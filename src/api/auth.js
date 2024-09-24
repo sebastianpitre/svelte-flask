@@ -1,6 +1,6 @@
 // src/api/auth.js
 import { user } from '../stores/user';
-
+import { vaciarCarrito } from '../stores/cart';
 // Función para guardar el token en localStorage
 export function saveToken(token) {
     localStorage.setItem('access_token', token);
@@ -65,6 +65,7 @@ export async function fetchWithAuth(url, options = {}) {
 //POST Función cerrar sesión🚩...
 
 export async function logout() {
+    vaciarCarrito() 
     try {
         // Obtener el token de acceso desde localStorage
         const token = localStorage.getItem('access_token');
