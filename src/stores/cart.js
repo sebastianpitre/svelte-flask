@@ -1,8 +1,10 @@
 import { writable, derived } from 'svelte/store';
 
+// Cargar el carrito del localStorage o inicializar vacío
 const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
 export const cart = writable(storedCart);
 
+// Guardar el carrito en el localStorage cada vez que cambia
 cart.subscribe(value => {
   localStorage.setItem('cart', JSON.stringify(value));
 });
@@ -15,6 +17,12 @@ export const totalProducts = derived(cart, $cart =>
 // Contar el número de productos diferentes en el carrito
 export const productCount = derived(cart, $cart => $cart.length);
 
+// Calcular el monto total de los productos en el carrito
+export const totalAmount = derived(cart, $cart =>
+  $cart.reduce((total, item) => total + item.quantity * item.precio, 0)
+);
+
+// Función para añadir un producto al carrito
 export function addToCart(producto) {
   cart.update(items => {
     const existingItem = items.find(item => item.id === producto.id);
@@ -27,6 +35,7 @@ export function addToCart(producto) {
   });
 }
 
+// Incrementar la cantidad de un producto
 export function incrementQuantity(productoId) {
   cart.update(items => {
     const item = items.find(item => item.id === productoId);
@@ -37,6 +46,7 @@ export function incrementQuantity(productoId) {
   });
 }
 
+// Decrementar la cantidad de un producto
 export function decrementQuantity(productoId) {
   cart.update(items => {
     let itemsUpdated = items;
@@ -50,6 +60,7 @@ export function decrementQuantity(productoId) {
   });
 }
 
+// Vaciar el carrito
 export function vaciarCarrito() {
   localStorage.removeItem('cart');
   cart.set([]);

@@ -15,6 +15,7 @@
   import PedidosAdmin from './routes/PedidosAdmin.svelte';
     import Verpedido from './routes/verpedido.svelte';
     import VerProducto from './routes/VerProducto.svelte';
+    import MisPedidos from './routes/MisPedidos.svelte';
 
 </script>
 
@@ -27,6 +28,7 @@
     <Route path="/registro" component={Registro} />
     <Route path="/cuenta" component={Cuenta} />
     <Route path="/perfil" component={Perfil} />
+    <Route path="/mis_pedidos" component={MisPedidos} />
 
     <Route path="/categorias" component={Categorias} />
     <Route path="/categoria/nueva" component={CategoryForm} />

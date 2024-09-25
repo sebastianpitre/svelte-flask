@@ -3,13 +3,25 @@
   import { Router, Route, link } from 'svelte-routing';
   import { isModalOpen } from "../stores/modalStore.js";
   import Carrito from "./carrito.svelte";
-  import { vaciarCarrito } from '../stores/cart.js';
 
   import { onMount } from "svelte";
   import { fetchUserProfile } from '../api/user.js';
   import { user } from '../stores/user.js'; // Store para guardar los datos del usuario
 
-  import { cart } from '../stores/cart.js';
+  import { cart, totalAmount, totalProducts, vaciarCarrito } from '../stores/cart.js';
+
+  let carrito = [];
+  let montoTotal = 0;
+
+  // Suscribirse a los cambios en el carrito y el monto total
+  cart.subscribe(value => {
+    carrito = value;
+  });
+
+  totalAmount.subscribe(value => {
+    montoTotal = value;
+  });
+
 
   let cartItems = [];
     cart.subscribe(value => {
@@ -68,6 +80,11 @@
     <Carrito />
     <div class="barra bg-white">
       <div class="row text-center mt-4 mb-n2">
+        <div class="col-12">
+          {#if montoTotal > 0}
+            <h5><strong>Total a pagar:</strong> <span class="text-success">${montoTotal}</span> </h5>
+          {/if}
+        </div>
         <div class="col-6">
           {#if cartItems.length === 0}
             <button class="btn btn-sm btn-danger" on:click={vaciarCarrito} disabled>vaciar carrito</button>
@@ -87,7 +104,7 @@
           {/if}
         {:else}
           <div class="col-6">
-            <button class="btn btn-sm btn-success"  on:click={login} on:click={() => isModalOpen.set(false)} disabled>Confirmar pedido</button>
+            <button class="btn btn-sm btn-success"  on:click={login} on:click={() => isModalOpen.set(false)}>Confirmar pedido</button>
           </div>
         {/if}
       </div>

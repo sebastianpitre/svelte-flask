@@ -2,6 +2,8 @@
     import { createPedido } from '../api/pedido';
     import { getProductos } from '../api/productos';
     import Footer from '../components/footer.svelte';
+    import { vaciarCarrito } from '../stores/cart';
+
     import { cart } from '../stores/cart';
     import { onMount } from 'svelte';
     import { get } from 'svelte/store';
@@ -46,6 +48,8 @@
                 console.error('Error al crear el pedido:', error);
                 alert('Hubo un error al crear el pedido');
             });
+            vaciarCarrito()
+            window.location.href = '/mis_pedidos';
     }
 </script>
 

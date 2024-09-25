@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row bg-gray-300 my-2 mx-sebas" style="border-radius: 0.60rem;">
+  <div class="row mt-6 bg-gray-300 my-2 mx-sebas" style="border-radius: 0.60rem;">
     <div class="row mx-auto justify-content-center">
       <div class="col-4 col-md-2 my-2 px-1">
         <a href="productos" class="card py-2 text-center" style="border-radius: 0.60rem;">

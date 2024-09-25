@@ -4,7 +4,7 @@
     import Footer from '../components/footer.svelte';
     import Nav from '../components/nav.svelte';
     import { onMount } from 'svelte';
-    import { getPedidos } from '../api/pedidoAdmin';
+    import { getPedidosAdmin } from '../api/pedidoAdmin';
     import MenuAcciones from '../components/MenuAcciones.svelte';
 
     // Importamos las librerías de DataTables
@@ -17,7 +17,7 @@
     // Cargar los pedidos
     onMount(async () => {
         try {
-            pedidos = await getPedidos();
+            pedidos = await getPedidosAdmin();
         } catch (error) {
             errorMessage = 'No se pudieron cargar los pedidos.';
         }
@@ -103,7 +103,7 @@
                                 <tr>
                                     <td>
                                         <p class="text-sm mb-0 text-center">
-                                            <span class=" font-weight-bold"> 080543{values.id_pedido}  </span>
+                                            <span class=" font-weight-bold">00{values.id_pedido}  </span>
                                         </p>
                                     </td>
         
@@ -135,7 +135,7 @@
 
                                     <td>
                                         <p class="text-sm mb-0 text-center">
-                                            <span class=" font-weight-bold"> 1  </span>
+                                            <span class=" font-weight-bold">{values.id_usuario} </span>
                                         </p>
                                     </td>
 

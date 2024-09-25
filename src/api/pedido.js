@@ -1,5 +1,5 @@
 // Importamos las funciones necesarias para interactuar con la API y la tienda de Svelte
-import { getProductosPublicos } from './productos';
+import { getProductosAPedir } from './productos';
 import { get } from 'svelte/store';
 import { cart } from '../stores/cart';
 import { fetchWithAuth } from './auth'; // Usar fetchWithAuth si ya tienes token, ajustado en el fetch.
@@ -19,7 +19,7 @@ export async function createPedido() {
         const idsProductos = carrito.map(item => item.id);
 
         // Llamamos a la API para obtener todos los productos, luego filtramos solo los que están en el carrito
-        const productosData = await getProductosPublicos();
+        const productosData = await getProductosAPedir();
 
         // Filtramos los productos que están en el carrito
         const productosEnCarrito = productosData.filter(producto => idsProductos.includes(producto.id));

@@ -1,8 +1,8 @@
 <script>
   import { isModalOpenPedidos, idStore } from "../stores/modalStore.js";
   import { onMount, onDestroy } from 'svelte';
-  import { fetchWithAuth } from '../api/auth'; // Verifica que la ruta sea correcta
-  import { getProductos } from '../api/productos';
+  import { fetchWithAuth } from '../api/auth.js'; // Verifica que la ruta sea correcta
+  import { getProductos } from '../api/productos.js';
 
   let productosx = []; // Lista de todos los productos disponibles
   let pedido = null;
@@ -32,7 +32,7 @@
     if (id) {
       try {
         // Aquí `response` es el objeto de datos directamente
-        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/pedidos/${id}`);
+        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/usuarios/pedidos/${id}`);
         console.log('Datos recibidos:', data);
 
         // Ahora verifica si data es el cuerpo de respuesta esperado

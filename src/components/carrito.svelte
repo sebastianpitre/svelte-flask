@@ -11,9 +11,12 @@
   <div class="cart">
     {#if cartItems.length === 0}
     <div class="text-center my-5">
-      <img class="" src="../public/img/sin-productos.webp" alt="No products available" style="width: 300px; height: auto;">
+      <div class="col-12">
+        <img class="" src="../public/img/sin-productos.webp" alt="No products available" style="width: 220px; height: auto;">
+      </div>
       <h4 class="mt-3">El carrito está vacio</h4>
       <p>Agrega productos para continuar con el pedido</p>
+      <a href="/" class="btn btn-sm btn-success">ir a comprar</a>
     </div>
     {/if}
     <div class="row justify-content-center">
@@ -22,7 +25,7 @@
         <div class="card border mx-0 px-3 py-2">
           <div class="row">
 
-            <div class="col-12 col-md-auto text-center my-auto d-none d-md-block">
+            <div class="col-12 col-xl-4 text-center my-auto ">
               <img src="{item.url_imagen}" alt="" width="150px" height="120px" class="border-radius-lg icon-md-xl">
             </div>
 
@@ -32,15 +35,15 @@
 
                 <div class="col-12">
                   <div class="row my-auto">
-                    <h6 class="text-dark text-center text-md-start col-12 my-0">{item.nombre} - ${item.precio}</h6>
-                    <p class="m-0 d-none d-md-block col-12" style="font-size:12px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed cupiditate quas culpa maxime dolor.</p>
-                    
+                    <h6 class="text-dark text-center text-xl-start col-12 my-0">{item.nombre}</h6>
+                    <h6 class="text-dark text-center text-xl-start col-12 my-0">Precio: ${item.precio}</h6>
+                    <p class="m-0 d-none d-md-block col-12 text-center text-xl-start" style="font-size:12px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed cupiditate quas culpa maxime dolor.</p>
                   </div>
                 </div>
                 
-                <p class="text-dark text-bold col-12 col-md-6 text-center pt-3 text-md-end my-0">Subtotal: ${item.precio*item.quantity}</p>
+                <p class="text-dark text-bold col-12 text-center col-md-6 text-xl-start pt-3 my-0">Subtotal: ${item.precio*item.quantity}</p>
   
-                <div class="col-12 col-md-6 text-center text-md-end mt-2 mb-n2">
+                <div class="col-12 col-md-6 text-center mt-2 mb-n2">
                   <button class="btn col btn-sm btn-blue" on:click={() => decrementQuantity(item.id)}>-</button>
                   <span class="col p-1 btn disabled text-dark">{item.quantity}</span>
                   <button class="btn col btn-sm btn-success" on:click={() => incrementQuantity(item.id)}>+</button>

@@ -10,10 +10,7 @@
   import { cart, addToCart, incrementQuantity, decrementQuantity } from './stores/cart';
   import Footer from './components/footer.svelte';
   import Card from './components/card.svelte';
-  import Ofertas from './papelera/ofertas.svelte';
-  import OfertaSlider from './papelera/OfertaSlider.svelte';
   import Sliderly from './components/Sliderly.svelte';
-    import NoDisponibles from './papelera/NoDisponibles.svelte';
 
   let categorias = [];
 

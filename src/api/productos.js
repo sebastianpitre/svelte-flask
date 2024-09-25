@@ -15,7 +15,7 @@ export async function getProductos() {
 }
 
 
-export const getProductosPublicos = async () => {
+export const getProductosAPedir = async () => {
     try {
         const productos = await fetchWithAuth('http://127.0.0.1:5000/api/publico/productos');
         return productos;

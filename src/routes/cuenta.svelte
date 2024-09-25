@@ -65,7 +65,7 @@
           </div>
         </a>
 
-        <a class="border-radius-2xl botones px-2 cursor-pointer mb-0" use:link href="/perfil">
+        <a class="border-radius-2xl botones px-2 cursor-pointer mb-0" use:link href="/mis_pedidos">
           <div class="container border-bottom px-3">
             <div class="row">
               <div class="col-auto p-0 ps-3 pt-3 pb-1">
