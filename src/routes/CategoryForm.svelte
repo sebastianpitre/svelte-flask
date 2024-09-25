@@ -6,20 +6,20 @@
     export let id;
   
     let nombre = "";
-    let imagen = "";
+    let url_imagen = "";
   
     let listCategorias = [];
   
     onMount(async () => {
-      fetch("http://localhost:8086/api/publico/categorias")
+      fetch("http://127.0.0.1:5000/api/publico/categorias")
         .then((response) => response.json())
         .then((results) => (listCategorias = results));
   
       if (id) {
-        const response = await fetch(`http://localhost:8086/api/publico/categorias/${id}`);
+        const response = await fetch(`http://127.0.0.1:5000/api/publico/categorias/${id}`);
         const product = await response.json();
         nombre = product.nombre;
-        imagen = product.imagen;
+        url_imagen = product.url_imagen;
 
       }
     });
@@ -29,13 +29,13 @@
   
       const formData = {
         nombre,
-        imagen,
+        url_imagen,
 
       };
   
       try {
         const method = id ? "PATCH" : "POST";
-        const url = id ? `http://localhost:8086/api/publico/categorias/${id}` : "http://localhost:8086/api/publico/categorias";
+        const url = id ? `http://127.0.0.1:5000/api/publico/categorias/${id}` : "http://127.0.0.1:5000/api/publico/categorias";
   
         const response = await fetch(url, {
           method,
@@ -89,7 +89,7 @@
             <div class="col-12 col-md-6">
                 <div class="input-group  input-group-static my-2">
                     <h6 class="">Link Icono</h6>
-                    <input type="text" class="form-control mt-n3" bind:value={imagen} />
+                    <input type="text" class="form-control mt-n3" bind:value={url_imagen} />
                 </div>
             </div>
 

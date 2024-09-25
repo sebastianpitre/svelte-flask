@@ -7,8 +7,8 @@
     import MenuAcciones from '../components/MenuAcciones.svelte';
 
     // Definimos las variables reactivas para el estado del formulario
-    let id;
-    let imagen = '';
+    let id_categorias;
+    let url_imagen = '';
     let nombre = '';
     
 
@@ -17,14 +17,14 @@
         event.preventDefault();
 
         const formData = {
-            id,
-            imagen,
+            id_categorias,
+            url_imagen,
             nombre,
             
         };
 
         try {
-            const response = await fetch('http://localhost:8086/api/publico/categorias', {
+            const response = await fetch('http://127.0.0.1:5000/api/publico/categorias', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -45,13 +45,13 @@
 
     let listCategorias = [];
 
-    fetch("http://localhost:8086/api/publico/categorias")
+    fetch("http://127.0.0.1:5000/api/publico/categorias")
     .then((response) => response.json())
     .then((results) => (listCategorias = results));
 
     // eliminar Categorias
 
-   async function eliminarCategoria(id) {
+   async function eliminarCategoria(id_categorias) {
     try {
         const result = await Swal.fire({
             
@@ -65,13 +65,13 @@
         });
 
         if (result.isConfirmed) {
-            const response = await fetch(`http://localhost:8086/api/publico/categorias/${id}`, {
+            const response = await fetch(`http://127.0.0.1:5000/api/publico/categorias/${id_categorias}`, {
                 method: 'DELETE',
             });
 
             if (response.ok) {
                 // Actualizar la lista de categoria después de la eliminación
-                listCategorias = listCategorias.filter(producto => producto.id !== id);
+                listCategorias = listCategorias.filter(producto => producto.id !== id_categorias);
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -100,63 +100,77 @@
 </script>
 
 <main>
-    <Nav />
 
-    <MenuAcciones/>
-    
-    <div class="col-12 col-md-6 mx-auto mt-3 mb-4 mb-md-0">
-
-        <div class="col-12 text-end">
-            <a href="/categoria/nueva" class="btn btn-sm btn-success">Agregar categoria</a>
-        </div>
-        <div class="col-12 mx-auto">
-
-            <div class="table-responsive card">
-                <table class="table align-items-center mb-0">
-                    <thead>
-                        <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Nombres</th>
-                            
-                            <th
-                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {#each listCategorias as values}
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="{values.imagen}" alt="img" class=" avatar-xs me-3">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-xs">{values.nombre}</h6>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">
-                                <a class="btn btn-sm btn-outline-success" href={`/categoria/editar/${values.id}`}>Editar</a>
-                                <button class="btn btn-sm btn-outline-danger" on:click={() => eliminarCategoria(values.id)}>Eliminar</button>
-                                
-                            </td>
-                        </tr>
-                        {:else}
-                        <tr>
-                            <td class="text-center">
-                                No se encontraron categorias  
-                            </td>
-                        </tr>
-                        {/each}
-                        
-                    </tbody>
-                </table>
-            </div>
+    <div class="row m-0">
+        <MenuAcciones/>
+        
+        <div class="col" style="margin-left: 4.5rem;">
 
             
-        </div>
+            <div class="col-8 mx-auto">
+                <div class="row">
+                    <h4 class="col-6 pt-3">Categorias</h4>
+                    <div class="col-6 mt-3 text-end">
+                        <a href="/categoria/nueva" class="btn btn-sm btn-success">Agregar categoria</a>
+                    </div>
+                </div>
 
+                
+                  
+                  
+
+                <div class="table-responsive card">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7">
+                                    id</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Nombres</th>
+                                
+                                <th
+                                    class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7">
+                                    acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {#each listCategorias as values}
+                            <tr>
+                                <td>
+                                    <p class="mb-0 text-xs text-center">{values.id_categorias}</p>
+                                </td>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="{values.url_imagen}" alt="img" class=" avatar-xs me-3">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-xs">{values.nombre}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <a class="btn btn-sm btn-outline-success" href={`/categoria/editar/${values.id_categorias}`}>Editar</a>
+                                    <button class="btn btn-sm btn-outline-danger" on:click={() => eliminarCategoria(values.id_categorias)}>Eliminar</button>
+                                    
+                                </td>
+                            </tr>
+                            {:else}
+                            <tr>
+                                <td class="text-center">
+                                    No se encontraron categorias  
+                                </td>
+                            </tr>
+                            {/each}
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+                
+            </div>
+
+        </div>
     </div>
     <Footer/>
 </main>

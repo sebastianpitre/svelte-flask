@@ -1,8 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-	import Menufooter from '../components/menufooter.svelte';
 	import Footer from '../components/footer.svelte';
-	import Nav from '../components/nav.svelte';
     import MenuAcciones from '../components/MenuAcciones.svelte';
 
     import { user } from '../stores/user'; // Store para guardar los datos del usuario
@@ -43,16 +41,16 @@
 
 <main>
 
-    <Nav/>
+        <div class="row m-0">
 
-    <MenuAcciones/>
-    <div class="container-fluid">
-        <div class="row">
+            <MenuAcciones/>
 
-            <div class="col-12 col-md-10 mx-auto mb-4 mb-md-0">
-                
-                <div class="col-12 text-end">
-                    <a href="/usuario/nuevo" class="btn btn-sm btn-success">Agregar usuario</a>
+            <div class="col mt-3" style="margin-left: 4.5rem;">
+                <div class="row">
+                    <h4 class="col-6 pt-3">Usuarios</h4>
+                    <div class="col-6 mt-3 text-end">
+                        <a href="/usuario/nuevo" class="btn btn-sm btn-success">Agregar usuario</a>
+                    </div>
                 </div>
                 <div class="card p-2">
                     <div class="table-responsive">
@@ -110,9 +108,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <Menufooter/>
-<Footer></Footer>
+<Footer/>
 </main>
 
 <style>
