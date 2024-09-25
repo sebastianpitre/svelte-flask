@@ -16,6 +16,7 @@
     import Verpedido from './routes/verpedido.svelte';
     import VerProducto from './routes/VerProducto.svelte';
     import MisPedidos from './routes/MisPedidos.svelte';
+    import Example from './routes/example.svelte';
 
 </script>
 
@@ -47,6 +48,8 @@
     <Route path="/pedido" component={Pedido} />
     <Route path="/pedidos_admin" component={PedidosAdmin} />
     <Route path="/pedidos_admin/:id" component={Verpedido} />
+
+    <Route path="/example" component={Example} />
 
 
   </Router>
