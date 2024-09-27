@@ -1,9 +1,9 @@
 <script>
     import { createPedido } from '../api/pedido';
     import { getProductos } from '../api/productos';
-    import Footer from '../components/footer.svelte';
+    import Footer from '../components/Footer.svelte';
     import { vaciarCarrito } from '../stores/cart';
-
+    import Swal from 'sweetalert2';
     import { cart } from '../stores/cart';
     import { onMount } from 'svelte';
     import { get } from 'svelte/store';
@@ -36,21 +36,40 @@
             const producto = productosEnCarrito.find(p => p.id === item.id);
             return total + (producto.precio * item.quantity);
         }, 0);
+        
     });
 
     // Función que se ejecutará al hacer clic en el botón para crear el pedido
     function handleCrearPedido() {
         createPedido()
             .then(() => {
-                alert('Pedido creado con éxito');
+                // Mostrar SweetAlert de éxito
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: 'Pedido creado con éxito',
+                    icon: 'success',
+                    confirmButtonText: 'Mirar pedido',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redirigir a "mis_pedidos"
+                        window.location.href = '/mis_pedidos';
+                    }
+                });
+                vaciarCarrito();
             })
             .catch(error => {
                 console.error('Error al crear el pedido:', error);
-                alert('Hubo un error al crear el pedido');
+                // Mostrar SweetAlert de error
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error al crear el pedido',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar',
+                });
             });
-            vaciarCarrito()
-            window.location.href = '/mis_pedidos';
     }
+
+    
 </script>
 
 <main>

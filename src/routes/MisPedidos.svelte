@@ -1,7 +1,7 @@
 <script>
     import Menufooter from '../components/menufooter.svelte';
     import { isAuthenticated, checkAuth } from '../stores/auth';
-    import Footer from '../components/footer.svelte';
+    import Footer from '../components/Footer.svelte';
     import Nav from '../components/nav.svelte';
     import { onMount } from 'svelte';
     import { getMisPedidos } from '../api/pedidoAdmin';

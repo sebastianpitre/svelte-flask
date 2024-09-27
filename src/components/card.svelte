@@ -82,8 +82,15 @@
         <p class="text-success text-center border-bottom border-gray mt-1 mb-3 pb-2">$ {producto.precio} <span class="text-dark text-sm">{producto.unidad_producto}</span></p>
       {/if}
   
+      
       <div class="row text-center mt-2">
-
+        <p class="col mt-n3 my-0" style="font-size: 13px;">
+          {#if itemQuantity < producto.cantidad}
+          Maximo {producto.cantidad} 
+          {:else}
+          ¡limite alcanzado!
+          {/if}
+        </p>
         <div class="col-md-10 col-12 mx-auto">
 
           {#if producto.is_activo === true}
@@ -92,11 +99,16 @@
               <div>
                 <button class="btn col btn-sm border border-dark" on:click={() => decrementQuantity(producto.id)}>-</button>
                 <span class="col p-1 btn disabled text-dark">{itemQuantity} {producto.unidad_producto}</span>
+                {#if itemQuantity < producto.cantidad}
                 <button class="btn col btn-sm border border-success text-success" on:click={() => incrementQuantity(producto.id)}>+</button>
+                {:else}
+                <button class="btn col btn-sm border  text-dark" disabled on:click={() => incrementQuantity(producto.id)}>max</button>
+                
+                {/if}
               </div>
             {/if}
             {#if !isInCart}
-              <button class="btn col-12 btn-sm btn-success" on:click={handleAddToCart}>Agregar </button>
+              <button class="btn col-12 btn-sm btn-success" on:click={handleAddToCart}>Agregar</button>
             {/if}
 
             {:else} <button class="btn col-12 btn-sm bg-info text-white invalid disabled">Disponible pronto</button>

@@ -4,6 +4,7 @@
   // Importar la tienda del carrito y funciones para modificarla
   import { cart, addToCart, incrementQuantity, decrementQuantity } from '../stores/cart';
   import Nav from '../components/nav.svelte';
+  import Menufooter from '../components/menufooter.svelte';
 
   // Recibir el `id` como prop
   export let id;
@@ -64,11 +65,10 @@
   // Función para agregar al carrito
   function handleAddToCart() {
     isFading = true; // Activa el efecto de desvanecimiento
-    setTimeout(() => {
+    
       addToCart(producto); // Llama a la función de la tienda del carrito
       checkCartStatus(); // Actualiza el estado del carrito
       isFading = false; // Restaura el estado del botón si lo necesitas para futuras acciones
-    }, 500); // Coincide con la duración de la animación CSS
 
     
   }
@@ -114,7 +114,7 @@
     <div class="card p-4">
       <div class="row">
         <div class="col-12 col-md-5 mb-4">
-          <img class="w-100" src="{producto.url_imagen}" alt="">
+          <img class="w-100 border-radius-2xl" src="{producto.url_imagen}" alt="">
         </div>
         <div class="col">
           <h5>{producto.nombre}</h5>
@@ -134,46 +134,33 @@
             </div>
           </div>
 
-          <style>
-            /* Efecto de brillo radiante y desvanecimiento */
-            .glow-fade {
-              animation: glow 0.7s ease-in-out, fade 0.7s ease-in-out;
-            }
+          <p class="col my-0" style="font-size: 13px;">
+            {#if itemQuantity < producto.cantidad}
+            Maximo {producto.cantidad}
+            {:else}
+            ¡limite alcanzado!
+            {/if}
+          </p>
 
-            /* Animación de brillo */
-            @keyframes glow {
-              0% {
-                box-shadow: 0 0 5px rgba(0, 255, 0, 0.5), 0 0 10px rgba(0, 255, 0, 0.5);
-              }
-              100% {
-                box-shadow: 0 0 15px rgba(0, 255, 0, 1), 0 0 30px rgba(0, 255, 0, 1);
-              }
-            }
-
-            /* Animación de desvanecimiento */
-            @keyframes fade {
-              0% {
-                opacity: 1;
-              }
-              100% {
-                opacity: 0;
-              }
-            }
-
-
-          </style>
           {#if producto.is_activo}
+
             {#if isInCart}
-              <div class="col-12">
+              <div>
                 <button class="btn col btn-sm border border-dark" on:click={handleDecrement}>-</button>
                 <span class="col p-1 btn disabled text-dark">{itemQuantity} {producto.unidad_producto}</span>
+                {#if itemQuantity < producto.cantidad}
                 <button class="btn col btn-sm border border-success text-success" on:click={handleIncrement}>+</button>
+                {:else}
+                <button class="btn col btn-sm border  text-dark" disabled>max</button>
+                
+                {/if}
               </div>
-            {:else}
-            <button class="btn col btn-sm btn-success {isFading ? 'glow-fade' : ''}" on:click={handleAddToCart}>Agregar al carrito</button>
             {/if}
-          {:else}
-            <button class="btn col-4 btn-sm bg-info text-white invalid disabled">Disponible pronto</button>
+            {#if !isInCart}
+              <button class="btn col btn-sm btn-success" on:click={handleAddToCart}>Agregar al carrito</button>
+            {/if}
+
+            {:else} <button class="btn col-4 btn-sm bg-info text-white invalid disabled">Disponible pronto</button>
           {/if}
         </div>
       </div>
@@ -185,11 +172,8 @@
   {/if}
   </div>
 
-  <style>
-    body{
-      background-color: #f0f2f5;
-    }
-  </style>
+  <Menufooter/>
+
 </main>
 
 

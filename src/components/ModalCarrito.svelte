@@ -102,10 +102,14 @@
               <button class="btn btn-sm btn-success">Confirmar pedido</button>
             </a>
           {/if}
-        {:else}
-          <div class="col-6">
-            <button class="btn btn-sm btn-success"  on:click={login} on:click={() => isModalOpen.set(false)}>Confirmar pedido</button>
-          </div>
+          {:else if cartItems.length === 0}
+            <div class="col-6">
+              <button class="btn btn-sm btn-success" disabled on:click={login} on:click={() => isModalOpen.set(false)}>Confirmar pedido</button>
+            </div>
+          {:else}
+            <div class="col-6">
+              <button class="btn btn-sm btn-success" on:click={login} on:click={() => isModalOpen.set(false)}>Confirmar pedido</button>
+            </div>
         {/if}
       </div>
     </div>

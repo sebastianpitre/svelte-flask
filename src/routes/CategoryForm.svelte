@@ -1,77 +1,75 @@
 <script>
     import { onMount } from "svelte";
     import Swal from "sweetalert2";
-  import Nav from "../components/nav.svelte";
-  
+    import { fetchWithAuth } from '../api/auth.js'; // Asegúrate de importar la función correctamente
+    
     export let id;
-  
-    let nombre = "";
-    let url_imagen = "";
-  
-    let listCategorias = [];
-  
-    onMount(async () => {
-      fetch("http://127.0.0.1:5000/api/publico/categorias")
-        .then((response) => response.json())
-        .then((results) => (listCategorias = results));
-  
-      if (id) {
-        const response = await fetch(`http://127.0.0.1:5000/api/publico/categorias/${id}`);
-        const product = await response.json();
-        nombre = product.nombre;
-        url_imagen = product.url_imagen;
 
+    // DATOS
+    let nombre = '';
+    let url_imagen = '';
+
+    onMount(async () => {
+      try {
+
+        // Si hay un id, obtener detalles del producto (ya como JSON)
+        if (id) {
+          const producto = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/categorias/${id}`);
+          if (producto) {
+
+            nombre = producto.nombre;
+            url_imagen = producto.url_imagen;
+            
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     });
   
     const handleSubmit = async (event) => {
-      event.preventDefault();
-  
-      const formData = {
-        nombre,
-        url_imagen,
+    event.preventDefault();
 
-      };
-  
-      try {
-        const method = id ? "PATCH" : "POST";
-        const url = id ? `http://127.0.0.1:5000/api/publico/categorias/${id}` : "http://127.0.0.1:5000/api/publico/categorias";
-  
-        const response = await fetch(url, {
-          method,
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
-  
-        if (!response.ok) {
-          throw new Error("Error en la solicitud");
-        }
-  
-        const data = await response.json();
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Producto guardado correctamente',
-          showConfirmButton: false,
-          timer: 1500
-        }).then(() => {
-        window.location.href = '/categorias'; // Redirigir a la lista de categorias
-        });
-  
-      } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Hubo un problema al guardar el producto',
-        });
-      }
+    const formData = {
+      nombre,
+      url_imagen,
     };
+
+    try {
+      const method = id ? "PATCH" : "POST";
+      const url = id
+        ? `http://127.0.0.1:5000/api/admin/categorias/${id}`
+        : "http://127.0.0.1:5000/api/admin/categorias";
+
+      // Usar fetchWithAuth en lugar de fetch
+      const data = await fetchWithAuth(url, {
+        method,
+        body: JSON.stringify(formData),
+      });
+
+      // Mostrar mensaje de éxito
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Categoria guardada correctamente',
+        showConfirmButton: false,
+        timer: 1500,
+      }).then(() => {
+        window.location.href = '/categorias'; // Redirigir a la lista de categorias
+      });
+
+    } catch (error) {
+      // Mostrar mensaje de error en caso de fallo
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un problema al guardar el producto',
+      });
+    }
+  };
   </script>
   
   <main class="row col-12">
-    <Nav />
     <div class="col-12 col-md-6 mx-auto pt-3 mb-4 mb-md-0">
         <form on:submit={handleSubmit}>
           <div class="card p-3">

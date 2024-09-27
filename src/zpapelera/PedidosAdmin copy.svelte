@@ -1,11 +1,11 @@
 <script>
     import Menufooter from '../components/menufooter.svelte';
     import { isAuthenticated, checkAuth } from '../stores/auth';
-    import Footer from '../components/footer.svelte';
+    import Footer from '../components/Footer.svelte';
     import Nav from '../components/nav.svelte';
     import { onMount } from 'svelte';
     import { getPedidos } from '../api/pedidoAdmin';
-    import MenuAcciones from '../components/MenuAcciones.svelte';
+    import MenuAcciones from '../components/MenuLateral.svelte';
 
     // Importamos las librerías de DataTables
     import jQuery from 'jquery';

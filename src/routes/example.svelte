@@ -1,5 +1,5 @@
 <script>
-    import MenuAcciones from "../components/MenuAcciones.svelte";
+    import MenuAcciones from "../components/MenuLateral.svelte";
 
 </script>
 <main>

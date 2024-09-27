@@ -10,7 +10,7 @@
   let apellidos = "";
   let email = "";
   let password = "";
-  let tipoIdentificacion = "";
+  let tipo_identificacion = "";
   let identificacion = "";
   let telefono = "";
   let direccion = "";
@@ -18,37 +18,32 @@
   let ciudad = "";
 
   onMount(async () => {
-    if (id) {
       try {
-        const response = await fetchWithAuth(`http://localhost:8086/api/auth/perfil/${id}`);
-        
-        if (!response.ok) {
-          throw new Error('No se pudo cargar el usuario');
+
+        // Si hay un id, obtener detalles del producto (ya como JSON)
+        if (id) {
+          const user = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/usuarios/${id}`);
+          if (user) {
+
+            nombres = user.nombres || "";
+            apellidos = user.apellidos || "";
+            email = user.email || "";
+            password = user.password || "";
+            tipo_identificacion = user.tipo_identificacion || "";
+            identificacion = user.identificacion || "";
+            telefono = user.telefono || "";
+            direccion = user.direccion || "";
+            barrio = user.barrio || "";
+            ciudad = user.ciudad || "";
+            
+          }
         }
-
-        const user = await response.json();
-
-        nombres = user.nombres || "";
-        apellidos = user.apellidos || "";
-        email = user.email || "";
-        password = user.password || "";
-        tipoIdentificacion = user.tipoIdentificacion || "";
-        identificacion = user.identificacion || "";
-        telefono = user.telefono || "";
-        direccion = user.direccion || "";
-        barrio = user.barrio || "";
-        ciudad = user.ciudad || "";
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: error.message,
-        });
+        console.error('Error fetching data:', error);
       }
-    }
-  });
+    });
 
-  const handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = {
@@ -56,7 +51,7 @@
       apellidos,
       email,
       password,
-      tipoIdentificacion,
+      tipo_identificacion,
       identificacion,
       telefono,
       direccion,
@@ -66,21 +61,12 @@
 
     try {
       const method = id ? "PATCH" : "POST";
-      const url = id ? `http://localhost:8086/api/auth/perfil/${id}` : "http://localhost:8086/api/auth/registro";
+      const url = id ? `http://127.0.0.1:5000/api/admin/usuarios/${id}` : "http://127.0.0.1:5000/api/admin/usuarios/";
 
       const response = await fetchWithAuth(url, {
         method,
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(formData),
       });
-
-      if (!response.ok) {
-        throw new Error("Error en la solicitud");
-      }
-
-      await response.json();
 
       Swal.fire({
         icon: 'success',
@@ -102,7 +88,7 @@
   };
 </script>
 
-<main class="row col-12">
+<main class="row m-0">
   <Nav />
   <div class="col-12 col-md-8 mx-auto pt-3 mb-4 mb-md-0">
     <form on:submit={handleSubmit}>
@@ -136,7 +122,7 @@
           <div class="col-12 col-md-6">
             <div class="input-group input-group-static my-2">
               <label for="TipoIdentificacion">Tipo identificación</label>
-              <input type="text" class="form-control" bind:value={tipoIdentificacion} />
+              <input type="text" class="form-control" bind:value={tipo_identificacion} />
             </div>
           </div>
           <div class="col-12 col-md-6">

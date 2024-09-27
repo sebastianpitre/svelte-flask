@@ -8,7 +8,7 @@
   import Car from './components/ModalCarrito.svelte';
   import { selectedCategory } from './stores/stores';
   import { cart, addToCart, incrementQuantity, decrementQuantity } from './stores/cart';
-  import Footer from './components/footer.svelte';
+  import Footer from './components/Footer.svelte';
   import Card from './components/card.svelte';
   import Sliderly from './components/Sliderly.svelte';
 
@@ -78,11 +78,11 @@
     <Nav/>
     <Header/>
     
-    <div class="mx-0 mx-md-5 mb-4">
+    <div class="mx-0 mb-4">
       {#if productosEnPromocion.length > 0 }
-
-        <div class="col-auto">
-          <h5 class="text-dark mt-2 ms-2 ms-md-0">🌟Ofertas</h5>
+        <div class="row my-2 mx-2 pb-1 mx-md-2 mx-md-5">
+          <img class="ms-n2 mt-n1" src="../public/img/icon/star.png" alt="🌟" style="width: 53px; height: 28px">
+          <h5 class="col-auto my-auto text-dark ms-n3">Ofertas</h5>
         </div>
 
       <Sliderly/>
@@ -126,22 +126,19 @@
       <!-- Mostrar productos agrupados por categoría cuando no es "Todos" -->
       {#if $selectedCategory !== 'all'}
         {#each categoriasConProductos as categoria}
-          <div class="row">
-            <div class="col-md-12 col-lg-12">
-              <div class="row my-2">
-                <img class="sin-fondo" src="{categoria.url_imagen}" alt="" style="width: 60px;">
-                <h5 class="col my-auto text-dark ms-n3">{categoria.nombre}</h5>
-              </div>
-              <div class="row">
-                {#each filteredProducts as producto (producto.id)}
-                  {#if producto.id_categorias === categoria.id_categorias && producto.is_activo === true}
-                    <div class="{clasesCard}">
-                      <Card {producto} addToCart={handleAddToCart}/>
-                    </div>
-                  {/if}
-                {/each}
-              </div>
-            </div>
+          <div class="row my-2">
+            <img class="sin-fondo" src="{categoria.url_imagen}" alt="" style="width: 60px;">
+            <h5 class="col-auto my-auto text-dark ms-n3">{categoria.nombre}</h5>
+            <hr class="bg-gray-600 opacity-1 col mt-3 me-2" style="padding-top: 1.7px ;">
+          </div>
+          <div class="row my-2">
+            {#each filteredProducts as producto (producto.id)}
+              {#if producto.id_categorias === categoria.id_categorias && producto.is_activo === true}
+                <div class="{clasesCard}">
+                  <Card {producto} addToCart={handleAddToCart}/>
+                </div>
+              {/if}
+            {/each}
           </div>
         {/each}
 

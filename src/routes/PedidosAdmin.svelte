@@ -1,12 +1,9 @@
 <script>
-    import Menufooter from '../components/menufooter.svelte';
-    import { isAuthenticated, checkAuth } from '../stores/auth';
-    import Footer from '../components/footer.svelte';
-    import Nav from '../components/nav.svelte';
+    import Footer from '../components/Footer.svelte';
     import { onMount } from 'svelte';
     import { getPedidosAdmin } from '../api/pedidoAdmin';
-    import MenuAcciones from '../components/MenuAcciones.svelte';
-
+    import MenuAcciones from '../components/MenuLateral.svelte';
+    
     // Importamos las librerías de DataTables
     import jQuery from 'jquery';
     import 'datatables.net-dt';
@@ -20,15 +17,6 @@
             pedidos = await getPedidosAdmin();
         } catch (error) {
             errorMessage = 'No se pudieron cargar los pedidos.';
-        }
-    });
-
-    // redirigir si no iniciado sesion
-    let isAuth = false;
-    onMount(async () => {
-        isAuth = await checkAuth();
-        if (!isAuth) {
-            window.location.href = '/login'; // Redirige al login si no está autenticado
         }
     });
 
@@ -71,11 +59,11 @@
 
     <ModalPedidos/>
 
-        <div class="row m-0">
+        <div class="row m-0" style="padding-left: 4.5rem;">
 
             <MenuAcciones/>
 
-            <div class="col" style="margin-left: 4.5rem;">
+            <div class="col">
                 <div class="col-12">
                     <h4 class="col-6 pt-3">Pedidos</h4>
                     <div class="card mt-3 p-2">

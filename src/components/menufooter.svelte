@@ -28,9 +28,12 @@
         addToCart({ id: 1, name: 'Producto Ejemplo', price: 100 });
     }
 
-    function isActive(path) {
-        return $currentPath === path ? 'bg-select border-sebas col-10 mx-auto' : 'col-8 mx-auto';
-    }
+    function isActive(path) {return $currentPath === path ? 'bg-select border-sebas col-10 mx-auto' : 'col-8 mx-auto';}
+
+    function selector(path) {return $currentPath === path ? 'selector' : 'no-selector';}
+
+    function linkSelect(path) {return $currentPath === path ? 'card-select' : 'none';}
+
 </script>
 
 
@@ -38,30 +41,46 @@
         <div class="container-fluid">
             <div class="row mx-sebas" style="border-radius: 0.60rem;">
 
-                <div class="row ms-0" style="border-radius: 0.60rem; background-color: black; width: 84%;">
+                <div class="row ms-0" style="border-radius: 0.60rem; background-color: #1a1a1a; width: 84%;">
                     <a class="col p-1 text-center" href="/" on:click={() => updatePath('/')}>
-                        <span class="material-symbols-outlined {isActive('/')}" style="border-radius: 50%; font-size: 28px;">home_app_logo</span>
-                        <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Inicio</p>
+                        <div class=" mx-auto card-menu {linkSelect('/')}" style="width: 60px;">
+                            <span class="material-symbols-outlined {isActive('/')}" style="border-radius: 50%; font-size: 28px;">home_app_logo</span>
+                            <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Inicio</p>
+                            <span class="{selector('/')}"></span>
+                        </div>
+                        
                     </a>
                     {#if userProfile && userProfile.nombres}
     
                         <!-- ADMIN -->
                         {#if userProfile.rol === "ADMIN"}
                             <a class="col p-1 text-center" href="/cuenta" on:click={() => updatePath('/cuenta')}>
-                                <span class="material-symbols-outlined {isActive('/cuenta')}" style=" font-size: 28px;">person</span>
-                                <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Cuenta</p>
+                                <div class=" mx-auto card-menu {linkSelect('/cuenta')}" style="width: 60px;">
+                                    <span class="material-symbols-outlined {isActive('/cuenta')}" style=" font-size: 28px;">person</span>
+                                    <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Cuenta</p>
+                                    <span class="{selector('/cuenta')}"></span>
+                                </div>
+                                
                             </a>
     
                             <a class="col p-1 text-center" href="/productos" on:click={() => updatePath('/productos')}>
-                                <span class="material-symbols-outlined {isActive('/productos')}" style="font-size: 28px;">settings</span>
-                                <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Admin</p>
+                                <div class=" mx-auto card-menu {linkSelect('/productos')}" style="width: 60px;">
+                                    <span class="material-symbols-outlined {isActive('/productos')}" style="font-size: 28px;">settings</span>
+                                    <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Admin</p>
+                                    <span class="{selector('/productos')}"></span>
+                                </div>
+                                
                             </a>
     
                             <!-- USUARIO -->
                             {:else if userProfile.rol === "CLIENTE"}
                             <a class="col p-1 text-center" href="/cuenta" on:click={() => updatePath('/cuenta')}>
-                                <span class="material-symbols-outlined {isActive('/cuenta')}" style="border-radius: 50%; font-size: 28px;">person</span>
-                                <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Cuenta</p>
+                                <div class=" mx-auto card-menu {linkSelect('/cuenta')}" style="width: 60px;">
+                                    <span class="material-symbols-outlined {isActive('/cuenta')}" style="border-radius: 50%; font-size: 28px;">person</span>
+                                    <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Cuenta</p>
+                                    <span class="{selector('/cuenta')}"></span>
+                                </div>
+                                
                             </a>
                         {/if}
                     {:else}
@@ -70,8 +89,12 @@
     
                     <a class="col p-1 text-center" href="/login" on:click={() => updatePath('/cuenta')}>
                         <div class="{isActive('/cuenta')}">
-                            <span class="material-symbols-outlined text-white " style="border-radius: 50%; font-size: 28px;">person</span>
-                            <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Cuenta</p>
+                            <div class=" mx-auto card-menu {linkSelect('/cuenta')}" style="width: 60px;">
+                                <span class="material-symbols-outlined text-white " style="border-radius: 50%; font-size: 28px;">person</span>
+                                <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Cuenta</p>
+                                <span class="{selector('/cuenta')}"></span>
+                            </div>
+                            
                         </div>
                     </a>
 
@@ -80,7 +103,7 @@
                 
                 <!-- carrito -->
                 
-                <button class="col btn text-capitalize mb-0 position-relative p-1 pt-2 text-center" on:click={openModal} style="border-radius: 0.60rem; background-color: black; width: 15%; margin-left: 17px;">
+                <button class="col btn text-capitalize mb-0 position-relative p-1 pt-2 text-center" on:click={openModal} style="border-radius: 0.60rem; background-color: #1a1a1a; width: 15%; margin-left: 17px;">
                     <svg class="mb-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 105.96 98.45" style="width: 35px;">
                         <defs>
                         <style>
@@ -114,6 +137,66 @@
     
 
 <style>
+
+    .selector{
+        width: 50%;
+        height: 4px;
+        border-radius: 20px;
+        background-color: #39a900;
+        position: absolute;
+        left: 15px;
+        bottom: -2px;
+
+        /* Inicialmente, está en escala pequeña */
+        transform: scale(0);
+        /* Aplicar la animación */
+        animation: growAnimation 600ms forwards;
+    }
+
+    /* Definimos la animación */
+    @keyframes growAnimation {
+        from {
+        transform: scale(0);
+        }
+        to {
+        transform: scale(1);
+        }
+    }
+    /* Animación del borde */
+    @keyframes borderLoading {
+        0% {
+        border-color: transparent; /* Comienza sin borde visible */
+        }
+        20% {
+        border-color: green; /* Al final del efecto, el borde es verde */
+        }
+    }
+
+  .no-selector{
+    display: none;
+  }
+    
+  .card-menu{
+    position: relative;
+    color: white;
+    border-radius: 0.30rem;
+    text-align: center;
+  }
+
+  .card-menu:hover {
+    transition: color 100ms ease-out 100ms;
+    background: #2d2d2d;
+  }
+
+  .card-select{
+    background-color: #2d2d2d;    
+    border: 1px solid transparent; /* Empieza sin borde */
+    /* Animación */
+    animation: borderLoading 2s linear forwards;
+  }
+
+  
+
 .mx-sebas {
   margin-right: -6px !important;
   margin-left: -6px !important;
@@ -129,6 +212,6 @@
 }
 
 .bg-select{
-   color: #38a900a8 ;
+   color: #38a900 ;
 }
 </style>

@@ -2,9 +2,8 @@
     import { onMount } from 'svelte';
 
     import Swal from 'sweetalert2';
-    import Footer from '../components/footer.svelte';
-    import Nav from '../components/nav.svelte';
-    import MenuAcciones from '../components/MenuAcciones.svelte';
+    import Footer from '../components/Footer.svelte';
+    import MenuAcciones from '../components/MenuLateral.svelte';
 
     // Definimos las variables reactivas para el estado del formulario
     let id_categorias;
@@ -101,13 +100,13 @@
 
 <main>
 
-    <div class="row m-0">
+    <div class="row m-0" style="padding-left: 4.5rem;">
         <MenuAcciones/>
         
-        <div class="col" style="margin-left: 4.5rem;">
+        <div class="col" style="min-height: 68vh;">
 
             
-            <div class="col-8 mx-auto">
+            <div class="col mx-auto">
                 <div class="row">
                     <h4 class="col-6 pt-3">Categorias</h4>
                     <div class="col-6 mt-3 text-end">
@@ -167,7 +166,7 @@
                     </table>
                 </div>
 
-                
+                  
             </div>
 
         </div>

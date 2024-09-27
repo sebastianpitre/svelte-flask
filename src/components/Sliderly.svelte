@@ -26,8 +26,8 @@
           350: { perPage: 1 },
           530: { perPage: 1 },
           700: { perPage: 2 },
-          992: { perPage: 2 },
-          1200: { perPage: 2 },
+          880: { perPage: 3 },
+          1200: { perPage: 3 },
           3000: { perPage: 4 }
         }
       }).mount(); // Monta Splide
@@ -253,10 +253,10 @@
     }
 
     .splide__arrow--prev {
-     left: 0px;
+     left: 20px;
     }
     .splide__arrow--next {
-      right: 0px;
+      right: 20px;
     }
 
     .mx-n4-5 {

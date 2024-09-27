@@ -203,6 +203,30 @@
   </div>
 </div>
 
+<div class="position-sticky mobile-menu z-index-sticky mb-6 mt-n1 d-md-none d-block" style="top: -2px;">
+  <div class="row">
+    <div class="col-12">
+      <nav class="navbar navbar-expand-lg top-0 z-index-fixed py-0  position-absolute py-0 start-0 end-0" style="background-color: #2d2d2d;">
+        <div class="container-fluid px-0">
+          <a class="col font-weight-bolder " use:link href="/" rel="tooltip" data-placement="bottom">
+            <div class="row my-2">
+              <a href="/" class="col-1 text-end">
+                <span class="material-symbols-outlined text-white pt-1">arrow_back_ios</span>
+              </a>
+              <div class="col-2 text-end">
+                <img class="mt-1" src="/public/img/logo.svg" alt="imglogo" style="width: 25px;">
+              </div>
+              <h6 class="col-9 border-start border-1 text-white my-auto font-weight-bold">SENA Empresa vitrina web</h6>
+            </div>
+            
+          </a>
+
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
 
 
 <style>

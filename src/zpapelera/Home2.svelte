@@ -61,7 +61,7 @@
   // carrito 
 
   import { cart, addToCart, incrementQuantity, decrementQuantity } from '../stores/cart';
-  import Footer from '../components/footer.svelte';
+  import Footer from '../components/Footer.svelte';
   import Menufooter from '../components/menufooter.svelte';
 
   let listProductos = []; // Aquí obtienes tu lista de productos

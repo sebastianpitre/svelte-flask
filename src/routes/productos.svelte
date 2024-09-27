@@ -1,15 +1,10 @@
 <script>
     import { isAuthenticated, checkAuth } from '../stores/auth';
-	import Menufooter from '../components/menufooter.svelte';
-	import Footer from '../components/footer.svelte';
-	import Nav from '../components/nav.svelte';
-    
-
+	import Footer from '../components/Footer.svelte';
     import { eliminarProducto } from '../api/productos';
     import { onMount } from 'svelte';
-
     import { getProductos } from '../api/productos';
-    import MenuAcciones from '../components/MenuAcciones.svelte';
+    import MenuAcciones from '../components/MenuLateral.svelte';
 
     let productos = [];
     let errorMessage = '';
@@ -22,24 +17,13 @@
         }
     });
 
-    // redirigir si no iniciado sesion
-
-    let isAuth = false;
-    onMount(async () => {
-        isAuth = await checkAuth();
-        if (!isAuth) {
-            window.location.href = '/login'; // Redirige al login si no está autenticado
-        }
-    });
-
 </script>
-
 
 <main>
 
-    <div class="row m-0">
+    <div class="row m-0" style="padding-left: 4.5rem;">
         <MenuAcciones/>
-        <div class="col" style="margin-left: 4.5rem;">
+        <div class="col">
             <div class="row">
                 <h4 class="col-6 pt-3">Productos</h4>
                 <div class="col-6 mt-3 text-end">
@@ -74,12 +58,6 @@
                                         
                                         <div class="d-flex flex-column justify-content-center">
                                             <h5 class="mb-0 text-sm">{values.nombre}</h5>
-                                            
-                                            <!-- {#each listCategorias as item}
-                                                {#if item.id === values.idCategoria}
-                                                    <p class="text-sm mb-0">Categoria: {item.nombre}</p>
-                                                {/if}
-                                            {/each} -->
                                         </div>
                                     </div>
                                 </td>
@@ -123,9 +101,3 @@
     
     <Footer/>
 </main>
-
-<style>
-    main{
-        background-color: #f5f5f5;
-    }
-</style>
