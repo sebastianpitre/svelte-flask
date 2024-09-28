@@ -42,11 +42,28 @@
                 </div>
                 
                 <p class="text-dark text-bold col-12 text-center col-md-6 text-xl-start pt-3 my-0">Subtotal: ${item.precio*item.quantity}</p>
-  
-                <div class="col-12 col-md-6 text-center mt-2 mb-n2">
-                  <button class="btn col btn-sm btn-blue" on:click={() => decrementQuantity(item.id)}>-</button>
+                
+                <div class="col-12 col-md-6 text-center mt-3 mb-n2">
+                  <p class="col mt-n3 my-0" style="font-size: 13px;">
+                    {#if item.quantity < item.cantidad}
+                    Maximo {item.cantidad} 
+                    {:else}
+                    ¡limite alcanzado!
+                    {/if}
+                  </p>
+                  {#if item.quantity <=1}
+                  <button class="btn col btn-sm border btn-danger" on:click={() => decrementQuantity(item.id)}>x</button>
+                  {:else}
+                  <button class="btn col btn-sm border text-dark" on:click={() => decrementQuantity(item.id)}>-</button>
+                  
+                  {/if}
                   <span class="col p-1 btn disabled text-dark">{item.quantity}</span>
+                  {#if item.quantity < item.cantidad}
                   <button class="btn col btn-sm btn-success" on:click={() => incrementQuantity(item.id)}>+</button>
+                  {:else}
+                  <button class="btn col btn-sm border  text-dark" disabled on:click={() => incrementQuantity(item.id)}>max</button>
+                  
+                  {/if}
           
                 </div>
                   

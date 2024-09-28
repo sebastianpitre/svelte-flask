@@ -21896,8 +21896,7 @@
     }
   
     .dropdown .dropdown-menu:before {
-      font-family: var(--bs-body-font-family);
-      content: "\f0d8";
+      content: "▲";
       position: absolute;
       top: 0;
       left: 28px;
@@ -21932,7 +21931,7 @@
     }
   
     .navbar-toggler+.navbar-collapse .dropdown:not(.nav-item) .dropdown-menu:before {
-      font-family: var(--bs-body-font-family);
+      font-family: "Font Awesome 5 Free";
       content: "\f0d8";
       position: absolute;
       top: 0;
@@ -21978,7 +21977,7 @@
     }
   
     .dropdown .dropdown-menu:before {
-      font-family: var(--bs-body-font-family);
+      font-family: "Font Awesome 5 Free";
       content: "\f0d8";
       position: absolute;
       top: 0;

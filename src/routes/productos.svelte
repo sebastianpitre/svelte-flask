@@ -6,6 +6,10 @@
     import { getProductos } from '../api/productos';
     import MenuAcciones from '../components/MenuLateral.svelte';
 
+    // Importamos las librerías de DataTables
+    import jQuery from 'jquery';
+    import 'datatables.net-dt';
+
     let productos = [];
     let errorMessage = '';
 
@@ -17,6 +21,30 @@
         }
     });
 
+    onMount(() => {
+        const tableInterval = setInterval(() => {
+            if (productos.length > 0) {
+                jQuery('#tablaPedidos').DataTable({
+                    language: {
+                        search: "Busqueda Dinámica",
+                        lengthMenu: "Mostrar  _MENU_",
+                        info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                        infoEmpty: "No hay entradas disponibles",
+                        infoFiltered: "(filtrado de _MAX_ entradas totales)",
+                        paginate: {
+                            first: "Primero",
+                            last: "Último",
+                            next: "Siguiente",
+                            previous: "Anterior"
+                        },
+                        zeroRecords: "No se encontraron registros coincidentes" // Traducción aquí
+                    }
+                }); // Inicializa DataTable
+                clearInterval(tableInterval);
+            }
+        }, 100); // Revisa cada 300ms hasta que los pedidos se hayan cargado
+    });
+
 </script>
 
 <main>
@@ -24,16 +52,17 @@
     <div class="row m-0" style="padding-left: 4.5rem;">
         <MenuAcciones/>
         <div class="col">
-            <div class="row">
-                <h4 class="col-6 pt-3">Productos</h4>
+            <div class="row" style="background-color: #1b1b1b;">
+                <h4 class="col-6 text-white pt-3">Productos</h4>
                 <div class="col-6 mt-3 text-end">
                     <a href="/producto/nuevo" class="btn btn-sm btn-success">Agregar producto</a>
                 </div>
             </div>
             
-            <div class="card p-2">
+            <div class="card p-2 mt-3">
                 <div class="table-responsive">
-                    <table class="table align-items-center mb-0">
+                    <table id="tablaPedidos" class="table align-items-center mb-0">
+                        
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Nombre</th>
@@ -54,7 +83,7 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         
-                                        <img src="{values.url_imagen}" class="avatar-xl me-3" alt="img" >
+                                        <img src="{values.url_imagen}" class="avatar-lg me-3 border-radius-md" alt="img" >
                                         
                                         <div class="d-flex flex-column justify-content-center">
                                             <h5 class="mb-0 text-sm">{values.nombre}</h5>
@@ -63,9 +92,9 @@
                                 </td>
     
                                 <td>
-                                    <p class="text-sm mb-0">Precio: <span class="text-success font-weight-bold">$ {values.precio}  </span>{values.unidad_producto}</p>
+                                    <p class="text-sm mb-0"><span class="text-success font-weight-bold">$ {values.precio}  </span></p>
                                     {#if values.is_promocion === true}
-                                    <p class="text-sm mb-0">Precio con oferta: <span class="text-warning font-weight-bold">{values.precio-values.precio*values.descuento/100}</span> {values.unidad_producto}</p>
+                                    <p class="text-sm mb-0">con descuento: <span class="text-warning font-weight-bold">$ {values.precio-values.precio*values.descuento/100}</span></p>
                                     {/if}
                                     
                                 </td>
@@ -75,7 +104,7 @@
                                     {#if values.is_activo === true}
                                     <p class="text-sm mb-0 text-center mx-5 bg-success border-radius-2xl text-white font-weight-bold">Activo</p>
                                     {:else}
-                                    <p class="text-sm mb-0 text-center mx-5 bg-danger border-radius-2xl text-white font-weight-bold">No activo</p>
+                                    <p class="text-sm mb-0 text-center mx-4 bg-danger border-radius-2xl text-white font-weight-bold">No activo</p>
                                     {/if}
                                     {#if values.is_promocion === true}
                                     <p class="text-sm mt-1 text-center mb-0"><span class="text-success font-weight-bold">En Oferta <span class="text-warning">{Math.trunc(values.descuento)}%</span></span></p>
@@ -85,12 +114,13 @@
     
                                 </td>
     
-                                <td class="align-middle">
-                                    <button class="btn btn-sm btn-outline-danger" on:click={() => eliminarProducto(values.id)}>Eliminar</button>
-                                    <a class="btn btn-sm btn-outline-success" href={`/producto/editar/${values.id}`}>Editar</a>
+                                <td class="">
+                                    <button class="btn mx-1 col-auto btn-sm btn-outline-danger" on:click={() => eliminarProducto(values.id)}>Eliminar</button>
+                                    <a class="btn col-auto mx-1 btn-sm btn-outline-success" href={`/producto/editar/${values.id}`}>Editar</a>
                                 </td>
                             </tr>
                             {/each}
+                            
                             
                         </tbody>
                     </table>

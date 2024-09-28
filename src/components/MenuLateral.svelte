@@ -110,7 +110,8 @@
       position: fixed; /* Fijo en la página */
       top: 0;
       left: 0;
-      z-index: 9999;
+      z-index: 9997;
+      
   }
 
   .text-menu{

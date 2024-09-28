@@ -27,6 +27,7 @@
   }
 
   import { logout } from '../api/auth';
+    import Search from './Search.svelte';
 
   // cerrar sesion
     function handleLogout() {
@@ -63,6 +64,9 @@
           <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
             <ul class="navbar-nav navbar-nav-hover ms-auto">
 
+              <li class="nav-item pe-3">
+                <Search/>
+              </li>
               <li class="nav-item pt-2">
                 <button class="btn-sm btn btn-outline-success border-0 border-end border-2 mb-0 p-0 mt-n3 pe-1" on:click={openModal} style="border-radius: 0;">
                   <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 105.96 98.45" style="width: 31px;">
@@ -103,7 +107,7 @@
                     <img class="icon opacity-9 mt-n1" src="/img/icon/admin.svg" alt="icon" width="20px">
                     {userProfile.nombres}
                   </a>
-                  <div class="dropdown-menu dropdown-menu-end dropdown-menu-animation dropdown-md mt-0 mt-lg-3 p-3 border-radius-lg" aria-labelledby="dropdownMenuDocs">
+                  <div class="dropdown-menu dropdown-menu-end dropdown-menu-animation mt-0 mt-lg-3 p-3 border-radius-lg" aria-labelledby="dropdownMenuDocs">
                     <div class="d-none d-lg-block">
                       <ul class="list-group">
 

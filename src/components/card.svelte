@@ -97,12 +97,16 @@
 
             {#if isInCart}
               <div>
-                <button class="btn col btn-sm border border-dark" on:click={() => decrementQuantity(producto.id)}>-</button>
-                <span class="col p-1 btn disabled text-dark">{itemQuantity} {producto.unidad_producto}</span>
+                {#if itemQuantity <=1}
+                  <button class="btn col btn-sm border border-danger   text-danger" on:click={() => decrementQuantity(producto.id)}>x</button>
+                {:else}
+                  <button class="btn col btn-sm border border-dark" on:click={() => decrementQuantity(producto.id)}>-</button>
+                {/if}
+                <span class="col p-1 btn disabled text-dark">{itemQuantity}</span>
                 {#if itemQuantity < producto.cantidad}
                 <button class="btn col btn-sm border border-success text-success" on:click={() => incrementQuantity(producto.id)}>+</button>
                 {:else}
-                <button class="btn col btn-sm border  text-dark" disabled on:click={() => incrementQuantity(producto.id)}>max</button>
+                <button class="btn col btn-sm border text-dark" disabled on:click={() => incrementQuantity(producto.id)}>max</button>
                 
                 {/if}
               </div>

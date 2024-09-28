@@ -23,6 +23,7 @@
     // modal carrito
     import ModalPedidos from '../components/ModalPedidos.svelte';
     import { idStore, isModalOpenPedidos } from '../stores/modalStore';
+    import { right } from '@popperjs/core';
 
     function openModal(id) {
         idStore.set(id); // Asigna el ID al store
@@ -35,8 +36,8 @@
             if (pedidos.length > 0) {
                 jQuery('#tablaPedidos').DataTable({
                     language: {
-                        search: "Buscar:",
-                        lengthMenu: "Mostrar _MENU_ entradas",
+                        search: "Busqueda Dinamica",
+                        lengthMenu: "Mostrar _MENU_",
                         info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
                         infoEmpty: "No hay entradas disponibles",
                         infoFiltered: "(filtrado de _MAX_ entradas totales)",
@@ -53,6 +54,21 @@
             }
         }, 300); // Revisa cada 300ms hasta que los pedidos se hayan cargado
     });
+
+     // Función para formatear la fecha en español
+     function formatearFecha(fechaISO) {
+        const fecha = new Date(fechaISO);
+        
+        // Formatear la fecha en español
+        const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' };
+        const fechaFormateada = new Intl.DateTimeFormat('es-ES', opcionesFecha).format(fecha);
+        
+        // Obtener la hora por separado
+        const opcionesHora = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const horaFormateada = new Intl.DateTimeFormat('es-ES', opcionesHora).format(fecha);
+
+        return { fechaFormateada, horaFormateada };
+    }
 </script>
 
 <main>
@@ -68,15 +84,15 @@
                     <h4 class="col-6 pt-3">Pedidos</h4>
                     <div class="card mt-3 p-2">
                         <div id="productTable" class="table-responsive">
-                            <table id="tablaPedidos" class="table display align-items-center mb-0">
+                            <table id="tablaPedidos" class="table display align-items-center m-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Id del pedido</th>
-                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Monto total</th>
-                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Estado del pedido</th>
-                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Fecha de creación</th>
-                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Id del usuario</th>
-                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Acciones</th>
+                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Id</th>
+                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Estado pedido</th>
+                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7 ">Total</th>
+                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7 ">Fecha de creación</th>
+                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7 ">Id del usuario</th>
+                                        <th class="text-uppercase font-weight-bolder opacity-7"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,18 +105,11 @@
     
                                     {#each pedidos as values}
                                     <tr>
-                                        <td>
+                                        <td class="sticky-left bg-white">
                                             <p class="text-sm mb-0 text-center">
                                                 <span class=" font-weight-bold">00{values.id_pedido}  </span>
                                             </p>
                                         </td>
-            
-                                        <td>
-                                            <p class="text-sm mb-0 text-center">
-                                                <span class=" font-weight-bold"> {values.monto_total}  </span>
-                                            </p>
-                                        </td>
-    
                                         <td>
                                             <p class="text-sm mb-0 text-center">
                                                 {#if values.estado_pedido === "PENDIENTE"}
@@ -115,23 +124,34 @@
                                             </p>
                                         </td>
             
-                                        <td>
+                                        <td class="">
                                             <p class="text-sm mb-0 text-center">
-                                                <span class=" font-weight-bold"> {values.fecha_creacion}  </span>
+                                                <span class=" font-weight-bold"> {values.monto_total}  </span>
                                             </p>
                                         </td>
     
-                                        <td>
+                                        
+            
+                                        <td class="text-sm mb-0 text-center">
+                                            <p class="mb-0">
+                                                <span class="font-weight-bold">{formatearFecha(values.fecha_creacion).fechaFormateada}</span><br>
+                                                <span class="font-weight-bold">hora: {formatearFecha(values.fecha_creacion).horaFormateada}</span>
+                                            </p>
+                                            
+                                        </td>
+    
+                                        <td class="">
                                             <p class="text-sm mb-0 text-center">
                                                 <span class=" font-weight-bold">{values.id_usuario} </span>
                                             </p>
                                         </td>
     
-                                        <td class="text-center">
-                                            <button on:click={() => openModal(values.id_pedido)} class="btn btn-sm text-white bg-info">Detalles</button>
-                                            <button class="btn btn-sm btn-success">✓</button>
-                                            <button class="btn btn-sm btn-danger">x</button>
-                                            <a class="btn btn-sm btn-outline-success" href={`/pedidos_admin/${values.id_pedido}`}>Editar</a>
+                                        <td class=" col sticky-right p-0 bg-white">
+                                            <div class="row py-1">
+                                                <div class="col-12 text-center mb-1"><button on:click={() => openModal(values.id_pedido)} class="btn btn-sm text-white bg-info mb-0">Ver</button></div>
+                                            </div>
+                                            
+                                            <!-- <a class="btn btn-sm btn-outline-success" href={`/pedidos_admin/${values.id_pedido}`}>Editar</a> -->
                                         </td>
                                     </tr>
                                     {/each}
@@ -143,6 +163,27 @@
                 
             </div>
         </div>
+        <style>
+            /* Fijar la primera columna */
+            td.sticky-right {
+              position: sticky;
+              right: 0;
+              z-index: 10; /* Asegura que la columna esté por encima de las demás */
+            }
 
+            td.sticky-left {
+              position: sticky;
+              left: 0;
+              z-index: 10; /* Asegura que la columna esté por encima de las demás */
+            }
+
+            td{
+                border-top:1px solid #eee ;
+                border-bottom:1px solid #eee ;
+            }
+
+          </style>
+        
     <Footer/>
 </main>
+

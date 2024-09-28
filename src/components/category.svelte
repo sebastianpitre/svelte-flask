@@ -57,14 +57,26 @@
     background-color: #38a900b4 ;
     border-radius: 30px;
     position: absolute;
-    bottom: -16px;
+    bottom: -13px;
     font-size: 40px;
     display: block;
     margin: auto;
-    left: 50%;
-    transform: translate(-50%, -50%); 
+    left: 25%;
+    /* Aplicar la animación */
+    animation: growAnimation 800ms forwards;
   }
 
+   /* Definimos la animación */
+   @keyframes growAnimation {
+        from {
+        transform: scale(0);
+        }
+        to {
+        transform: scale(1), translate(-50%, -50%);
+        }
+    }
+
+  
 .div {
     -ms-overflow-style: none;
     box-sizing: border-box;
@@ -117,9 +129,13 @@ li, ul {
 }
 
 .selected {
-  box-shadow: 4px 4px 2px 1px #38a90052;
+  box-shadow:none;
   box-sizing: border-box;
   border: 1px solid #38a900b4;
+}
+
+.selected:hover {
+  box-shadow:none;
 }
 
 </style>

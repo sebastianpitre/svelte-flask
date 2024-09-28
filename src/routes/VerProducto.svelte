@@ -146,8 +146,12 @@
 
             {#if isInCart}
               <div>
-                <button class="btn col btn-sm border border-dark" on:click={handleDecrement}>-</button>
-                <span class="col p-1 btn disabled text-dark">{itemQuantity} {producto.unidad_producto}</span>
+                {#if itemQuantity <=1}
+                  <button class="btn col btn-sm border border-danger   text-danger" on:click={handleDecrement}>x</button>
+                {:else}
+                  <button class="btn col btn-sm border border-dark" on:click={handleDecrement}>-</button>
+                {/if}
+                <span class="col p-1 btn disabled text-dark">{itemQuantity}</span>
                 {#if itemQuantity < producto.cantidad}
                 <button class="btn col btn-sm border border-success text-success" on:click={handleIncrement}>+</button>
                 {:else}

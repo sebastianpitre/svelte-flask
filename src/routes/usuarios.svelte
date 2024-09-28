@@ -26,8 +26,8 @@
             if (usuarios.length > 0) {
                 jQuery('#tablaUsuarios').DataTable({
                     language: {
-                        search: "Buscar:",
-                        lengthMenu: "Mostrar _MENU_ entradas",
+                        search: "Busqueda Dinámica",
+                        lengthMenu: "Mostrar  _MENU_",
                         info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
                         infoEmpty: "No hay entradas disponibles",
                         infoFiltered: "(filtrado de _MAX_ entradas totales)",
