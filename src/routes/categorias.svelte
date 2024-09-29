@@ -1,7 +1,8 @@
 <script>
     import { onMount } from 'svelte';
-
+    import { fetchWithAuth } from '../api/auth';
     import Swal from 'sweetalert2';
+    import { getCategorias } from '../api/categorias';
     import Footer from '../components/Footer.svelte';
     import MenuAcciones from '../components/MenuLateral.svelte';
 
@@ -23,7 +24,7 @@
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/publico/categorias', {
+            const response = await fetchWithAuth('http://127.0.0.1:5000/api/admin/categorias', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -42,11 +43,16 @@
         }
     };
 
-    let listCategorias = [];
+    let categorias = [];
+    let errorMessage = '';
 
-    fetch("http://127.0.0.1:5000/api/publico/categorias")
-    .then((response) => response.json())
-    .then((results) => (listCategorias = results));
+    onMount(async () => {
+        try {
+            categorias = await getCategorias();
+        } catch (error) {
+            errorMessage = 'No se pudieron cargar las categorias.';
+        }
+    });
 
     // eliminar Categorias
 
@@ -64,13 +70,13 @@
         });
 
         if (result.isConfirmed) {
-            const response = await fetch(`http://127.0.0.1:5000/api/publico/categorias/${id_categorias}`, {
+            const response = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/categorias/${id_categorias}`, {
                 method: 'DELETE',
             });
 
             if (response.ok) {
                 // Actualizar la lista de categoria después de la eliminación
-                listCategorias = listCategorias.filter(producto => producto.id !== id_categorias);
+                categorias = categorias.filter(categorias =>categorias.id_categorias !== id_categorias);
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -133,7 +139,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {#each listCategorias as values}
+                            {#each categorias as values}
                             <tr>
                                 <td>
                                     <p class="mb-0 text-xs text-center">{values.id_categorias}</p>

@@ -5,4 +5,6 @@ export const isModalOpen = writable(false);
 
 export const isModalOpenPedidos = writable(false);
 
+export const isModalOpenSearch = writable(false);
+
 export const idStore = writable(null);

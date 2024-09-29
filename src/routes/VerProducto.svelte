@@ -164,7 +164,7 @@
               <button class="btn col btn-sm btn-success" on:click={handleAddToCart}>Agregar al carrito</button>
             {/if}
 
-            {:else} <button class="btn col-4 btn-sm bg-info text-white invalid disabled">Disponible pronto</button>
+            {:else} <button class="btn btn-sm bg-info text-white invalid disabled">Disponible pronto</button>
           {/if}
         </div>
       </div>

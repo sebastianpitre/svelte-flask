@@ -597,7 +597,9 @@ div.dt-container {
     /* busqueda dinamica */
 
   .dt-layout-end .dt-search{
-    position: relative;
+    position: sticky;
+    left: 0px;
+
   }
   
   div.dt-container .dt-input {    
@@ -630,7 +632,7 @@ div.dt-container {
     font-size: 0.7em;
     transform: translateX(26px) translateY(-11px);
     padding: 0 6px 1px 5px;
-    border-radius: 2px;
+    border-radius: 20px;
     background: #38a900;
     letter-spacing: 1px;
     border: 0px solid #fff;

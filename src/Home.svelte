@@ -145,6 +145,7 @@
 
       {/if}
       
+      {#if productosNoactivos.length > 0}
       <div class="row my-2">
         <span class="material-symbols-outlined text-dark my-auto col-auto">
           update
@@ -163,7 +164,7 @@
 
         {/each}
       </div>
-
+      {/if}
     </div>
 
     <Menufooter/>

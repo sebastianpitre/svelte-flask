@@ -25,7 +25,9 @@
         const tableInterval = setInterval(() => {
             if (productos.length > 0) {
                 jQuery('#tablaPedidos').DataTable({
+                    order: [[0, 'desc']], // Ordena la primera columna (ID) en orden descendente
                     language: {
+                        order: [[0, 'desc']],
                         search: "Busqueda Dinámica",
                         lengthMenu: "Mostrar  _MENU_",
                         info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
@@ -65,6 +67,7 @@
                         
                         <thead>
                             <tr>
+                                <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">id</th>
                                 <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Nombre</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Precios y descuentos</th>
                                 <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">estado de producto</th>
@@ -80,6 +83,11 @@
                             {/if}
                             {#each productos as values}
                             <tr>
+                                <td>
+                                    <p class="text-sm mb-0"><span class="font-weight-bold">{values.id}</span></p>
+                                    
+                                </td>
+
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         

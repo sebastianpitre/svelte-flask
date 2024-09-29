@@ -35,6 +35,7 @@
         const tableInterval = setInterval(() => {
             if (pedidos.length > 0) {
                 jQuery('#tablaPedidos').DataTable({
+                    order: [[0, 'desc']], // Ordena la primera columna (ID) en orden descendente
                     language: {
                         search: "Busqueda Dinamica",
                         lengthMenu: "Mostrar _MENU_",
@@ -83,8 +84,8 @@
                 <div class="col-12">
                     <h4 class="col-6 pt-3">Pedidos</h4>
                     <div class="card mt-3 p-2">
-                        <div id="productTable" class="table-responsive">
-                            <table id="tablaPedidos" class="table display align-items-center m-0">
+                        <div class="table-responsive">
+                            <table id="tablaPedidos" class="table align-items-center m-0">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Id</th>
