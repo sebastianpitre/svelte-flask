@@ -104,12 +104,12 @@
       {/if}
 
       <!-- Mostrar productos juntos cuando se selecciona "Todos" -->
-      {#if productosEnPromocion.length > 0 && $selectedCategory === 'all'}
-        <div class="row my-2">
+      {#if $selectedCategory === 'all'}
+        <div class="row my-2 mt-3">
           <span class="material-symbols-outlined text-dark my-auto col-auto">
             dashboard
             </span>
-          <h5 class="col-auto my-auto text-dark ms-n3">Todos los disponibles</h5>
+          <h5 class="col-auto my-auto text-dark ms-n3">Disponibles</h5>
           <hr class="bg-gray-600 opacity-1 col mt-3 me-2" style="padding-top: 1.7px ;">
         </div>
         <div class="row my-2">
@@ -126,7 +126,7 @@
       <!-- Mostrar productos agrupados por categoría cuando no es "Todos" -->
       {#if $selectedCategory !== 'all'}
         {#each categoriasConProductos as categoria}
-          <div class="row my-2">
+          <div class="row my-2 mt-3">
             <img class="sin-fondo" src="{categoria.url_imagen}" alt="" style="width: 60px;">
             <h5 class="col-auto my-auto text-dark ms-n3">{categoria.nombre}</h5>
             <hr class="bg-gray-600 opacity-1 col mt-3 me-2" style="padding-top: 1.7px ;">
@@ -164,7 +164,7 @@
 
         {/each}
       </div>
-      {/if}
+      {/if} 
     </div>
 
     <Menufooter/>
