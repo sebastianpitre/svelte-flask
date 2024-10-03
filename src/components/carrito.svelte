@@ -37,7 +37,7 @@
                   <div class="row my-auto">
                     <h6 class="text-dark text-center text-xl-start col-12 my-0">{item.nombre}</h6>
                     <h6 class="text-dark text-center text-xl-start col-12 my-0">Precio: ${item.precio}</h6>
-                    <p class="m-0 d-none d-md-block col-12 text-center text-xl-start" style="font-size:12px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed cupiditate quas culpa maxime dolor.</p>
+                    <p class="m-0 d-none d-md-block col-12 text-center text-xl-start" style="font-size:12px; min-height: 40px;">{item.descripcion}</p>
                   </div>
                 </div>
                 

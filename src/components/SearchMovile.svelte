@@ -196,6 +196,7 @@
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
           <li class="autocomplete-item {activeIndex === index ? 'active' : ''} position-relative" on:click={() => handleSelectProduct(product.id)}>
+            <img class="mt-1" src="{product.url_imagen}" alt="" style="width: 25px; height: 25px; border-radius: 3px ">
             {product.nombre.length >= 18 ? product.nombre.substring(0, 18) + "..." : product.nombre}
             <span class="{product.is_activo? 'color-activo': 'color-inactivo'} position-absolute">●</span>
           </li>

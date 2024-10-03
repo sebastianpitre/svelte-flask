@@ -6,43 +6,6 @@
     import Footer from '../components/Footer.svelte';
     import MenuAcciones from '../components/MenuLateral.svelte';
 
-    // Definimos las variables reactivas para el estado del formulario
-    let id_categorias;
-    let url_imagen = '';
-    let nombre = '';
-    
-
-    // Función para manejar el envío del formulario
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        const formData = {
-            id_categorias,
-            url_imagen,
-            nombre,
-            
-        };
-
-        try {
-            const response = await fetchWithAuth('http://127.0.0.1:5000/api/admin/categorias', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (!response.ok) {
-                throw new Error('Error en la solicitud');
-            }
-
-            const data = await response.json();
-            console.log('Datos enviados correctamente:', data);
-        } catch (error) {
-            console.error('Error al enviar los datos:', error);
-        }
-    };
-
     let categorias = [];
     let errorMessage = '';
 

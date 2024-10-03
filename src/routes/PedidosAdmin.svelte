@@ -118,9 +118,11 @@
                                                     {:else if values.estado_pedido === "APROBADO"}
                                                     <span class="text-success font-weight-bold"> {values.estado_pedido}  </span>
                                                     {:else if values.estado_pedido === "CANCELADO"}
-                                                    <span class="text-danger font-weight-bold"> {values.estado_pedido} ❌  </span>
+                                                    <span class="text-danger font-weight-bold"> {values.estado_pedido}</span>
                                                     {:else if values.estado_pedido === "ENTREGADO"}
-                                                    <span class="text-success font-weight-bold"> {values.estado_pedido}✅  </span>
+                                                    <span class="text-success font-weight-bold"> {values.estado_pedido}</span>
+                                                    {:else if values.estado_pedido === "DEVUELTO"}
+                                                    <span class="text-warning font-weight-bold"> {values.estado_pedido}</span>
                                                 {/if}
                                             </p>
                                         </td>

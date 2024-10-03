@@ -44,7 +44,7 @@ export async function createPedido() {
         // Aquí manejamos la respuesta del fetchWithAuth
         if (response) {
             console.log("Pedido creado con éxito:", response);
-            return response; // Retornamos los datos del pedido creado
+            return response.id_pedido;  // Retornamos el id_pedido
         } else {
             throw new Error('Error al crear el pedido: respuesta no válida');
         }

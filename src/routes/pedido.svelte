@@ -42,20 +42,36 @@
     // Función que se ejecutará al hacer clic en el botón para crear el pedido
     function handleCrearPedido() {
         createPedido()
-            .then(() => {
-                // Mostrar SweetAlert de éxito
-                Swal.fire({
-                    title: '¡Éxito!',
-                    text: 'Pedido creado con éxito',
-                    icon: 'success',
-                    confirmButtonText: 'Mirar pedido',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Redirigir a "mis_pedidos"
-                        window.location.href = '/mis_pedidos';
-                    }
-                });
-                vaciarCarrito();
+            .then((id_pedido) => {
+                if (id_pedido) {
+                    // Mostrar SweetAlert de éxito
+                    Swal.fire({ 
+                        title: '¡Éxito!',
+                        text: 'Pedido creado con éxito',
+                        icon: 'success',
+                        confirmButtonText: 'Mirar pedido',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirigir a "mis_pedidos"
+                            window.location.href =`/soporte/${id_pedido}`;
+                        }
+                    });
+                    vaciarCarrito();
+                }else{
+                    // Mostrar SweetAlert de éxito
+                    Swal.fire({ 
+                        title: '¡ERROR!',
+                        text: 'Error al crear el pedido',
+                        icon: 'error',
+                        confirmButtonText: 'ok',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirigir a "mis_pedidos"
+                            window.location.href =`/`;
+                        }
+                    });
+                }
+                
             })
             .catch(error => {
                 console.error('Error al crear el pedido:', error);

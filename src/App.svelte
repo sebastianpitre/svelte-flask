@@ -17,6 +17,9 @@
   import VerProducto from "./routes/VerProducto.svelte";
   import MisPedidos from "./routes/MisPedidos.svelte";
   import Example from "./routes/example.svelte";
+    import Soporte from "./routes/Soporte.svelte";
+    import Ajustes from "./routes/Ajustes.svelte";
+    import BannerForm from "./routes/BannerForm.svelte";
 </script>
 
 <main>
@@ -45,6 +48,10 @@
     <Route path="/pedido" component={Pedido} />
     <Route path="/pedidos_admin" component={PedidosAdmin} />
     <Route path="/pedidos_admin/:id" component={Verpedido} />
+    <Route path="/soporte/:id" component={Soporte} />
+
+    <Route path="/ajustes" component={Ajustes} />
+    <Route path="/nuevo_banner" component={BannerForm} />
 
     <Route path="/example" component={Example} />
   </Router>

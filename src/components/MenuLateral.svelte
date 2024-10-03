@@ -89,9 +89,10 @@
           <p class="pt-1 text-white text-menu">Usuarios</p>
           <span class="{selector('/usuarios')}"></span>
       </a>
-      <a class="my-1 p-1 text-center card-menu mx-2 {linkSelect('/')} mt-auto" href="/" on:click={() => updatePath('/')}>
-          <span class="material-symbols-outlined simbolo-icon {isActive('/')}">settings</span>
+      <a class="my-1 p-1 text-center card-menu mx-2 {linkSelect('/ajustes')} mt-auto" href="/ajustes" on:click={() => updatePath('/')}>
+          <span class="material-symbols-outlined simbolo-icon {isActive('/ajustes')}">settings</span>
           <p class="pt-1 text-white text-menu">Ajustes</p>
+          <span class="{selector('/ajustes')}"></span>
       </a>
         <hr class="text-white bg-white mx-2 my-0">
         <!-- Botón Dropdown en el fondo -->

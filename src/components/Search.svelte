@@ -82,10 +82,10 @@
     }
 
     input {
-        border: 3px solid transparent;
+        border: 2px solid transparent;
         border-radius: 50px;
         padding-left: 20px;
-        color: #707070;
+        color: #70707098;
         background-origin: border-box;
         background-clip: padding-box, border-box;
         background-image: linear-gradient(#fff, #fff), /* Fondo blanco interno */
@@ -140,6 +140,7 @@
         background-size: 200% 200%; /* Hacemos el fondo más grande para animarlo */
         animation: moveGradient 3s linear infinite; /* Animación continua */
         border-top: 0px;
+        font-size: 13px;
     }
   
     .autocomplete-item {
@@ -193,6 +194,7 @@
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
           <li class="autocomplete-item {activeIndex === index ? 'active' : ''} position-relative" on:click={() => handleSelectProduct(product.id)}>
+            <img class="mt-1" src="{product.url_imagen}" alt="" style="width: 25px; height: 25px; border-radius: 3px ">
             {product.nombre.length >= 18 ? product.nombre.substring(0, 18) + "..." : product.nombre}
             <span class="{product.is_activo? 'color-activo': 'color-inactivo'} position-absolute">●</span>
           </li>
