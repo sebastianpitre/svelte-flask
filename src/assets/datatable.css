@@ -603,7 +603,7 @@ div.dt-container {
   }
   
   div.dt-container .dt-input {    
-    border:2px solid #38a900;
+    border:2px solid #04324d;
     border-radius: 3px;
     padding: 5px;
     background-color: transparent;
@@ -611,7 +611,7 @@ div.dt-container {
   }
 
   div.dt-container .dt-input:focus {
-    border:2px solid #38a900;
+    border:2px solid #04324d;
     outline: none; /* Elimina el borde interno */
   }
   
@@ -622,7 +622,7 @@ div.dt-container {
     background: transparent;
     border-radius: 5px;
     color: #e8e8e8;
-    border: 1px solid #38a900;
+    border: 1px solid #04324d;
     font-size: 1em;
   }
   
@@ -632,8 +632,8 @@ div.dt-container {
     font-size: 0.7em;
     transform: translateX(26px) translateY(-11px);
     padding: 0 6px 1px 5px;
-    border-radius: 20px;
-    background: #38a900;
+    border-radius: 5px;
+    background: #04324d;
     letter-spacing: 1px;
     border: 0px solid #fff;
     border-left: 3px solid #fff;

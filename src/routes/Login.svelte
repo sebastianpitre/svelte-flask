@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 
-                <div class="col-xl-4 -lg-5 col-md-7 d-flex flex-column me-auto me-auto me-lg-auto ms-lg-5">
+                <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column me-auto me-auto me-lg-auto ms-lg-5 z-index-2">
                     <div class="card card-plain">
                         <div class="card-header text-center">
                             <h4 class="font-weight-bolder">Iniciar sesión</h4>
@@ -69,41 +69,4 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="page-header min-vh-100">
-        <div class="container">
-            
-            <div class="row">
-                <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
-                    <div class="card z-index-0 mt-7">
-                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="bg-success shadow-success border-radius-lg py-3 pe-1 text-center py-4">
-                                <h4 class="font-weight-bolder text-white mt-1 mb-0">Iniciar</h4>
-                                <p class="mb-1 text-sm text-white">Bienvenido!</p>
-                            </div>
-                        </div>
-                        <div class="card-body pb-0">
-                            <form on:submit|preventDefault={handleLogin}>
-                                <label for="email" class="form-label">Correo</label>
-                                <div class="input-group input-group-outline mb-3">
-                                    <input type="text" id="email" class="form-control" bind:value={email} required>
-                                </div>
-                                <label for="password" class="form-label">Contraseña</label>
-                                <div class="input-group input-group-outline mb-4">
-                                    <input type="password" id="password" class="form-control" bind:value={password} required>
-                                </div>
-                                <div class="text-center">
-                                    <button class="btn btn-success" type="submit">iniciar</button>    
-                                </div>
-
-                                {#if errorMessage}
-                                    <p class="error text-center">{errorMessage}</p>
-                                {/if}
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </section>

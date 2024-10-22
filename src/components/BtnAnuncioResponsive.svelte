@@ -1,0 +1,46 @@
+<script>
+    // modal Search
+    import ModalSearch from './ModalAnuncio.svelte';
+    import { isModalOpenAnuncios } from '../stores/modalStore';
+
+    function openModalAnuncios() {
+        isModalOpenAnuncios.set(true); // Abre el modal
+        
+    }
+</script>
+<main>
+<button class="boton-anuncio bg-success d-block d-md-none" on:click={openModalAnuncios}>
+    <span class="material-symbols-outlined pt-1 text-white">campaign</span>
+</button>
+</main>
+
+<style>
+.boton-anuncio{
+    animation: expandFade 3s infinite;              
+    border:none;
+    position: fixed;
+    right: 13px;
+    bottom: 65px;
+    border-radius: 100px;
+    width: 38px;
+    height: 38px;
+    z-index: 9970;
+  
+}
+
+/* Efecto de desvanecimiento y expansión hacia afuera */
+@keyframes expandFade {
+        0% {
+            box-shadow: 0 0 0 0 #39a900;
+        }
+        100% {
+            box-shadow: 0 0 0px 10px rgba(0, 255, 0, 0);
+        }
+    }
+.material-symbols-outlined {
+    font-size: 28px;
+    transform: scaleX(-1) rotate(-40deg);
+}
+
+
+</style>

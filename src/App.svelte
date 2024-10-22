@@ -20,11 +20,14 @@
     import Soporte from "./routes/Soporte.svelte";
     import Ajustes from "./routes/Ajustes.svelte";
     import BannerForm from "./routes/BannerForm.svelte";
+    import Ofertas from "./routes/Ofertas.svelte";
+    import HomeAdmin from "./routes/HomeAdmin.svelte";
 </script>
 
 <main>
   <Router>
     <Route path="/" component={Home} exact />
+    <Route path="/administrador" component={HomeAdmin}/>
 
     <Route path="/login" component={Login} />
     <Route path="/registro" component={Registro} />
@@ -37,6 +40,7 @@
     <Route path="/categoria/editar/:id" component={CategoryForm} />
 
     <Route path="/productos" component={Productos} />
+    <Route path="/ofertas" component={Ofertas} />
     <Route path="/producto/nuevo" component={ProductForm} />
     <Route path="/producto/editar/:id" component={ProductForm} />
     <Route path="/producto/:id" component={VerProducto} />

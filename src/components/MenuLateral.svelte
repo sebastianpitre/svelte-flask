@@ -63,10 +63,10 @@
           <img class="mb-n1" src="/public/img/logo.svg" alt="imglogo" style="width: 30px;">
           <span class="text-white">Vitrina</span>
       </a>
-      <a class="my-1 p-1 text-center card-menu mx-2 {linkSelect('/')}" href="/" on:click={() => updatePath('/')}>
-          <span class="material-symbols-outlined simbolo-icon {isActive('/')}">home_app_logo</span>
+      <a class="my-1 p-1 text-center card-menu mx-2 {linkSelect('/administrador')}" href="/administrador" on:click={() => updatePath('/administrador')}>
+          <span class="material-symbols-outlined simbolo-icon {isActive('/administrador')}">home_app_logo</span>
           <p class="pt-1 text-white text-menu">Home</p>
-          <span class="{selector('/')}"></span>
+          <span class="{selector('/administrador')}"></span>
       </a>
       <a class="my-1 p-1 text-center card-menu mx-2 {linkSelect('/productos')}" href="/productos" on:click={() => updatePath('/productos')}>
           <span class="material-symbols-outlined simbolo-icon {isActive('/productos')}">inventory</span>

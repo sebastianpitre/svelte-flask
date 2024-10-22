@@ -78,9 +78,9 @@
     </div>
     <p class="text-dark text-bold text-2xl">Carrito</p>
     <Carrito />
-    <div class="barra bg-white">
+    <div class="barra bg-white position-sticky bottom-0">
       <div class="row text-center mt-4 mb-n2">
-        <div class="col-12">
+        <div class="col-12 mt-n3">
           {#if montoTotal > 0}
             <h5><strong>Total a pagar:</strong> <span class="text-success">${montoTotal}</span> </h5>
           {/if}

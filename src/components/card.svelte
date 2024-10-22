@@ -61,16 +61,17 @@
         </a>
         
       </div>
-      {#if producto.is_promocion === true && producto.is_activo === true}
+      <!-- {#if producto.is_promocion === true && producto.is_activo === true}
         <div class="blur opacity-9 col-8 col-sm-6 text-dark text-center position-absolute" style="z-index: 3; border-radius: 7px 0px 0px 0px; bottom: 1px; right: 1px; height: 20px; font-size: 15px;">
           <span class="material-symbols-outlined" style="font-size: 15px;">schedule</span> 2 dias 13h
         </div>
-      {/if}
+      {/if} -->
       
+
       <div class="colored-shadow" style="background-image: url(&quot;{producto.url_imagen}&quot;);"></div>
     </div>
     <div class="px-2 py-0">
-      <p class="text-dark text-center text-capitalize mt-1 mb-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre}</p>
+      <p class="text-dark text-center nombre mt-1 mb-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre}</p>
 
       {#if producto.is_promocion === true && producto.is_activo === true} 
         <div class="text-warning text-center border-bottom border-gray mt-1 mb-3 pb-2">
@@ -81,7 +82,7 @@
         {:else}
         <p class="text-success text-center border-bottom border-gray mt-1 mb-3 pb-2">$ {producto.precio} <span class="text-dark text-sm">{producto.unidad_producto}</span></p>
       {/if}
-  
+
       
       <div class="row text-center mt-2">
         <p class="col mt-n3 my-0" style="font-size: 13px;">
@@ -133,6 +134,10 @@
       .img-marco{
         height: 140px;
       }
+    }
+
+    .nombre::first-letter {
+      text-transform: uppercase;
     }
 
     .img, .img-oferta {

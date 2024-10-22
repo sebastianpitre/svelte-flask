@@ -48,9 +48,9 @@
           stock = product.stock || 0;
           is_activo = product.is_activo || true;
           id_categorias = product.id_categorias || 0;
-          fecha_inicio_descuento = product.fecha_inicio_descuento || null;
-          fecha_fin_descuento = product.fecha_fin_descuento || null;
-
+          fecha_inicio_descuento = convertirFechaDatetimeAFecha(product.fecha_inicio_descuento) || null;
+          fecha_fin_descuento = convertirFechaDatetimeAFecha(product.fecha_fin_descuento) || null;
+          console.log(product)
         }
       }
     } catch (error) {
@@ -111,6 +111,29 @@
       });
     }
   };
+
+
+
+  // FUNCION DE CONVERSIÓN DE FECHAS 🌟🌟🌟
+
+  function convertirFechaDatetimeAFecha(fechaDatetimeStr) {
+    // Convertir la cadena de datetime a un objeto Date
+    const fecha = new Date(fechaDatetimeStr);
+
+    // Verificar si la fecha es válida
+    // if (isNaN(fecha)) {
+    //     throw new Error("Fecha inválida");
+    // }
+
+    // Obtener el día, mes y año
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Meses comienzan desde 0
+    const año = fecha.getFullYear();
+
+    // Retornar la fecha en formato dd/mm/yyyy
+    return `${año}-${mes}-${dia}`;
+}
+
 </script>
 
 <main class="row m-0">
@@ -153,6 +176,7 @@
               <input type="url" class="form-control" bind:value={url_ficha_tecnica} />
             </div>
           </div>
+          
 
           <div class="col-12 col-md-6">
             <div class="input-group input-group-static my-2">
@@ -218,15 +242,17 @@
           </div>
 
           <div class="col-6">
-            <div class="input-group input-group-static my-2">
-              <p for="id_categorias">Categoría</p>
-              <select class="form-select" bind:value={id_categorias} required>
-                {#each categorias as categoria}
-                  <option value={categoria.id}>{categoria.nombre}</option>
-                {/each}
-              </select>
+            <label for="id_categorias" class="form-label">Categoría</label>
+            <div class="input-group input-group-outline mb-3 mt-n2">
+                <select class="form-control" bind:value={id_categorias} required>
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option value="1" >CARNES</option>
+                    <option value="2" >LACTEOS</option>
+                    
+                    <!-- Agrega más opciones según sea necesario -->
+                </select>
             </div>
-          </div>
+        </div>
 
           <div class="col-12 text-center mt-4">
             <button type="submit" class="btn btn-success">{id ? "Actualizar Producto" : "Crear Producto"}</button>

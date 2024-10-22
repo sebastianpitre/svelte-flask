@@ -63,11 +63,11 @@
                                 
                             </a>
     
-                            <a class="col p-1 text-center" href="/productos" on:click={() => updatePath('/productos')}>
-                                <div class=" mx-auto card-menu {linkSelect('/productos')}" style="width: 60px;">
-                                    <span class="material-symbols-outlined {isActive('/productos')}" style="font-size: 28px;">settings</span>
+                            <a class="col p-1 text-center" href="/administrador" on:click={() => updatePath('/administrador')}>
+                                <div class=" mx-auto card-menu {linkSelect('/administrador')}" style="width: 60px;">
+                                    <span class="material-symbols-outlined {isActive('/administrador')}" style="font-size: 28px;">settings</span>
                                     <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Admin</p>
-                                    <span class="{selector('/productos')}"></span>
+                                    <span class="{selector('/administrador')}"></span>
                                 </div>
                                 
                             </a>

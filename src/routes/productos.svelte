@@ -54,8 +54,8 @@
     <div class="row m-0" style="padding-left: 4.5rem;">
         <MenuAcciones/>
         <div class="col">
-            <div class="row" style="background-color: #1b1b1b;">
-                <h4 class="col-6 text-white pt-3">Productos</h4>
+            <div class="row">
+                <h4 class="col-6 text-dark pt-3">Productos</h4>
                 <div class="col-6 mt-3 text-end">
                     <a href="/producto/nuevo" class="btn btn-sm btn-success">Agregar producto</a>
                 </div>

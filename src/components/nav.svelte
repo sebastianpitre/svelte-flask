@@ -69,7 +69,7 @@
             <Search/>
           </div>
           <div class="mb-0 ms-3 pt-3">
-            <button class="btn-sm btn btn-outline-success border-0 border-end border-2 mb-0 p-0 mt-n4 pe-1" on:click={openModal} style="border-radius: 0;">
+            <button class="btn-sm btn btn-outline-success border-0 mb-0 p-0 mt-n4 pe-1" on:click={openModal} style="border-radius: 0;">
               <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 105.96 98.45" style="width: 31px;">
                 <defs>
                   <style>
@@ -118,7 +118,7 @@
                       </li>
                       
                       <li class="nav-item list-group-item border-0 p-0">
-                        <a class="dropdown-item py-2 ps-3 border-radius-md" use:link href="/productos">
+                        <a class="dropdown-item py-2 ps-3 border-radius-md" use:link href="/administrador">
                           <h6 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">Administrar</h6>
                         </a>
                       </li>

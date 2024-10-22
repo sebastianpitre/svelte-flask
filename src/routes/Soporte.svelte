@@ -22,8 +22,6 @@
     }
     }
 
-
-  
     // Llama a la función al montar el componente
     onMount(() => {
         console.log('ID del pedido:', id);
@@ -31,11 +29,20 @@
         fetchPedido();
       }
     });
+
+     // Función para imprimir el recibo
+     function printReceipt() {
+        window.print();
+    }
+
   </script>
 <main>
     {#if pedido}
       <div class="mx-auto mt-5 col-12 col-md-4">
         <a class="btn btn-dark btn-sm" href="/">Volver</a>
+        <!-- Botón para imprimir el recibo -->
+        <button class="btn btn-primary btn-sm mb-3" on:click={printReceipt}>Imprimir Recibo</button>
+        
         <div class="ticket card  bg-white  px-5 py-3">
           <div class="text-lateral">
             <strong class="border-top text-dark border-bottom border-2" style="border-color: black;">
@@ -55,7 +62,7 @@
             {#each pedido.productos as producto}
               <li>
                 <strong>Producto ID:</strong> {producto.id} - 
-                <strong>Cantidad:</strong> {producto.cantidad} - 
+                <strong>Cantidad:</strong> {producto.cantidad} -  
                 <strong>Precio:</strong> {producto.precio}
               </li>
             {/each}

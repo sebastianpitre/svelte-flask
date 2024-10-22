@@ -139,10 +139,10 @@ async function cambiarEstado(nuevoEstado) {
           <!-- Botones para cambiar el estado del pedido -->
           <div class="col-6">
             <h4 class="">Cambiar Estado del Pedido</h4>
-            <button on:click={() => cambiarEstado('APROBADO')} class="btn btn-success">Aprobar</button>
+            <!-- <button on:click={() => cambiarEstado('APROBADO')} class="btn btn-success">Aprobar</button> -->
             <button on:click={() => cambiarEstado('CANCELADO')} class="btn btn-danger">Cancelar</button>
             <button on:click={() => cambiarEstado('DEVUELTO')} class="btn btn-warning">Devolver</button>
-            <button on:click={() => cambiarEstado('ENTREGADO')} class="btn btn-primary">Entregar</button>
+            <button on:click={() => cambiarEstado('ENTREGADO')} class="btn btn-success">Entregar</button>
           </div>
 
         </div>

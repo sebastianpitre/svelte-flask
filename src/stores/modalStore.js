@@ -7,4 +7,6 @@ export const isModalOpenPedidos = writable(false);
 
 export const isModalOpenSearch = writable(false);
 
+export const isModalOpenAnuncios = writable(false);
+
 export const idStore = writable(null);

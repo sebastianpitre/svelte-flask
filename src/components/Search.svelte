@@ -84,7 +84,7 @@
     input {
         border: 2px solid transparent;
         border-radius: 50px;
-        padding-left: 20px;
+        padding-left: 35px;
         color: #70707098;
         background-origin: border-box;
         background-clip: padding-box, border-box;
@@ -105,7 +105,8 @@
     
     input:focus {
         border: 2px solid transparent;
-        padding-left: 20px;
+        padding-left: 35px;
+
 
         background-origin: border-box;
         background-clip: padding-box, border-box;
@@ -125,7 +126,7 @@
       background-color: #fff;
       max-height: auto; /* Controla el tamaño máximo de la lista */
       overflow-y: auto; /* Habilitar desplazamiento si es necesario */
-      width: 216px;
+      width: 231px;
       margin-top: 0px;
       border-radius: 0px 0px 16px 16px; /* Superior izquierdo, Superior derecho, Inferior derecho, Inferior izquierdo */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -182,11 +183,19 @@
         right: 5px;
         font-size: 17px;
     }
+
+    .icon{
+      position: absolute;
+      left: 10px;
+      font-size: 20px;
+      top: 6px;
+    }
     
   </style>
   
   <div bind:this={searchBox} class="search-wrapper">
     <input type="text" placeholder="Buscar productos" bind:value={searchTerm} on:input={handleInput} on:keydown={handleKeydown}/>
+    <span class="material-symbols-outlined icon text-dark">search</span>
     
     {#if showDropdown}
       <ul class="autocomplete-list">
