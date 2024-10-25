@@ -4,18 +4,46 @@ import { get } from 'svelte/store';
 import { cart } from '../stores/cart';
 import { fetchWithAuth } from './auth'; // Usar fetchWithAuth si ya tienes token, ajustado en el fetch.
 
+// Inicializa el historial si no existe
+function inicializarHistorial() {
+    if (!localStorage.getItem('historial_pedido')) {
+        localStorage.setItem('historial_pedido', JSON.stringify({}));
+    }
+}
+
+// Actualiza el historial de pedidos en localStorage
+function actualizarHistorialPedido(pedidoProductosDto) {
+    // Asegúrate de que el historial esté inicializado
+    inicializarHistorial();
+
+    // Obtén el historial actual del localStorage
+    let historialPedido = JSON.parse(localStorage.getItem('historial_pedido'));
+
+    // Actualiza las cantidades en el historial para cada producto en el pedido
+    pedidoProductosDto.forEach(item => {
+        if (historialPedido[item.id]) {
+            historialPedido[item.id] += item.cantidad;
+        } else {
+            historialPedido[item.id] = item.cantidad;
+        }
+    });
+
+    // Guarda el historial actualizado en localStorage
+    localStorage.setItem('historial_pedido', JSON.stringify(historialPedido));
+}
+
 export async function createPedido() {
     try {
         const carrito = get(cart);
 
         if (carrito.length === 0) {
             console.warn('El carrito está vacío');
-            return;  
+            return;
         }
 
         const idsProductos = carrito.map(item => item.id);
         const productosData = await getProductosAPedir();
-        console.log('Productos obtenidos:', productosData); // Para depuración
+        console.log('Productos obtenidos:', productosData);
 
         const productosEnCarrito = productosData.filter(producto => idsProductos.includes(producto.id));
 
@@ -34,24 +62,29 @@ export async function createPedido() {
             productos: pedidoProductosDto
         };
 
-        console.log('Datos del pedido:', JSON.stringify(pedido)); // Para depuración
+        console.log('Datos del pedido:', JSON.stringify(pedido));
 
         const response = await fetchWithAuth('http://127.0.0.1:5000/api/usuarios/pedidos', {
             method: 'POST',
             body: JSON.stringify(pedido)
         });
 
-        // Aquí manejamos la respuesta del fetchWithAuth
         if (response) {
             console.log("Pedido creado con éxito:", response);
-            return response.id_pedido;  // Retornamos el id_pedido
+            
+            // Actualiza el historial de pedidos con los datos actuales del pedido
+            actualizarHistorialPedido(pedidoProductosDto);
+
+            // Limpia el carrito
+            cart.set([]); // O usa cart.clear() si tienes esa función en el store
+
+            return response.id_pedido;
         } else {
             throw new Error('Error al crear el pedido: respuesta no válida');
         }
         
     } catch (error) {
         console.error('Error al crear el pedido:', error.message || error);
-        throw error; // Asegúrate de volver a lanzar el error
+        throw error;
     }
 }
-
