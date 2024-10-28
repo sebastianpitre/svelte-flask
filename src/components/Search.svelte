@@ -123,6 +123,8 @@
       list-style: none; /* Elimina los puntos */
       position: absolute;
       z-index: 1000;
+      height: 75vh;
+      overflow: hidden;
       background-color: #fff;
       max-height: auto; /* Controla el tamaño máximo de la lista */
       overflow-y: auto; /* Habilitar desplazamiento si es necesario */
@@ -142,6 +144,20 @@
         animation: moveGradient 3s linear infinite; /* Animación continua */
         border-top: 0px;
         font-size: 13px;
+    }
+    /* Ocultar la barra de desplazamiento */
+    .autocomplete-list::-webkit-scrollbar {
+        display: none; /* Oculta la barra de desplazamiento para navegadores Webkit */
+    }
+
+    /* Para Firefox */
+    .autocomplete-list {
+        scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+    }
+
+    /* Para IE y Edge */
+    .autocomplete-list {
+        -ms-overflow-style: none; /* Oculta la barra de desplazamiento */
     }
   
     .autocomplete-item {
