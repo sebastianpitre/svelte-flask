@@ -73,6 +73,13 @@
     addToCart(producto);
   }
 
+  // Función para obtener la cantidad del producto directamente desde localStorage 🌟🌟🌟
+  function cantidadProductoEnHistorial(productoId) {
+        const historial = JSON.parse(localStorage.getItem('historial_pedido')) || {};
+        return historial[productoId] || 0; // Devuelve 0 si el producto no existe en el historial
+    }
+
+
 </script>
 
 <main>
@@ -119,7 +126,7 @@
         <div class="row my-2">
           {#each filteredProducts as producto (producto.id)}
           {#if producto.is_activo === true}
-            <div class="{clasesCard}">
+            <div class="{clasesCard} {cantidadProductoEnHistorial(producto.id) >= producto.cantidad ? 'order-last' : ''}">
               <Card {producto} addToCart={handleAddToCart}/>
             </div>
             {/if}
@@ -138,7 +145,7 @@
           <div class="row my-2">
             {#each filteredProducts as producto (producto.id)}
               {#if producto.id_categorias === categoria.id_categorias && producto.is_activo === true}
-                <div class="{clasesCard}">
+                <div class="{clasesCard} {cantidadProductoEnHistorial(producto.id) >= producto.cantidad ? 'order-last' : ''}">
                   <Card {producto} addToCart={handleAddToCart}/>
                 </div>
               {/if}

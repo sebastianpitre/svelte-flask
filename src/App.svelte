@@ -37,13 +37,13 @@
 
     <Route path="/categorias" component={Categorias} />
     <Route path="/categoria/nueva" component={CategoryForm} />
-    <Route path="/categoria/editar/:id" component={CategoryForm} />
+    <Route path="/categoria/:id" component={CategoryForm} />
 
     <Route path="/productos" component={Productos} />
     <Route path="/ofertas" component={Ofertas} />
     <Route path="/producto/nuevo" component={ProductForm} />
-    <Route path="/producto/editar/:id" component={ProductForm} />
-    <Route path="/producto/:id" component={VerProducto} />
+    <Route path="/producto/:id" component={ProductForm} />
+    <Route path="/ver_producto/:id" component={VerProducto} />
 
     <Route path="/usuarios" component={Usuarios} />
     <Route path="/usuario/nuevo" component={UsuarioForm} />

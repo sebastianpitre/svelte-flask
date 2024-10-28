@@ -118,7 +118,7 @@
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <a class="btn btn-sm btn-outline-success" href={`/categoria/editar/${values.id_categorias}`}>Editar</a>
+                                    <a class="btn btn-sm btn-outline-success" href={`/categoria/${values.id_categorias}`}>Editar</a>
                                     <button class="btn btn-sm btn-outline-danger" on:click={() => eliminarCategoria(values.id_categorias)}>Eliminar</button>
                                     
                                 </td>

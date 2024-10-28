@@ -16,7 +16,7 @@
   let url_imagen = "";
   let url_ficha_tecnica = null;
   let unidad_producto = "";
-  let cantidad = 0;
+  let cantidad = 1;
   let precio = 0;
   let is_promocion = false;
   let descuento = 0;
@@ -135,21 +135,33 @@
 }
 
 </script>
+<style>
 
+</style>
 <main class="row m-0">
   <div class="col-12 col-md-8 mx-auto pt-3 mb-4 mb-md-0">
     <form on:submit={handleSubmit}>
       <div class="card p-3">
+        
         <h3 class="text-center">{id ? "Editar Producto" : "Guardar Producto"}</h3>
+        
         <div class="row mx-auto pt-3">
-          <div class="col-12 col-md-6 {id ? 'd-none' : ''}">
+          <div class="col-auto">
+            <div class="text-center  border p-2 border-radius-2xl">
+              <span class="">Activo? {is_activo === true ? 'Si': 'No' }</span>
+              <div class="form-check form-switch ms-4 mb-3">
+                <input type="checkbox" class="form-check-input" bind:checked={is_activo} />
+              </div>
+            </div>
+          </div>
+          <div class="col-7 col-md-4 {id ? 'd-none' : ''}">
             <div class="input-group input-group-static my-2">
               <label for="sku">SKU</label>
               <input type="text" class="form-control" bind:value={sku} required={!id} />
             </div>
           </div>
 
-          <div class="col-12 col-md-6">
+          <div class="col-12 col-md-6 {id ? "col-md-10" : ""}">
             <div class="input-group input-group-static my-2">
               <label for="nombre">Nombre</label>
               <input type="text" class="form-control" bind:value={nombre} required />
@@ -177,85 +189,89 @@
             </div>
           </div>
           
-
-          <div class="col-12 col-md-6">
+          <div class="col-12 col-md-3">
             <div class="input-group input-group-static my-2">
-              <label for="unidad_producto">Unidad de Producto</label>
-              <input type="text" class="form-control" bind:value={unidad_producto} required />
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="cantidad">Cantidad</label>
+              <label for="cantidad">Cantidad de unidad</label>
               <input type="number" class="form-control" bind:value={cantidad} required />
             </div>
           </div>
 
-          <div class="col-12 col-md-6">
+          <div class="col-12 col-md-3">
+            <label for="unidad_producto" class="form-label">Unidad de medida</label>
+            <div class="input-group input-group-outline mb-3 mt-n1">
+                <select class="form-control" bind:value={unidad_producto} required>
+                    <option value="" selected>Seleccionar</option>
+                    <option value="KG" >Kilogramo</option>
+                    <option value="GR" >Gramo</option>
+                    <option value="L" >Litro</option>
+                    <option value="ML" >Mililitro</option>
+                    <option value="UD" >Unidad</option>
+                    
+                    <!-- Agrega más opciones según sea necesario -->
+                </select>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-3">
             <div class="input-group input-group-static my-2">
               <label for="precio">Precio</label>
               <input type="number" class="form-control" bind:value={precio} required />
             </div>
           </div>
 
-          <div class="col-12 col-md-6">
+          <div class="col-auto">
+            <div class="border-radius-2xl border p-2">
+              <span>Decuento?</span>
+              <div class="form-check form-switch"><span>{is_promocion === true ? 'Si': 'No' }</span> 
+                <input type="checkbox" class="form-check-input" bind:checked={is_promocion} />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-2 {is_promocion === false ? 'd-none': '' }">
             <div class="input-group input-group-static my-2">
-              <label for="descuento">Descuento</label>
-              <input type="number" class="form-control" bind:value={descuento} />
+              <label for="descuento">% Descuento</label>
+              <input type="number" placeholder="cuanto es el % ?" class="form-control" bind:value={descuento} />
             </div>
           </div>
 
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="stock">Stock</label>
-              <input type="number" class="form-control" bind:value={stock} required />
-            </div>
-          </div>
-
-          <div class="col-12 col-md-3">
-            <div class="form-check form-switch my-2">
-              <label for="is_promocion" class="form-check-label">Promoción</label>
-              <input type="checkbox" class="form-check-input" bind:checked={is_promocion} />
-            </div>
-          </div>
-
-          <div class="col-12 col-md-3">
-            <div class="form-check form-switch my-2">
-              <label for="is_activo" class="form-check-label">Activo</label>
-              <input type="checkbox" class="form-check-input" bind:checked={is_activo} />
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6">
-            <div>
-              <label for="fecha_inicio_descuento" class="form-label">Inicio Descuento</label>
-              <input type="date" class="form-control" bind:value={fecha_inicio_descuento} />
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6">
-            <div>
-              <label for="fecha_fin_descuento" class="form-label">Fin Descuento</label>
-              <input type="date" class="form-control" bind:value={fecha_fin_descuento} />
-            </div>
-          </div>
-
-          <div class="col-6">
+          <div class="col">
             <label for="id_categorias" class="form-label">Categoría</label>
             <div class="input-group input-group-outline mb-3 mt-n2">
                 <select class="form-control" bind:value={id_categorias} required>
-                    <option value="" disabled selected>Seleccionar</option>
-                    <option value="1" >CARNES</option>
-                    <option value="2" >LACTEOS</option>
-                    
-                    <!-- Agrega más opciones según sea necesario -->
+                  {#each categorias as item}
+                  <option value={item.id_categorias}>{item.nombre}</option>
+                  {/each}
                 </select>
             </div>
-        </div>
+          </div>
+
+          <div class="col-12 col-md-3 d-none">
+            <div class="input-group input-group-static my-2">
+              <label for="stock">Stock</label>
+              <input type="number" class="form-control" disabled bind:value={stock} required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div>
+                <label for="fecha_inicio_descuento" class="form-label ms-n1 ps-1">Inicio Descuento</label>
+                <input type="date" class="form-control" bind:value={fecha_inicio_descuento} />
+              </div>
+            </div>
+  
+            <div class="col-12 col-md-6">
+              <div>
+                <label for="fecha_fin_descuento" class="form-label">Fin Descuento</label>
+                <input type="date" class="form-control" bind:value={fecha_fin_descuento} />
+              </div>
+            </div>
+          </div>
 
           <div class="col-12 text-center mt-4">
-            <button type="submit" class="btn btn-success">{id ? "Actualizar Producto" : "Crear Producto"}</button>
+            <a href="/productos" class="btn btn-danger">cancelar</a>
+            <button type="submit" class="btn btn-success">{id ? "Actualizar Producto" : "Guardar Producto"}</button>
           </div>
         </div>
       </div>

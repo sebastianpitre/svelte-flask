@@ -37,6 +37,12 @@
       addToCart(producto);
     }
 
+    // Función para obtener la cantidad del producto directamente desde localStorage 🌟🌟🌟
+    function cantidadProductoEnHistorial(productoId) {
+        const historial = JSON.parse(localStorage.getItem('historial_pedido')) || {};
+        return historial[productoId] || 0; // Devuelve 0 si el producto no existe en el historial
+    }
+
   </script>
   
   <div class="card bg-gray {noDisponible ? 'bg-gray-200 ' : ''} position-relative">
@@ -56,7 +62,7 @@
     
     <div class="card-header p-0 position-relative z-index-2" style="border-radius: 0.75rem 0.75rem 0px 0px">
       <div class="d-block blur-shadow-image cursor-pointer img-marco" >
-        <a href="{`/producto/${producto.id}`}">
+        <a href="{`/ver_producto/${producto.id}`}">
           <img src="{fotoNoDisponible ? '../public/img/sin-productos.webp' : producto.url_imagen}" width="100%" height="170vh" alt="producto" class="border-bottom img-size {producto.is_promocion ? 'img-oferta' : 'img'} {producto.is_activo ? '' : 'img-no-activo'}" style="border-radius: 0.75rem 0.75rem 0px 0px">
         </a>
         
@@ -71,12 +77,13 @@
       <div class="colored-shadow" style="background-image: url(&quot;{producto.url_imagen}&quot;);"></div>
     </div>
     <div class="px-2 py-0">
-      <p class="text-dark text-center nombre mt-1 mb-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre}</p>
+      <p class="text-dark text-center nombre mt-1 mb-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre} 
+        {#if producto.cantidad > 1}x{producto.cantidad}{/if}</p>
 
       {#if producto.is_promocion === true && producto.is_activo === true} 
         <div class="text-warning text-center border-bottom border-gray mt-1 mb-3 pb-2">
           <del class="text-underline text-start text-dark opacity-9 " style="font-size: 12px;left: 14px;" >$ {producto.precio}</del>
-          ${producto.precio-producto.precio*producto.descuento/100} 
+          ${producto.precio-producto.precio*producto.descuento/100}
           <span class="text-dark text-sm">{producto.unidad_producto}</span>
         </div>
         {:else}
@@ -86,7 +93,7 @@
       
       <div class="row text-center mt-2">
         <p class="col mt-n3 my-0" style="font-size: 13px;">
-          {#if itemQuantity < producto.cantidad}
+          {#if itemQuantity < producto.cantidad-cantidadProductoEnHistorial(producto.id)}
           Maximo {producto.cantidad} 
           {:else}
           ¡limite alcanzado!
@@ -95,7 +102,6 @@
         <div class="col-md-10 col-12 mx-auto">
 
           {#if producto.is_activo === true}
-
             {#if isInCart}
               <div>
                 {#if itemQuantity <=1}
@@ -104,7 +110,8 @@
                   <button class="btn col btn-sm border border-dark" on:click={() => decrementQuantity(producto.id)}>-</button>
                 {/if}
                 <span class="col p-1 btn disabled text-dark">{itemQuantity}</span>
-                {#if itemQuantity < producto.cantidad}
+
+                {#if itemQuantity < producto.cantidad-cantidadProductoEnHistorial(producto.id)}
                 <button class="btn col btn-sm border border-success text-success" on:click={() => incrementQuantity(producto.id)}>+</button>
                 {:else}
                 <button class="btn col btn-sm border text-dark" disabled on:click={() => incrementQuantity(producto.id)}>max</button>
@@ -112,8 +119,10 @@
                 {/if}
               </div>
             {/if}
-            {#if !isInCart}
+            {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.cantidad}
               <button class="btn col-12 btn-sm btn-success" on:click={handleAddToCart}>Agregar</button>
+              {:else if !isInCart}
+              <button class="btn col-12 btn-sm btn-warning">Comprado</button>
             {/if}
 
             {:else} <button class="btn col-12 btn-sm bg-info text-white invalid disabled">Disponible pronto</button>

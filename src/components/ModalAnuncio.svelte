@@ -175,7 +175,7 @@
           {#each listProductos as values}
           {#if values.is_activo === true && values.is_promocion === true}
               <li class="splide__slide">
-                <a href="{`/producto/${values.id}`}">
+                <a href="{`/ver_producto/${values.id}`}">
                   <svg id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1394 929">
                     <defs>
                       
@@ -234,7 +234,7 @@
                         <path class="cls-4_circulo" d="M795.75,180.76c1.94-.06,2.75.89,2.85,2.36.11,1.77-.65,2.94-2.63,2.93-1.57-.01-2.51-.91-2.62-2.35-.14-1.79.88-2.82,2.4-2.95Z"/>
                         <path class="cls-4_circulo" d="M856.39,154.48c2.2.39,3.17,1.41,3.02,3.23-.14,1.61-1.29,2.23-2.72,2.18-1.41-.05-2.52-.63-2.61-2.31-.1-1.95,1.24-2.55,2.31-3.11Z"/>
                       </g>
-                      <image width="1394" text-anchor="middle" dominant-baseline="middle" height="929" xlink:href="/public/img/anuncio3png"/>
+                      <image width="1394" text-anchor="middle" dominant-baseline="middle" height="929" xlink:href="/public/img/anuncio6.png"/>
                       <g>
                         <rect class="cls-1" x="128.31" y="315.52" width="796.3" height="180" rx="13.59" ry="13.59"/>
                         <text class="cls-7" transform="translate(165.47 384.62)"><tspan text-anchor="middle" dominant-baseline="middle" x="355" y="0">{values.nombre}</tspan></text>
@@ -242,6 +242,7 @@
                         <rect class="cls-10" x="387.42" y="477.47" width="278.08" height="70.11" rx="13.59" ry="13.59"/>
                         <text class="cls-5" transform="translate(456.7 558.76)" text-anchor="middle" dominant-baseline="middle"><tspan x="70" y="-45">$ {values.precio}</tspan></text>
                       </g>
+                      {#if values.is_promocion === true}
                       <g>
                         <g>
                           <path class="cls-8" d="M161.05,173.61c.19,5.37-1.6,8.61-5.16,10.79-3.88,2.37-7.85,2.27-11.72-.11-12.24-7.55-24.51-15.03-36.65-22.74-2.78-1.77-4.8-1.85-7.62-.05-11.51,7.37-23.23,14.4-34.78,21.71-4.72,2.99-9.36,4.22-14.28.76-4.27-3.01-5.44-7.35-3.87-13.75,3.3-13.41,6.5-26.84,9.97-40.2.8-3.08.08-4.87-2.33-6.85-10.66-8.79-21.11-17.84-31.72-26.68-4.18-3.49-6.67-7.55-4.91-13.04,1.66-5.19,5.56-7.39,10.96-7.98,14.03-1.54,28.12-2.35,42.2-3.01,3.19-.15,4.72-1.26,5.88-4.2,5.29-13.36,10.71-26.67,16.28-39.92,3.37-8.02,12.81-9.83,18.51-3.77,1.4,1.49,2.15,3.33,2.9,5.18,5.29,12.9,10.62,25.79,15.84,38.73.91,2.26,1.77,3.74,4.69,3.92,14.5.91,28.99,2.11,43.48,3.2,5.45.41,9.2,3.09,10.72,7.68,1.49,4.51.05,8.96-4.19,12.55-10.32,8.75-20.53,17.65-31.09,26.1-3.67,2.93-4.5,5.51-3.24,10.06,3.46,12.48,6.3,25.13,9.36,37.71.4,1.65.65,3.34.76,3.9Z"/>
@@ -250,6 +251,7 @@
                         <text class="cls-2_oferta" transform="translate(67.21 122.71)" text-anchor="middle" dominant-baseline="middle"><tspan x="36" y="-10">{parseInt(values.descuento, 10)}%</tspan></text>
                         <text class="cls-3" transform="translate(86.54 134.74)"><tspan x="0" y="0">de dcto</tspan></text>
                       </g>
+                      {/if}
                     </g>
                   </svg>
                 </a>

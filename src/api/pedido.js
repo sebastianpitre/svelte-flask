@@ -2,18 +2,30 @@
 import { getProductosAPedir } from './productos';
 import { get } from 'svelte/store';
 import { cart } from '../stores/cart';
-import { fetchWithAuth } from './auth'; // Usar fetchWithAuth si ya tienes token, ajustado en el fetch.
+import { fetchWithAuth } from './auth';
 
-// Inicializa el historial si no existe
+// Obtiene la fecha actual en formato "YYYY-MM-DD"
+function obtenerFechaActual() {
+    const hoy = new Date();
+    return hoy.toISOString().split('T')[0];
+}
+
+// Inicializa o reinicia el historial si es un nuevo día
 function inicializarHistorial() {
-    if (!localStorage.getItem('historial_pedido')) {
+    const fechaActual = obtenerFechaActual();
+    const fechaHistorial = localStorage.getItem('fecha_historial');
+
+    if (fechaHistorial !== fechaActual) {
+        // Si es un nuevo día, limpia el historial y actualiza la fecha en localStorage
         localStorage.setItem('historial_pedido', JSON.stringify({}));
+        localStorage.setItem('fecha_historial', fechaActual);
+        console.log('Historial de pedidos reiniciado para el nuevo día');
     }
 }
 
 // Actualiza el historial de pedidos en localStorage
 function actualizarHistorialPedido(pedidoProductosDto) {
-    // Asegúrate de que el historial esté inicializado
+    // Asegúrate de que el historial esté inicializado y de la fecha actual
     inicializarHistorial();
 
     // Obtén el historial actual del localStorage
@@ -52,7 +64,10 @@ export async function createPedido() {
             return {
                 id: producto.id,
                 cantidad: item.quantity,
-                precio: producto.precio
+                precio: producto.precio,
+                nombre: producto.nombre,
+                cantidad_medida: producto.cantidad_medida
+
             };
         });
 

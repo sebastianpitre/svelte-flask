@@ -1,13 +1,26 @@
 <script>
     import { onMount } from 'svelte';
     import { fetchWithAuth } from '../api/auth'; // Verifica que la ruta sea correcta
+  import { getProductos } from '../api/productos.js';
+
 
     // Recibir el `id` como prop
     export let id;
   
+    let productosx = []; // Lista de todos los productos disponibles
+    let errorMessage = '';
     // Variable para almacenar el pedido
     let pedido = null;
   
+    // Función para obtener los productos disponibles
+    async function fetchProductos() {
+      try {
+        productosx = await getProductos();
+      } catch (error) {
+        errorMessage = 'No se pudieron cargar los productos.';
+        console.error(error);
+      }
+    }
     async function fetchPedido() {
     try {
         // Aquí `response` es el objeto de datos directamente
@@ -22,26 +35,63 @@
     }
     }
 
+    // Variable para controlar la visibilidad del div
+    let mostrarDiv = true;
+
+    // Función para ocultar el div por 3 segundos
+    function ocultarDiv() {
+        printReceipt()
+        mostrarDiv = false; // Oculta el div
+        
+        // Después de 3 segundos, vuelve a mostrar el div
+        setTimeout(() => {
+            mostrarDiv = true;
+        }, 3000); // 3000 ms = 3 segundos
+    }
+
+    // Función auxiliar para obtener el nombre del producto por su ID
+  function obtenerNombreProducto(idProducto) {
+    const productoEncontrado = productosx.find((prod) => prod.id === idProducto);
+    return productoEncontrado ? productoEncontrado.nombre : 'Producto';
+  }
+
+  function obtenerCantidad(idProducto) {
+    const productoCantidad = productosx.find((prod) => prod.id === idProducto);
+    return productoCantidad ? productoCantidad.cantidad : '';
+  }
+
+  function obtenerCantidadUnidad(idProducto) {
+    const productoCantidad = productosx.find((prod) => prod.id === idProducto);
+    return productoCantidad ? productoCantidad.unidad_producto : '.';
+  }
+
     // Llama a la función al montar el componente
     onMount(() => {
         console.log('ID del pedido:', id);
       if (id) {
+        fetchProductos(); // Primero carga los productos disponibles
         fetchPedido();
       }
     });
 
      // Función para imprimir el recibo
      function printReceipt() {
+      setTimeout(() => {
         window.print();
+        }, 1000); // 3000 ms = 3 segundos
+        
     }
 
   </script>
 <main>
     {#if pedido}
       <div class="mx-auto mt-5 col-12 col-md-4">
-        <a class="btn btn-dark btn-sm" href="/">Volver</a>
-        <!-- Botón para imprimir el recibo -->
-        <button class="btn btn-primary btn-sm mb-3" on:click={printReceipt}>Imprimir Recibo</button>
+
+        {#if mostrarDiv}
+          <a class="btn btn-dark btn-sm" href="/">Volver</a>
+            <!-- Botón para imprimir el recibo -->
+          <button class="btn btn-primary btn-sm mb-3" on:click={ocultarDiv}>Imprimir Recibo</button>
+        {/if}
         
         <div class="ticket card  bg-white  px-5 py-3">
           <div class="text-lateral">
@@ -53,20 +103,39 @@
   
           <h3>Detalles del Pedido</h3>
           <p><strong>N° Pedido:</strong> {pedido.id_pedido}</p>
-          <p><strong>Monto Total:</strong> {pedido.monto_total}</p>
           <p><strong>Estado:</strong> {pedido.estado_pedido}</p>
-          <p><strong>Fecha: </strong> {new Date(pedido.fecha_creacion).toLocaleString()}</p>
+          <p><strong>Fecha creación: </strong> "el back no la trae"</p>
+
     
-          <h5 class="border-top pt-2">Productos</h5>
-          <ul>
-            {#each pedido.productos as producto}
-              <li>
-                <strong>Producto ID:</strong> {producto.id} - 
-                <strong>Cantidad:</strong> {producto.cantidad} -  
-                <strong>Precio:</strong> {producto.precio}
-              </li>
-            {/each}
-          </ul>
+          <h5>Productos</h5>
+          <div class=" border">
+            <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-dark text-xxs font-weight-bolder pe-0">Descripcion</th>
+                    <th class="text-uppercase text-dark text-xxs font-weight-bolder text-center">Cantidad</th>
+                    <th class="text-uppercase text-dark text-xxs font-weight-bolder text-center">precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {#if pedido.productos && pedido.productos.length > 0}
+                  {#each pedido.productos as producto}
+                  <tr>
+                      <td class="text-xs text-dark font-weight-bolder border-0 ps-4">{obtenerNombreProducto(producto.id)} x{obtenerCantidad(producto.id)} {obtenerCantidadUnidad(producto.id)}</td>
+                      <td class="text-xs text-dark font-weight-bolder border-0 text-center">{producto.cantidad}</td>
+                      <td class="text-xs text-dark font-weight-bolder border-0 text-center">{producto.precio}</td>
+                  </tr>
+                  {/each}
+                  {:else}
+                    <p>No hay productos en este pedido.</p>
+                  {/if}
+                </tbody>
+            </table>
+            
+          </div>
+
+          <p class="text-end mt-2"><strong>Total:</strong> {pedido.monto_total}</p>
+
   
           
         </div>

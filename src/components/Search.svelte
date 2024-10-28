@@ -36,7 +36,7 @@
     }
   
     function handleSelectProduct(id) {
-      window.location.href = `/producto/${id}`;
+      window.location.href = `/ver_producto/${id}`;
     }
   
     function handleClickOutside(event) {

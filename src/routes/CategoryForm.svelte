@@ -74,7 +74,7 @@
   };
   </script>
   
-  <main class="row col-12">
+  <main class="row col-12 bg-gray-200" style="min-height: 100vh; background-image: url('');">
     <div class="col-12 col-md-6 mx-auto pt-3 mb-4 mb-md-0">
         <form on:submit={handleSubmit}>
           <div class="card p-3">
