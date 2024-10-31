@@ -66,8 +66,7 @@ export async function createPedido() {
                 cantidad: item.quantity,
                 precio: producto.precio,
                 nombre: producto.nombre,
-                cantidad_medida: producto.cantidad_medida
-
+                cantidad_producto: producto.cantidad_producto
             };
         });
 

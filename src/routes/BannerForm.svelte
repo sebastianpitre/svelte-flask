@@ -14,7 +14,7 @@
 
         // Si hay un id, obtener detalles del producto (ya como JSON)
         if (id) {
-          const producto = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/categorias/${id}`);
+          const producto = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/banner/${id}`);
           if (producto) {
 
             posicion_y = producto.posicion_y;
@@ -82,7 +82,7 @@
               <div class="col-12 col-md-6">
                 <div class="input-group  input-group-static my-2">
                     <h6 class="">Posicion en "Y"</h6>
-                    <input type="text" class="form-control mt-n3" bind:value={posicion_y} />
+                    <input type="number" class="form-control mt-n3" bind:value={posicion_y} />
                 </div>
             </div>
 

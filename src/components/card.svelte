@@ -53,7 +53,7 @@
         </span>
     {/if}
 
-    {#if producto.is_activo === false}
+    {#if producto.stock === 0 && producto.is_activo === true}
         <span class="bg-gray-600 col-7 col-sm-6 text-white text-center position-absolute" style="z-index: 3; border-radius: 10px 0px 20px 0px;">
         Agotado
         </span>
@@ -93,10 +93,14 @@
       
       <div class="row text-center mt-2">
         <p class="col mt-n3 my-0" style="font-size: 13px;">
-          {#if itemQuantity < producto.cantidad-cantidadProductoEnHistorial(producto.id)}
-          Maximo {producto.cantidad} 
+          {#if producto.stock > 0}
+            {#if itemQuantity < producto.cantidad-cantidadProductoEnHistorial(producto.id)}
+            Límite {producto.cantidad-cantidadProductoEnHistorial(producto.id)}/{producto.cantidad} 
+            {:else}
+            ¡limite alcanzado!
+            {/if}
           {:else}
-          ¡limite alcanzado!
+            Mira otros productos
           {/if}
         </p>
         <div class="col-md-10 col-12 mx-auto">
@@ -119,13 +123,23 @@
                 {/if}
               </div>
             {/if}
-            {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.cantidad}
-              <button class="btn col-12 btn-sm btn-success" on:click={handleAddToCart}>Agregar</button>
-              {:else if !isInCart}
-              <button class="btn col-12 btn-sm btn-warning">Comprado</button>
+
+            {#if producto.stock > 0}
+            
+              {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.cantidad}
+                <button class="btn col-12 btn-sm btn-success" on:click={handleAddToCart}>Agregar</button>
+                {:else if !isInCart}
+                <button class="btn col-12 btn-sm btn-warning">Comprado</button>
+              {/if}
+
+              {:else}
+              {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.cantidad}
+                <button class="btn col-12 btn-sm bg-info text-white invalid disabled">Agotado</button>
+                {:else if !isInCart}
+                <button class="btn col-12 btn-sm btn-warning">Comprado</button>
+              {/if}
             {/if}
 
-            {:else} <button class="btn col-12 btn-sm bg-info text-white invalid disabled">Disponible pronto</button>
           {/if}
 
           

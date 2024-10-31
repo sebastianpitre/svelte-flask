@@ -119,9 +119,8 @@
         </div>
         <div class="col">
           <h5>{producto.nombre}</h5>
-          <p><strong>Descripción:</strong> {producto.descripcion}</p>
+          <p><strong></strong> {producto.descripcion}</p>
           <p><strong>Precio:</strong> ${producto.precio}</p>
-          <p><strong>categoria:</strong> {producto.id_categorias}</p>
           <div class="row">
             <div class="col-auto">
               <button class="btn py-0 px-2 btn-sm bg-info text-white" on:click={copiarAlPortapapeles}>Copiar ficha tecnica</button>

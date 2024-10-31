@@ -38,6 +38,26 @@
       }, 10000); // Cambiar de slide cada 3 segundos
     }
   });
+
+   // FUNCION DE CONVERSIÓN DE FECHAS 🌟🌟🌟
+
+   function convertirFechaDatetimeAFecha(fechaDatetimeStr) {
+    // Convertir la cadena de datetime a un objeto Date
+    const fecha = new Date(fechaDatetimeStr);
+
+    // Array con los nombres de los meses
+    const meses = [
+      "Ene", "Feb", "Mar", "Abr", "May", "Jun", 
+      "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+    ];
+    // Obtener el día, mes y año
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    const mes = meses[fecha.getMonth()]; // Obtener el nombre del mes a partir del array
+    const año = fecha.getFullYear();
+
+    // Retornar la fecha en formato dd/mm/yyyy
+    return `${dia} de ${mes}`;
+  }
 </script>
 
 <style>
@@ -231,7 +251,7 @@
                       <text class="cls-4" transform="translate(44.76 122.74)"><tspan class="cls-20" x="0" y="0">Antes</tspan></text>
                     </g>
                   </g>
-                  <text class="cls-6" transform="translate(46.8 241.94)"><tspan x="-30" y="0">Hasta agotar existencias</tspan></text>
+                  <text class="cls-6" transform="translate(46.8 241.94)" text-anchor="middle" dominant-baseline="middle"><tspan x="65" y="-4">Hásta el {convertirFechaDatetimeAFecha(values.fecha_fin_descuento)}</tspan></text>
                 </g>
                 <text class="cls-25" transform="translate(24.86 206.59)"><tspan x="0" y="0">{values.nombre.split(' ').slice(0, 3).join(' ')}</tspan></text>
               </svg>

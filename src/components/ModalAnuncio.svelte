@@ -69,7 +69,7 @@
 
     // Retornar la fecha en formato dd/mm/yyyy
     return `${dia} de ${mes}`;
-}
+  }
 </script>
 
 

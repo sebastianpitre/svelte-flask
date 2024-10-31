@@ -123,10 +123,9 @@
       list-style: none; /* Elimina los puntos */
       position: absolute;
       z-index: 1000;
-      height: 75vh;
+      max-height: 75vh;
       overflow: hidden;
       background-color: #fff;
-      max-height: auto; /* Controla el tamaño máximo de la lista */
       overflow-y: auto; /* Habilitar desplazamiento si es necesario */
       width: 231px;
       margin-top: 0px;

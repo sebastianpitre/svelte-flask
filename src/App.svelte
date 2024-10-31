@@ -22,6 +22,7 @@
     import BannerForm from "./routes/BannerForm.svelte";
     import Ofertas from "./routes/Ofertas.svelte";
     import HomeAdmin from "./routes/HomeAdmin.svelte";
+    import Entrada from "./routes/Entrada.svelte";
 </script>
 
 <main>
@@ -44,6 +45,7 @@
     <Route path="/producto/nuevo" component={ProductForm} />
     <Route path="/producto/:id" component={ProductForm} />
     <Route path="/ver_producto/:id" component={VerProducto} />
+    <Route path="/entrada/:id" component={Entrada} />
 
     <Route path="/usuarios" component={Usuarios} />
     <Route path="/usuario/nuevo" component={UsuarioForm} />
@@ -56,6 +58,7 @@
 
     <Route path="/ajustes" component={Ajustes} />
     <Route path="/nuevo_banner" component={BannerForm} />
+    <Route path="/ajustes/:id" component={BannerForm} />
 
     <Route path="/example" component={Example} />
   </Router>

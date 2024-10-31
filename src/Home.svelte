@@ -125,7 +125,7 @@
         </div>
         <div class="row my-2">
           {#each filteredProducts as producto (producto.id)}
-          {#if producto.is_activo === true}
+          {#if producto.is_activo === true && producto.stock > 0}
             <div class="{clasesCard} {cantidadProductoEnHistorial(producto.id) >= producto.cantidad ? 'order-last' : ''}">
               <Card {producto} addToCart={handleAddToCart}/>
             </div>
@@ -144,7 +144,7 @@
           </div>
           <div class="row my-2">
             {#each filteredProducts as producto (producto.id)}
-              {#if producto.id_categorias === categoria.id_categorias && producto.is_activo === true}
+              {#if producto.id_categorias === categoria.id_categorias && producto.is_activo === true && producto.stock > 0}
                 <div class="{clasesCard} {cantidadProductoEnHistorial(producto.id) >= producto.cantidad ? 'order-last' : ''}">
                   <Card {producto} addToCart={handleAddToCart}/>
                 </div>
@@ -156,7 +156,7 @@
 
       {/if}
       
-      {#if productosNoactivos.length > 0}
+     
       <div class="row my-2">
         <span class="material-symbols-outlined text-dark my-auto col-auto">
           update
@@ -166,7 +166,7 @@
       </div>
       <div class="row">
         {#each filteredProducts as producto (producto.id)}
-        {#if producto.is_activo === false}
+        {#if producto.stock === 0 && producto.is_activo === true}
 
             <div class="{clasesCard}">
               <Card {producto} addToCart={handleAddToCart}/>
@@ -175,7 +175,6 @@
 
         {/each}
       </div>
-      {/if} 
     </div>
 
     <BtnAnuncio/>

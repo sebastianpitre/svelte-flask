@@ -93,7 +93,7 @@
                             
                             <div class="card-body p-0 text-center">
                                 <a class="btn btn-danger btn-sm" href="/#">eliminar</a>
-                                <a class="btn btn-danger btn-sm" href="/ajustes/id">editar</a>
+                                <a class="btn btn-danger btn-sm" href="/ajustes/{values.id_banner}">editar</a>
                             </div>
                         </div>
                     </div>

@@ -71,6 +71,7 @@
                                 <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Nombre</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Precios y descuentos</th>
                                 <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">estado de producto</th>
+                                <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Stock</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acciones</th>
                             </tr>
                         </thead>
@@ -121,10 +122,16 @@
                                     {/if}
     
                                 </td>
+
+                                <td class="text-center">
+                                    <p class="text-sm mb-0"><span class="text-dark font-weight-bold">{values.stock}</span></p>
+                                </td>
     
                                 <td class="">
                                     <button class="btn mx-1 col-auto btn-sm btn-outline-danger" on:click={() => eliminarProducto(values.id)}>Eliminar</button>
                                     <a class="btn col-auto mx-1 btn-sm btn-outline-success" href={`/producto/${values.id}`}>Editar</a>
+                                    <a class="btn col-auto mx-1 btn-sm btn-outline-dark" href={`/entrada/${values.id}`}>Entrada →</a>
+                                    <a class="btn col-auto mx-1 btn-sm btn-outline-danger" href={`/Salidas/${values.id}`}>Salidas →</a>
                                 </td>
                             </tr>
                             {/each}

@@ -39,7 +39,7 @@
           <div class="col-12 col-md-6">
 
             <h5 class="mb-n5 text-white ">
-              Hola, {userProfile.nombres} 
+              Hola, {userProfile.nombres} {userProfile.apellidos} 
             </h5>
 
 
@@ -49,7 +49,7 @@
     </div>
   </header>
 
-  <div class="container">
+  <div class="container" style="min-height: 57vh;">
     <div class="col-12 col-md-6 mx-auto">
 
       <div class="card mt-n5">

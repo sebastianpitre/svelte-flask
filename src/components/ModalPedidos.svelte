@@ -164,7 +164,7 @@ async function cambiarEstado(nuevoEstado) {
                 {#each pedido.productos as producto}
                 <tr>
                   <td>{producto.id}</td>
-                  <td>{obtenerNombreProducto(producto.id)}</td>
+                  <td>{obtenerNombreProducto(producto.id)} x{producto.cantidad_producto}</td>
                   <td class="text-center">{producto.cantidad}</td>
                   <td class="text-center">{producto.precio}</td>
                 </tr>
