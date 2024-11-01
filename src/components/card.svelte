@@ -134,14 +134,14 @@
               {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.max_usuario || producto.max_usuario === 0 && !isInCart}
                 <button class="btn col-12 btn-sm btn-success" on:click={handleAddToCart}>Agregar</button>
                 {:else if !isInCart}
-                <button class="btn col-12 btn-sm btn-warning">Comprado</button>
+                <button class="btn col-12 btn-sm btn-warning invalid disabled text-white">Comprado</button>
               {/if}
 
               {:else}
               {#if !isInCart && cantidadProductoEnHistorial(producto.id) <= producto.max_usuario}
                 <button class="btn col-12 btn-sm bg-info text-white invalid disabled">Agotado</button>
                 {:else if !isInCart}
-                <button class="btn col-12 btn-sm btn-warning">Comprado</button>
+                <button class="btn col-12 btn-sm btn-warning invalid disabled text-white">Comprado</button>
               {/if}
             {/if}
 
