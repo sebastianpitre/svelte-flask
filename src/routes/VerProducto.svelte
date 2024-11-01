@@ -5,7 +5,7 @@
   import { cart, addToCart, incrementQuantity, decrementQuantity } from '../stores/cart';
   import Nav from '../components/nav.svelte';
   import Menufooter from '../components/menufooter.svelte';
-    import Footer from '../components/Footer.svelte';
+  import Footer from '../components/Footer.svelte';
 
   // Recibir el `id` como prop
   export let id;
@@ -105,6 +105,12 @@
             console.error("Error al copiar: ", err);
         }
     };
+
+    // Función para obtener la cantidad del producto directamente desde localStorage 🌟🌟🌟
+    function cantidadProductoEnHistorial(productoId) {
+        const historial = JSON.parse(localStorage.getItem('historial_pedido')) || {};
+        return historial[productoId] || 0; // Devuelve 0 si el producto no existe en el historial
+    }
 </script>
 
 <main>
@@ -134,38 +140,64 @@
             </div>
           </div>
 
-          <p class="col my-0" style="font-size: 13px;">
-            {#if itemQuantity < producto.cantidad}
-            Maximo {producto.cantidad}
-            {:else}
-            ¡limite alcanzado!
-            {/if}
-          </p>
-
-          {#if producto.is_activo}
-
-            {#if isInCart}
-              <div>
-                {#if itemQuantity <=1}
-                  <button class="btn col btn-sm border border-danger   text-danger" on:click={handleDecrement}>x</button>
+          <div class="row mt-2">
+            <p class="col-12 mt-n3 my-0" style="font-size: 13px;">
+              {#if producto.stock > 0}
+                {#if producto.max_usuario === 0}
+                Sin limite♾️ 
                 {:else}
-                  <button class="btn col btn-sm border border-dark" on:click={handleDecrement}>-</button>
+                  {#if itemQuantity < producto.max_usuario-cantidadProductoEnHistorial(producto.id)}
+                  Límite {producto.max_usuario-cantidadProductoEnHistorial(producto.id)}/{producto.max_usuario} 
+                  {:else}
+                  ¡limite alcanzado!
+                  {/if}
                 {/if}
-                <span class="col p-1 btn disabled text-dark">{itemQuantity}</span>
-                {#if itemQuantity < producto.cantidad}
-                <button class="btn col btn-sm border border-success text-success" on:click={handleIncrement}>+</button>
-                {:else}
-                <button class="btn col btn-sm border  text-dark" disabled>max</button>
+    
+              {:else}
+                Mira otros productos
+              {/if}
+            </p>
+            <div class="col mx-auto">
+    
+              {#if producto.is_activo === true}
+                {#if isInCart}
+                  <div>
+                    {#if itemQuantity <=1}
+                      <button class="btn col btn-sm border border-danger   text-danger" on:click={handleDecrement}>x</button>
+                    {:else}
+                      <button class="btn col btn-sm border border-dark" on:click={handleDecrement}>-</button>
+                    {/if}
+                    <span class="col p-1 btn disabled text-dark">{itemQuantity}</span>
+    
+                    {#if itemQuantity < producto.max_usuario-cantidadProductoEnHistorial(producto.id) || producto.max_usuario === 0}
+                    <button class="btn col btn-sm border border-success text-success" on:click={handleIncrement}>+</button>
+                    {:else}
+                    <button class="btn col btn-sm border text-dark" disabled on:click={handleIncrement}>max</button>
+                    
+                    {/if}
+                  </div>
+                {/if}
+    
+                {#if producto.stock > 0}
                 
+                  {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.max_usuario || producto.max_usuario === 0 && !isInCart}
+                    <button class="btn col btn-sm btn-success" on:click={handleAddToCart}>Agregar al carrito</button>
+                    {:else if !isInCart}
+                    <button class="btn col btn-sm btn-warning">Comprado</button>
+                  {/if}
+    
+                  {:else}
+                  {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.max_usuario}
+                    <button class="btn col btn-sm bg-info text-white invalid disabled">Agotado</button>
+                    {:else if !isInCart}
+                    <button class="btn col btn-sm btn-warning">Comprado</button>
+                  {/if}
                 {/if}
-              </div>
-            {/if}
-            {#if !isInCart}
-              <button class="btn col btn-sm btn-success" on:click={handleAddToCart}>Agregar al carrito</button>
-            {/if}
-
-            {:else} <button class="btn btn-sm bg-info text-white invalid disabled">Disponible pronto</button>
-          {/if}
+    
+              {/if}
+    
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -177,6 +209,7 @@
   </div>
 
   <Menufooter/>
+
   <Footer/>
 
 </main>

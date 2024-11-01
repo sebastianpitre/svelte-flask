@@ -94,11 +94,16 @@
       <div class="row text-center mt-2">
         <p class="col mt-n3 my-0" style="font-size: 13px;">
           {#if producto.stock > 0}
-            {#if itemQuantity < producto.cantidad-cantidadProductoEnHistorial(producto.id)}
-            Límite {producto.cantidad-cantidadProductoEnHistorial(producto.id)}/{producto.cantidad} 
+            {#if producto.max_usuario === 0}
+            Sin limite♾️ 
             {:else}
-            ¡limite alcanzado!
+              {#if itemQuantity < producto.max_usuario-cantidadProductoEnHistorial(producto.id)}
+              Límite {producto.max_usuario-cantidadProductoEnHistorial(producto.id)}/{producto.max_usuario} 
+              {:else}
+              ¡limite alcanzado!
+              {/if}
             {/if}
+
           {:else}
             Mira otros productos
           {/if}
@@ -115,7 +120,7 @@
                 {/if}
                 <span class="col p-1 btn disabled text-dark">{itemQuantity}</span>
 
-                {#if itemQuantity < producto.cantidad-cantidadProductoEnHistorial(producto.id)}
+                {#if itemQuantity < producto.max_usuario-cantidadProductoEnHistorial(producto.id) || producto.max_usuario === 0}
                 <button class="btn col btn-sm border border-success text-success" on:click={() => incrementQuantity(producto.id)}>+</button>
                 {:else}
                 <button class="btn col btn-sm border text-dark" disabled on:click={() => incrementQuantity(producto.id)}>max</button>
@@ -126,14 +131,14 @@
 
             {#if producto.stock > 0}
             
-              {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.cantidad}
+              {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.max_usuario || producto.max_usuario === 0 && !isInCart}
                 <button class="btn col-12 btn-sm btn-success" on:click={handleAddToCart}>Agregar</button>
                 {:else if !isInCart}
                 <button class="btn col-12 btn-sm btn-warning">Comprado</button>
               {/if}
 
               {:else}
-              {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.cantidad}
+              {#if !isInCart && cantidadProductoEnHistorial(producto.id) <= producto.max_usuario}
                 <button class="btn col-12 btn-sm bg-info text-white invalid disabled">Agotado</button>
                 {:else if !isInCart}
                 <button class="btn col-12 btn-sm btn-warning">Comprado</button>
