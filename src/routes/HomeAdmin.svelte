@@ -22,14 +22,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Avistamientos</p>
-                                        <h5 class="font-weight-bolder">1253</h5>
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Productos</p>
+                                        <h5 class="font-weight-bolder">34</h5>
                                         <p class="mb-0">Total</p>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-info shadow-success text-center rounded-circle">
-                                        <i class="fas fa-eye text-lg opacity-10" aria-hidden="true"></i>
+                                    <div class="icon icon-shape bg-success shadow-success text-center rounded-circle">
+                                        <span class="material-symbols-outlined simbolo-icon mt-2 pt-1">inventory</span>
                                     </div>
                                 </div>
                             </div>
@@ -42,14 +42,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Avistamientos</p>
-                                        <h5 class="font-weight-bolder">1253</h5>
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Categorías</p>
+                                        <h5 class="font-weight-bolder">5</h5>
                                         <p class="mb-0">Total</p>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-info shadow-success text-center rounded-circle">
-                                        <i class="fas fa-eye text-lg opacity-10" aria-hidden="true"></i>
+                                    <div class="icon icon-shape bg-success shadow-success text-center rounded-circle">
+                                        <span class="material-symbols-outlined simbolo-icon mt-2 pt-1">category</span>
                                     </div>
                                 </div>
                             </div>
@@ -62,14 +62,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Avistamientos</p>
-                                        <h5 class="font-weight-bolder">1253</h5>
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Pedidos</p>
+                                        <h5 class="font-weight-bolder">103</h5>
                                         <p class="mb-0">Total</p>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-info shadow-success text-center rounded-circle">
-                                        <i class="fas fa-eye text-lg opacity-10" aria-hidden="true"></i>
+                                    <div class="icon icon-shape bg-success shadow-success text-center rounded-circle">
+                                        <span class="material-symbols-outlined simbolo-icon mt-2 pt-1">contract</span>
                                     </div>
                                 </div>
                             </div>
@@ -82,14 +82,14 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Avistamientos</p>
-                                        <h5 class="font-weight-bolder">1253</h5>
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Usuarios</p>
+                                        <h5 class="font-weight-bolder">4</h5>
                                         <p class="mb-0">Total</p>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-info shadow-success text-center rounded-circle">
-                                        <i class="fas fa-eye text-lg opacity-10" aria-hidden="true"></i>
+                                    <div class="icon icon-shape bg-success shadow-success text-center rounded-circle">
+                                        <span class="material-symbols-outlined simbolo-icon mt-2 pt-1">group</span>
                                     </div>
                                 </div>
                             </div>

@@ -131,7 +131,7 @@
                                     <button class="btn mx-1 col-auto btn-sm btn-outline-danger" on:click={() => eliminarProducto(values.id)}>Eliminar</button>
                                     <a class="btn col-auto mx-1 btn-sm btn-outline-success" href={`/producto/${values.id}`}>Editar</a>
                                     <a class="btn col-auto mx-1 btn-sm btn-outline-dark" href={`/entrada/${values.id}`}>Entrada →</a>
-                                    <a class="btn col-auto mx-1 btn-sm btn-outline-danger" href={`/Salidas/${values.id}`}>Salidas →</a>
+                                    <a class="btn col-auto mx-1 btn-sm btn-outline-danger" href={`/salida/${values.id}`}>Salida →</a>
                                 </td>
                             </tr>
                             {/each}

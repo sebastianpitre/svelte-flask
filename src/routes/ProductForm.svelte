@@ -17,6 +17,7 @@
   let url_ficha_tecnica = null;
   let unidad_producto = "";
   let cantidad = 1;
+  let max_usuario = 1;
   let precio = 0;
   let is_promocion = false;
   let descuento = 0;
@@ -42,6 +43,7 @@
           url_ficha_tecnica = product.url_ficha_tecnica || null;
           unidad_producto = product.unidad_producto || "";
           cantidad = product.cantidad || 0;
+          max_usuario = product.max_usuario || 0;
           precio = product.precio || 0;
           is_promocion = product.is_promocion || false;
           descuento = product.descuento || 0;
@@ -69,6 +71,7 @@
       url_ficha_tecnica,
       unidad_producto,
       cantidad,
+      max_usuario,
       precio,
       is_promocion,
       descuento,
@@ -250,6 +253,13 @@
             <div class="input-group input-group-static my-2">
               <label for="stock">Stock</label>
               <input type="number" class="form-control" disabled bind:value={stock} required />
+            </div>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <div class="input-group input-group-static my-2">
+              <label for="stock">Límite por usuario</label>
+              <input type="number" class="form-control" bind:value={max_usuario} required />
             </div>
           </div>
 

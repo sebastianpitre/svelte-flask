@@ -82,6 +82,20 @@
         
     }
 
+    // Función para formatear la fecha en español
+    function formatearFecha(fechaISO) {
+        const fecha = new Date(fechaISO);
+        
+        // Formatear la fecha en español
+        const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' };
+        const fechaFormateada = new Intl.DateTimeFormat('es-ES', opcionesFecha).format(fecha);
+        
+        // Obtener la hora por separado
+        const opcionesHora = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const horaFormateada = new Intl.DateTimeFormat('es-ES', opcionesHora).format(fecha);
+
+        return { fechaFormateada, horaFormateada };
+    }
   </script>
 <main>
     {#if pedido}
@@ -104,7 +118,7 @@
           <h3>Detalles del Pedido</h3>
           <p><strong>N° Pedido:</strong> {pedido.id_pedido}</p>
           <p><strong>Estado:</strong> {pedido.estado_pedido}</p>
-          <p><strong>Fecha creación: </strong> "el back no la trae"</p>
+          <p><strong>Fecha creación: </strong>{formatearFecha(pedido.fecha_creacion).fechaFormateada}</p>
 
     
           <h5>Productos</h5>

@@ -159,7 +159,7 @@
 
             <div class="col-12 col-md-8">
                 <div class="input-group input-group-static my-2">
-                  <label for="descripcion">Descripción</label>
+                  <label for="descripcion">Observación</label>
                   <textarea class="form-control" bind:value={descripcion}></textarea>
                 </div>
               </div>

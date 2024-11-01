@@ -46,6 +46,7 @@
     <Route path="/producto/:id" component={ProductForm} />
     <Route path="/ver_producto/:id" component={VerProducto} />
     <Route path="/entrada/:id" component={Entrada} />
+    <Route path="/salida/:id" component={Entrada} />
 
     <Route path="/usuarios" component={Usuarios} />
     <Route path="/usuario/nuevo" component={UsuarioForm} />
