@@ -42,7 +42,7 @@ export async function eliminarProducto(id) {
         });
         
         if (result.isConfirmed) {
-            const response = await fetchWithAuth(`http://localhost:8086/api/admin/productos/${id}`, {
+            const response = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/productos/${id}`, {
                 method: 'DELETE',
             });
 

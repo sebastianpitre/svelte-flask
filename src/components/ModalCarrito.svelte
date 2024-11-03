@@ -85,32 +85,28 @@
             <h5><strong>Total a pagar:</strong> <span class="text-success">${montoTotal}</span> </h5>
           {/if}
         </div>
-        <div class="col-6">
+        <div class="col-12">
           {#if cartItems.length === 0}
             <button class="btn btn-sm btn-danger" on:click={vaciarCarrito} disabled>vaciar carrito</button>
           {:else}
             <button class="btn btn-sm btn-danger" on:click={vaciarCarrito}>vaciar carrito</button>
           {/if}
-        </div>
-        {#if userProfile && userProfile.nombres}
+          {#if userProfile && userProfile.nombres}
           {#if cartItems.length === 0}
-            <div class="col-6">
               <button class="btn btn-sm btn-success" disabled>Confirmar pedido</button>
-            </div>
             {:else}
-            <a use:link href="/pedido" class="col-6">
+            <a use:link href="/pedido" class="">
               <button class="btn btn-sm btn-success">Confirmar pedido</button>
             </a>
           {/if}
           {:else if cartItems.length === 0}
-            <div class="col-6">
-              <button class="btn btn-sm btn-success" disabled on:click={login} on:click={() => isModalOpen.set(false)}>Confirmar pedido</button>
-            </div>
+            <button class="btn btn-sm btn-success" disabled on:click={login} on:click={() => isModalOpen.set(false)}>Confirmar pedido</button>
           {:else}
-            <div class="col-6">
-              <button class="btn btn-sm btn-success" on:click={login} on:click={() => isModalOpen.set(false)}>Confirmar pedido</button>
-            </div>
+            <button class="btn btn-sm btn-success" on:click={login} on:click={() => isModalOpen.set(false)}>Confirmar pedido</button>
         {/if}
+
+        </div>
+        
       </div>
     </div>
   </div>

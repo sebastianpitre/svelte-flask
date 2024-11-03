@@ -39,7 +39,13 @@
         // Calcular el total a pagar sumando los precios multiplicados por las cantidades
         totalAPagar = carrito.reduce((total, item) => {
             const producto = productosEnCarrito.find(p => p.id === item.id);
-            return total + (producto.precio * item.quantity);
+
+            // Definir precio_final en base a la condición
+            const precio_final = producto.is_promocion 
+            ? producto.precio - producto.precio * producto.descuento / 100 
+            : producto.precio;
+
+            return total + (precio_final * item.quantity);
         }, 0);
 
         try {
@@ -141,9 +147,9 @@
                             {#each productosEnCarrito as producto (producto.id)}
                                 <tr>
                                     <td class="text-xs font-weight-bolder border-0 ps-4">{carrito.find(item => item.id === producto.id).quantity}</td>
-                                    <td class="text-xs font-weight-bolder border-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre}</td>
-                                    <td class="text-xs font-weight-bolder border-0 text-end pe-4">$ {producto.precio.toFixed(2)}</td>
-                                    <td class="text-xs font-weight-bolder border-0 text-end pe-4">$ {(producto.precio * carrito.find(item => item.id === producto.id).quantity).toFixed(2)}</td>
+                                    <td class="text-xs font-weight-bolder border-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre} x {producto.cantidad} {producto.unidad_producto}</td>
+                                    <td class="text-xs font-weight-bolder border-0 text-end pe-4">$ {producto.is_promocion ? producto.precio-producto.precio*producto.descuento/100 : producto.precio}</td>
+                                    <td class="text-xs font-weight-bolder border-0 text-end pe-4">$ {producto.is_promocion ? (producto.precio-producto.precio*producto.descuento/100) * carrito.find(item => item.id === producto.id).quantity : producto.precio * carrito.find(item => item.id === producto.id).quantity}</td>
                                 </tr>
                             {/each}
                             <tr class="border-top">

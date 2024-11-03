@@ -37,15 +37,18 @@
 
     // Variable para controlar la visibilidad del div
     let mostrarDiv = true;
+    let sombra = 'card';
 
     // Función para ocultar el div por 3 segundos
     function ocultarDiv() {
         printReceipt()
         mostrarDiv = false; // Oculta el div
+        sombra = '';
         
         // Después de 3 segundos, vuelve a mostrar el div
         setTimeout(() => {
             mostrarDiv = true;
+            sombra = 'card';
         }, 3000); // 3000 ms = 3 segundos
     }
 
@@ -107,7 +110,7 @@
           <button class="btn btn-primary btn-sm mb-3" on:click={ocultarDiv}>Imprimir Recibo</button>
         {/if}
         
-        <div class="ticket card  bg-white  px-5 py-3">
+        <div class="ticket {sombra}  bg-white  px-5 py-3">
           <div class="text-lateral">
             <strong class="border-top text-dark border-bottom border-2" style="border-color: black;">
               Vigilado

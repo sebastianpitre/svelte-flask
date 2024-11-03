@@ -14,13 +14,13 @@
   let nombre = "";
   let descripcion = "";
   let url_imagen = "";
-  let url_ficha_tecnica = null;
+  let url_ficha_tecnica = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcLqnQ1cYNxL6xE6_cEknAlHFXDPQTKnpcHQ&s";
   let unidad_producto = "";
   let cantidad = 1;
   let max_usuario = 1;
   let precio = 0;
   let is_promocion = false;
-  let descuento = 0;
+  let descuento = 10;
   let stock = 0;
   let is_activo = true;
   let id_categorias = 0;
@@ -40,7 +40,7 @@
           nombre = product.nombre || "";
           descripcion = product.descripcion || "";
           url_imagen = product.url_imagen || "";
-          url_ficha_tecnica = product.url_ficha_tecnica || null;
+          url_ficha_tecnica = product.url_ficha_tecnica || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcLqnQ1cYNxL6xE6_cEknAlHFXDPQTKnpcHQ&s";
           unidad_producto = product.unidad_producto || "";
           cantidad = product.cantidad || 0;
           max_usuario = product.max_usuario || 0;
@@ -186,12 +186,12 @@
               </div>
             </div>
   
-            <!-- <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6">
               <div class="input-group input-group-static my-2">
                 <label for="url_ficha_tecnica">URL Ficha Técnica</label>
                 <input type="url" class="form-control" bind:value={url_ficha_tecnica} />
               </div>
-            </div> -->
+            </div>
             
             <div class="col-12 col-md-3">
               <div class="input-group input-group-static my-2">
@@ -239,7 +239,7 @@
               </div>
             </div>
   
-            <div class="col">
+            <div class="col-12 col-md-6">
               <label for="id_categorias" class="form-label">Categoría</label>
               <div class="input-group input-group-outline mb-3 mt-n2">
                   <select class="form-control" bind:value={id_categorias} required>
@@ -321,18 +321,22 @@
           <div class="colored-shadow" style="background-image: url(&quot;{url_imagen}&quot;);"></div>
         </div>
         <div class="px-2 py-0">
-          <p class="text-dark text-center nombre mt-1 mb-0">{nombre.length >= 15 ? nombre.substring(0, 15) + "..." : nombre} 
-            {#if cantidad > 1}x{cantidad}{/if}</p>
+          <p class="text-dark text-center nombre mt-1 mb-0">{nombre.length >= 15 ? nombre.substring(0, 15) + "..." : nombre}</p>
     
           {#if is_promocion === true && is_activo === true} 
             <div class="text-warning text-center border-bottom border-gray mt-1 mb-3 pb-2">
               <del class="text-underline text-start text-dark opacity-9 " style="font-size: 12px;left: 14px;" >$ {precio}</del>
               ${precio-precio*descuento/100}
-              <span class="text-dark text-sm">{unidad_producto}</span>
             </div>
             {:else}
-            <p class="text-success text-center border-bottom border-gray mt-1 mb-3 pb-2">$ {precio} <span class="text-dark text-sm">{unidad_producto}</span></p>
+            <p class="text-success text-center border-bottom border-gray mt-1 mb-3 pb-2">$ {precio}</p>
           {/if}
+
+          <div class="row justify-space-between text-center">
+            <div class="col-12 mt-n3 mb-2">
+              <span class="badge border border-1 text-dark justify-space-between" style="font-size: 10px;">x {cantidad} {unidad_producto}</span>
+            </div>
+          </div>
     
           
           <div class="row text-center mt-2">

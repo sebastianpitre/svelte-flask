@@ -126,7 +126,7 @@
         <div class="row my-2">
           {#each filteredProducts as producto (producto.id)}
           {#if producto.is_activo === true && producto.stock > 0}
-            <div class="{clasesCard} {cantidadProductoEnHistorial(producto.id) === producto.max_usuario && cantidadProductoEnHistorial(producto.id) > 0 ? 'order-last' : ''}">
+            <div class="{clasesCard} {cantidadProductoEnHistorial(producto.id) >= producto.max_usuario && producto.max_usuario > 0 ? 'order-last' : ''}">
               <Card {producto} addToCart={handleAddToCart}/>
             </div>
             {/if}
@@ -145,7 +145,7 @@
           <div class="row my-2">
             {#each filteredProducts as producto (producto.id)}
               {#if producto.id_categorias === categoria.id_categorias && producto.is_activo === true && producto.stock > 0}
-                <div class="{clasesCard} {cantidadProductoEnHistorial(producto.id) >= producto.max_usuario && cantidadProductoEnHistorial(producto.id) > 0 ? 'order-last' : ''}">
+                <div class="{clasesCard} {cantidadProductoEnHistorial(producto.id) >= producto.max_usuario && producto.max_usuario > 0 ? 'order-last' : ''}">
                   <Card {producto} addToCart={handleAddToCart}/>
                 </div>
               {/if}

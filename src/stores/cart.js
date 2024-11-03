@@ -19,7 +19,14 @@ export const productCount = derived(cart, $cart => $cart.length);
 
 // Calcular el monto total de los productos en el carrito
 export const totalAmount = derived(cart, $cart =>
-  $cart.reduce((total, item) => total + item.quantity * item.precio, 0)
+  $cart.reduce((total, item) => {
+    const precio_final = item.is_promocion 
+      ? item.precio - item.precio * item.descuento / 100 
+      : item.precio;
+
+    console.log(`Producto: ${item.nombre}, Cantidad: ${item.quantity}, Precio Final: ${precio_final}`);
+    return total + item.quantity * precio_final;
+  }, 0)
 );
 
 // Función para añadir un producto al carrito

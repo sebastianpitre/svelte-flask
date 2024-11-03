@@ -6,6 +6,13 @@
     cart.subscribe(value => {
       cartItems = value;
     });
+
+    // Función para obtener la cantidad del producto directamente desde localStorage 🌟🌟🌟
+    function cantidadProductoEnHistorial(productoId) {
+        const historial = JSON.parse(localStorage.getItem('historial_pedido')) || {};
+        return historial[productoId] || 0; // Devuelve 0 si el producto no existe en el historial
+    }
+
   </script>
   
   <div class="cart">
@@ -36,32 +43,43 @@
                 <div class="col-12">
                   <div class="row my-auto">
                     <h6 class="text-dark text-center text-xl-start col-12 my-0">{item.nombre}</h6>
-                    <h6 class="text-dark text-center text-xl-start col-12 my-0">Precio: ${item.precio}</h6>
+                    <h6 class="text-dark text-center text-xl-start col-12 my-0">${item.is_promocion ? item.precio-item.precio*item.descuento/100 : item.precio}</h6>
                     <p class="m-0 d-none d-md-block col-12 text-center text-xl-start" style="font-size:12px; min-height: 40px;">{item.descripcion}</p>
                   </div>
                 </div>
                 
-                <p class="text-dark text-bold col-12 text-center col-md-6 text-xl-start pt-3 my-0">Subtotal: ${item.precio*item.quantity}</p>
+                <p class="text-dark text-bold col-12 text-center col-md-6 text-xl-start pt-3 my-0">Subtotal: <span class="text-success">$ {item.is_promocion 
+                ? (item.precio-item.precio*item.descuento/100) * item.quantity : item.precio*item.quantity}</span> </p>
                 
                 <div class="col-12 col-md-6 text-center mt-3 mb-n2">
                   <p class="col mt-n3 my-0" style="font-size: 13px;">
-                    {#if item.quantity < item.cantidad}
-                    Maximo {item.cantidad} 
+                    {#if item.stock > 0}
+                      {#if item.max_usuario === 0}
+                      Sin limite♾️
+                      {:else}
+                        {#if item.quantity < item.max_usuario-cantidadProductoEnHistorial(item.id)}
+                        Límite {item.max_usuario-cantidadProductoEnHistorial(item.id)}/{item.max_usuario} 
+                        {:else}
+                        ¡limite alcanzado!
+                        {/if}
+                      {/if}
+
                     {:else}
-                    ¡limite alcanzado!
+                      Mira otros productos
                     {/if}
                   </p>
+
                   {#if item.quantity <=1}
-                  <button class="btn col btn-sm border btn-danger" on:click={() => decrementQuantity(item.id)}>x</button>
+                    <button class="btn col btn-sm border border-danger   text-danger" on:click={() => decrementQuantity(item.id)}>x</button>
                   {:else}
-                  <button class="btn col btn-sm border text-dark" on:click={() => decrementQuantity(item.id)}>-</button>
-                  
+                    <button class="btn col btn-sm border border-dark" on:click={() => decrementQuantity(item.id)}>-</button>
                   {/if}
                   <span class="col p-1 btn disabled text-dark">{item.quantity}</span>
-                  {#if item.quantity < item.cantidad}
-                  <button class="btn col btn-sm btn-success" on:click={() => incrementQuantity(item.id)}>+</button>
+
+                  {#if item.quantity < item.max_usuario-cantidadProductoEnHistorial(item.id) || item.max_usuario === 0}
+                  <button class="btn col btn-sm border border-success text-success" on:click={() => incrementQuantity(item.id)}>+</button>
                   {:else}
-                  <button class="btn col btn-sm border  text-dark" disabled on:click={() => incrementQuantity(item.id)}>max</button>
+                  <button class="btn col btn-sm border text-dark" disabled on:click={() => incrementQuantity(item.id)}>max</button>
                   
                   {/if}
           

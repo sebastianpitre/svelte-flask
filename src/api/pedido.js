@@ -61,10 +61,16 @@ export async function createPedido() {
 
         const pedidoProductosDto = carrito.map(item => {
             const producto = productosEnCarrito.find(p => p.id === item.id);
+            
+            // Definir precio_final en base a la condición
+            const precio_final = producto.is_promocion 
+            ? producto.precio - producto.precio * producto.descuento / 100 
+            : producto.precio;
+
             return {
                 id: producto.id,
                 cantidad: item.quantity,
-                precio: producto.precio,
+                precio: precio_final,
                 nombre: producto.nombre,
                 cantidad_producto: producto.cantidad
             };

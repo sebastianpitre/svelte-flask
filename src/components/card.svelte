@@ -77,7 +77,7 @@
       <div class="colored-shadow" style="background-image: url(&quot;{producto.url_imagen}&quot;);"></div>
     </div>
     <div class="px-2 py-0">
-      <p class="text-dark text-center nombre mt-1 mb-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre}
+      <p class="text-dark text-center nombre mt-1 mb-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre}</p>
         <div class="row justify-space-between text-center">
           <div class="col-12 mt-n1">
             <span class="badge border border-1 text-dark justify-space-between" style="font-size: 10px;">x {producto.cantidad} {producto.unidad_producto}</span>
