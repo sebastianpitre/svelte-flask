@@ -111,6 +111,22 @@
         const historial = JSON.parse(localStorage.getItem('historial_pedido')) || {};
         return historial[productoId] || 0; // Devuelve 0 si el producto no existe en el historial
     }
+
+    let currentUrl = window.location.href;
+
+    function share() {
+      if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          text: "Te comparto este enlace:",
+          url: currentUrl,
+        })
+        .then(() => console.log("Contenido compartido exitosamente"))
+        .catch((error) => console.error("Error al compartir:", error));
+      } else {
+        alert("La función de compartir no está disponible en este navegador.");
+      }
+    }
 </script>
 
 <main>
@@ -119,15 +135,31 @@
     {#if producto}
     <h4>Detalles del producto</h4>
     <div class="card p-4">
+      <a href={`https://wa.me/?text=${encodeURIComponent("He encontrado este producto en Vitrina web CBC y creo que puede interesarte:\n" + currentUrl + "\n" + producto.nombre)}`}
+        class="material-symbols-outlined simbolo-icon p-2 text-dark bg-white border cursor-pointer"
+        translate="no" target="_blank"
+        style="position: absolute; right: -8px; top: -8px; border-radius: 50px;">
+        share
+      </a>
+
+
       <div class="row">
-        <div class="col-12 col-md-5 mb-4">
+        <div class="col-12 col-md-5 mb-3">
           <img class="w-100 border-radius-2xl" src="{producto.url_imagen}" alt="">
         </div>
         <div class="col">
           <h5>{producto.nombre}</h5>
-          <p><strong></strong> {producto.descripcion}</p>
-          <p><strong>Precio:</strong> ${producto.precio}</p>
-          <div class="row">
+          <p class="mb-2">{producto.descripcion}</p>
+          {#if producto.is_promocion === true && producto.is_activo === true} 
+            <div class="text-warning mb-3 pb-2">
+              <del class="text-underline text-start text-dark opacity-9 " style="font-size: 12px;left: 14px;" >$ {producto.precio}</del>
+              ${producto.precio-producto.precio*producto.descuento/100}
+              <span class="text-dark text-sm">{producto.unidad_producto}</span>
+            </div>
+            {:else}
+            <p class="text-success mt-1 mb-3 pb-2">$ {producto.precio} <span class="text-dark text-sm">{producto.unidad_producto}</span></p>
+          {/if}
+          <!-- <div class="row">
             <div class="col-auto">
               <button class="btn py-0 px-2 btn-sm bg-info text-white" on:click={copiarAlPortapapeles}>Copiar ficha tecnica</button>
             </div>
@@ -138,7 +170,7 @@
                 </div>
               {/if}
             </div>
-          </div>
+          </div> -->
 
           <div class="row mt-2">
             <p class="col-12 mt-n3 my-0" style="font-size: 13px;">
@@ -187,10 +219,10 @@
                   {/if}
     
                   {:else}
-                  {#if !isInCart && cantidadProductoEnHistorial(producto.id) < producto.max_usuario}
-                    <button class="btn col btn-sm bg-info text-white invalid disabled">Agotado</button>
-                    {:else if !isInCart}
+                  {#if cantidadProductoEnHistorial(producto.id) === producto.max_usuario && producto.max_usuario != 0}
                     <button class="btn col btn-sm btn-warning">Comprado</button>
+                    {:else if !isInCart}
+                    <button class="btn col btn-sm bg-info text-white invalid disabled">Agotado</button>
                   {/if}
                 {/if}
     

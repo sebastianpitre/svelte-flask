@@ -77,25 +77,28 @@
       <div class="colored-shadow" style="background-image: url(&quot;{producto.url_imagen}&quot;);"></div>
     </div>
     <div class="px-2 py-0">
-      <p class="text-dark text-center nombre mt-1 mb-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre} 
-        {#if producto.cantidad > 1}x{producto.cantidad}{/if}</p>
+      <p class="text-dark text-center nombre mt-1 mb-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre}
+        <div class="row justify-space-between text-center">
+          <div class="col-12 mt-n1">
+            <span class="badge border border-1 text-dark justify-space-between" style="font-size: 10px;">x {producto.cantidad} {producto.unidad_producto}</span>
+          </div>
+        </div>
 
       {#if producto.is_promocion === true && producto.is_activo === true} 
-        <div class="text-warning text-center border-bottom border-gray mt-1 mb-3 pb-2">
+        <div class="text-warning text-center border-bottom border-gray mb-3">
           <del class="text-underline text-start text-dark opacity-9 " style="font-size: 12px;left: 14px;" >$ {producto.precio}</del>
           ${producto.precio-producto.precio*producto.descuento/100}
-          <span class="text-dark text-sm">{producto.unidad_producto}</span>
         </div>
         {:else}
-        <p class="text-success text-center border-bottom border-gray mt-1 mb-3 pb-2">$ {producto.precio} <span class="text-dark text-sm">{producto.unidad_producto}</span></p>
+        <p class="text-success text-center border-bottom border-gray mb-3">$ {producto.precio}</p>
       {/if}
 
       
-      <div class="row text-center mt-2">
+      <div class="row text-center mt-4">
         <p class="col mt-n3 my-0" style="font-size: 13px;">
           {#if producto.stock > 0}
             {#if producto.max_usuario === 0}
-            Sin limite♾️ 
+            Sin limite♾️
             {:else}
               {#if itemQuantity < producto.max_usuario-cantidadProductoEnHistorial(producto.id)}
               Límite {producto.max_usuario-cantidadProductoEnHistorial(producto.id)}/{producto.max_usuario} 
@@ -138,11 +141,14 @@
               {/if}
 
               {:else}
-              {#if !isInCart && cantidadProductoEnHistorial(producto.id) <= producto.max_usuario}
-                <button class="btn col-12 btn-sm bg-info text-white invalid disabled">Agotado</button>
+              {#if cantidadProductoEnHistorial(producto.id) === producto.max_usuario && producto.max_usuario != 0}
+              <button class="btn col-12 btn-sm btn-warning invalid disabled text-white">Comprado</button>
+
                 {:else if !isInCart}
-                <button class="btn col-12 btn-sm btn-warning invalid disabled text-white">Comprado</button>
+                <button class="btn col-12 btn-sm bg-info text-white invalid disabled">Agotado</button>
+
               {/if}
+              
             {/if}
 
           {/if}

@@ -3,6 +3,8 @@
     import { getProductos } from '../api/productos';
     import Footer from '../components/Footer.svelte';
     import { vaciarCarrito } from '../stores/cart';
+    import { fetchUserProfile } from '../api/user.js';
+    import { user } from '../stores/user.js'; // Store para guardar los datos del usuario
     import Swal from 'sweetalert2';
     import { cart } from '../stores/cart';
     import { onMount } from 'svelte';
@@ -15,6 +17,9 @@
     // Variable para almacenar el total de productos y el total a pagar
     let totalProductos = 0;
     let totalAPagar = 0;
+
+    let errorMessage = ''; // Para manejar errores
+    let userProfile = {};
 
     // onMount se ejecuta cuando el componente se monta
     onMount(async () => {
@@ -36,6 +41,29 @@
             const producto = productosEnCarrito.find(p => p.id === item.id);
             return total + (producto.precio * item.quantity);
         }, 0);
+
+        try {
+            userProfile = await fetchUserProfile();
+            user.set(userProfile); // Guardar los datos en el store
+        } catch (error) {
+            console.error('No se pudo obtener el perfil del usuario:', error);
+        }
+
+        // INICIO DE PROTECCION DE RUTA🛡️
+        // REQUISITOS let userProfile = {}; E IMPORTAR {fetchUserProfile}
+        // Verifica que userProfile esté definido antes de acceder a sus propiedades
+        if (userProfile && userProfile.nombres) {
+            if (userProfile.rol === "ADMIN" || userProfile.rol === "CLIENTE") {
+                console.log("Acceso concedido a pedido"); // si es usuario no redirige 
+            } else {
+                console.log("Redirigiendo a la ruta principal");
+                window.location.href = '/'; // no es usuario redirige a home
+            }
+        } else {
+            console.log("Perfil de usuario no disponible");
+            window.location.href = '/'; // Redirigir si no hay perfil
+        }
+        // FIN DE PROTECCION DE RUTA🛡️
         
     });
 

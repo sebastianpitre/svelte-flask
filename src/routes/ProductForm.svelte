@@ -141,150 +141,227 @@
 <style>
 
 </style>
-<main class="row m-0">
-  <div class="col-12 col-md-8 mx-auto pt-3 mb-4 mb-md-0">
-    <form on:submit={handleSubmit}>
-      <div class="card p-3">
-        
-        <h3 class="text-center">{id ? "Editar Producto" : "Guardar Producto"}</h3>
-        
-        <div class="row mx-auto pt-3">
-          <div class="col-auto">
-            <div class="text-center  border p-2 border-radius-2xl">
-              <span class="">Activo? {is_activo === true ? 'Si': 'No' }</span>
-              <div class="form-check form-switch ms-4 mb-3">
-                <input type="checkbox" class="form-check-input" bind:checked={is_activo} />
-              </div>
-            </div>
-          </div>
-          <div class="col-7 col-md-4 {id ? 'd-none' : ''}">
-            <div class="input-group input-group-static my-2">
-              <label for="sku">SKU</label>
-              <input type="text" class="form-control" bind:value={sku} required={!id} />
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 {id ? "col-md-10" : ""}">
-            <div class="input-group input-group-static my-2">
-              <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" bind:value={nombre} required />
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="descripcion">Descripción</label>
-              <textarea class="form-control" bind:value={descripcion} required></textarea>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="url_imagen">URL Imagen</label>
-              <input type="url" class="form-control" bind:value={url_imagen} required />
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="url_ficha_tecnica">URL Ficha Técnica</label>
-              <input type="url" class="form-control" bind:value={url_ficha_tecnica} />
-            </div>
-          </div>
+<main class="container ">
+  <div class="row mx-auto">
+    <div class="col-12 col-md-9 {is_activo ? '' : 'mx-auto'} pt-3 mb-4 mb-md-0">
+      <form on:submit={handleSubmit}>
+        <div class="card p-3">
           
-          <div class="col-12 col-md-3">
-            <div class="input-group input-group-static my-2">
-              <label for="cantidad">Cantidad de unidad</label>
-              <input type="number" class="form-control" bind:value={cantidad} required />
-            </div>
-          </div>
-
-          <div class="col-12 col-md-3">
-            <label for="unidad_producto" class="form-label">Unidad de medida</label>
-            <div class="input-group input-group-outline mb-3 mt-n1">
-                <select class="form-control" bind:value={unidad_producto} required>
-                    <option value="" selected>Seleccionar</option>
-                    <option value="KG" >Kilogramo</option>
-                    <option value="GR" >Gramo</option>
-                    <option value="L" >Litro</option>
-                    <option value="ML" >Mililitro</option>
-                    <option value="UD" >Unidad</option>
-                    
-                    <!-- Agrega más opciones según sea necesario -->
-                </select>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-3">
-            <div class="input-group input-group-static my-2">
-              <label for="precio">Precio</label>
-              <input type="number" class="form-control" bind:value={precio} required />
-            </div>
-          </div>
-
-          <div class="col-auto">
-            <div class="border-radius-2xl border p-2">
-              <span>Decuento?</span>
-              <div class="form-check form-switch"><span>{is_promocion === true ? 'Si': 'No' }</span> 
-                <input type="checkbox" class="form-check-input" bind:checked={is_promocion} />
+          <h3 class="text-center">{id ? "Editar Producto" : "Guardar Producto"}</h3>
+          
+          <div class="row mx-auto pt-3">
+            <div class="col-auto">
+              <div class="text-center  border p-2 border-radius-2xl">
+                <span class="">Activo? {is_activo === true ? 'Si': 'No' }</span>
+                <div class="form-check form-switch ms-4 mb-3">
+                  <input type="checkbox" class="form-check-input" bind:checked={is_activo} />
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="col-6 col-md-2 {is_promocion === false ? 'd-none': '' }">
-            <div class="input-group input-group-static my-2">
-              <label for="descuento">% Descuento</label>
-              <input type="number" placeholder="cuanto es el % ?" class="form-control" bind:value={descuento} />
+            <div class="col-7 col-md-4 {id ? 'd-none' : ''}">
+              <div class="input-group input-group-static my-2">
+                <label for="sku">SKU</label>
+                <input type="text" class="form-control" bind:value={sku} required={!id} />
+              </div>
             </div>
-          </div>
-
-          <div class="col">
-            <label for="id_categorias" class="form-label">Categoría</label>
-            <div class="input-group input-group-outline mb-3 mt-n2">
-                <select class="form-control" bind:value={id_categorias} required>
-                  {#each categorias as item}
-                  <option value={item.id_categorias}>{item.nombre}</option>
-                  {/each}
-                </select>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-3 d-none">
-            <div class="input-group input-group-static my-2">
-              <label for="stock">Stock</label>
-              <input type="number" class="form-control" disabled bind:value={stock} required />
-            </div>
-          </div>
-
-          <div class="col-12 col-md-3">
-            <div class="input-group input-group-static my-2">
-              <label for="stock">Límite por usuario</label>
-              <input type="number" class="form-control" bind:value={max_usuario} required />
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-md-6">
-              <div>
-                <label for="fecha_inicio_descuento" class="form-label ms-n1 ps-1">Inicio Descuento</label>
-                <input type="date" class="form-control" bind:value={fecha_inicio_descuento} />
+  
+            <div class="col-12 col-md-6 {id ? "col-md-10" : ""}">
+              <div class="input-group input-group-static my-2">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" bind:value={nombre} required />
               </div>
             </div>
   
             <div class="col-12 col-md-6">
-              <div>
-                <label for="fecha_fin_descuento" class="form-label">Fin Descuento</label>
-                <input type="date" class="form-control" bind:value={fecha_fin_descuento} />
+              <div class="input-group input-group-static my-2">
+                <label for="descripcion">Descripción</label>
+                <textarea class="form-control" bind:value={descripcion} required></textarea>
               </div>
             </div>
-          </div>
-
-          <div class="col-12 text-center mt-4">
-            <a href="/productos" class="btn btn-danger">cancelar</a>
-            <button type="submit" class="btn btn-success">{id ? "Actualizar Producto" : "Guardar Producto"}</button>
+  
+            <div class="col-12 col-md-6">
+              <div class="input-group input-group-static my-2">
+                <label for="url_imagen">URL Imagen</label>
+                <input type="url" class="form-control" bind:value={url_imagen} required />
+              </div>
+            </div>
+  
+            <!-- <div class="col-12 col-md-6">
+              <div class="input-group input-group-static my-2">
+                <label for="url_ficha_tecnica">URL Ficha Técnica</label>
+                <input type="url" class="form-control" bind:value={url_ficha_tecnica} />
+              </div>
+            </div> -->
+            
+            <div class="col-12 col-md-3">
+              <div class="input-group input-group-static my-2">
+                <label for="cantidad">Cantidad de unidad</label>
+                <input type="number" class="form-control" bind:value={cantidad} required />
+              </div>
+            </div>
+  
+            <div class="col-12 col-md-3">
+              <label for="unidad_producto" class="form-label">Unidad de medida</label>
+              <div class="input-group input-group-outline mb-3 mt-n1">
+                  <select class="form-control" bind:value={unidad_producto} required>
+                      <option value="" selected>Seleccionar</option>
+                      <option value="KG" >Kilogramo</option>
+                      <option value="GR" >Gramo</option>
+                      <option value="L" >Litro</option>
+                      <option value="ML" >Mililitro</option>
+                      <option value="UND" >Unidad</option>
+                      
+                      <!-- Agrega más opciones según sea necesario -->
+                  </select>
+              </div>
+            </div>
+  
+            <div class="col-12 col-md-3">
+              <div class="input-group input-group-static my-2">
+                <label for="precio">Precio</label>
+                <input type="number" class="form-control" bind:value={precio} required />
+              </div>
+            </div>
+  
+            <div class="col-auto">
+              <div class="border-radius-2xl border p-2">
+                <span>Decuento?</span>
+                <div class="form-check form-switch"><span>{is_promocion === true ? 'Si': 'No' }</span> 
+                  <input type="checkbox" class="form-check-input" bind:checked={is_promocion} />
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-6 col-md-2 {is_promocion === false ? 'd-none': '' }">
+              <div class="input-group input-group-static my-2">
+                <label for="descuento">% Descuento</label>
+                <input type="number" placeholder="cuanto es el % ?" class="form-control" bind:value={descuento} />
+              </div>
+            </div>
+  
+            <div class="col">
+              <label for="id_categorias" class="form-label">Categoría</label>
+              <div class="input-group input-group-outline mb-3 mt-n2">
+                  <select class="form-control" bind:value={id_categorias} required>
+                    {#each categorias as item}
+                    <option value={item.id_categorias}>{item.nombre}</option>
+                    {/each}
+                  </select>
+              </div>
+            </div>
+  
+            <div class="col-12 col-md-3 d-none">
+              <div class="input-group input-group-static my-2">
+                <label for="stock">Stock</label>
+                <input type="number" class="form-control" disabled bind:value={stock} required />
+              </div>
+            </div>
+  
+            <div class="col-12 col-md-3">
+              <div class="input-group input-group-static my-2">
+                <label for="stock">Límite por usuario</label>
+                <input type="number" class="form-control" bind:value={max_usuario} required />
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <div>
+                  <label for="fecha_inicio_descuento" class="form-label ms-n1 ps-1">Inicio Descuento</label>
+                  <input type="date" class="form-control" bind:value={fecha_inicio_descuento} />
+                </div>
+              </div>
+    
+              <div class="col-12 col-md-6">
+                <div>
+                  <label for="fecha_fin_descuento" class="form-label">Fin Descuento</label>
+                  <input type="date" class="form-control" bind:value={fecha_fin_descuento} />
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-12 text-center mt-4">
+              <a href="/productos" class="btn btn-danger">cancelar</a>
+              <button type="submit" class="btn btn-success">{id ? "Actualizar Producto" : "Guardar Producto"}</button>
+            </div>
           </div>
         </div>
+      </form>
+    </div>
+    <div class="col-md-3 {is_activo ? '' : 'd-none'}  pt-3">
+      <div class="card bg-gray {is_activo ? '' : 'bg-gray-200 '} position-relative">
+    
+        {#if is_promocion === true && is_activo === true}
+            <span class="bg-success opacity-9 col-6 col-sm-4 text-white text-center position-absolute" style="z-index: 3; border-radius: 10px 0px 20px 0px;">
+              - {Math.trunc(descuento)}%
+            </span>
+        {/if}
+    
+        {#if stock === 0 && is_activo === true}
+            <span class="bg-gray-600 col-7 col-sm-6 text-white text-center position-absolute" style="z-index: 3; border-radius: 10px 0px 20px 0px;">
+            Agotado
+            </span>
+        {/if}
+    
+        
+        <div class="card-header p-0 position-relative z-index-2" style="border-radius: 0.75rem 0.75rem 0px 0px">
+          <div class="d-block blur-shadow-image cursor-pointer img-marco" >
+            <a href="{`/ver_producto/${id}`}">
+              <img src="{url_imagen ? url_imagen : '../public/img/sin-productos.webp'}" width="100%" height="170vh" alt="producto" class="border-bottom img-size {is_promocion ? 'img-oferta' : 'img'} {is_activo ? '' : 'img-no-activo'}" style="border-radius: 0.75rem 0.75rem 0px 0px">
+            </a>
+            
+          </div>
+          <!-- {#if is_promocion === true && is_activo === true}
+            <div class="blur opacity-9 col-8 col-sm-6 text-dark text-center position-absolute" style="z-index: 3; border-radius: 7px 0px 0px 0px; bottom: 1px; right: 1px; height: 20px; font-size: 15px;">
+              <span class="material-symbols-outlined" style="font-size: 15px;">schedule</span> 2 dias 13h
+            </div>
+          {/if} -->
+          
+    
+          <div class="colored-shadow" style="background-image: url(&quot;{url_imagen}&quot;);"></div>
+        </div>
+        <div class="px-2 py-0">
+          <p class="text-dark text-center nombre mt-1 mb-0">{nombre.length >= 15 ? nombre.substring(0, 15) + "..." : nombre} 
+            {#if cantidad > 1}x{cantidad}{/if}</p>
+    
+          {#if is_promocion === true && is_activo === true} 
+            <div class="text-warning text-center border-bottom border-gray mt-1 mb-3 pb-2">
+              <del class="text-underline text-start text-dark opacity-9 " style="font-size: 12px;left: 14px;" >$ {precio}</del>
+              ${precio-precio*descuento/100}
+              <span class="text-dark text-sm">{unidad_producto}</span>
+            </div>
+            {:else}
+            <p class="text-success text-center border-bottom border-gray mt-1 mb-3 pb-2">$ {precio} <span class="text-dark text-sm">{unidad_producto}</span></p>
+          {/if}
+    
+          
+          <div class="row text-center mt-2">
+            <p class="col mt-n3 my-0" style="font-size: 13px;">
+              {#if stock > 0}
+                {#if max_usuario === 0}
+                Sin limite♾️ 
+                {:else}
+                  Límite {max_usuario}/{max_usuario} 
+                {/if}
+    
+              {:else}
+                Stock en 0
+              {/if}
+            </p>
+            <div class="col-md-10 col-12 mx-auto">
+
+              {#if is_activo === true && stock > 0}
+              <button class="btn col-12 btn-sm btn-success">Agregar</button>
+              {:else}
+              <button class="btn col-12 btn-sm bg-info text-white invalid disabled">Agotado</button>
+              {/if}
+
+            </div>
+          </div>
+        </div>
+        
       </div>
-    </form>
+    </div>
   </div>
+  
 </main>
