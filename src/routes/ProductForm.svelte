@@ -322,7 +322,11 @@
         </div>
         <div class="px-2 py-0">
           <p class="text-dark text-center nombre mt-1 mb-0">{nombre.length >= 15 ? nombre.substring(0, 15) + "..." : nombre}</p>
-    
+          <div class="row justify-space-between text-center">
+            <div class="col-12 mt-n1 mb-n1">
+              <span class="badge border border-1 text-dark justify-space-between" style="font-size: 10px;">x {cantidad} {unidad_producto}</span>
+            </div>
+          </div>
           {#if is_promocion === true && is_activo === true} 
             <div class="text-warning text-center border-bottom border-gray mt-1 mb-3 pb-2">
               <del class="text-underline text-start text-dark opacity-9 " style="font-size: 12px;left: 14px;" >$ {precio}</del>
@@ -332,11 +336,7 @@
             <p class="text-success text-center border-bottom border-gray mt-1 mb-3 pb-2">$ {precio}</p>
           {/if}
 
-          <div class="row justify-space-between text-center">
-            <div class="col-12 mt-n3 mb-2">
-              <span class="badge border border-1 text-dark justify-space-between" style="font-size: 10px;">x {cantidad} {unidad_producto}</span>
-            </div>
-          </div>
+          
     
           
           <div class="row text-center mt-2">

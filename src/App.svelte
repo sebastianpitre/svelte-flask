@@ -23,6 +23,7 @@
     import Ofertas from "./routes/Ofertas.svelte";
     import HomeAdmin from "./routes/HomeAdmin.svelte";
     import Entrada from "./routes/Entrada.svelte";
+    import Salidas from "./routes/Salidas.svelte";
 </script>
 
 <main>
@@ -46,7 +47,9 @@
     <Route path="/producto/:id" component={ProductForm} />
     <Route path="/ver_producto/:id" component={VerProducto} />
     <Route path="/entrada/:id" component={Entrada} />
-    <Route path="/salida/:id" component={Entrada} />
+    <Route path="/entrada/:id" component={Entrada} />
+    <Route path="/salida" component={Salidas} />
+    <Route path="/salida/:id" component={Salidas} />
 
     <Route path="/usuarios" component={Usuarios} />
     <Route path="/usuario/nuevo" component={UsuarioForm} />
