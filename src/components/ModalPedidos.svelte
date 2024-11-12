@@ -3,6 +3,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { fetchWithAuth } from '../api/auth'; // Verifica que la ruta sea correcta
   import { getProductos } from '../api/productos';
+  import Swal from 'sweetalert2';
 
   let productosx = []; // Lista de todos los productos disponibles
   let pedido = null;
@@ -28,53 +29,50 @@
   }
 
   async function fetchPedido() {
-  if (id) {
-    try {
-      const data = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/pedidos/${id}`);
-      console.log('Datos recibidos:', data);
+    if (id) {
+      try {
+        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/pedidos/${id}`);
+        console.log('Datos recibidos:', data);
 
-      // Verifica si la respuesta tiene la estructura que esperas
-      if (data) {
-        pedido = data; // Asigna el pedido directamente
-        console.log('Pedido obtenido:', pedido);
-      } else {
-        throw new Error('La respuesta no contiene datos válidos');
+        // Verifica si la respuesta tiene la estructura que esperas
+        if (data) {
+          pedido = data; // Asigna el pedido directamente
+          console.log('Pedido obtenido:', pedido);
+        } else {
+          throw new Error('La respuesta no contiene datos válidos');
+        }
+      } catch (error) {
+        console.error('Error al obtener el pedido:', error);
+        Swal.fire('Error', 'No se pudo obtener el pedido.', 'error');
+        errorMessage = 'No se pudo obtener el pedido.';
       }
-    } catch (error) {
-      console.error('Error al obtener el pedido:', error);
-      alert('Error al cambiar el estado');
-      errorMessage = 'No se pudo obtener el pedido.';
     }
   }
-}
 
-
-async function cambiarEstado(nuevoEstado) {
+  async function cambiarEstado(nuevoEstado) {
   try {
-    // Asegúrate de enviar el objeto con la estructura correcta
-    const response = await fetchWithAuth(`http://127.0.0.1:5000/api/usuarios/pedidos/${pedido.id_pedido}`, {
+    const response = await fetchWithAuth(`http://127.0.0.1:5000/api/usuarios/pedidos/${pedido?.id_pedido}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json' // Asegura que el contenido sea JSON
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        estado_pedido: nuevoEstado  // Asegúrate de que esto coincida con lo que espera el backend
+        estado_pedido: nuevoEstado
       })
     });
 
-    if (response.status === 200 || response.ok) {
-      console.log('Estado cambiado exitosamente a:', nuevoEstado);
-      pedido.estado_pedido = nuevoEstado; // Actualiza el estado en el frontend
-      alert(`El estado se cambió a ${nuevoEstado} correctamente.`);
-    } else {
-      throw new Error(`Error en el servidor: ${response.status}`);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Error en el servidor: ${errorData.message || response.statusText}`);
     }
+
+    pedido.estado_pedido = nuevoEstado;
+    Swal.fire('Éxito', `El estado se cambió a ${nuevoEstado} correctamente.`, 'success');
   } catch (error) {
     console.error('Error al cambiar el estado:', error);
-    alert('Error al cambiar el estado. Verifica la conexión o el servidor.');
+    Swal.fire('Error', error.message, 'error');
   }
 }
-
 
   // Función auxiliar para obtener el nombre del producto por su ID
   function obtenerNombreProducto(idProducto) {
@@ -84,9 +82,10 @@ async function cambiarEstado(nuevoEstado) {
 
   // Llama a las funciones al montar el componente
   onMount(async () => {
-      await fetchProductos(); // Primero carga los productos disponibles
-      await fetchPedido(); // Luego carga el pedido
+    await fetchProductos(); // Primero carga los productos disponibles
+    await fetchPedido(); // Luego carga el pedido
   });
+
   // Limpia la suscripción al desmontar el componente
   onDestroy(() => {
     unsubscribe();

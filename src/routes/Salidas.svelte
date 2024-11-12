@@ -110,9 +110,9 @@
         </div>
 
         <div class="col-12 col-md-6">
-          <label for="unidad_producto" class="form-label">Estado de la salida</label>
+          <label for="salidas_estado" class="form-label">Estado de la salida</label>
           <div class="input-group input-group-outline mb-3 mt-n1">
-              <select class="form-control" bind:value={unidad_producto} required>
+              <select class="form-control" bind:value={salidas_estado} required>
                   <option value="" selected>Seleccionar</option>
                   <option value="DESCOMPUESTO" >DESCOMPUESTO</option>
                   <option value="ROBO" >ROBO</option>

@@ -52,41 +52,38 @@
     };
 
     try {
-      // Hacer el POST para crear una nueva entrada
-      const response = await fetchWithAuth("http://127.0.0.1:5000/api/admin/entradas", {
-        method: "POST",
-        body: JSON.stringify(formData),
-      });
-      
-      const data = await response.json();
+    // Llama a fetchWithAuth y obtiene los datos como JSON si están disponibles
+    const data = await fetchWithAuth("http://127.0.0.1:5000/api/admin/entradas", {
+      method: "POST",
+      body: JSON.stringify(formData),
+    });
 
-      if (response.ok) {
-        // Mostrar mensaje de éxito
-        Swal.fire({
-          icon: "success",
-          title: "Éxito",
-          text: "Entrada creada correctamente",
-          showConfirmButton: false,
-          timer: 1500,
-        }).then(() => {
-          window.location.href = "/productos"; // Redirigir a la lista de productos
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: data.message || "Hubo un problema al crear la entrada",
-        });
-      }
-    } catch (error) {
-      // Mostrar mensaje de error en caso de fallo
+    // Si `data` es null, significa que la respuesta estaba vacía
+    if (data) {
+      Swal.fire({
+        icon: "success",
+        title: "Éxito",
+        text: "Entrada creada correctamente",
+        showConfirmButton: false,
+        timer: 1500,
+      }).then(() => {
+        window.location.href = "/productos";
+      });
+    } else {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Error al conectar con el servidor",
+        text: "Respuesta inesperada del servidor",
       });
-      console.error("Error:", error);
     }
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Error al conectar con el servidor",
+    });
+    console.error("Error:", error);
+  }
   };
 </script>
 
