@@ -13,6 +13,16 @@ export async function getPedidosAdmin() {
     }
 }
 
+export async function getPedidosMod() {
+    try {
+        const pedidos = await fetchWithAuth('http://127.0.0.1:5000/api/mod/pedidos');
+        return pedidos;
+    } catch (error) {
+        console.error('Error fetching pedidos:', error);
+        throw error;
+    }
+}
+
 export async function getMisPedidos() {
     try {
         const pedidos = await fetchWithAuth('http://127.0.0.1:5000/api/usuarios/pedidos');

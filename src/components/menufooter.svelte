@@ -82,6 +82,23 @@
                                 </div>
                                 
                             </a>
+                            {:else if userProfile.rol === "MOD"}
+                            <a class="col p-1 text-center" href="/cuenta" on:click={() => updatePath('/cuenta')}>
+                                <div class=" mx-auto card-menu {linkSelect('/cuenta')}" style="width: 60px;">
+                                    <span class="material-symbols-outlined {isActive('/cuenta')}" style="border-radius: 50%; font-size: 28px;">person</span>
+                                    <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Cuenta</p>
+                                    <span class="{selector('/cuenta')}"></span>
+                                </div>
+                                
+                            </a>
+                            <a class="col p-1 text-center" href="/consultar_pedidos" on:click={() => updatePath('/consultar_pedidos')}>
+                                <div class=" mx-auto card-menu {linkSelect('/consultar_pedidos')}" style="width: 60px;">
+                                    <span class="material-symbols-outlined {isActive('/consultar_pedidos')}" style="border-radius: 50%; font-size: 28px;">contract</span>
+                                    <p class="m-0 mt-n3 pt-1 text-white" style="font-size: 12px;">Moderador</p>
+                                    <span class="{selector('/consultar_pedidos')}"></span>
+                                </div>
+                                
+                            </a>
                         {/if}
                     {:else}
                 

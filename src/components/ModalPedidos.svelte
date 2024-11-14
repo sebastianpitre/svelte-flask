@@ -31,7 +31,7 @@
   async function fetchPedido() {
     if (id) {
       try {
-        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/pedidos/${id}`);
+        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/mod/pedidos/${id}`);
         console.log('Datos recibidos:', data);
 
         // Verifica si la respuesta tiene la estructura que esperas

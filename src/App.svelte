@@ -16,20 +16,21 @@
   import Verpedido from "./routes/verpedido.svelte";
   import VerProducto from "./routes/VerProducto.svelte";
   import MisPedidos from "./routes/MisPedidos.svelte";
-  import Example from "./routes/example.svelte";
-    import Soporte from "./routes/Soporte.svelte";
-    import Ajustes from "./routes/Ajustes.svelte";
-    import BannerForm from "./routes/BannerForm.svelte";
-    import Ofertas from "./routes/Ofertas.svelte";
-    import HomeAdmin from "./routes/HomeAdmin.svelte";
-    import Entrada from "./routes/Entrada.svelte";
-    import Salidas from "./routes/Salidas.svelte";
+  import Soporte from "./routes/Soporte.svelte";
+  import Ajustes from "./routes/Ajustes.svelte";
+  import BannerForm from "./routes/BannerForm.svelte";
+  import Ofertas from "./routes/Ofertas.svelte";
+  import HomeAdmin from "./routes/HomeAdmin.svelte";
+  import Entrada from "./routes/Entrada.svelte";
+  import Salidas from "./routes/Salidas.svelte";
+  import ConsultarPedidos from "./routes/ConsultarPedidos.svelte";
 </script>
 
 <main>
   <Router>
     <Route path="/" component={Home} exact />
     <Route path="/administrador" component={HomeAdmin}/>
+    <Route path="/consultar_pedidos" component={ConsultarPedidos}/>
 
     <Route path="/login" component={Login} />
     <Route path="/registro" component={Registro} />
@@ -47,7 +48,6 @@
     <Route path="/producto/:id" component={ProductForm} />
     <Route path="/ver_producto/:id" component={VerProducto} />
     <Route path="/entrada/:id" component={Entrada} />
-    <Route path="/entrada/:id" component={Entrada} />
     <Route path="/salida" component={Salidas} />
     <Route path="/salida/:id" component={Salidas} />
 
@@ -63,7 +63,5 @@
     <Route path="/ajustes" component={Ajustes} />
     <Route path="/nuevo_banner" component={BannerForm} />
     <Route path="/ajustes/:id" component={BannerForm} />
-
-    <Route path="/example" component={Example} />
   </Router>
 </main>

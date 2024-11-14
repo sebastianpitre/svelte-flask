@@ -156,6 +156,36 @@
                 </div>
               </div>
             </div>
+            {:else if userProfile.rol === "MOD"}
+            <div class="mb-0">
+              <div class="nav-item dropdown  ms-2">
+                <a role="button" class=" btn btn-sm btn-blue mb-0" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img class="icon opacity-9 mt-n1" src="/img/icon/admin.svg" alt="icon" width="20px">
+                  {userProfile.nombres.split(' ').slice(0, 1).join(' ')}
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animation mt-0  p-3 border-radius-lg" aria-labelledby="dropdownMenuDocs">
+                    <ul class="list-group">
+
+                      <li class="nav-item list-group-item border-0 p-0">
+                        <a class="dropdown-item py-2 ps-3 border-radius-md" use:link href="/cuenta">
+                          <h6 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">Cuenta</h6>
+                        </a>
+                      </li>
+                      
+                      <li class="nav-item list-group-item border-0 p-0">
+                        <a class="dropdown-item py-2 ps-3 border-radius-md" use:link href="/consultar_pedidos">
+                          <h6 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">Control de pedidos</h6>
+                        </a>
+                      </li>
+                      <li class="nav-item list-group-item border-0 p-0">
+                        <button class="dropdown-item py-2 ps-3 border-radius-md bg-danger" on:click={handleLogout}>
+                          <h6 class="dropdown-header text-white font-weight-bolder d-flex justify-content-cente align-items-center p-0">cerrar sesion</h6>
+                        </button>
+                      </li>
+                    </ul>
+                </div>
+              </div>
+            </div>
             {:else}
 
               <div class="nav-item dropdown dropdown-hover ms-2">
