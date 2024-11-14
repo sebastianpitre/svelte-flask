@@ -1,9 +1,10 @@
 <script>
-  import { isModalOpenPedidos, idStore } from "../stores/modalStore.js";
+  import { isModalOpenPedidosMod, idStore } from "../stores/modalStore.js";
   import { onMount, onDestroy } from 'svelte';
-  import { fetchWithAuth } from '../api/auth'; // Verifica que la ruta sea correcta
-  import { getProductos } from '../api/productos';
+  import { fetchWithAuth } from '../api/auth.js'; // Verifica que la ruta sea correcta
+  import { getProductos } from '../api/productos.js';
   import Swal from 'sweetalert2';
+  import ProteccionMod from "./ProteccionMod.svelte";
 
   let productosx = []; // Lista de todos los productos disponibles
   let pedido = null;
@@ -31,7 +32,7 @@
   async function fetchPedido() {
     if (id) {
       try {
-        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/pedidos/${id}`);
+        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/mod/pedidos/${id}`);
         console.log('Datos recibidos:', data);
 
         // Verifica si la respuesta tiene la estructura que esperas
@@ -93,7 +94,7 @@
 
   function handleClickOutside(event) {
     if (event.target.classList.contains("modal")) {
-      isModalOpenPedidos.set(false); // Cierra el modal
+      isModalOpenPedidosMod.set(false); // Cierra el modal
     }
   }
 </script>
@@ -101,10 +102,11 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-<div class="modal" class:open={$isModalOpenPedidos} on:click={handleClickOutside} role="dialog" aria-modal="true">
+<div class="modal" class:open={$isModalOpenPedidosMod} on:click={handleClickOutside} role="dialog" aria-modal="true">
+  <ProteccionMod/>
   <div class="modal-content">
     <div class="col mt-n4 text-end">
-      <span class="close" on:click={() => isModalOpenPedidos.set(false)}>&times;</span>
+      <span class="close" on:click={() => isModalOpenPedidosMod.set(false)}>&times;</span>
     </div>
 
     {#if pedido}
@@ -135,19 +137,7 @@
 
           </div>
 
-          <!-- Botones para cambiar el estado del pedido -->
-          <div class="col-6">
-            <h4 class="">Cambiar Estado del Pedido</h4>
-            <!-- <button on:click={() => cambiarEstado('APROBADO')} class="btn btn-success">Aprobar</button> -->
-             {#if pedido.estado_pedido === "PENDIENTE"}
-              <button on:click={() => cambiarEstado('CANCELADO')} class="btn btn-danger">Cancelar</button>
-              <button on:click={() => cambiarEstado('ENTREGADO')} class="btn btn-success">Entregar</button>
-              {:else if pedido.estado_pedido === "ENTREGADO"}
-              <button on:click={() => cambiarEstado('DEVUELTO')} class="btn btn-warning">Devolver</button>
-              {:else}
-              <button class="btn btn-warning" disabled>Devuelto</button>
-             {/if}
-          </div>
+
 
         </div>
 
@@ -193,7 +183,7 @@
   .modal {
     display: none;
     position: fixed;
-    z-index: 999;
+    z-index: 9999;
     padding-top: 50px;
     left: 0;
     top: 0;

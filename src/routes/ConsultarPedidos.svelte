@@ -21,15 +21,15 @@
     });
 
     // modal carrito
-    import ModalPedidos from '../components/ModalPedidos.svelte';
-    import { idStore, isModalOpenPedidos } from '../stores/modalStore';
+    import { idStore, isModalOpenPedidosMod } from '../stores/modalStore';
     import { right } from '@popperjs/core';
     import Nav from '../components/nav.svelte';
     import Menufooter from '../components/menufooter.svelte';
+    import ModalPedidosMod from '../components/ModalPedidosMod.svelte';
 
     function openModal(id) {
         idStore.set(id); // Asigna el ID al store
-        isModalOpenPedidos.set(true); // Abre el modal
+        isModalOpenPedidosMod.set(true); // Abre el modal
     }
 
     // Inicializar DataTable después de cargar los pedidos
@@ -76,7 +76,7 @@
 
 <main>
 
-    <ModalPedidos/>
+    <ModalPedidosMod/>
 
         <div class="row m-0" style="min-height: 83vh;">
 

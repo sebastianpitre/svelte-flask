@@ -111,7 +111,7 @@
       position: fixed; /* Fijo en la página */
       top: 0;
       left: 0;
-      z-index: 1060;
+      z-index: 998;
       
   }
 

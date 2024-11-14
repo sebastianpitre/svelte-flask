@@ -3,6 +3,7 @@
   import Swal from "sweetalert2";
   import { fetchWithAuth } from '../api/auth';
   import { getCategorias } from '../api/categorias';
+    import ProteccionAdmi from "../components/ProteccionAdmi.svelte";
 
   export let id; // Si existe, es edición. Si no, es creación.
 
@@ -141,7 +142,9 @@
 <style>
 
 </style>
-<main class="container ">
+<main class="container">
+
+  <ProteccionAdmi/>
   <div class="row mx-auto">
     <div class="col-12 col-md-9 {is_activo ? '' : 'mx-auto'} pt-3 mb-4 mb-md-0">
       <form on:submit={handleSubmit}>
