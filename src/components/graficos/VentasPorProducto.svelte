@@ -26,7 +26,7 @@
   
     let labels = []; // Fechas
     let data = []; // Montos vendidos
-    let limite = 10; // Número de resultados
+    let limite = 6; // Número de resultados
     let fechaInicio = ""; // Fecha de inicio
     let fechaFin = ""; // Fecha de fin
     let errorMessage = ""; // Mensaje de error
@@ -154,18 +154,29 @@
   {#if errorMessage}
     <p class="error">{errorMessage}</p>
   {:else}
-    <div>
-      <label for="limite">Selecciona el número de productos:</label>
-      <input type="number" id="limite" bind:value={limite} min="1" />
+    <div class="row  mb-n3">
+      <div class="col-12 col-md-4">
+        <div class="input-group input-group-static my-2">
+          <label for="limite">Número de productos</label>
+          <input type="number" class="form-control p-2" id="limite" bind:value={limite} min="1" />
+        </div>
+      </div>
+      
+      <div class="col-12 col-md-4">
+        <label for="fechaInicio" class="form-label">Fecha de inicio</label>
+        <input type="date" class="form-control border p-2" id="fechaInicio" bind:value={fechaInicio} />
+      </div>
+
   
-      <label for="fechaInicio">Fecha de inicio:</label>
-      <input type="date" id="fechaInicio" bind:value={fechaInicio} />
+      <div class="col-12 col-md-4">
+        <label for="fechaFin" class="form-label">Fecha de fin</label>
+        <input type="date" class="form-control border p-2" id="fechaFin" bind:value={fechaFin} />
+      </div>
+      
   
-      <label for="fechaFin">Fecha de fin:</label>
-      <input type="date" id="fechaFin" bind:value={fechaFin} />
-  
-      <canvas bind:this={canvas}></canvas>
     </div>
+    <canvas bind:this={canvas}></canvas>
+
   {/if}
   
   <style>

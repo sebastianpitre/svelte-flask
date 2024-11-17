@@ -1,6 +1,6 @@
 <script>
-    import { onMount } from "svelte";
-    import {
+  import { onMount } from "svelte";
+  import {
       Chart,
       LineController,
       LineElement,
@@ -9,11 +9,13 @@
       CategoryScale,
       Title,
       Tooltip,
-      Legend
-    } from "chart.js";
-  
-    // Registrar componentes necesarios
-    Chart.register(
+      Legend,
+      Filler,
+  } from "chart.js";
+  import ChartDataLabels from 'chartjs-plugin-datalabels'; // Plugin para etiquetas
+
+  // Registrar componentes y plugins de Chart.js
+  Chart.register(
       LineController,
       LineElement,
       PointElement,
@@ -21,112 +23,124 @@
       CategoryScale,
       Title,
       Tooltip,
-      Legend
-    );
-  
-    let labels = []; // Fechas
-    let data = []; // Montos totales de ventas
-    let periodo = "mensual"; // Periodo seleccionado por el usuario
-    let errorMessage = ""; // Mensaje de error
-    let canvas; // Referencia al elemento <canvas>
-    let chartInstance = null; // Referencia al gráfico actual
-  
-    async function cargarDatos() {
+      Legend,
+      Filler,
+      ChartDataLabels
+  );
+
+  let labels = []; // Meses
+  let data = []; // Ventas totales
+  let canvas; // Referencia al canvas
+  let chartInstance = null; // Instancia del gráfico
+
+  async function cargarVentasUltimos6Meses() {
       try {
-        // Llamada a la API con el filtro de periodo
-        const response = await fetch(`http://127.0.0.1:5000/api/admin/stats/ventas-por-fechas?periodo=${periodo}`);
-        if (!response.ok) {
-          throw new Error("Error al obtener los datos de ventas por fechas");
-        }
-  
-        const json = await response.json();
-  
-        // Procesar los datos para Chart.js
-        labels = json.map((entry) => entry.fecha); // Fechas
-        data = json.map((entry) => parseFloat(entry.total_ventas)); // Montos totales
-  
-        // Destruir gráfico existente si hay uno
-        if (chartInstance) {
-          chartInstance.destroy();
-        }
-  
-        // Crear el gráfico
-        const ctx = canvas.getContext("2d");
-        chartInstance = new Chart(ctx, {
-          type: "line", // Tipo de gráfico: línea
-          data: {
-            labels: labels,
-            datasets: [
-              {
-                label: "Montos Totales de Ventas",
-                data: data,
-                backgroundColor: "rgba(54, 162, 235, 0.2)",
-                borderColor: "rgba(54, 162, 235, 1)",
-                borderWidth: 1,
-                tension: 0.4, // Suaviza las líneas
+          const response = await fetch("http://127.0.0.1:5000/api/admin/stats/ventas-ultimos-6-meses");
+          if (!response.ok) {
+              throw new Error("Error al cargar los datos.");
+          }
+
+          const json = await response.json();
+
+          // Procesar datos
+          labels = json.map((entry) => entry.mes);
+          data = json.map((entry) => parseFloat(entry.total_ventas));
+
+          // Destruir gráfico existente si ya existe
+          if (chartInstance) {
+              chartInstance.destroy();
+          }
+
+          // Crear gráfico
+          const ctx = canvas.getContext("2d");
+          chartInstance = new Chart(ctx, {
+              type: "line",
+              data: {
+                  labels: labels,
+                  datasets: [
+                      {
+                          label: "Ventas Totales",
+                          data: data,
+                          backgroundColor: "rgba(54, 162, 235, 0.2)", // Área sombreada
+                          borderColor: "rgba(54, 162, 235, 1)", // Línea
+                          pointBackgroundColor: "rgba(54, 162, 235, 1)",
+                          pointRadius: 5, // Tamaño de los puntos
+                          borderWidth: 2,
+                          tension: 0.4, // Líneas suavizadas
+                          fill: true, // Rellenar debajo de la línea
+                      },
+                  ],
               },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: true,
+              options: {
+                  responsive: true,
+                  plugins: {
+                      legend: {
+                          display: true,
+                          position: "top",
+                      },
+                      title: {
+                          display: true,
+                          text: "Ventas de los Últimos Meses",
+                          font: {
+                              size: 16,
+                          },
+                      },
+                      tooltip: {
+                          enabled: false, // Deshabilitar tooltips estándar
+                      },
+                      datalabels: {
+                          anchor: 'end', // Posición de las etiquetas
+                          align: 'top', // Alineación hacia arriba
+                          backgroundColor: 'rgba(255, 255, 255, 0.8)', // Fondo blanco
+                          borderRadius: 4, // Bordes redondeados
+                          borderWidth: 1, // Ancho del borde
+                          borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
+                          color: '#000', // Color del texto
+                          font: {
+                              size: 12,
+                          },
+                          formatter: (value) => `${value.toLocaleString('en-US')}`, // Formato con separadores de miles
+                      },
+                  },
+                  scales: {
+                      y: {
+                          beginAtZero: true,
+                          title: {
+                              display: true,
+                              text: "Ventas Totales",
+                          },
+                      },
+                      x: {
+                          title: {
+                              display: true,
+                              text: "Meses",
+                          },
+                          ticks: {
+                              maxRotation: 45,
+                              minRotation: 0,
+                          },
+                      },
+                  },
               },
-              title: {
-                display: true,
-                text: `Montos Totales de Ventas (${periodo})`,
-              },
-            },
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          },
-        });
+              plugins: [ChartDataLabels], // Activar plugin de etiquetas
+          });
       } catch (error) {
-        errorMessage = error.message;
-        console.error(error);
+          console.error("Error:", error);
       }
-    }
-  
-    // Cargar datos al montar el componente
-    onMount(cargarDatos);
-  
-    // Recargar datos cuando cambie el periodo
-    $: if (periodo) {
-      cargarDatos();
-    }
-  </script>
-  
-  <!-- Contenedor para el gráfico -->
-  {#if errorMessage}
-    <p class="error">{errorMessage}</p>
-  {:else}
-    <div class="">
-      <label for="periodo">Selecciona un periodo:</label>
-      <select id="periodo" bind:value={periodo}>
-        <option value="diario">Diario</option>
-        <option value="semanal">Semanal</option>
-        <option value="mensual">Mensual</option>
-        <option value="anual">Anual</option>
-      </select>
-      <canvas bind:this={canvas}></canvas>
-    </div>
-  {/if}
-  
-  <style>
-    .error {
-      color: red;
-      font-weight: bold;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-    }
-    select {
-      margin-bottom: 16px;
-    }
-  </style>
-  
+  }
+
+  // Cargar datos al montar el componente
+  onMount(cargarVentasUltimos6Meses);
+</script>
+
+<div>
+  <canvas bind:this={canvas}></canvas>
+</div>
+
+<style>
+  canvas {
+      max-width: 100%;
+      height: 400px;
+      margin: 20px auto;
+  }
+</style>

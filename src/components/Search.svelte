@@ -89,9 +89,9 @@
         background-origin: border-box;
         background-clip: padding-box, border-box;
         background-image: linear-gradient(#fff, #fff), /* Fondo blanco interno */
-                        linear-gradient(135deg, #38a900a8, #daead2a8, #38a900a8); /* Degradado verde */
+                        linear-gradient(135deg, #050e00ea, #daead2a8, #050e00ea); /* Degradado verde */
         background-size: 200% 200%; /* Hacemos el fondo más grande para animarlo */
-        animation: moveGradient 3s linear infinite; /* Animación continua */
+        animation: moveGradient 4s linear infinite; /* Animación continua */
     }
 
     @keyframes moveGradient {
@@ -111,9 +111,9 @@
         background-origin: border-box;
         background-clip: padding-box, border-box;
         background-image: linear-gradient(#fff, #fff), /* Fondo blanco interno */                        
-                          linear-gradient(135deg, #38a900a8, #daead2a8, #38a900a8); /* Degradado verde */
+                          linear-gradient(135deg, #050e00ea, #daead2a8, #050e00ea); /* Degradado verde */
         background-size: 200% 200%; /* Hacemos el fondo más grande para animarlo */
-        animation: moveGradient 3s linear infinite; /* Animación continua */
+        animation: moveGradient 4s linear infinite; /* Animación continua */
         outline: #000; /* Elimina el borde interno */
         border-radius: 16px 16px 0px 0px; /* Superior izquierdo, Superior derecho, Inferior derecho, Inferior izquierdo */
 
@@ -138,9 +138,9 @@
         background-origin: border-box;
         background-clip: padding-box, border-box;
         background-image: linear-gradient(#fff, #fff), /* Fondo blanco interno */                        
-                          linear-gradient(135deg, #38a900a8, #daead2a8, #38a900a8); /* Degradado verde */
+                          linear-gradient(135deg, #050e00ea, #daead2a8, #050e00ea); /* Degradado verde */
         background-size: 200% 200%; /* Hacemos el fondo más grande para animarlo */
-        animation: moveGradient 3s linear infinite; /* Animación continua */
+        animation: moveGradient 4s linear infinite; /* Animación continua */
         border-top: 0px;
         font-size: 13px;
     }

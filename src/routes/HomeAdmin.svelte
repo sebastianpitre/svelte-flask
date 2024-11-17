@@ -24,7 +24,7 @@
             <div class="row">
 
                 <div class="col-12 col-md-6">
-                    <div class="row mb-4">
+                    <div class="row mb-3">
 
                         <div class="col-6 col-xl-3 col-sm-6 mb-xl-0 mb-2">
                             <div class="card p-2">
@@ -106,12 +106,16 @@
                     </div>
                 </div>
 
-                <div class="col-4 mt-4">
-                    <VentasPorFechas/>
+                <div class="col-12 col-md-5 mt-4">
+                    <div class="card p-2">
+                        <VentasPorFechas/>
+                    </div>
                 </div>
 
-                <div class="col-8 mt-4">
-                    <Stock/>
+                <div class="col-12 col-md-7 mt-4">
+                    <div class="card p-2" >
+                        <VentasPorProducto/>
+                    </div>
                 </div>
             
         </div>
