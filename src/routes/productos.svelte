@@ -25,7 +25,9 @@
         const tableInterval = setInterval(() => {
             if (productos.length > 0) {
                 jQuery('#tablaPedidos').DataTable({
-                    order: [[0, 'desc']], // Ordena la primera columna (ID) en orden descendente
+                    order: [
+                        [1, 'dsc'] // Ordenar por estado (Pendiente primero)
+                    ],
                     language: {
                         order: [[0, 'desc']],
                         search: "Busqueda Dinámica",
@@ -46,6 +48,21 @@
             }
         }, 100); // Revisa cada 300ms hasta que los pedidos se hayan cargado
     });
+
+    // Función para formatear la fecha en español
+    function formatearFecha(fechaISO) {
+        const fecha = new Date(fechaISO);
+        
+        // Formatear la fecha en español
+        const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' };
+        const fechaFormateada = new Intl.DateTimeFormat('es-ES', opcionesFecha).format(fecha);
+        
+        // Obtener la hora por separado
+        const opcionesHora = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const horaFormateada = new Intl.DateTimeFormat('es-ES', opcionesHora).format(fecha);
+
+        return { fechaFormateada, horaFormateada };
+    }
 
 </script>
 
@@ -68,11 +85,12 @@
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">id</th>
+                                <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7 d-none">fecha Actualizacion</th>
                                 <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Nombre</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Precios y descuentos</th>
                                 <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">estado de producto</th>
                                 <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Stock</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acciones</th>
+                                <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -86,6 +104,10 @@
                             <tr>
                                 <td>
                                     <p class="text-sm mb-0"><span class="font-weight-bold">{values.id}</span></p>
+                                    
+                                </td>
+                                <td class="d-none">
+                                    <p class="text-sm mb-0"><span class="font-weight-bold">{formatearFecha(values.fecha_actualizacion).fechaFormateada} {formatearFecha(values.fecha_actualizacion).horaFormateada}</span></p>
                                     
                                 </td>
 

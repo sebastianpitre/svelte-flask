@@ -69,7 +69,7 @@
 
   @media (min-width: 768px) {
     .height-responsive {
-    min-height: 55vh !important;
+    min-height: 50vh !important;
   }
   }
 </style>

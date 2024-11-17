@@ -21,6 +21,7 @@
     "@popperjs/core": "^2.11.8",
     "@splidejs/splide": "^4.1.4",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.6",
     "datatables.net": "^2.1.7",
     "datatables.net-dt": "^2.1.7",
     "datatables.net-responsive-dt": "^3.0.3",

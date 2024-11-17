@@ -35,7 +35,10 @@
         const tableInterval = setInterval(() => {
             if (pedidos.length > 0) {
                 jQuery('#tablaPedidos').DataTable({
-                    order: [[0, 'desc']], // Ordena la primera columna (ID) en orden descendente
+                    order: [
+                        [1, 'dsc'], // Ordenar por estado (Pendiente primero)
+                        [0, 'asc']  // Ordenar por fecha de creación (más antigua primero)
+                    ],
                     language: {
                         search: "Busqueda Dinamica",
                         lengthMenu: "Mostrar _MENU_",

@@ -9,7 +9,7 @@
     }
 </script>
 <main>
-<button class="boton-anuncio bg-warning border border-2 border-white" on:click={openModalAnuncios}>
+<button class="boton-anuncio bg-morado border border-2 border-white" on:click={openModalAnuncios}>
     <span class="material-symbols-outlined pt-1 text-white">campaign</span>
 </button>
 </main>
@@ -28,12 +28,16 @@
   
 }
 
+.bg-morado{
+    background-color: #bd46ff;
+}
+
 
 
 /* Efecto de desvanecimiento y expansión hacia afuera */
 @keyframes expandFade {
         0% {
-            box-shadow: 0 0 0 0 #fb8c00;
+            box-shadow: 0 0 0 0 #bd46ff;
         }
         100% {
             box-shadow: 0 0 0px 10px rgba(0, 255, 0, 0);

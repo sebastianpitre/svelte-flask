@@ -204,7 +204,7 @@
   <div class="splide__track">
     <ul class="splide__list">
       {#each listProductos as values}
-      {#if values.is_activo === true && values.is_promocion === true}
+      {#if values.is_activo === true && values.is_promocion === true && values.stock >0}
           <li class="splide__slide px-5">
             <a href="{`/ver_producto/${values.id}`}" class="card position-relative mb-2 mx-n4-5">
               <svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 250">
@@ -253,7 +253,7 @@
                   </g>
                   <text class="cls-6" transform="translate(46.8 241.94)" text-anchor="middle" dominant-baseline="middle"><tspan x="65" y="-4">Hásta el {convertirFechaDatetimeAFecha(values.fecha_fin_descuento)}</tspan></text>
                 </g>
-                <text class="cls-25" transform="translate(24.86 206.59)"><tspan x="0" y="0">{values.nombre.split(' ').slice(0, 3).join(' ')}</tspan></text>
+                <text class="cls-25" transform="translate(24.86 206.59)"><tspan x="0" y="0">{values.nombre.length >= 19 ? values.nombre.substring(0, 17) + "..." : values.nombre}</tspan></text>
               </svg>
             </a>
           </li>

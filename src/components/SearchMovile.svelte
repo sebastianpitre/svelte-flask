@@ -185,6 +185,12 @@
         right: 5px;
         font-size: 17px;
     }
+    .color-agotado{
+        color: #6f6d6d;
+        top:2px;
+        right: 5px;
+        font-size: 17px;
+    }
     
   </style>
   
@@ -199,10 +205,14 @@
           <li class="autocomplete-item {activeIndex === index ? 'active' : ''} position-relative" on:click={() => handleSelectProduct(product.id)}>
             <img class="mt-1" src="{product.url_imagen}" alt="" style="width: 25px; height: 25px; border-radius: 3px ">
             {product.nombre.length >= 18 ? product.nombre.substring(0, 18) + "..." : product.nombre}
-            <span class="{product.is_activo? 'color-activo': 'color-inactivo'} position-absolute">●</span>
+            <span class="{product.is_activo? 'color-activo': 'color-inactivo'} {product.stock <= 0 ? 'color-agotado': ''} position-absolute">●</span>
           </li>
         {/each}
       </ul>
+
+      
     {/if}
+
+    
   </div>
   

@@ -1,8 +1,9 @@
 <script>
   import { isModalOpenPedidos, idStore } from "../stores/modalStore.js";
   import { onMount, onDestroy } from 'svelte';
-  import { fetchWithAuth } from '../api/auth.js'; // Verifica que la ruta sea correcta
-  import { getProductos } from '../api/productos.js';
+  import { fetchWithAuth } from '../api/auth'; // Verifica que la ruta sea correcta
+  import { getProductos } from '../api/productos';
+  import Swal from 'sweetalert2';
 
   let productosx = []; // Lista de todos los productos disponibles
   let pedido = null;
@@ -27,23 +28,43 @@
     }
   }
 
-  // Función para obtener el pedido por id
   async function fetchPedido() {
     if (id) {
       try {
-        // Aquí `response` es el objeto de datos directamente
-        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/usuarios/pedidos/${id}`);
+        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/pedidos/${id}`);
         console.log('Datos recibidos:', data);
 
-        // Ahora verifica si data es el cuerpo de respuesta esperado
-        pedido = data;
-        console.log('Pedido obtenido:', pedido);
+        // Verifica si la respuesta tiene la estructura que esperas
+        if (data) {
+          pedido = data; // Asigna el pedido directamente
+          console.log('Pedido obtenido:', pedido);
+        } else {
+          throw new Error('La respuesta no contiene datos válidos');
+        }
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Error al obtener el pedido:', error);
+        Swal.fire('Error', 'No se pudo obtener el pedido.', 'error');
         errorMessage = 'No se pudo obtener el pedido.';
       }
     }
   }
+
+  async function cambiarEstado(nuevoEstado) {
+  try {
+    const response = await fetchWithAuth(`http://127.0.0.1:5000/api/usuarios/mipedido/${pedido?.id_pedido}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        estado_pedido: nuevoEstado
+      }),
+    });
+
+    pedido.estado_pedido = nuevoEstado;
+    Swal.fire('Éxito', `El estado se cambió a ${nuevoEstado} correctamente.`, 'success');
+  } catch (error) {
+    console.error('Error al cambiar el estado:', error);
+    Swal.fire('Error', error.message, 'error');
+  }
+}
 
   // Función auxiliar para obtener el nombre del producto por su ID
   function obtenerNombreProducto(idProducto) {
@@ -53,9 +74,10 @@
 
   // Llama a las funciones al montar el componente
   onMount(async () => {
-      await fetchProductos(); // Primero carga los productos disponibles
-      await fetchPedido(); // Luego carga el pedido
-    });
+    await fetchProductos(); // Primero carga los productos disponibles
+    await fetchPedido(); // Luego carga el pedido
+  });
+
   // Limpia la suscripción al desmontar el componente
   onDestroy(() => {
     unsubscribe();
@@ -76,64 +98,72 @@
     <div class="col mt-n4 text-end">
       <span class="close" on:click={() => isModalOpenPedidos.set(false)}>&times;</span>
     </div>
+
     {#if pedido}
       <div>
-        <h4>Información del Pedido</h4>
-
         <div class="row">
-          <div class="col-12">
-            <span class="">ID del pedido - 00{pedido.id_pedido}  </span>
+          <div class="col-6">
+            <h4>Información del Pedido</h4>
+            <span>ID del pedido - 00{pedido.id_pedido}</span><br>
+            <span>Monto total - {pedido.monto_total}</span><br>
+
+            <span>Estado del pedido - 
+              {#if pedido.estado_pedido === "PENDIENTE"}
+                <span class="text-info font-weight-bold"> {pedido.estado_pedido}</span>
+              {:else if pedido.estado_pedido === "APROBADO"}
+                <span class="text-success font-weight-bold"> {pedido.estado_pedido}</span>
+              {:else if pedido.estado_pedido === "CANCELADO"}
+                <span class="text-danger font-weight-bold"> {pedido.estado_pedido}</span>
+              {:else if pedido.estado_pedido === "ENTREGADO"}
+                <span class="text-success font-weight-bold"> {pedido.estado_pedido}</span>
+              {:else if pedido.estado_pedido === "DEVUELTO"}
+                <span class="text-warning font-weight-bold"> {pedido.estado_pedido}</span>
+              {/if}
+            </span><br>
+
+            <span>Fecha de creación - {pedido.fecha_creacion}</span><br>
+
+            <span>ID del usuario - {pedido.id_usuario}</span>
 
           </div>
-          <div class="col-12">
-            <span class="">Monto total - {pedido.monto_total}  </span>
+
+          <!-- Botones para cambiar el estado del pedido -->
+          <div class="col-6">
+            <!-- <button on:click={() => cambiarEstado('APROBADO')} class="btn btn-success">Aprobar</button> -->
+             {#if pedido.estado_pedido === "PENDIENTE"}
+              <h4 class="">Cambiar Estado del Pedido</h4>
+              <button on:click={() => cambiarEstado('CANCELADO')} class="btn btn-danger">Cancelar</button>
+             {/if}
           </div>
-          <div class="col-12">
-            <span class="">Estado del pedido - 
-              {#if pedido.estado_pedido === "PENDIENTE"}
-              <span class="text-info font-weight-bold"> {pedido.estado_pedido}  </span>
-                  {:else if pedido.estado_pedido === "APROBADO"}
-                  <span class="text-success font-weight-bold"> {pedido.estado_pedido}  </span>
-                  {:else if pedido.estado_pedido === "CANCELADO"}
-                  <span class="text-danger font-weight-bold"> {pedido.estado_pedido} ❌  </span>
-                  {:else if pedido.estado_pedido === "ENTREGADO"}
-                  <span class="text-success font-weight-bold"> {pedido.estado_pedido}✅  </span>
-              {/if} 
-            </span>
-          </div>
-          <div class="col-12">
-            <span class="">Fecha de creacion - {pedido.fecha_creacion}  </span>
-          </div>
-          <div class="col-12">
-            <span class="">ID del usuario - {pedido.id_usuario} </span>
-          </div>
+
         </div>
 
+        <!-- Tabla de productos del pedido -->
         <h4 class="mt-3">Productos del Pedido</h4>
-        <div class=" border table-responsive">
+        <div class="border table-responsive">
           <table class="table align-items-center mb-0">
-              <thead>
-                <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder ps-4 pe-0">id</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder pe-0">nombre de producto</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center">Cantidad</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center">precio</th>
-                </tr>
-              </thead>
-              <tbody>
-                {#if pedido.productos && pedido.productos.length > 0}
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre del Producto</th>
+                <th class="text-center">Cantidad</th>
+                <th class="text-center">Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#if pedido.productos && pedido.productos.length > 0}
                 {#each pedido.productos as producto}
                 <tr>
-                    <td class="text-xs font-weight-bolder border-0 ps-4">{producto.id}</td>
-                    <td class="text-xs font-weight-bolder border-0 ps-4">{obtenerNombreProducto(producto.id)}</td>
-                    <td class="text-xs font-weight-bolder border-0 text-center">{producto.cantidad}</td>
-                    <td class="text-xs font-weight-bolder border-0 text-center">{producto.precio}</td>
+                  <td>{producto.id}</td>
+                  <td>{obtenerNombreProducto(producto.id)} x{producto.cantidad_producto}</td>
+                  <td class="text-center">{producto.cantidad}</td>
+                  <td class="text-center">{producto.precio}</td>
                 </tr>
                 {/each}
-                {:else}
-                  <p>No hay productos en este pedido.</p>
-                {/if}
-              </tbody>
+              {:else}
+                <p>No hay productos en este pedido.</p>
+              {/if}
+            </tbody>
           </table>
         </div>
       </div>
@@ -146,10 +176,11 @@
 </div>
 
 <style>
+  /* Estilos del modal */
   .modal {
     display: none;
     position: fixed;
-    z-index: 9999;
+    z-index: 999;
     padding-top: 50px;
     left: 0;
     top: 0;
@@ -185,5 +216,10 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  /* Botones de cambio de estado */
+  .btn {
+    margin-right: 10px;
   }
 </style>

@@ -173,7 +173,7 @@
       <div class="splide__track">
         <ul class="splide__list">
           {#each listProductos as values}
-          {#if values.is_activo === true && values.is_promocion === true}
+          {#if values.is_activo === true && values.anunciar === true}
               <li class="splide__slide">
                 <a href="{`/ver_producto/${values.id}`}">
                   <svg id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1394 929">
@@ -237,7 +237,7 @@
                       <image width="1394" text-anchor="middle" dominant-baseline="middle" height="929" xlink:href="/public/img/anuncio6.png"/>
                       <g>
                         <rect class="cls-1" x="128.31" y="315.52" width="796.3" height="180" rx="13.59" ry="13.59"/>
-                        <text class="cls-7" transform="translate(165.47 384.62)"><tspan text-anchor="middle" dominant-baseline="middle" x="355" y="0">{values.nombre}</tspan></text>
+                        <text class="cls-7" transform="translate(165.47 384.62)"><tspan text-anchor="middle" dominant-baseline="middle" x="355" y="0">{values.nombre.length >= 15 ? values.nombre.substring(0, 15) + "..." : values.nombre}</tspan></text>
                         <text class="cls-6" transform="translate(206.29 459.42)" text-anchor="middle" dominant-baseline="middle" ><tspan x="320" y="-15">Disponible el {convertirFechaDatetimeAFecha(values.fecha_inicio_descuento)}</tspan></text>
                         <rect class="cls-10" x="387.42" y="477.47" width="278.08" height="70.11" rx="13.59" ry="13.59"/>
                         <text class="cls-5" transform="translate(456.7 558.76)" text-anchor="middle" dominant-baseline="middle"><tspan x="70" y="-45">$ {values.precio}</tspan></text>

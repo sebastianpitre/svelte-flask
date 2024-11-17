@@ -26,6 +26,7 @@
     import Nav from '../components/nav.svelte';
     import Menufooter from '../components/menufooter.svelte';
     import ModalPedidosMod from '../components/ModalPedidosMod.svelte';
+    import ProteccionMod from '../components/ProteccionMod.svelte';
 
     function openModal(id) {
         idStore.set(id); // Asigna el ID al store
@@ -77,6 +78,7 @@
 <main>
 
     <ModalPedidosMod/>
+    <ProteccionMod/>
 
         <div class="row m-0" style="min-height: 83vh;">
 

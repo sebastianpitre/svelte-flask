@@ -159,7 +159,7 @@
         </h5>
       </div>
       {#each listProductos as values}
-        {#if values.is_activo === true && values.is_promocion === true}
+        {#if values.is_activo === true && values.is_promocion === true && values.stock > 0}
         <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-3 mb-3 px-2">
           <a href="{`/ver_producto/${values.id}`}" class="card position-relative mb-2 mx-n4-5">
             <svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 250">

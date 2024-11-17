@@ -45,6 +45,10 @@
         const tableInterval = setInterval(() => {
             if (pedidos.length > 0) {
                 jQuery('#tablaPedidos').DataTable({
+                    order: [
+                        [2, 'dsc'], // Ordenar por estado (Pendiente primero)
+                        [0, 'dsc']  // Ordenar por fecha de creación (más antigua primero) 
+                    ],
                     language: {
                         search: "Buscar mis pedidos:",
                         lengthMenu: "Mostrar _MENU_ entradas",
@@ -122,9 +126,11 @@
                                 {:else if values.estado_pedido === "APROBADO"}
                                 <span class="text-success font-weight-bold"> {values.estado_pedido}  </span>
                                 {:else if values.estado_pedido === "CANCELADO"}
-                                <span class="text-danger font-weight-bold"> {values.estado_pedido} ❌  </span>
+                                <span class="text-danger font-weight-bold"> {values.estado_pedido}</span>
                                 {:else if values.estado_pedido === "ENTREGADO"}
-                                <span class="text-success font-weight-bold"> {values.estado_pedido}✅  </span>
+                                <span class="text-success font-weight-bold"> {values.estado_pedido}</span>
+                                {:else if values.estado_pedido === "DEVUELTO"}
+                                <span class="text-warning font-weight-bold"> {values.estado_pedido}</span>
                             {/if}
                         </p>
                     </td>
@@ -137,7 +143,6 @@
 
                     <td class="text-center">
                         <button on:click={() => openModal(values.id_pedido)} class="btn btn-sm text-white bg-info">Detalles</button>
-                        <button class="btn btn-sm btn-danger">x</button>
                     </td>
                 </tr>
                 {/each}

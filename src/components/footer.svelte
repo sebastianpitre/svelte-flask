@@ -14,12 +14,15 @@
           </div>
         </div>
         <div class="col-lg-3 col-sm-12 mx-auto my-auto justify-content-center">
-          <h5 class="text-edo text-success">Contacto</h5>
-            <ul class="flex-column nav">
-              <li class="nav-item text-white">
-                Ubicación: Km 7 via la paz
+          <h5 class="text-edo text-success ps-3">Contacto</h5>
+            <ul class="flex-column nav mt-3 border ps-3">
+              <li class="nav-item text-white mt-n3">
+                <span class="bg-info px-2">Centro Biotecnológico del Caribe</span>
               </li>
-              <li class="nav-item text-white">
+              <li class="nav-item ">
+                <a class="text-white" href="https://maps.app.goo.gl/Y6UjHDGMeguajzfi6" target="_blank">Ubicación: Km 7 via la paz</a>
+              </li>
+              <li class="nav-item text-white mb-2">
                 correo: vitrinaweb@sena.edu.co
               </li>
             </ul>

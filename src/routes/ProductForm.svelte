@@ -25,6 +25,7 @@
   let stock = 0;
   let is_activo = true;
   let id_categorias = 0;
+  let anunciar = false;
   let fecha_inicio_descuento = null;
   let fecha_fin_descuento = null;
 
@@ -51,6 +52,7 @@
           stock = product.stock || 0;
           is_activo = product.is_activo || true;
           id_categorias = product.id_categorias || 0;
+          anunciar = product.anunciar || false;
           fecha_inicio_descuento = convertirFechaDatetimeAFecha(product.fecha_inicio_descuento) || null;
           fecha_fin_descuento = convertirFechaDatetimeAFecha(product.fecha_fin_descuento) || null;
           console.log(product)
@@ -79,6 +81,7 @@
       stock,
       is_activo,
       id_categorias,
+      anunciar,
       fecha_inicio_descuento,
       fecha_fin_descuento,
     };
@@ -267,6 +270,15 @@
               </div>
             </div>
   
+            <div class="col-auto">
+              <div class="border-radius-2xl border p-2">
+                <span>Anunciar?</span>
+                <div class="form-check form-switch"><span>{anunciar === true ? 'Si': 'No' }</span> 
+                  <input type="checkbox" class="form-check-input" bind:checked={anunciar} />
+                </div>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-12 col-md-6">
                 <div>

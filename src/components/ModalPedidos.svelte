@@ -53,24 +53,31 @@
   try {
     const response = await fetchWithAuth(`http://127.0.0.1:5000/api/usuarios/pedidos/${pedido?.id_pedido}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify({
         estado_pedido: nuevoEstado
-      })
+      }),
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Error en el servidor: ${errorData.message || response.statusText}`);
-    }
-
     pedido.estado_pedido = nuevoEstado;
-    Swal.fire('Éxito', `El estado se cambió a ${nuevoEstado} correctamente.`, 'success');
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'Éxito',
+      text: `El estado se cambió a ${nuevoEstado} correctamente.`,
+      timer: 2000, // Tiempo antes de cerrar la alerta (2 segundos)
+      showConfirmButton: false,
+    }).then(() => {
+      window.location.href = '/pedidos_admin'; // Redirige a la ruta raíz después de cerrar la alerta
+    });
+
   } catch (error) {
     console.error('Error al cambiar el estado:', error);
-    Swal.fire('Error', error.message, 'error');
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: error.message || 'Ocurrió un error al cambiar el estado.',
+    });
   }
 }
 
