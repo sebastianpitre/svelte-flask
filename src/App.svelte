@@ -24,12 +24,15 @@
   import Entrada from "./routes/Entrada.svelte";
   import Salidas from "./routes/Salidas.svelte";
   import ConsultarPedidos from "./routes/ConsultarPedidos.svelte";
+    import Estadisticas from "./routes/Estadisticas.svelte";
 </script>
 
 <main>
   <Router>
     <Route path="/" component={Home} exact />
     <Route path="/administrador" component={HomeAdmin}/>
+    <Route path="/chart" component={Estadisticas}/>
+
     <Route path="/consultar_pedidos" component={ConsultarPedidos}/>
 
     <Route path="/login" component={Login} />

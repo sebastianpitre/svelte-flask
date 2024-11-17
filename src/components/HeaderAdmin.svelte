@@ -53,12 +53,12 @@
 
 <style>
   .height-responsive {
-    min-height: 35vh !important;
+    min-height: 25vh !important;
   }
 
   @media (min-width: 768px) {
     .height-responsive {
-    min-height: 55vh !important;
+    min-height: 40vh !important;
   }
   }
 </style>
