@@ -1,6 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { createUser } from '../api/auth'; // Cambia esto a la ruta adecuada si es necesario
+    import Swal from 'sweetalert2';
 
     let nombres = '';
     let apellidos = '';
@@ -37,10 +38,22 @@
                 fecha_actualizacion: new Date().toISOString()
             };
             await createUser(data);
+            // Mostrar alerta de éxito
+            Swal.fire({
+                icon: 'success',
+                title: '¡Registro exitoso!',
+                text: 'Serás redirigido al inicio de sesión.',
+                timer: 2000, // Duración en milisegundos
+                showConfirmButton: false
+            }).then(() => {
+                // Redirigir al usuario después de cerrar la alerta
+                window.location.href = '/login';
+            });
+
             successMessage = 'Registro exitoso';
             errorMessage = '';
         } catch (error) {
-            errorMessage = 'Error al registrar usuario';
+            errorMessage = 'Error al registrar usuario, intenta usar otro correo';
             successMessage = '';
         }
     };

@@ -6,65 +6,58 @@
     import Footer from '../components/Footer.svelte';
     import MenuAcciones from '../components/MenuLateral.svelte';
 
-    let categorias = [];
+    let banners = [];
     let errorMessage = '';
 
+    // Cargar banners al montar el componente
     onMount(async () => {
         try {
-            categorias = await getBanners();
+            banners = await getBanners();
         } catch (error) {
-            errorMessage = 'No se pudieron cargar las categorias.';
+            console.error('Error al cargar banners:', error);
+            errorMessage = 'No se pudieron cargar los banners.';
         }
     });
 
-    // eliminar Categorias
-
-   async function eliminarCategoria(id_categorias) {
-    try {
-        const result = await Swal.fire({
-            
-            title: '¿Estás seguro?',
-            text: 'Esta acción no se puede deshacer',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Sí, eliminar'
-        });
-
-        if (result.isConfirmed) {
-            const response = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/categorias/${id_categorias}`, {
-                method: 'DELETE',
+    // Eliminar un banner
+    async function eliminarBanner(id_banner) {
+        try {
+            const result = await Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Esta acción no se puede deshacer',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar'
             });
 
-            if (response.ok) {
-                // Actualizar la lista de categoria después de la eliminación
-                categorias = categorias.filter(categorias =>categorias.id_categorias !== id_categorias);
+            if (result.isConfirmed) {
+                await fetchWithAuth(`http://127.0.0.1:5000/api/admin/banner/${id_banner}`, {
+                    method: 'DELETE',
+                });
+
+                // Actualizar lista de banners
+                banners = banners.filter((banner) => banner.id_banner !== id_banner);
+
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
                     title: '¡Eliminado!',
-                    text: 'La categoria ha sido eliminada.',
+                    text: 'El banner ha sido eliminado.',
                     showConfirmButton: false,
                     timer: 1500
                 });
-            } else {
-                Swal.fire(
-                    'Error',
-                    `Hubo un problema al eliminar la categoria: ${response.statusText}`,
-                    'error'
-                );
             }
+        } catch (error) {
+            console.error('Error al eliminar el banner:', error);
+            Swal.fire(
+                'Error',
+                `Hubo un problema al eliminar el banner: ${error.message || error}`,
+                'error'
+            );
         }
-    } catch (error) {
-        Swal.fire(
-            'Error',
-            `Hubo un problema al eliminar la categoria: ${error}`,
-            'error'
-        );
     }
-}
-
 </script>
 
 <main>
@@ -85,14 +78,14 @@
 
                 
                   <div class="row mx-5">
-                    {#each categorias as values}
+                    {#each banners as values}
                     <div class="col-6 col-md-3 mb-3">
                         <div class="card">
                             <img class="card-img-top" src="{values.url_imagen}" alt="img" />
                             <p class="text-center">Posicion de la imagen en "Y" {values.posicion_y}</p>
                             
                             <div class="card-body p-0 text-center">
-                                <a class="btn btn-danger btn-sm" href="/#">eliminar</a>
+                                <button class="btn btn-danger btn-sm" on:click={() => eliminarBanner(values.id_banner)}>eliminar</button>
                                 <a class="btn btn-danger btn-sm" href="/ajustes/{values.id_banner}">editar</a>
                             </div>
                         </div>

@@ -6,6 +6,7 @@
   import { user } from '../stores/user'; // Store para guardar los datos del usuario
   import { onMount } from 'svelte';
   import { productCount } from '../stores/cart.js';
+  import Swal from 'sweetalert2';
 
 
   let userProfile = {};
@@ -39,11 +40,32 @@
   import { logout } from '../api/auth';
     import Search from './Search.svelte';
 
-  // cerrar sesion
+    // cerrar sesion
     function handleLogout() {
-        logout();
-    }
-
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Serás desconectado de tu sesión actual.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, salir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Ejecuta la función logout si el usuario confirma
+            logout();
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '¡Sesión cerrada!',
+                text: 'Has cerrado sesión correctamente.',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    });
+}
 
 </script>
 

@@ -1,7 +1,6 @@
 <script>
   import { onMount } from "svelte";
   import Swal from "sweetalert2";
-  import Nav from "../components/nav.svelte";
   import { fetchWithAuth } from '../api/auth'; // Verifica que la ruta sea correcta
 
   export let id;
@@ -89,7 +88,6 @@
 </script>
 
 <main class="row m-0">
-  <Nav />
   <div class="col-12 col-md-8 mx-auto pt-3 mb-4 mb-md-0">
     <form on:submit={handleSubmit}>
       <div class="card p-3">

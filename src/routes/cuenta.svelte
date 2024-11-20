@@ -6,11 +6,34 @@
   import Menufooter from "../components/menufooter.svelte";
   import Nav from '../components/nav.svelte';
   import { logout } from '../api/auth';
+  import Swal from 'sweetalert2';
 
   // cerrar sesion
-    function handleLogout() {
-        logout();
-    }
+  function handleLogout() {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Serás desconectado de tu sesión actual.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, salir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Ejecuta la función logout si el usuario confirma
+            logout();
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '¡Sesión cerrada!',
+                text: 'Has cerrado sesión correctamente.',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    });
+}
 
 
 
@@ -76,24 +99,17 @@
           </div>
         </a>
 
-        <a class="border-radius-2xl botones px-2 cursor-pointer mb-0" use:link href="/perfil">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <div class="border-radius-2xl botones px-2 cursor-pointer mb-0" on:click={handleLogout}>
           <div class="container border-bottom px-3">
             <div class="row">
               <div class="col-auto p-0 ps-3 pt-3 pb-1">
-                <span class="material-symbols-outlined opacity-6 me-1 text-xl">location_on</span>
+                <span class="material-symbols-outlined opacity-6 me-1 text-danger text-xl">logout</span>
                 </div>
-                  <span class="col pt-3">Dirección</span>
+                  <span class="col pt-3 text-danger">Cerrar sesion</span>
             </div>
           </div>
-        </a>
-      </div>
-
-      <div class="container my-4">
-        <div class="row cursor-pointer " on:click={handleLogout}>
-          <div class="col-auto p-0 ps-2 pt-3 pb-1">
-            <span class="material-symbols-outlined text-xl text-danger">logout</span>
-          </div>
-          <span class="col pt-3 text-danger">Cerrar sesion</span>
         </div>
       </div>
 
