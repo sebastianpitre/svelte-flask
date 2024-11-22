@@ -62,7 +62,7 @@
           <div class="col-12 col-md-6">
 
             <h5 class="mb-n5 text-white ">
-              Hola, {userProfile.nombres} {userProfile.apellidos} 
+              Hola, {userProfile.nombres}
             </h5>
 
 

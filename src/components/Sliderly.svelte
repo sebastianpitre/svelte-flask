@@ -6,6 +6,11 @@
   let listProductos = [];
   let splide;
 
+  // Función que maneja el error de la imagen
+  function manejarErrorImagen(event) {
+      event.target.src = "/public/img/carrito-vacio.png"; // Cambiar a la imagen alternativa
+    }
+
   onMount(async () => {
     try {
       // Obtener productos desde API
@@ -58,6 +63,9 @@
     // Retornar la fecha en formato dd/mm/yyyy
     return `${dia} de ${mes}`;
   }
+
+  
+
 </script>
 
 <style>
@@ -227,7 +235,8 @@
                   <g>
                     <path class="cls-23" d="M63-19.53c102.97,47.03,125.16,93.9,133.93,131.32,10.26,43.8,10.87,114.66,51.51,167.57,6.72,8.76,15.35,13.93,20.6,17.64l153.96-52.43V-21l-360,1.47Z"/>
                     <g class="cls-19">
-                      <image width="2048" height="1536" transform="translate(78 -37) scale(.21)" xlink:href="{values.url_imagen}"/>
+                      <image width="2048" height="1536" transform="translate(78 -37) scale(.21)" xlink:href="{values.url_imagen}"  
+                      on:error={manejarErrorImagen}/>
                     </g>
                     <path class="cls-9" d="M63-19.53c102.97,47.03,125.16,93.9,133.93,131.32,10.26,43.8,10.87,114.66,51.51,167.57,6.72,8.76,15.35,13.93,20.6,17.64l153.96-52.43V-21l-360,1.47Z"/>
                   </g>
@@ -251,7 +260,7 @@
                       <text class="cls-4" transform="translate(44.76 122.74)"><tspan class="cls-20" x="0" y="0">Antes</tspan></text>
                     </g>
                   </g>
-                  <text class="cls-6" transform="translate(46.8 241.94)" text-anchor="middle" dominant-baseline="middle"><tspan x="65" y="-4">Hásta el {convertirFechaDatetimeAFecha(values.fecha_fin_descuento)}</tspan></text>
+                  <text class="cls-6" transform="translate(46.8 241.94)" text-anchor="middle" dominant-baseline="middle"><tspan x="65" y="-4">Hásta agotar existencias</tspan></text>
                 </g>
                 <text class="cls-25" transform="translate(24.86 206.59)"><tspan x="0" y="0">{values.nombre.length >= 19 ? values.nombre.substring(0, 17) + "..." : values.nombre}</tspan></text>
               </svg>

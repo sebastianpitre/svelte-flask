@@ -71,8 +71,9 @@
   };
   </script>
   
-  <main class="row col-12">
-    <div class="col-12 col-md-6 mx-auto pt-3 mb-4 mb-md-0">
+  <main class="container">
+    <div class="row mx-auto">
+      <div class="col-12 mx-auto col-md-6 pt-3 mb-4 mb-md-0">
         <form on:submit={handleSubmit}>
           <div class="card p-3">
             <h3 class="text-center">Agregar Banner</h3>
@@ -101,7 +102,15 @@
             </div>
           </div>
         </form>
+      </div>
+
+      <div class="col-6 mx-auto col-md-6 mb-3">
+        <div class="card">
+            <img class="card-img-top" src="{url_imagen}" alt="img" />
+        </div>
+      </div>
     </div>
+    
   </main>
 
   

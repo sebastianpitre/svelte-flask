@@ -151,8 +151,10 @@
               <button on:click={() => cambiarEstado('ENTREGADO')} class="btn btn-success">Entregar</button>
               {:else if pedido.estado_pedido === "ENTREGADO"}
               <button on:click={() => cambiarEstado('DEVUELTO')} class="btn btn-warning">Devolver</button>
-              {:else}
+              {:else if pedido.estado_pedido === "DEVUELTO"}
               <button class="btn btn-warning" disabled>Devuelto</button>
+              {:else}
+              <button class="btn btn-danger" disabled>Cancelado</button>
              {/if}
           </div>
 
