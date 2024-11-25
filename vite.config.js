@@ -9,6 +9,9 @@ export default defineConfig({
     minify: 'esbuild',  // Usa esbuild para la minificación, que es muy rápido
     chunkSizeWarningLimit: 500,  // Ajusta el límite de tamaño para los "chunks"
   },
+  server: {
+    historyApiFallback: true, // Asegura que las rutas se manejen en local
+  },
   resolve: {
     alias: {
       '@components': '/src/components',  // Alias para la carpeta de componentes
