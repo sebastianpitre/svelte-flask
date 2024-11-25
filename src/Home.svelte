@@ -8,11 +8,12 @@
   import Car from './components/ModalCarrito.svelte';
   import { selectedCategory } from './stores/stores';
   import { cart, addToCart, incrementQuantity, decrementQuantity } from './stores/cart';
-  import Footer from './components/Footer.svelte';
+
   import Card from './components/card.svelte';
   import Sliderly from './components/Sliderly.svelte';
   import BtnAnuncio from './components/BtnAnuncio.svelte';
   import ModalAnuncio from './components/ModalAnuncio.svelte';
+  import Footer from './components/Footer.svelte';
 
   let categorias = [];
 
