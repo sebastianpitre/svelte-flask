@@ -45,7 +45,7 @@
 
     // Función que maneja el error de la imagen
     function manejarErrorImagen(event) {
-      event.target.src = "/public/img/carrito-vacio.png"; // Cambiar a la imagen alternativa
+      event.target.src = "/img/carrito-vacio.png"; // Cambiar a la imagen alternativa
     }
 
   </script>
@@ -68,7 +68,7 @@
     <div class="card-header p-0 position-relative z-index-2" style="border-radius: 0.75rem 0.75rem 0px 0px">
       <div class="d-block blur-shadow-image cursor-pointer img-marco" >
         <a href="{`/ver_producto/${producto.id}`}">
-          <img src="{fotoNoDisponible ? '../public/img/sin-productos.webp' : producto.url_imagen}" width="100%" height="170vh" alt="producto" class="border-bottom img-size {producto.is_promocion ? 'img-oferta' : 'img'} {producto.is_activo ? '' : 'img-no-activo'}" style="border-radius: 0.75rem 0.75rem 0px 0px" on:error={manejarErrorImagen}>
+          <img src="{fotoNoDisponible ? '/img/sin-productos.webp' : producto.url_imagen}" width="100%" height="170vh" alt="producto" class="border-bottom img-size {producto.is_promocion ? 'img-oferta' : 'img'} {producto.is_activo ? '' : 'img-no-activo'}" style="border-radius: 0.75rem 0.75rem 0px 0px" on:error={manejarErrorImagen}>
         </a>
         
       </div>

@@ -60,7 +60,7 @@
 <div class="">
   <div id="sidebar" class="d-flex flex-column" style="background-color: #1b1b1b;">
       <a href="/" class="border-bottom text-center mt-2 mb-1 pb-1">
-          <img class="mb-n1" src="/public/img/logo.svg" alt="imglogo" style="width: 30px;">
+          <img class="mb-n1" src="/img/logo.svg" alt="imglogo" style="width: 30px;">
           <span class="text-white">Vitrina</span>
       </a>
       <a class="my-1 p-1 text-center card-menu mx-2 {linkSelect('/administrador')}" href="/administrador" on:click={() => updatePath('/administrador')}>

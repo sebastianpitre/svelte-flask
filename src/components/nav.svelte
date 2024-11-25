@@ -80,7 +80,7 @@
           <a class="col-9 col-sm-7 col-md-5 col-lg-4 col-xl-4 col-xxl-3 font-weight-bolder " use:link href="/" rel="tooltip" data-placement="bottom">
             <div class="row">
               <div class="col-3 text-end">
-                <img class="my-2" src="/public/img/logo.svg" alt="logo" style="width: 30px;">
+                <img class="my-2" src="/img/logo.svg" alt="logo" style="width: 30px;">
               </div>
               <p class="col-9 border-start border-2 text-dark my-auto font-weight-bold">SENA Empresa vitrina web</p>
             </div>
@@ -239,7 +239,7 @@
                 <span class="material-symbols-outlined text-white pt-1">arrow_back_ios</span>
               </a>
               <div class="col-2 text-end">
-                <img class="mt-1" src="/public/img/logo.svg" alt="logo" style="width: 25px;">
+                <img class="mt-1" src="/img/logo.svg" alt="logo" style="width: 25px;">
               </div>
               <h6 class="col-7 border-start border-1 text-white my-auto font-weight-bold">Vitrina web</h6>
               <div class="col-2 text-end">

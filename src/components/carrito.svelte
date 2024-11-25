@@ -19,7 +19,7 @@
     {#if cartItems.length === 0}
     <div class="text-center my-5">
       <div class="col-12">
-        <img class="" src="../public/img/sin-productos.webp" alt="No products available" style="width: 220px; height: auto;">
+        <img class="" src="/img/sin-productos.webp" alt="No products available" style="width: 220px; height: auto;">
       </div>
       <h4 class="mt-3">El carrito está vacio</h4>
       <p>Agrega productos para continuar con el pedido</p>

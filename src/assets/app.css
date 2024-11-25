@@ -72,7 +72,7 @@
 
   @font-face {
     font-family: 'Mi Fuente';
-    src: url('../public/fonts/WorkSans-Regular.ttf') format('truetype');
+    src: url('/fonts/WorkSans-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }

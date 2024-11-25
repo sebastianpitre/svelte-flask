@@ -92,7 +92,7 @@
     <div class="mx-0 mb-4">
       {#if productosEnPromocion.length > 0 }
         <div class="row my-2 mx-2 pb-1 mx-md-2 mx-md-5">
-          <img class="ms-n2 mt-n1" src="../public/img/icon/star.png" alt="🌟" style="width: 53px; height: 28px">
+          <img class="ms-n2 mt-n1" src="/img/icon/star.png" alt="🌟" style="width: 53px; height: 28px">
           <h5 class="col my-auto text-dark ms-n3">Ofertas</h5>
           <a href="/ofertas" class="col-auto my-auto text-end ms-n3 btn-sm btn mt-n1 p-1 px-2" style="background-color: #ffed00;"><span class=" text-dark">Ver todas → </span></a>
         </div>
