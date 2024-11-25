@@ -80,7 +80,7 @@
           <a class="col-9 col-sm-7 col-md-5 col-lg-4 col-xl-4 col-xxl-3 font-weight-bolder " use:link href="/" rel="tooltip" data-placement="bottom">
             <div class="row">
               <div class="col-3 text-end">
-                <img class="my-2" src="/public/img/logo.svg" alt="imglogo" style="width: 30px;">
+                <img class="my-2" src="/public/img/logo.svg" alt="logo" style="width: 30px;">
               </div>
               <p class="col-9 border-start border-2 text-dark my-auto font-weight-bold">SENA Empresa vitrina web</p>
             </div>
