@@ -3,6 +3,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 
 export default defineConfig({
   plugins: [svelte()],
+  publicDir: 'public',
   build: {
     outDir: 'dist',  // Carpeta donde se guardará la construcción de producción
     sourcemap: true,  // Genera archivos sourcemap para depuración
