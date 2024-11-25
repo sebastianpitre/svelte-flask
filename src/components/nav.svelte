@@ -239,7 +239,7 @@
                 <span class="material-symbols-outlined text-white pt-1">arrow_back_ios</span>
               </a>
               <div class="col-2 text-end">
-                <img class="mt-1" src="/public/img/logo.svg" alt="imglogo" style="width: 25px;">
+                <img class="mt-1" src="/public/img/logo.svg" alt="logo" style="width: 25px;">
               </div>
               <h6 class="col-7 border-start border-1 text-white my-auto font-weight-bold">Vitrina web</h6>
               <div class="col-2 text-end">

@@ -37,7 +37,7 @@
 </script>
 
 
-    <div class="position-sticky bottom-1 d-md-none mb-n2" style="z-index: 999;">
+    <div class="position-fixed bottom-1 d-md-none mb-n1" style="z-index: 999; width: 100%;">
         <div class="container-fluid">
             <div class="row mx-sebas" style="border-radius: 0.60rem;">
 

@@ -84,7 +84,7 @@
 
 </script>
 
-<main style="min-height: 90vh;">
+<main>
     
     <Nav/>
     <Header/>
