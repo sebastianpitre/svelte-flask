@@ -1,6 +1,5 @@
 <script>
     import { isAuthenticated, checkAuth } from '../stores/auth';
-	import Footer from '../components/Footer.svelte';
     import { eliminarProducto } from '../api/productos';
     import { onMount } from 'svelte';
     import { getProductos } from '../api/productos';
@@ -9,6 +8,7 @@
     // Importamos las librerías de DataTables
     import jQuery from 'jquery';
     import 'datatables.net-dt';
+    import Footer from '../components/Footer.svelte';
 
     let productos = [];
     let errorMessage = '';
