@@ -3,8 +3,8 @@
     import { fetchWithAuth } from '../api/auth';
     import Swal from 'sweetalert2';
     import { getCategorias } from '../api/categorias';
-    import Footer from '../components/Footer.svelte';
-    import MenuAcciones from '../components/MenuLateral.svelte';
+    import Footer from '@components/Footer.svelte';
+    import MenuAcciones from '@components/MenuLateral.svelte';
 
     let categorias = [];
     let errorMessage = '';

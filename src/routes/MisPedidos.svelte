@@ -1,8 +1,8 @@
 <script>
-    import Menufooter from '../components/menufooter.svelte';
+    import Menufooter from '@components/menufooter.svelte';
     import { isAuthenticated, checkAuth } from '../stores/auth';
-    import Footer from '../components/Footer.svelte';
-    import Nav from '../components/nav.svelte';
+    import Footer from '@components/Footer.svelte';
+    import Nav from '@components/nav.svelte';
     import { onMount } from 'svelte';
     import { getMisPedidos } from '../api/pedidoAdmin';
 
@@ -33,7 +33,7 @@
 
     // modal carrito
     import { idStore, isModalOpenPedidos } from '../stores/modalStore';
-    import ModalMisPedidos from '../components/ModalMisPedidos.svelte';
+    import ModalMisPedidos from '@components/ModalMisPedidos.svelte';
 
     function openModal(id) {
         idStore.set(id); // Asigna el ID al store

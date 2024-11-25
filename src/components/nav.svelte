@@ -29,7 +29,7 @@
   }
 
   // modal Search
-    import ModalSearch from '../components/ModalSearch.svelte';
+    import ModalSearch from '@components/ModalSearch.svelte';
     import { isModalOpenSearch } from '../stores/modalStore';
 
     function openModalSearch() {

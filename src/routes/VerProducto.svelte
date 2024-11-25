@@ -3,9 +3,9 @@
 
   // Importar la tienda del carrito y funciones para modificarla
   import { cart, addToCart, incrementQuantity, decrementQuantity } from '../stores/cart';
-  import Nav from '../components/nav.svelte';
-  import Menufooter from '../components/menufooter.svelte';
-  import Footer from '../components/Footer.svelte';
+  import Nav from '@components/nav.svelte';
+  import Menufooter from '@components/menufooter.svelte';
+  import Footer from '@components/Footer.svelte';
 
   // Recibir el `id` como prop
   export let id;

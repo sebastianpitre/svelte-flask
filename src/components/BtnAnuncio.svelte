@@ -1,6 +1,6 @@
 <script>
     // modal Search
-    import ModalSearch from '../components/ModalAnuncio.svelte';
+    import ModalSearch from '@components/ModalAnuncio.svelte';
     import { isModalOpenAnuncios } from '../stores/modalStore';
 
     function openModalAnuncios() {

@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
-	import Footer from '../components/Footer.svelte';
-    import MenuAcciones from '../components/MenuLateral.svelte';
+	import Footer from '@components/Footer.svelte';
+    import MenuAcciones from '@components/MenuLateral.svelte';
     import { eliminarUsuario } from '../api/usuarios';
     import { getUsuarios } from '../api/usuarios';
 

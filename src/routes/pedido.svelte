@@ -1,7 +1,7 @@
 <script>
     import { createPedido } from '../api/pedido';
     import { getProductos } from '../api/productos';
-    import Footer from '../components/Footer.svelte';
+    import Footer from '@components/Footer.svelte';
     import { vaciarCarrito } from '../stores/cart';
     import { fetchUserProfile } from '../api/user.js';
     import { user } from '../stores/user.js'; // Store para guardar los datos del usuario

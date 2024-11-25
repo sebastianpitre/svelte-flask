@@ -1,13 +1,13 @@
 <script>
-	import Footer from '../components/Footer.svelte';
+	import Footer from '@components/Footer.svelte';
     import { eliminarProducto } from '../api/productos';
-    import MenuAcciones from '../components/MenuLateral.svelte';
-    import HeaderAdmin from '../components/HeaderAdmin.svelte';
-    import Chart from "../components/graficos/ProdMasVendidos.svelte";
-    import Ganancias from '../components/graficos/Ganancias.svelte';
-    import VentasPorFechas from '../components/graficos/VentasPorFechas.svelte';
-    import VentasPorProducto from '../components/graficos/VentasPorProducto.svelte';
-    import Stock from '../components/graficos/Stock.svelte';
+    import MenuAcciones from '@components/MenuLateral.svelte';
+    import HeaderAdmin from '@components/HeaderAdmin.svelte';
+    import Chart from "@components/graficos/ProdMasVendidos.svelte";
+    import Ganancias from '@components/graficos/Ganancias.svelte';
+    import VentasPorFechas from '@components/graficos/VentasPorFechas.svelte';
+    import VentasPorProducto from '@components/graficos/VentasPorProducto.svelte';
+    import Stock from '@components/graficos/Stock.svelte';
 
 </script>
 

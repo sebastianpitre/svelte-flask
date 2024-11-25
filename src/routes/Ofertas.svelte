@@ -1,8 +1,8 @@
 <script>
   import { onMount } from 'svelte';
-  import Nav from '../components/nav.svelte';
-  import Menufooter from '../components/menufooter.svelte';
-  import Footer from '../components/Footer.svelte';
+  import Nav from '@components/nav.svelte';
+  import Menufooter from '@components/menufooter.svelte';
+  import Footer from '@components/Footer.svelte';
 
   let listProductos = [];
 

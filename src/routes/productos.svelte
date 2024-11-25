@@ -3,12 +3,12 @@
     import { eliminarProducto } from '../api/productos';
     import { onMount } from 'svelte';
     import { getProductos } from '../api/productos';
-    import MenuAcciones from '../components/MenuLateral.svelte';
+    import MenuAcciones from '@components/MenuLateral.svelte';
 
     // Importamos las librerías de DataTables
     import jQuery from 'jquery';
     import 'datatables.net-dt';
-    import Footer from '../components/Footer.svelte';
+    import Footer from '@components/Footer.svelte';
 
     let productos = [];
     let errorMessage = '';
