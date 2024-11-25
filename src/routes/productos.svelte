@@ -8,7 +8,7 @@
     // Importamos las librerías de DataTables
     import jQuery from 'jquery';
     import 'datatables.net-dt';
-    import Footer from '@components/Footer.svelte';
+    // import Footer from '@components/Footer.svelte';
 
     let productos = [];
     let errorMessage = '';
@@ -166,5 +166,5 @@
         </div>
     </div>
     
-    <Footer/>
+    <!-- <Footer/> -->
 </main>
