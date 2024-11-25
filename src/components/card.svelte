@@ -72,11 +72,9 @@
         </a>
         
       </div>
-      <!-- {#if producto.is_promocion === true && producto.is_activo === true}
-        <div class="blur opacity-9 col-8 col-sm-6 text-dark text-center position-absolute" style="z-index: 3; border-radius: 7px 0px 0px 0px; bottom: 1px; right: 1px; height: 20px; font-size: 15px;">
-          <span class="material-symbols-outlined" style="font-size: 15px;">schedule</span> 2 dias 13h
-        </div>
-      {/if} -->
+      <div class="blur opacity-9 col-8 col-sm-6 text-dark text-center position-absolute" style="z-index: 3; border-radius: 7px 0px 0px 0px; bottom: 1px; right: 1px; height: 20px; font-size: 15px;">
+        stock {Math.trunc(producto.stock)}
+      </div>
       
 
       <div class="colored-shadow" style="background-image: url(&quot;{producto.url_imagen}&quot;);"></div>
@@ -128,11 +126,10 @@
                 {/if}
                 <span class="col p-1 btn disabled text-dark">{itemQuantity}</span>
 
-                {#if itemQuantity < producto.max_usuario-cantidadProductoEnHistorial(producto.id) || producto.max_usuario === 0}
+                {#if (producto.max_usuario === 0 && itemQuantity < producto.stock) || (producto.max_usuario > 0 && itemQuantity < Math.min(producto.stock, producto.max_usuario - cantidadProductoEnHistorial(producto.id)))}
                 <button class="btn col btn-sm border border-success text-success" on:click={() => incrementQuantity(producto.id)}>+</button>
                 {:else}
-                <button class="btn col btn-sm border text-dark" disabled on:click={() => incrementQuantity(producto.id)}>max</button>
-                
+                  <button class="btn col btn-sm border text-dark" disabled on:click={() => incrementQuantity(producto.id)}>max</button>
                 {/if}
               </div>
             {/if}
