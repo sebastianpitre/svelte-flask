@@ -74,7 +74,7 @@
   <div class="modal-content">
     <div class="col">
       <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <span class="close position-absolute text-center text-gray" on:click={() => isModalOpen.set(false)}>&times;</span>
+      <div class="close position-absolute text-center text-gray" on:click={() => isModalOpen.set(false)}>&times;</div>
     </div>
     <p class="text-dark text-bold text-2xl">Carrito</p>
     <Carrito />

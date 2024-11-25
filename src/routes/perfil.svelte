@@ -52,44 +52,46 @@
 
         {#if isDisabled}
         <div class="text-end col cursor-pointer">
-          <span class="material-symbols-outlined text-end text-success" on:click={enableEditing}>
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <!-- svelte-ignore a11y-no-static-element-interactions -->
+          <div class="material-symbols-outlined text-end text-success" on:click={enableEditing}>
             edit_square
-            </span>
+            </div>
         </div>
           
         {/if}
 
         <div class="col-12 col-md-6">
           <div class="input-group input-group-static my-2">
-            <label>Nombres</label>
+            <label for="nombre">Nombres</label>
             <input type="text" bind:value={userProfile.nombres} class="form-control" required disabled={isDisabled}/>
           </div>
         </div>
 
         <div class="col-12 col-md-6">
           <div class="input-group input-group-static my-2">
-            <label>Apellidos</label>
+            <label for="Apellidos">Apellidos</label>
             <input type="text" bind:value={userProfile.apellidos} class="form-control" required disabled={isDisabled}/>
           </div>
         </div>
 
         <div class="col-12 col-md-6">
           <div class="input-group input-group-static my-2">
-            <label>Celular</label>
+            <label for="cel">Celular</label>
             <input type="number" bind:value={userProfile.telefono} class="form-control" required disabled={isDisabled}/>
           </div>
         </div>
 
         <div class="col-12 col-md-6">
           <div class="input-group input-group-static my-2">
-            <label>Correo</label>
+            <label for="correo">Correo</label>
             <input type="text" bind:value={userProfile.email} class="form-control" required disabled={isDisabled}/>
           </div>
         </div>
 
         <div class="col-12 col-md-6">
           <div class="input-group input-group-static my-2">
-            <label>Contraseña</label>
+            <label for="contra">Contraseña</label>
             <input type="password" bind:value={userProfile.password} class="form-control" required disabled={isDisabled}/>
           </div>
         </div>

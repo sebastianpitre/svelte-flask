@@ -105,10 +105,10 @@
 <div class="modal" class:open={$isModalOpenPedidosMod} on:click={handleClickOutside} role="dialog" aria-modal="true">
   <ProteccionMod/>
   <div class="modal-content">
-    <div class="col mt-n4 text-end">
-      <span class="close" on:click={() => isModalOpenPedidosMod.set(false)}>&times;</span>
+    <div class="col mb-4">
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div class="close position-absolute text-center" on:click={() => isModalOpenPedidosMod.set(false)}>&times;</div>
     </div>
-
     {#if pedido}
       <div>
         <div class="row">

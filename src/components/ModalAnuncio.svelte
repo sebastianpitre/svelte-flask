@@ -167,7 +167,7 @@
   <div class="modal-content">
     <div class="col">
       <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <span class="close position-absolute text-center" on:click={() => isModalOpenAnuncios.set(false)}>&times;</span>
+      <div class="close position-absolute text-center" on:click={() => isModalOpenAnuncios.set(false)}>&times;</div>
     </div>
     <div class="splide ">
       <div class="splide__track">

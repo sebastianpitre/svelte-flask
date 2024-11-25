@@ -14,9 +14,9 @@
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <div class="modal" class:open={$isModalOpenSearch} on:click={handleClickOutside} role="dialog" aria-modal="true">
   <div class="modal-content">
-    <div class="col">
+    <div class="col mb-4">
       <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <span class="close position-absolute text-center" on:click={() => isModalOpenSearch.set(false)}>&times;</span>
+      <div class="close position-absolute text-center" on:click={() => isModalOpenSearch.set(false)}>&times;</div>
     </div>
     <div class="col mt-n4 text-end">
       <SearchMovile/>

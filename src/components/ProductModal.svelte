@@ -35,9 +35,10 @@
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="modal" style="display: block;">
     <div class="modal-content">
-        <div class="col text-end mt-n3 me-n2">
-            <span class="close bg-dark text-white px-2 border-radius-2xl" on:click={closeModal}>&times;</span>
 
+        <div class="col mb-4">
+          <!-- svelte-ignore a11y-no-static-element-interactions -->
+          <div class="close position-absolute text-center" on:click={closeModal}>&times;</div>
         </div>
 
 

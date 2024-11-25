@@ -243,6 +243,8 @@
               </div>
               <h6 class="col-7 border-start border-1 text-white my-auto font-weight-bold">Vitrina web</h6>
               <div class="col-2 text-end">
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <div class="material-symbols-outlined text-white pt-1" on:click={openModalSearch}>search</div>
               </div>
             </div>

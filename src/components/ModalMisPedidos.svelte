@@ -95,10 +95,11 @@
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <div class="modal" class:open={$isModalOpenPedidos} on:click={handleClickOutside} role="dialog" aria-modal="true">
   <div class="modal-content">
-    <div class="col mt-n4 text-end">
-      <span class="close" on:click={() => isModalOpenPedidos.set(false)}>&times;</span>
-    </div>
 
+    <div class="col mb-4">
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div class="close position-absolute text-center" on:click={() => isModalOpenPedidos.set(false)}>&times;</div>
+    </div>
     {#if pedido}
       <div>
         <div class="row">
