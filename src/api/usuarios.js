@@ -52,7 +52,7 @@ export async function eliminarUsuario(id) {
     } catch (error) {
         Swal.fire(
             'Error',
-            `Hubo un problema al eliminar el usuario: ${error.message || error}`,
+            `Este Usuario no puede ser eliminado`,
             'error'
         );
     }

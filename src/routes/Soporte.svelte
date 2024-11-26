@@ -52,22 +52,6 @@
         }, 3000); // 3000 ms = 3 segundos
     }
 
-    // Función auxiliar para obtener el nombre del producto por su ID
-  function obtenerNombreProducto(idProducto) {
-    const productoEncontrado = productosx.find((prod) => prod.id === idProducto);
-    return productoEncontrado ? productoEncontrado.nombre : 'Producto';
-  }
-
-  function obtenerCantidad(idProducto) {
-    const productoCantidad = productosx.find((prod) => prod.id === idProducto);
-    return productoCantidad ? productoCantidad.cantidad : '';
-  }
-
-  function obtenerCantidadUnidad(idProducto) {
-    const productoCantidad = productosx.find((prod) => prod.id === idProducto);
-    return productoCantidad ? productoCantidad.unidad_producto : '.';
-  }
-
     // Llama a la función al montar el componente
     onMount(() => {
         console.log('ID del pedido:', id);
@@ -99,6 +83,7 @@
 
         return { fechaFormateada, horaFormateada };
     }
+    
   </script>
 <main>
     {#if pedido}
@@ -119,12 +104,14 @@
           </div>
   
           <h3>Detalles del Pedido</h3>
-          <p><strong>N° Pedido:</strong> {pedido.id_pedido}</p>
-          <p><strong>Estado:</strong> {pedido.estado_pedido}</p>
-          <p><strong>Fecha creación: </strong>{formatearFecha(pedido.fecha_creacion).fechaFormateada}</p>
+          <p class="my-0"><strong>Numero Pedido:</strong> 00{pedido.id_pedido}</p>
+          <p class="my-0"><strong>Estado Pedido:</strong> {pedido.estado_pedido}</p>
+          <p class="my-0"><strong>Fecha creación: </strong>{formatearFecha(pedido.fecha_creacion).fechaFormateada}</p>
+          <p class="my-0"><strong>Cliente: </strong>{pedido.nombre_usuario} {pedido.apellido_usuario}</p>
+          <p class="my-0"><strong>Identificación: </strong>{pedido.identificacion_usuario}</p>
 
     
-          <h5>Productos</h5>
+          <h5 class="mt-3">Productos</h5>
           <div class=" border">
             <table class="table align-items-center mb-0">
                 <thead>
@@ -138,7 +125,9 @@
                   {#if pedido.productos && pedido.productos.length > 0}
                   {#each pedido.productos as producto}
                   <tr>
-                      <td class="text-xs text-dark font-weight-bolder border-0 ps-4">{obtenerNombreProducto(producto.id)} x{obtenerCantidad(producto.id)} {obtenerCantidadUnidad(producto.id)}</td>
+                      <td class="text-xs text-dark font-weight-bolder border-0 ps-4">
+                         {producto.nombre_producto} x{Math.trunc(producto.cantidad_producto)} {producto.unidad_producto}
+                      </td>
                       <td class="text-xs text-dark font-weight-bolder border-0 text-center">{producto.cantidad}</td>
                       <td class="text-xs text-dark font-weight-bolder border-0 text-center">{producto.precio}</td>
                   </tr>
@@ -151,7 +140,12 @@
             
           </div>
 
-          <p class="text-end mt-2"><strong>Total:</strong> {pedido.monto_total}</p>
+          <div class="mt-2 ">
+            <div class="row mx-0 text-dark">
+              <div class="text-end col"><strong>Total</strong></div>
+              <div class="text-end border col-auto">$ {pedido.monto_total.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+            </div>
+          </div>
 
   
           

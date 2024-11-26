@@ -142,6 +142,9 @@
                     </td>
 
                     <td class="text-center">
+                        <a href="/soporte/{values.id_pedido}" class="btn btn-sm px-1 pb-0 text-white bg-success">
+                            <span class="material-symbols-outlined simbolo-icon">contract</span>
+                        </a>
                         <button on:click={() => openModal(values.id_pedido)} class="btn btn-sm text-white bg-info">Detalles</button>
                     </td>
                 </tr>

@@ -71,7 +71,8 @@ export async function createPedido() {
                 id: producto.id,
                 cantidad: item.quantity,
                 precio: precio_final,
-                nombre: producto.nombre,
+                nombre_producto: producto.nombre,
+                unidad_producto: producto.unidad_producto,
                 cantidad_producto: producto.cantidad
             };
         });

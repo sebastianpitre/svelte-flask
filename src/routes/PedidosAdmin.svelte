@@ -58,20 +58,23 @@
             }
         }, 300); // Revisa cada 300ms hasta que los pedidos se hayan cargado
     });
+    
+    function formatearFechaUTC(fechaGMT) {
+        const fecha = new Date(fechaGMT);
 
-     // Función para formatear la fecha en español
-     function formatearFecha(fechaISO) {
-        const fecha = new Date(fechaISO);
-        
-        // Formatear la fecha en español
-        const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' };
-        const fechaFormateada = new Intl.DateTimeFormat('es-ES', opcionesFecha).format(fecha);
-        
-        // Obtener la hora por separado
-        const opcionesHora = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
-        const horaFormateada = new Intl.DateTimeFormat('es-ES', opcionesHora).format(fecha);
+        // Formatear fecha en UTC
+        const dia = fecha.getUTCDate();
+        const mes = fecha.toLocaleString('es-ES', { month: 'long', timeZone: 'UTC' });
+        const anio = fecha.getUTCFullYear();
 
-        return { fechaFormateada, horaFormateada };
+        const hora = fecha.getUTCHours().toString().padStart(2, '0');
+        const minutos = fecha.getUTCMinutes().toString().padStart(2, '0');
+        const segundos = fecha.getUTCSeconds().toString().padStart(2, '0');
+
+        return {
+            fechaFormateada: `${dia} de ${mes} de ${anio}`,
+            horaFormateada: `${hora}:${minutos}:${segundos}`,
+        };
     }
 </script>
 
@@ -95,7 +98,7 @@
                                         <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Estado pedido</th>
                                         <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7 ">Total</th>
                                         <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7 ">Fecha de creación</th>
-                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7 ">Id del usuario</th>
+                                        <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7 ">Cliente</th>
                                         <th class="text-uppercase font-weight-bolder opacity-7"></th>
                                     </tr>
                                 </thead>
@@ -140,15 +143,16 @@
             
                                         <td class="text-sm mb-0 text-center">
                                             <p class="mb-0">
-                                                <span class="font-weight-bold">{formatearFecha(values.fecha_creacion).fechaFormateada}</span><br>
-                                                <span class="font-weight-bold">hora: {formatearFecha(values.fecha_creacion).horaFormateada}</span>
+                                                <span class="">{formatearFechaUTC(values.fecha_creacion).fechaFormateada}</span><br>
+                                                <span class="">hora: {formatearFechaUTC(values.fecha_creacion).horaFormateada}</span>
                                             </p>
                                             
                                         </td>
     
                                         <td class="">
                                             <p class="text-sm mb-0 text-center">
-                                                <span class=" font-weight-bold">{values.id_usuario} </span>
+                                                <span class="">{values.nombre_usuario} {values.apellido_usuario}</span><br>
+                                                <span class=" font-weight-bold">{values.identificacion_usuario} </span>
                                             </p>
                                         </td>
     

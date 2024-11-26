@@ -31,7 +31,7 @@
   async function fetchPedido() {
     if (id) {
       try {
-        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/pedidos/${id}`);
+        const data = await fetchWithAuth(`http://127.0.0.1:5000/api/usuarios/pedidos/${id}`);
         console.log('Datos recibidos:', data);
 
         // Verifica si la respuesta tiene la estructura que esperas
@@ -66,11 +66,7 @@
   }
 }
 
-  // Función auxiliar para obtener el nombre del producto por su ID
-  function obtenerNombreProducto(idProducto) {
-    const productoEncontrado = productosx.find((prod) => prod.id === idProducto);
-    return productoEncontrado ? productoEncontrado.nombre : 'Producto no encontrado';
-  }
+
 
   // Llama a las funciones al montar el componente
   onMount(async () => {
@@ -124,7 +120,7 @@
 
             <span>Fecha de creación - {pedido.fecha_creacion}</span><br>
 
-            <span>ID del usuario - {pedido.id_usuario}</span>
+            <span>Cliente - {pedido.nombre_usuario} {pedido.apellido_usuario}</span>
 
           </div>
 
@@ -156,7 +152,7 @@
                 {#each pedido.productos as producto}
                 <tr>
                   <td>{producto.id}</td>
-                  <td>{obtenerNombreProducto(producto.id)} x{producto.cantidad_producto}</td>
+                  <td>{producto.nombre_producto} x{Math.trunc(producto.cantidad_producto)} {producto.unidad_producto}</td>
                   <td class="text-center">{producto.cantidad}</td>
                   <td class="text-center">{producto.precio}</td>
                 </tr>

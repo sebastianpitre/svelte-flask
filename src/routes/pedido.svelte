@@ -83,13 +83,11 @@
                         title: '¡Éxito!',
                         text: 'Pedido creado con éxito',
                         icon: 'success',
-                        confirmButtonText: 'Mirar pedido',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Redirigir a "mis_pedidos"
+                        showConfirmButton: false,
+                            timer: 1500,
+                        }).then(() => {
                             window.location.href =`/soporte/${id_pedido}`;
-                        }
-                    });
+                        });
                     vaciarCarrito();
                 }else{
                     // Mostrar SweetAlert de éxito

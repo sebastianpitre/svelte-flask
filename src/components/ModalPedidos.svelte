@@ -139,7 +139,9 @@
 
             <span>Fecha de creación - {pedido.fecha_creacion}</span><br>
 
-            <span>ID del usuario - {pedido.id_usuario}</span>
+            <span>Cliente - {pedido.nombre_usuario} {pedido.apellido_usuario}</span><br>
+
+            <span>Indentificación - {pedido.identificacion_usuario}</span>
 
           </div>
 
@@ -178,7 +180,7 @@
                 {#each pedido.productos as producto}
                 <tr>
                   <td>{producto.id}</td>
-                  <td>{obtenerNombreProducto(producto.id)} x{producto.cantidad_producto}</td>
+                  <td>{producto.nombre_producto} x{Math.trunc(producto.cantidad_producto)} {producto.unidad_producto}</td>
                   <td class="text-center">{producto.cantidad}</td>
                   <td class="text-center">{producto.precio}</td>
                 </tr>
