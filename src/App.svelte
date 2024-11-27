@@ -25,6 +25,8 @@
   import Salidas from "./routes/Salidas.svelte";
   import ConsultarPedidos from "./routes/ConsultarPedidos.svelte";
     import Estadisticas from "./routes/Estadisticas.svelte";
+    import VistaSalidas from "./routes/VistaSalidas.svelte";
+    import VistaEntradas from "./routes/VistaEntradas.svelte";
 </script>
 
 <main>
@@ -51,7 +53,8 @@
     <Route path="/producto/:id" component={ProductForm} />
     <Route path="/ver_producto/:id" component={VerProducto} />
     <Route path="/entrada/:id" component={Entrada} />
-    <Route path="/salida" component={Salidas} />
+    <Route path="/vista_salidas" component={VistaSalidas} />
+    <Route path="/vista_entradas" component={VistaEntradas} />
     <Route path="/salida/:id" component={Salidas} />
 
     <Route path="/usuarios" component={Usuarios} />

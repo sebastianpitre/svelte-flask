@@ -89,6 +89,17 @@
           <p class="pt-1 text-white text-menu">Usuarios</p>
           <span class="{selector('/usuarios')}"></span>
       </a>
+      <a class="my-1 p-1 text-center card-menu mx-2 {linkSelect('/vista_salidas')}" href="/vista_salidas" on:click={() => updatePath('/vista_salidas')}>
+        <span class="material-symbols-outlined simbolo-icon {isActive('/vista_salidas')}">logout</span>
+        <p class="pt-1 text-white text-menu">Salidas</p>
+        <span class="{selector('/vista_salidas')}"></span>
+      </a>
+      <a class="my-1 p-1 text-center card-menu mx-2 {linkSelect('/vista_entradas')}" href="/vista_entradas" on:click={() => updatePath('/vista_entradas')}>
+        <span class="material-symbols-outlined simbolo-icon {isActive('/vista_entradas')}">login</span>
+        <p class="pt-1 text-white text-menu">Entradas</p>
+        <span class="{selector('/vista_entradas')}"></span>
+      </a>
+
       <a class="my-1 p-1 text-center card-menu mx-2 {linkSelect('/ajustes')} mt-auto" href="/ajustes" on:click={() => updatePath('/')}>
           <span class="material-symbols-outlined simbolo-icon {isActive('/ajustes')}">settings</span>
           <p class="pt-1 text-white text-menu">Ajustes</p>

@@ -213,7 +213,7 @@ function manejarErrorImagen(event) {
             <div class="col-12 col-md-3">
               <label for="unidad_producto" class="form-label">Unidad de medida</label>
               <div class="input-group input-group-outline mb-3 mt-n1">
-                  <select class="form-control" bind:value={unidad_producto} required>
+                  <select class="form-control" bind:value={unidad_producto} required disabled={stock ? true : false}>
                       <option value="" selected>Seleccionar</option>
                       <option value="KG" >Kilogramo</option>
                       <option value="GR" >Gramo</option>

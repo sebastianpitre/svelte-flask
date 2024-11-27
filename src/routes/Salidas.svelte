@@ -92,7 +92,9 @@
 
 <main class="row m-0">
 <div class="col-12 col-md-8 mx-auto pt-3 mb-4 mb-md-0">
-  <h3>Nueva salida para el producto</h3>
+  <div class="row">
+      <h4 class="col-12 pt-3">Nueva Salida</h4>
+  </div>
 
   <form on:submit={handleSubmit}>
     <div class="card p-3">
@@ -138,7 +140,7 @@
         <!-- Botones de acción -->
         <div class="col-12 text-center mt-4">
           <a href="/productos" class="btn btn-danger">Cancelar</a>
-          <button type="submit" class="btn btn-success">Agregar entrada</button>
+          <button type="submit" class="btn btn-success">Agregar salida</button>
         </div>
     </div>
   </form>
