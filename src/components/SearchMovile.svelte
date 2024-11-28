@@ -79,7 +79,7 @@
   <style>
     .search-wrapper {
       position: relative;
-      margin-top: 20px;
+      margin-top: -4px;
     }
 
     input {

@@ -8,6 +8,7 @@
   let nombres = "";
   let apellidos = "";
   let email = "";
+  let rol = "";
   let password = "";
   let tipo_identificacion = "";
   let identificacion = "";
@@ -27,6 +28,7 @@
             nombres = user.nombres || "";
             apellidos = user.apellidos || "";
             email = user.email || "";
+            rol = user.rol || "";
             password = user.password || "";
             tipo_identificacion = user.tipo_identificacion || "";
             identificacion = user.identificacion || "";
@@ -49,6 +51,7 @@
       nombres,
       apellidos,
       email,
+      rol,
       password,
       tipo_identificacion,
       identificacion,
@@ -92,72 +95,99 @@
     <form on:submit={handleSubmit}>
       <div class="card p-3">
         <h3 class="text-center">{id ? "Editar usuario" : "Guardar usuario"}</h3>
-        <div class="row mx-auto pt-3">
+        <div class="row">
           <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="Nombres">Nombres</label>
-              <input type="text" class="form-control" bind:value={nombres} required />
-            </div>
+              <label for="nombres" class="form-label">Nombres</label>
+              <div class="input-group input-group-outline mb-2 mt-n2">
+                  <input type="text" id="nombres" class="form-control" bind:value={nombres} required>
+              </div>
           </div>
+
           <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="Apellidos">Apellidos</label>
-              <input type="text" class="form-control" bind:value={apellidos} required />
-            </div>
+              <label for="apellidos" class="form-label">Apellidos</label>
+              <div class="input-group input-group-outline mb-2 mt-n2">
+                  <input type="text" id="apellidos" class="form-control" bind:value={apellidos} required>
+              </div>
           </div>
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="Email">Email</label>
-              <input type="email" class="form-control" bind:value={email} required />
-            </div>
+          
+          <div class="col-12 col-md-5">
+              <label for="email" class="form-label">Correo</label>
+              <div class="input-group input-group-outline mb-2 mt-n2">
+                  <input type="email" id="email" class="form-control" bind:value={email} required>
+              </div>
           </div>
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="Contraseña">Contraseña</label>
-              <input type="password" class="form-control" bind:value={password} required />
+
+          <div class="col-5 col-md-2">
+            <label for="tipo_identificacion" class="form-label">Rol</label>
+            <div class="input-group input-group-outline mb-3 mt-n2">
+                <select id="tipo_identificacion" class="form-control" bind:value={rol} required>
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option value="ADMIN">Administrador</option>
+                    <option value="MOD">Moderador</option>
+                    <option value="CLIENTE">Cliente</option>
+                    <!-- Agrega más opciones según sea necesario -->
+                </select>
             </div>
+        </div>
+
+          <div class="col-12 col-md-5">
+              <label for="password" class="form-label">Contraseña</label>
+              <div class="input-group input-group-outline mb-3 mt-n2">
+                  <input type="password" id="password" class="form-control" bind:value={password}>
+              </div>
           </div>
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="TipoIdentificacion">Tipo identificación</label>
-              <input type="text" class="form-control" bind:value={tipo_identificacion} />
-            </div>
+
+          <div class="col-5 col-md-4">
+              <label for="tipo_identificacion" class="form-label">Tipo ident.</label>
+              <div class="input-group input-group-outline mb-3 mt-n2">
+                  <select id="tipo_identificacion" class="form-control" bind:value={tipo_identificacion} required>
+                      <option value="" disabled selected>Seleccionar</option>
+                      <option value="CC">CC</option>
+                      <option value="TI">TI</option>
+                      <!-- Agrega más opciones según sea necesario -->
+                  </select>
+              </div>
           </div>
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="Identificacion">Identificación</label>
-              <input type="text" class="form-control" bind:value={identificacion} required />
-            </div>
+
+          <div class="col-7 col-md-8">
+              <label for="identificacion" class="form-label">Numero ident.</label>
+              <div class="input-group input-group-outline mb-2 mt-n2">
+                  <input type="text" id="identificacion" class="form-control" bind:value={identificacion} required>
+              </div>
           </div>
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="Telefono">Teléfono</label>
-              <input type="text" class="form-control" bind:value={telefono} required />
-            </div>
+
+          <div class="col-12 col-md-5">
+              <label for="telefono" class="form-label">Teléfono</label>
+              <div class="input-group input-group-outline mb-2 mt-n2">
+                  <input type="text" id="telefono" class="form-control" bind:value={telefono} required>
+              </div>
           </div>
-          <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="Direccion">Dirección</label>
-              <input type="text" class="form-control" bind:value={direccion} required />
-            </div>
+
+          <div class="col-12 col-md-7">
+              <label for="direccion" class="form-label">Dirección</label>
+              <div class="input-group input-group-outline mb-2 mt-n2">
+                  <input type="text" id="direccion" class="form-control" bind:value={direccion} required>
+              </div>
           </div>
+          
           <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="Barrio">Barrio</label>
-              <input type="text" class="form-control" bind:value={barrio} required />
-            </div>
+              <label for="barrio" class="form-label">Barrio</label>
+              <div class="input-group input-group-outline mb-2 mt-n2">
+                  <input type="text" id="barrio" class="form-control" bind:value={barrio} required>
+              </div>
           </div>
+
           <div class="col-12 col-md-6">
-            <div class="input-group input-group-static my-2">
-              <label for="Ciudad">Ciudad</label>
-              <input type="text" class="form-control" bind:value={ciudad} required />
-            </div>
+              <label for="ciudad" class="form-label">Ciudad</label>
+              <div class="input-group input-group-outline mb-2 mt-n2">
+                  <input type="text" id="ciudad" class="form-control" bind:value={ciudad} required>
+              </div>
           </div>
           <div class="col-12 text-center">
             <a href="/usuarios" class="btn btn-danger">Cancelar</a>
             <button class="btn btn-success" type="submit">Guardar</button>
           </div>
-        </div>
+      </div>
       </div>
     </form>
   </div>

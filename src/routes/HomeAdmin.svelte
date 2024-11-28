@@ -1,23 +1,39 @@
 <script>
-	import Footer from '../components/Footer.svelte';
     import { eliminarProducto } from '../api/productos';
-    import MenuAcciones from '../components/MenuLateral.svelte';
     import HeaderAdmin from '../components/HeaderAdmin.svelte';
     import Chart from "@components/graficos/ProdMasVendidos.svelte";
     import Ganancias from '../components/graficos/Ganancias.svelte';
     import VentasPorFechas from '../components/graficos/VentasPorFechas.svelte';
     import VentasPorProducto from '../components/graficos/VentasPorProducto.svelte';
     import Stock from '../components/graficos/Stock.svelte';
+    import MenuLateral from '../components/MenuLateral.svelte';
+    import { getPedidosIndex, getProductosIndex, getCategoriasIndex, getUsuariosIndex } from '../api/admin.js'; // Importa la función de la API
+    import { onMount } from 'svelte';
+
+
+    let totalPedidos = 0
+    let totalProductos = 0
+    let totalCategorias = 0
+    let totalUsuarios = 0
+
+    onMount(async () => {
+        totalPedidos = await getPedidosIndex(); // Llama a la función externa
+        totalProductos = await getProductosIndex(); // Llama a la función externa
+        totalCategorias = await getCategoriasIndex(); // Llama a la función externa
+        totalUsuarios = await getUsuariosIndex(); // Llama a la función externa
+    });
+    
+
 
 </script>
 
 <main>
 
     <div class="row m-0" style="padding-left: 4.5rem;">
-        <MenuAcciones/>
+        <MenuLateral/>
         <div class="col">
             <div class="row">
-                <h4 class="col-6 text-dark pt-2">Dashboard</h4>
+                <h4 class="col-6 text-dark pt-2">Administración</h4>
           
             </div>
 
@@ -33,7 +49,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <p class="mb-0">Total</p>
-                                        <h5 class="font-weight-bolder">34</h5>
+                                        <h5 class="font-weight-bolder">{totalProductos}</h5>
                                     </div>
                                     <div class="col-4 text-end">
                                         <div class="icon icon-shape bg-success shadow-success text-center rounded-circle">
@@ -50,7 +66,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <p class="mb-0">Total</p>
-                                        <h5 class="font-weight-bolder">5</h5>
+                                        <h5 class="font-weight-bolder">{totalCategorias}</h5>
                                     </div>
                                     <div class="col-4 text-end">
                                         <div class="icon icon-shape bg-success shadow-success text-center rounded-circle">
@@ -67,7 +83,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <p class="mb-0">Total</p>
-                                        <h5 class="font-weight-bolder">103</h5>
+                                        <h5 class="font-weight-bolder">{totalPedidos}</h5>
                                     </div>
                                     <div class="col-4 text-end">
                                         <div class="icon icon-shape bg-success shadow-success text-center rounded-circle">
@@ -84,7 +100,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <p class="mb-0">Total</p>
-                                        <h5 class="font-weight-bolder">4</h5>
+                                        <h5 class="font-weight-bolder">{totalUsuarios}</h5>
                                     </div>
                                     <div class="col-4 text-end">
                                         <div class="icon icon-shape bg-success shadow-success text-center rounded-circle">
@@ -121,5 +137,4 @@
         </div>
     </div>
     
-    <Footer/>
 </main>

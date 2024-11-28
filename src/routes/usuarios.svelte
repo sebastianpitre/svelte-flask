@@ -121,7 +121,6 @@
                 </div>
             </div>
         </div>
-<Footer/>
 </main>
 
 <style>

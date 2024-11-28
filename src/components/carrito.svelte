@@ -55,7 +55,7 @@
                   <p class="col mt-n3 my-0" style="font-size: 13px;">
                     {#if item.stock > 0}
                       {#if item.max_usuario === 0}
-                      Sin limite♾️
+                      limite {item.stock}
                       {:else}
                         {#if item.quantity < item.max_usuario-cantidadProductoEnHistorial(item.id)}
                         Límite {item.max_usuario-cantidadProductoEnHistorial(item.id)}/{item.max_usuario} 

@@ -59,7 +59,7 @@
         // REQUISITOS let userProfile = {}; E IMPORTAR {fetchUserProfile}
         // Verifica que userProfile esté definido antes de acceder a sus propiedades
         if (userProfile && userProfile.nombres) {
-            if (userProfile.rol === "ADMIN" || userProfile.rol === "CLIENTE") {
+            if (userProfile.rol === "ADMIN" || userProfile.rol === "CLIENTE" || userProfile.rol === "MOD") {
                 console.log("Acceso concedido a pedido"); // si es usuario no redirige 
             } else {
                 console.log("Redirigiendo a la ruta principal");

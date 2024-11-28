@@ -149,11 +149,16 @@
                                     <p class="text-sm mb-0"><span class="text-dark font-weight-bold">{values.stock}</span></p>
                                 </td>
     
-                                <td class="">
+                                <td>
                                     <button class="btn mx-1 col-auto btn-sm btn-outline-danger" on:click={() => eliminarProducto(values.id)}>Eliminar</button>
                                     <a class="btn col-auto mx-1 btn-sm btn-outline-success" href={`/producto/${values.id}`}>Editar</a>
                                     <a class="btn col-auto mx-1 btn-sm btn-outline-dark" href={`/entrada/${values.id}`}>Entrada →</a>
+                                    {#if values.stock <= 0}
                                     <a class="btn col-auto mx-1 btn-sm btn-outline-danger" href={`/salida/${values.id}`}>Salida →</a>
+                                    {:else}
+                                    <div class="btn col-auto mx-1 btn-sm btn-outline-danger disabled">Salida →</div>
+                                    {/if}
+
                                 </td>
                             </tr>
                             {/each}
