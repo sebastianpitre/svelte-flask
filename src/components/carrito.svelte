@@ -76,11 +76,10 @@
                   {/if}
                   <span class="col p-1 btn disabled text-dark">{item.quantity}</span>
 
-                  {#if item.quantity < item.max_usuario-cantidadProductoEnHistorial(item.id) || item.max_usuario === 0}
-                  <button class="btn col btn-sm border border-success text-success" on:click={() => incrementQuantity(item.id)}>+</button>
+                  {#if (item.max_usuario === 0 && item.quantity < item.stock) || (item.max_usuario > 0 && item.quantity < Math.min(item.stock, item.max_usuario - cantidadProductoEnHistorial(item.id)))}
+                    <button class="btn col btn-sm border border-success text-success" on:click={() => incrementQuantity(item.id)}>+</button>
                   {:else}
-                  <button class="btn col btn-sm border text-dark" disabled on:click={() => incrementQuantity(item.id)}>max</button>
-                  
+                    <button class="btn col btn-sm border text-dark" disabled>max</button>
                   {/if}
           
                 </div>

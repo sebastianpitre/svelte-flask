@@ -4,7 +4,7 @@
   import { user } from '../stores/user'; // Store para guardar los datos del usuario
   import { onMount } from 'svelte';
   import Menufooter from "@components/menufooter.svelte";
-  import Nav from '@components/nav.svelte';
+  import Nav from '../components/nav.svelte';
   import { logout } from '../api/auth';
   import Swal from 'sweetalert2';
 

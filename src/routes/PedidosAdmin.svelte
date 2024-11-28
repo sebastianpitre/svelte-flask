@@ -1,8 +1,8 @@
 <script>
-    import Footer from '@components/Footer.svelte';
+    import Footer from '../components/Footer.svelte';
     import { onMount } from 'svelte';
     import { getPedidosAdmin } from '../api/pedidoAdmin';
-    import MenuAcciones from '@components/MenuLateral.svelte';
+    import MenuAcciones from '../components/MenuLateral.svelte';
     
     // Importamos las librerías de DataTables
     import jQuery from 'jquery';
@@ -21,7 +21,7 @@
     });
 
     // modal carrito
-    import ModalPedidos from '@components/ModalPedidos.svelte';
+    import ModalPedidos from '../components/ModalPedidos.svelte';
     import { idStore, isModalOpenPedidos } from '../stores/modalStore';
     import { right } from '@popperjs/core';
 

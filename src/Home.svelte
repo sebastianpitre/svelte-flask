@@ -1,19 +1,19 @@
 <script>
   import { onMount } from 'svelte';
 
-  import Menufooter from '@components/menufooter.svelte';
-  import Nav from '@components/nav.svelte';
-  import Header from '@components/header.svelte';
-  import Category from '@components/category.svelte';
-  import Car from '@components/ModalCarrito.svelte';
+  import Menufooter from './components/menufooter.svelte';
+  import Nav from './components/nav.svelte';
+  import Header from './components/header.svelte';
+  import Category from './components/category.svelte';
+  import Car from './components/ModalCarrito.svelte';
   import { selectedCategory } from './stores/stores';
   import { cart, addToCart, incrementQuantity, decrementQuantity } from './stores/cart';
 
-  import Card from '@components/card.svelte';
-  import Sliderly from '@components/Sliderly.svelte';
-  import BtnAnuncio from '@components/BtnAnuncio.svelte';
-  import ModalAnuncio from '@components/ModalAnuncio.svelte';
-  import Footer from '@components/Footer.svelte';
+  import Card from './components/card.svelte';
+  import Sliderly from './components/Sliderly.svelte';
+  import BtnAnuncio from './components/BtnAnuncio.svelte';
+  import ModalAnuncio from './components/ModalAnuncio.svelte';
+  import Footer from './components/Footer.svelte';
 
   let categorias = [];
 

@@ -3,9 +3,9 @@
 
   // Importar la tienda del carrito y funciones para modificarla
   import { cart, addToCart, incrementQuantity, decrementQuantity } from '../stores/cart';
-  import Nav from '@components/nav.svelte';
-  import Menufooter from '@components/menufooter.svelte';
-  import Footer from '@components/Footer.svelte';
+  import Nav from '../components/nav.svelte';
+  import Menufooter from '../components/menufooter.svelte';
+  import Footer from '../components/Footer.svelte';
 
   // Recibir el `id` como prop
   export let id;
@@ -200,12 +200,11 @@
                       <button class="btn col btn-sm border border-dark" on:click={handleDecrement}>-</button>
                     {/if}
                     <span class="col p-1 btn disabled text-dark">{itemQuantity}</span>
-    
-                    {#if itemQuantity < producto.max_usuario-cantidadProductoEnHistorial(producto.id) || producto.max_usuario === 0}
+
+                    {#if (producto.max_usuario === 0 && itemQuantity < producto.stock) || (producto.max_usuario > 0 && itemQuantity < Math.min(producto.stock, producto.max_usuario - cantidadProductoEnHistorial(producto.id)))}
                     <button class="btn col btn-sm border border-success text-success" on:click={handleIncrement}>+</button>
                     {:else}
-                    <button class="btn col btn-sm border text-dark" disabled on:click={handleIncrement}>max</button>
-                    
+                      <button class="btn col btn-sm border text-dark" disabled>max</button>
                     {/if}
                   </div>
                 {/if}

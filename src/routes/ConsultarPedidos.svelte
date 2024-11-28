@@ -1,8 +1,8 @@
 <script>
-    import Footer from '@components/Footer.svelte';
+    import Footer from '../components/Footer.svelte';
     import { onMount } from 'svelte';
     import { getPedidosMod } from '../api/pedidoAdmin';
-    import MenuAcciones from '@components/MenuLateral.svelte';
+    import MenuAcciones from '../components/MenuLateral.svelte';
     
     // Importamos las librerías de DataTables
     import jQuery from 'jquery';
@@ -23,10 +23,10 @@
     // modal carrito
     import { idStore, isModalOpenPedidosMod } from '../stores/modalStore';
     import { right } from '@popperjs/core';
-    import Nav from '@components/nav.svelte';
-    import Menufooter from '@components/menufooter.svelte';
-    import ModalPedidosMod from '@components/ModalPedidosMod.svelte';
-    import ProteccionMod from '@components/ProteccionMod.svelte';
+    import Nav from '../components/nav.svelte';
+    import Menufooter from '../components/menufooter.svelte';
+    import ModalPedidosMod from '../components/ModalPedidosMod.svelte';
+    import ProteccionMod from '../components/ProteccionMod.svelte';
 
     function openModal(id) {
         idStore.set(id); // Asigna el ID al store
