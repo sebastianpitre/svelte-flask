@@ -8,12 +8,15 @@
     "build": "vite build",
     "preview": "vite preview",
     "dev:svelte": "vite",
-    "dev:python": "python ../ruta_a_tu_backend/nombre_del_archivo.py"
+    "dev:python": "python ../ruta_a_tu_backend/nombre_del_archivo.py",
+    "predeploy": "npm run build", 
+    "deploy": "gh-pages -d dist" 
   },
   "devDependencies": {
     "@smui/button": "^7.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
     "concurrently": "^7.6.0",
+    "gh-pages": "^6.2.0",
     "svelte": "^4.2.18",
     "vite": "^5.4.11"
   },
