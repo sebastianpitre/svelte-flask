@@ -1,5 +1,5 @@
 <script>
-  import Menufooter from "@components/menufooter.svelte";
+  import Menufooter from "../components/menufooter.svelte";
   import { fetchUserProfile } from '../api/user';
   import { onMount } from 'svelte';
   import { user } from '../stores/user'; // Store para guardar los datos del usuario

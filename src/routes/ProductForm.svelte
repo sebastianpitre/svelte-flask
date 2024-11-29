@@ -3,7 +3,7 @@
   import Swal from "sweetalert2";
   import { fetchWithAuth } from '../api/auth';
   import { getCategorias } from '../api/categorias';
-    import ProteccionAdmi from "@components/ProteccionAdmi.svelte";
+    import ProteccionAdmi from "../components/ProteccionAdmi.svelte";
 
   export let id; // Si existe, es edición. Si no, es creación.
 

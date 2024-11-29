@@ -1,6 +1,6 @@
 <script>
-    import Chart from "@components/graficos/ProdMasVendidos.svelte";
-    import IngresosPorProducto from "@components/graficos/IngresosPorProducto.svelte";
+    import Chart from "../components/graficos/ProdMasVendidos.svelte";
+    import IngresosPorProducto from "../components/graficos/IngresosPorProducto.svelte";
 
   </script>
   
