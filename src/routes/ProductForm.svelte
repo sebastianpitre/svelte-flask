@@ -283,7 +283,7 @@ function manejarErrorImagen(event) {
               </div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-12 col-md-6">
                 <div>
                   <label for="fecha_inicio_descuento" class="form-label ms-n1 ps-1">Inicio Descuento</label>
@@ -297,7 +297,7 @@ function manejarErrorImagen(event) {
                   <input type="date" class="form-control" bind:value={fecha_fin_descuento} />
                 </div>
               </div>
-            </div>
+            </div> -->
   
             <div class="col-12 text-center mt-4">
               <a href="/productos" class="btn btn-danger">cancelar</a>

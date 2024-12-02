@@ -24,9 +24,9 @@
   import Entrada from "./routes/Entrada.svelte";
   import Salidas from "./routes/Salidas.svelte";
   import ConsultarPedidos from "./routes/ConsultarPedidos.svelte";
-    import Estadisticas from "./routes/Estadisticas.svelte";
-    import VistaSalidas from "./routes/VistaSalidas.svelte";
-    import VistaEntradas from "./routes/VistaEntradas.svelte";
+  import Estadisticas from "./routes/Estadisticas.svelte";
+  import VistaSalidas from "./routes/VistaSalidas.svelte";
+  import VistaEntradas from "./routes/VistaEntradas.svelte";
 </script>
 
 <main>
