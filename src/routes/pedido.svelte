@@ -128,7 +128,7 @@
     </header>
 
     <div class="container">
-        <div class="col-12 col-md-6 mx-auto">
+        <div class="col-12 col-md-6 mx-auto" style="min-height: 48.8vh;">
             <div class="card px-0 px-md-4 mt-n5">
                 <h5 class="ps-3 pt-2">Resumen del Pedido</h5>
                 <div class=" border ">

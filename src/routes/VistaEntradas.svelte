@@ -175,6 +175,5 @@
 
           </style>
         
-    <Footer/>
 </main>
 

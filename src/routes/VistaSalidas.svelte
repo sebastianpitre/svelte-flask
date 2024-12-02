@@ -182,6 +182,5 @@
 
           </style>
         
-    <Footer/>
 </main>
 
