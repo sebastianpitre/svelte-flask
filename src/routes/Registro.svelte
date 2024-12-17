@@ -72,10 +72,14 @@
 
     <div class="page-header min-vh-100">
         <div class="container">
+            <a href="/" class="position-fixed top-2" style="z-index: 9999;">
+                <img class="card p-2" width="50px" src="/img/logo.svg" alt="">
+            </a>
+            
             <div class="row">
                 
-                <div class="col-xl-5 col-lg-5 col-md-8 d-flex flex-column me-auto me-auto me-lg-auto ms-lg-4">
-                    <div class="card card-plain">
+                <div class="col-11 col-sm-10 col-md-8 col-lg-5 col-xl-4 d-flex flex-column me-auto ms-auto me-lg-auto ms-lg-4 z-index-2">
+                    <div class="card ">
                         <div class="card-header text-center">
                             <h4 class="font-weight-bolder">Crear cuenta</h4>
                             <p class="mb-0">Ingresa tu correo electrónico y contraseña para iniciar sesión</p>
@@ -182,8 +186,8 @@
                     </div>
                 </div>
 
-                <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                    <div class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
+                <div class="col-12 d-md-flex col-lg-6 d-flex h-100 my-auto m-0 p-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+                    <div class="position-relative h-100 px-7 d-flex flex-column justify-content-center"
                         style="background-image: url('/img/img-sena/arbol.jpeg'); background-size: cover;">
                     </div>
                 </div>

@@ -145,10 +145,18 @@
 function manejarErrorImagen(event) {
   event.target.src = "/img/carrito-vacio.png"; // Cambiar a la imagen alternativa
 }
-</script>
-<style>
 
-</style>
+// Función para mostrar la alerta
+function showAlert() {
+        Swal.fire({
+            title: '¡Indicaciones!',
+            html: '<p>Dirigete a la pagina y selecciona la imagen a subir:</p><img class="w-50" src="/img/guia1.png" alt="guia1"><p>Espera que cargue la imagen y copia la URL que dice "Enlace directo"</p><img class="w-80" src="/img/guia3.png" alt="guia1"><p>luego vuelve y pega la URL copiada</p><a class="btn btn-success" href="https://postimages.org/" target="_blank">ir a la pagina</a>',
+            showConfirmButton: false,
+            showCloseButton: true, // Muestra un botón de cerrar
+        });
+    }
+</script>
+
 <main class="container">
 
   <ProteccionAdmi/>
@@ -161,7 +169,7 @@ function manejarErrorImagen(event) {
           
           <div class="row mx-auto pt-3">
             <div class="col-auto">
-              <div class="text-center  border p-2 border-radius-2xl">
+              <div class="text-center  {is_activo === true ? 'activo': 'border' } p-2 border-radius-2xl">
                 <span class="">Activo? {is_activo === true ? 'Si': 'No' }</span>
                 <div class="form-check form-switch ms-4 mb-3">
                   <input type="checkbox" class="form-check-input" bind:checked={is_activo} />
@@ -189,10 +197,19 @@ function manejarErrorImagen(event) {
               </div>
             </div>
   
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 my-auto">
               <div class="input-group input-group-static my-2">
-                <label for="url_imagen">URL Imagen</label>
-                <input type="url" class="form-control" bind:value={url_imagen} required />
+                <label class="col-12" for="url_imagen">URL de Imagen</label>
+                <div class="row col-12 ">
+                  <div class="col-9">
+                    <input type="url" class="form-control" bind:value={url_imagen} required />
+                  </div>
+                  <div class="col-3 my-auto">
+                    <div class="btn btn-sm btn-outline-success mt-n3" on:click={showAlert}>subir nueva</div>
+
+                  </div>
+                </div>
+               
               </div>
             </div>
   
@@ -234,9 +251,9 @@ function manejarErrorImagen(event) {
             </div>
   
             <div class="col-auto">
-              <div class="border-radius-2xl border p-2">
+              <div class="border-radius-2xl {is_promocion === true ? 'activo': 'border' } p-2">
                 <span>Decuento?</span>
-                <div class="form-check form-switch"><span>{is_promocion === true ? 'Si': 'No' }</span> 
+                <div class="form-check form-switch"><span class="ms-2">{is_promocion === true ? 'Si': 'No' }</span> 
                   <input type="checkbox" class="form-check-input" bind:checked={is_promocion} />
                 </div>
               </div>
@@ -275,9 +292,9 @@ function manejarErrorImagen(event) {
             </div>
   
             <div class="col-auto">
-              <div class="border-radius-2xl border p-2">
+              <div class="border-radius-2xl {anunciar === true ? 'anunciar': 'border' } p-2">
                 <span>Anunciar?</span>
-                <div class="form-check form-switch"><span>{anunciar === true ? 'Si': 'No' }</span> 
+                <div class="form-check form-switch"><span class="ms-2">{anunciar === true ? 'Si': 'No' }</span> 
                   <input type="checkbox" class="form-check-input" bind:checked={anunciar} />
                 </div>
               </div>
@@ -331,11 +348,9 @@ function manejarErrorImagen(event) {
             </a>
             
           </div>
-          <!-- {#if is_promocion === true && is_activo === true}
-            <div class="blur opacity-9 col-8 col-sm-6 text-dark text-center position-absolute" style="z-index: 3; border-radius: 7px 0px 0px 0px; bottom: 1px; right: 1px; height: 20px; font-size: 15px;">
-              <span class="material-symbols-outlined" style="font-size: 15px;">schedule</span> 2 dias 13h
-            </div>
-          {/if} -->
+          <div class="blur opacity-9 col-8 col-sm-6 text-dark text-center position-absolute" style="z-index: 3; border-radius: 7px 0px 0px 0px; bottom: 1px; right: 1px; height: 20px; font-size: 15px;">
+            stock {Math.trunc(stock)}
+          </div>   
           
     
           <div class="colored-shadow" style="background-image: url(&quot;{url_imagen}&quot;);"></div>
@@ -389,3 +404,15 @@ function manejarErrorImagen(event) {
   </div>
   
 </main>
+
+<style>
+  .anunciar{
+    border: 2px solid #bd46ff;
+    color: #bd46ff;
+  }
+
+  .activo{
+    border: 2px solid #39a900;
+    color: #39a900;
+  }
+</style>

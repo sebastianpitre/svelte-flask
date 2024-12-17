@@ -235,14 +235,20 @@
         <div class="container-fluid px-0">
           <div class="col font-weight-bolder ">
             <div class="row my-2">
-              <a href="/" class="col-1 text-end">
-                <span class="material-symbols-outlined text-white pt-1">arrow_back_ios</span>
-              </a>
-              <div class="col-2 text-end">
-                <img class="mt-1" src="/img/logo.svg" alt="logo" style="width: 25px;">
+
+              <div class="col-9 my-auto">
+                <div class="row p-0">
+                  <div class="col-auto">
+                    <img class="mt-n1" src="/img/logo.svg" alt="logo" style="width: 25px;">
+                  </div>
+    
+                  <h6 class="col-7 border-start border-1 text-white my-auto font-weight-bold">Vitrina web</h6>
+                </div>
               </div>
-              <h6 class="col-7 border-start border-1 text-white my-auto font-weight-bold">Vitrina web</h6>
-              <div class="col-2 text-end">
+              
+              
+              
+              <div class="col-3 text-end">
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <!-- svelte-ignore a11y-no-static-element-interactions -->
                 <div class="material-symbols-outlined text-white pt-1" on:click={openModalSearch}>search</div>
