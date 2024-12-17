@@ -118,13 +118,15 @@
 
       <!-- Mostrar productos juntos cuando se selecciona "Todos" -->
       {#if $selectedCategory === 'all'}
-        <div class="row my-2 mt-3">
-          <span class="material-symbols-outlined text-dark my-auto col-auto">
-            dashboard
-            </span>
-          <h5 class="col-auto my-auto text-dark ms-n3 border-end border-2">Disponibles</h5>
-          <hr class="bg-gray-600 opacity-1 col mt-3 me-2" style="padding-top: 1.7px ;">
-        </div>
+        {#if filteredProducts.some(producto => producto.is_activo === true && producto.stock > 0)}
+          <div class="row my-2 mt-3">
+            <span class="material-symbols-outlined text-dark my-auto col-auto">
+              dashboard
+              </span>
+            <h5 class="col-auto my-auto text-dark ms-n3 border-end border-2">Disponibles</h5>
+            <hr class="bg-gray-600 opacity-1 col mt-3 me-2" style="padding-top: 1.7px ;">
+          </div>
+          {/if}
         <div class="row my-2">
           {#each filteredProducts as producto (producto.id)}
             {#if producto.is_activo === true && producto.stock > 0}
@@ -158,7 +160,7 @@
 
       {/if}
       
-     
+      {#if filteredProducts.some(producto => producto.stock <= 0 && producto.is_activo === true)}
       <div class="row my-2">
         <span class="material-symbols-outlined text-dark my-auto col-auto">
           update
@@ -166,6 +168,7 @@
         <h5 class="col-auto my-auto text-dark ms-n3 border-end border-2">Disponibles pronto</h5>
         <hr class="bg-gray-600 opacity-1 col mt-3 me-2" style="padding-top: 1.7px ;">
       </div>
+      {/if}
       <div class="row">
         {#each filteredProducts as producto (producto.id)}
         {#if producto.stock <= 0 && producto.is_activo === true}
