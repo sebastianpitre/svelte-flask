@@ -9,7 +9,7 @@
     import { cart } from '../stores/cart';
     import { onMount } from 'svelte';
     import { get } from 'svelte/store';
-    import { address } from '../stores/pedido';
+    import { address, formaEntrega } from '../stores/pedido';
 
 
     // Variables para almacenar el carrito y los productos completos
@@ -54,6 +54,7 @@
             userProfile = await fetchUserProfile();
             user.set(userProfile); // Guardar los datos en el store
             address.set(userProfile.direccion); // Solo inicializamos el store con la dirección del perfil
+            formaEntrega.set("Recogerlo"); // Solo inicializamos el store con la dirección del perfil
         } catch (error) {
             console.error('No se pudo obtener el perfil del usuario:', error);
         }
@@ -130,7 +131,7 @@
     function cancelEditing() {
         isDisabled = true;
         finalizarPedido = false;
-        address.set(userProfile.direccion); //  el store con la dirección del perfil
+        address.set(userProfile.direccion); //  el store con la dirección del perfil por defecto
 
     }
 
@@ -138,6 +139,7 @@
         // Aquí puedes agregar la lógica para guardar los cambios
         
         address.set($address); // Actualiza el store con la dirección actual
+        formaEntrega.set($formaEntrega); // Actualiza el store con la forma de entrega selecionada
 
         isDisabled = true; // Deshabilita nuevamente los inputs después de guardar
         finalizarPedido = false;
@@ -147,8 +149,9 @@
             title: 'Dirección guardada',
             text: 'Cambios guardados con éxito',
             icon: 'success',
-            timer: 1500,
-            confirmButtonText: 'Aceptar',
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 1000,
         });
                 
     }
@@ -166,7 +169,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-xl-6 mx-auto">
-                <div class="card px-0 px-md-4 mt-n5">
+                <div class="card px-0 px-md-4 mt-n8 mt-xl-n5">
                     <h5 class="ps-3 pt-2">Resumen del Pedido</h5>
                     <div class=" border mb-3">
                         <table class="table align-items-center mb-0">
@@ -204,33 +207,56 @@
             </div>
     
             <div class="col-12 col-xl-6 mx-auto">
-                <div class="card px-0 px-md-4 mt-3 mt-xl-n5">
-                    <h5 class="ps-3 pt-2 mb-0">Información de envio</h5>
+                <div class="card px-2 px-0 px-md-4 mt-3 mt-xl-n5">
+                    <h5 class="ps-3 pt-2 mb-0">Información de entrega</h5>
     
-                    <div class="row ps-2">
+                    <div class="row">
+
+                        <!-- Formulario -->
+
                         {#if !isDisabled}
-                            <div class="col-8 col-md-6">
-                                <div class="input-group input-group-static my-2">
-                                    <input type="text" placeholder="escriba su dirección" class="form-control mt-n3 pb-0" bind:value={$address} disabled={isDisabled}/>
+
+                            <div class="col-12 col-md-4">
+                                <label for="forma" class="form-label">Forma de entrega</label>
+                                <div class="input-group input-group-outline mb-3 mt-n2">
+                                    <select class="form-control" bind:value={$formaEntrega} required>
+                                      <option value="Domicilio">Domicilio 🛵</option>
+                                      <option value="Recogerlo">Recogerlo 🛒</option>
+                                    </select>
                                 </div>
                             </div>
+                            {#if $formaEntrega === "Domicilio"}
+                                <div class="col-12 col-md-8">
+                                    <div class="input-group input-group-static my-2">
+                                        <label for="direccion">Dirección de entrega</label>
+                                        <input type="text" placeholder="escriba su dirección" class="form-control pb-0" bind:value={$address} disabled={isDisabled}/>
+                                    </div>
+                                </div>
+                            {/if}
                         {/if}
+
+                        <!-- Botones -->
     
-                        <div class="col-4 col-md-6 my-auto">
+                        <div class="col-12 col-md-12 my-auto">
                             {#if !isDisabled}
                                 <button type="button" class="btn btn-sm bg-danger text-white mb-0" on:click={cancelEditing}>x</button>
-                                <button type="button" class="btn btn-sm bg-info text-white mb-0" on:click={saveChanges}>✓</button>
-                                
+                                <button type="button" class="btn btn-sm bg-success text-white mb-0" on:click={saveChanges}>Confirmar</button>
                               {:else}
-                                <button type="button" class="btn btn-sm btn-warning mb-0" on:click={enableEditing}>Editar</button>
+                                <button type="button" class="btn btn-sm text-start btn-warning mb-0" on:click={enableEditing}>Editar</button>
                             {/if}
                         </div>
                     </div>
     
                     <div class="border mt-2 p-2 mb-3">
-                        <p class="text-xs text-secondary mb-1"><strong>Nombre del destinatario:</strong>  {userProfile.nombres} {userProfile.apellidos}</p>
-                        <p class="text-xs text-secondary mb-1"><strong>Dirección de entrega:</strong> {$address}</p>
-                        <p class="text-xs text-secondary mb-1"><strong>Ciudad:</strong> {userProfile.ciudad}</p>
+                        <p class="text-xs text-secondary mb-1"><strong>Forma de entrega:</strong> {$formaEntrega}</p>
+
+                        <p class="text-xs text-secondary mb-1"><strong>Nombre del cliente:</strong>  {userProfile.nombres} {userProfile.apellidos}</p>
+
+                        {#if $formaEntrega === "Domicilio"}
+                            <p class="text-xs text-secondary mb-1"><strong>Dirección de entrega:</strong> {$address}</p>
+                            <p class="text-xs text-secondary mb-1"><strong>Ciudad:</strong> {userProfile.ciudad}</p>
+                        {/if}
+                        
                         <p class="text-xs text-secondary mb-1"><strong>Teléfono:</strong>  {userProfile.telefono}</p>
                     </div>
                 </div>
@@ -238,16 +264,17 @@
         </div>
         
 
-        <div class="col text-center">
+        <div class="col text-center mt-3 mb-3">
+            {#if !isDisabled}
+                <p class="mb-1" style="color: #ff000094; font-size: 14px;">Debes confirmar la Información de entrega para continuar</p>
+            {/if}
+
             <a href="/" class="btn btn-sm btn-danger mb-0">Volver</a>
 
-            <button class="mt-3 btn btn-sm btn-success" on:click={handleCrearPedido} disabled={finalizarPedido}>
+            <button class="mb-0 btn btn-sm btn-success" on:click={handleCrearPedido} disabled={finalizarPedido}>
                 Finalizar y enviar Pedido
             </button>
 
-            {#if !isDisabled}
-                <p style="color: #ff000094; font-size: 14px;">Debes confirmar la dirección para continuar</p>
-            {/if}
         </div>
     </div>
     
