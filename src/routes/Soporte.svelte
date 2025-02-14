@@ -106,6 +106,7 @@
           <h3>Detalles del Pedido</h3>
           <p class="my-0"><strong>Numero Pedido:</strong> 00{pedido.id_pedido}</p>
           <p class="my-0"><strong>Estado Pedido:</strong> {pedido.estado_pedido}</p>
+          <p class="my-0"><strong>Dirección:</strong> {pedido.direccion}</p>
           <p class="my-0"><strong>Fecha creación: </strong>{formatearFecha(pedido.fecha_creacion).fechaFormateada}</p>
           <p class="my-0"><strong>Cliente: </strong>{pedido.nombre_usuario} {pedido.apellido_usuario}</p>
           <p class="my-0"><strong>Identificación: </strong>{pedido.identificacion_usuario}</p>

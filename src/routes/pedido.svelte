@@ -9,6 +9,8 @@
     import { cart } from '../stores/cart';
     import { onMount } from 'svelte';
     import { get } from 'svelte/store';
+    import { address } from '../stores/pedido';
+
 
     // Variables para almacenar el carrito y los productos completos
     let carrito = [];
@@ -51,6 +53,7 @@
         try {
             userProfile = await fetchUserProfile();
             user.set(userProfile); // Guardar los datos en el store
+            address.set(userProfile.direccion); // Solo inicializamos el store con la dirección del perfil
         } catch (error) {
             console.error('No se pudo obtener el perfil del usuario:', error);
         }
@@ -72,7 +75,6 @@
         // FIN DE PROTECCION DE RUTA🛡️
         
     });
-
     // Función que se ejecutará al hacer clic en el botón para crear el pedido
     function handleCrearPedido() {
         createPedido()
@@ -117,6 +119,40 @@
             });
     }
 
+    let isDisabled = true;
+    let finalizarPedido = false;
+
+    function enableEditing() {
+        isDisabled = false;
+        finalizarPedido = true;
+    }
+
+    function cancelEditing() {
+        isDisabled = true;
+        finalizarPedido = false;
+        address.set(userProfile.direccion); //  el store con la dirección del perfil
+
+    }
+
+    function saveChanges() {
+        // Aquí puedes agregar la lógica para guardar los cambios
+        
+        address.set($address); // Actualiza el store con la dirección actual
+
+        isDisabled = true; // Deshabilita nuevamente los inputs después de guardar
+        finalizarPedido = false;
+
+        // Mostrar SweetAlert de error
+        Swal.fire({
+            title: 'Dirección guardada',
+            text: 'Cambios guardados con éxito',
+            icon: 'success',
+            timer: 1500,
+            confirmButtonText: 'Aceptar',
+        });
+                
+    }
+
     
 </script>
 
@@ -128,50 +164,91 @@
     </header>
 
     <div class="container">
-        <div class="col-12 col-md-6 mx-auto" style="min-height: 48.8vh;">
-            <div class="card px-0 px-md-4 mt-n5">
-                <h5 class="ps-3 pt-2">Resumen del Pedido</h5>
-                <div class=" border ">
-                    <table class="table align-items-center mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder ps-3 pe-0">CANT</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder">DESCRIPCIÓN</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-end">VR/U</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-end">VR/T</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {#each productosEnCarrito as producto (producto.id)}
+        <div class="row">
+            <div class="col-12 col-xl-6 mx-auto">
+                <div class="card px-0 px-md-4 mt-n5">
+                    <h5 class="ps-3 pt-2">Resumen del Pedido</h5>
+                    <div class=" border mb-3">
+                        <table class="table align-items-center mb-0">
+                            <thead>
                                 <tr>
-                                    <td class="text-xs font-weight-bolder border-0 ps-4">{carrito.find(item => item.id === producto.id).quantity}</td>
-                                    <td class="text-xs font-weight-bolder border-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre} x {producto.cantidad} {producto.unidad_producto}</td>
-                                    <td class="text-xs font-weight-bolder border-0 text-end pe-4">$ {producto.is_promocion ? producto.precio-producto.precio*producto.descuento/100 : producto.precio}</td>
-                                    <td class="text-xs font-weight-bolder border-0 text-end pe-4">$ {producto.is_promocion ? (producto.precio-producto.precio*producto.descuento/100) * carrito.find(item => item.id === producto.id).quantity : producto.precio * carrito.find(item => item.id === producto.id).quantity}</td>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder ps-3 pe-0">CANT</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder">DESCRIPCIÓN</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-end">VR/U</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-end">VR/T</th>
                                 </tr>
-                            {/each}
-                            <tr class="border-top">
-                                <td colspan="2" class="text-xxs font-weight-bolder ps-3">N° PRODUCTOS:</td>
-                                <td colspan="2" class="text-xs font-weight-bolder text-end pe-4">{totalProductos}</td>
-                            </tr>
-                            <tr class="border-top">
-                                <td colspan="2" class="text-xxs font-weight-bolder ps-3">TOTAL A PAGAR:</td>
-                                <td colspan="2" class="text-xs font-weight-bolder text-end pe-4">${totalAPagar.toFixed(2)}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="col text-center">
-                    <a href="/" class="btn btn-sm btn-danger mb-0">Volver</a>
-
-                    <button class="mt-3 btn btn-sm btn-success" on:click={handleCrearPedido}>
-                        Finalizar y enviar Pedido
-                    </button>
+                            </thead>
+                            <tbody>
+                                {#each productosEnCarrito as producto (producto.id)}
+                                    <tr>
+                                        <td class="text-xs font-weight-bolder border-0 ps-4">{carrito.find(item => item.id === producto.id).quantity}</td>
+                                        <td class="text-xs font-weight-bolder border-0">{producto.nombre.length >= 15 ? producto.nombre.substring(0, 15) + "..." : producto.nombre} x {producto.cantidad} {producto.unidad_producto}</td>
+                                        <td class="text-xs font-weight-bolder border-0 text-end pe-4">$ {producto.is_promocion ? producto.precio-producto.precio*producto.descuento/100 : producto.precio}</td>
+                                        <td class="text-xs font-weight-bolder border-0 text-end pe-4">$ {producto.is_promocion ? (producto.precio-producto.precio*producto.descuento/100) * carrito.find(item => item.id === producto.id).quantity : producto.precio * carrito.find(item => item.id === producto.id).quantity}</td>
+                                    </tr>
+                                {/each}
+                                <tr class="border-top">
+                                    <td colspan="2" class="text-xxs font-weight-bolder ps-3">N° PRODUCTOS:</td>
+                                    <td colspan="2" class="text-xs font-weight-bolder text-end pe-4">{totalProductos}</td>
+                                </tr>
+                                <tr class="border-top">
+                                    <td colspan="2" class="text-xxs font-weight-bolder ps-3">TOTAL A PAGAR:</td>
+                                    <td colspan="2" class="text-xs font-weight-bolder text-end pe-4">${totalAPagar.toFixed(2)}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+    
+                    
+                </div>   
+            </div>
+    
+            <div class="col-12 col-xl-6 mx-auto">
+                <div class="card px-0 px-md-4 mt-3 mt-xl-n5">
+                    <h5 class="ps-3 pt-2 mb-0">Información de envio</h5>
+    
+                    <div class="row ps-2">
+                        {#if !isDisabled}
+                            <div class="col-8 col-md-6">
+                                <div class="input-group input-group-static my-2">
+                                    <input type="text" placeholder="escriba su dirección" class="form-control mt-n3 pb-0" bind:value={$address} disabled={isDisabled}/>
+                                </div>
+                            </div>
+                        {/if}
+    
+                        <div class="col-4 col-md-6 my-auto">
+                            {#if !isDisabled}
+                                <button type="button" class="btn btn-sm bg-danger text-white mb-0" on:click={cancelEditing}>x</button>
+                                <button type="button" class="btn btn-sm bg-info text-white mb-0" on:click={saveChanges}>✓</button>
+                                
+                              {:else}
+                                <button type="button" class="btn btn-sm btn-warning mb-0" on:click={enableEditing}>Editar</button>
+                            {/if}
+                        </div>
+                    </div>
+    
+                    <div class="border mt-2 p-2 mb-3">
+                        <p class="text-xs text-secondary mb-1"><strong>Nombre del destinatario:</strong>  {userProfile.nombres} {userProfile.apellidos}</p>
+                        <p class="text-xs text-secondary mb-1"><strong>Dirección de entrega:</strong> {$address}</p>
+                        <p class="text-xs text-secondary mb-1"><strong>Ciudad:</strong> {userProfile.ciudad}</p>
+                        <p class="text-xs text-secondary mb-1"><strong>Teléfono:</strong>  {userProfile.telefono}</p>
+                    </div>
                 </div>
             </div>
         </div>
+        
+
+        <div class="col text-center">
+            <a href="/" class="btn btn-sm btn-danger mb-0">Volver</a>
+
+            <button class="mt-3 btn btn-sm btn-success" on:click={handleCrearPedido} disabled={finalizarPedido}>
+                Finalizar y enviar Pedido
+            </button>
+
+            {#if !isDisabled}
+                <p style="color: #ff000094; font-size: 14px;">Debes confirmar la dirección para continuar</p>
+            {/if}
+        </div>
     </div>
     
-    <Footer/>
 </main>
