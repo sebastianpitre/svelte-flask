@@ -9,7 +9,7 @@
     import { cart } from '../stores/cart';
     import { onMount } from 'svelte';
     import { get } from 'svelte/store';
-    import { address, formaEntrega } from '../stores/pedido';
+    import { address, formaEntrega, barrio, ciudad } from '../stores/pedido';
 
 
     // Variables para almacenar el carrito y los productos completos
@@ -54,7 +54,9 @@
             userProfile = await fetchUserProfile();
             user.set(userProfile); // Guardar los datos en el store
             address.set(userProfile.direccion); // Solo inicializamos el store con la dirección del perfil
-            formaEntrega.set("Recogerlo"); // Solo inicializamos el store con la dirección del perfil
+            formaEntrega.set("Recogerlo"); // Solo inicializamos el store con la forma de entrega para recogerlo
+            barrio.set(userProfile.barrio); // Solo inicializamos el store con el barrio del perfil
+            ciudad.set(userProfile.ciudad); // Solo inicializamos el store con la ciudad del perfil
         } catch (error) {
             console.error('No se pudo obtener el perfil del usuario:', error);
         }
@@ -140,6 +142,8 @@
         
         address.set($address); // Actualiza el store con la dirección actual
         formaEntrega.set($formaEntrega); // Actualiza el store con la forma de entrega selecionada
+        ciudad.set($ciudad); // Actualiza el store con la forma de entrega selecionada
+        barrio.set($barrio); // Actualiza el store con la forma de entrega selecionada
 
         isDisabled = true; // Deshabilita nuevamente los inputs después de guardar
         finalizarPedido = false;
@@ -232,15 +236,30 @@
                                         <input type="text" placeholder="escriba su dirección" class="form-control pb-0" bind:value={$address} disabled={isDisabled}/>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="input-group input-group-static my-2">
+                                        <label for="direccion">Barrio</label>
+                                        <input type="text" placeholder="escriba su dirección" class="form-control pb-0" bind:value={$barrio} disabled={isDisabled}/>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="input-group input-group-static my-2">
+                                        <label for="direccion">Ciudad</label>
+                                        <input type="text" placeholder="escriba su dirección" class="form-control pb-0" bind:value={$ciudad} disabled={isDisabled}/>
+                                    </div>
+                                </div>
                             {/if}
                         {/if}
 
                         <!-- Botones -->
     
-                        <div class="col-12 col-md-12 my-auto">
+                        <div class="col-12 col-md-12">
                             {#if !isDisabled}
-                                <button type="button" class="btn btn-sm bg-danger text-white mb-0" on:click={cancelEditing}>x</button>
-                                <button type="button" class="btn btn-sm bg-success text-white mb-0" on:click={saveChanges}>Confirmar</button>
+                                <div class="mt-2">
+                                    <button type="button" class="btn btn-sm bg-danger text-white mb-0" on:click={cancelEditing}>x</button>
+                                    <button type="button" class="btn btn-sm bg-success text-white mb-0" on:click={saveChanges}>Confirmar</button>
+                                </div>
+                                
                               {:else}
                                 <button type="button" class="btn btn-sm text-start btn-warning mb-0" on:click={enableEditing}>Editar</button>
                             {/if}
@@ -254,7 +273,8 @@
 
                         {#if $formaEntrega === "Domicilio"}
                             <p class="text-xs text-secondary mb-1"><strong>Dirección de entrega:</strong> {$address}</p>
-                            <p class="text-xs text-secondary mb-1"><strong>Ciudad:</strong> {userProfile.ciudad}</p>
+                            <p class="text-xs text-secondary mb-1"><strong>Barrio:</strong> {$barrio}</p>
+                            <p class="text-xs text-secondary mb-1"><strong>Ciudad:</strong> {$ciudad}</p>
                         {/if}
                         
                         <p class="text-xs text-secondary mb-1"><strong>Teléfono:</strong>  {userProfile.telefono}</p>

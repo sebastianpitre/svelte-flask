@@ -109,6 +109,8 @@
           <p class="my-0"><strong>Forma de entrega:</strong> {pedido.forma_entrega}</p>
           {#if pedido.forma_entrega !== 'Recogerlo'}
             <p class="my-0"><strong>Dirección de entrega:</strong> {pedido.direccion}</p>
+            <p class="my-0"><strong>Barrio:</strong> {pedido.barrio}</p>
+            <p class="my-0"><strong>ciudad:</strong> {pedido.ciudad}</p>
           {/if}
           <p class="my-0"><strong>Fecha creación: </strong>{formatearFecha(pedido.fecha_creacion).fechaFormateada}</p>
           <p class="my-0"><strong>Cliente: </strong>{pedido.nombre_usuario} {pedido.apellido_usuario}</p>

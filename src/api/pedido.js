@@ -3,7 +3,7 @@ import { getProductosAPedir } from './productos';
 import { get } from 'svelte/store';
 import { cart } from '../stores/cart';
 import { fetchWithAuth } from './auth';
-import { address, formaEntrega } from '../stores/pedido';
+import { address, formaEntrega, barrio, ciudad } from '../stores/pedido';
 
 // Obtiene la fecha actual en formato "YYYY-MM-DD"
 function obtenerFechaActual() {
@@ -81,9 +81,11 @@ export async function createPedido() {
         const montoTotal = pedidoProductosDto.reduce((total, item) => total + (item.precio * item.cantidad), 0);
         const pedido = {
             monto_total: montoTotal,
+            productos: pedidoProductosDto,
             direccion: get(address), // Obtiene el valor actual del store
             forma_entrega: get(formaEntrega), // Obtiene el valor actual del store
-            productos: pedidoProductosDto
+            barrio: get(barrio), // Obtiene el valor actual del store
+            ciudad: get(ciudad), // Obtiene el valor actual del store
         };
 
         console.log('Datos del pedido:', JSON.stringify(pedido));
