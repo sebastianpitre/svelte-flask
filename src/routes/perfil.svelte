@@ -237,7 +237,7 @@
   
           <form on:submit={handleSubmitDireccion}>
             <div class="row">
-              <h5 class="col-8">Datos personales</h5>
+              <h5 class="col-8">Datos de entrega</h5>
   
               {#if isDisabledDireccion}
                 <div class="text-end col cursor-pointer">

@@ -285,14 +285,11 @@
         
 
         <div class="col text-center mt-3 mb-3">
-            {#if !isDisabled}
-                <p class="mb-1" style="color: #ff000094; font-size: 14px;">Debes confirmar la Información de entrega para continuar</p>
-            {/if}
 
             <a href="/" class="btn btn-sm btn-danger mb-0">Volver</a>
 
             <button class="mb-0 btn btn-sm btn-success" on:click={handleCrearPedido} disabled={finalizarPedido}>
-                Finalizar y enviar Pedido
+                {isDisabled === false ? "Confirme la informacion" : "Finalizar y enviar Pedido"}
             </button>
 
         </div>
