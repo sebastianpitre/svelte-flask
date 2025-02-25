@@ -100,7 +100,7 @@
     }
 
     .cls-4_circulo{
-      fill: #b934ff;
+      fill: #39a900;
     }
 
     .cls-3 {
@@ -129,7 +129,7 @@
     }
 
     .cls-10 {
-      fill: #b934ff;
+      fill: #39a900;
     }
 
     .cls-11 {
@@ -149,7 +149,7 @@
     }
 
     #Capa_1-2{
-      fill: #b934ff;
+      fill: #39a900;
     }
 
     .cls-13 {
@@ -235,13 +235,13 @@
                         <path class="cls-4_circulo" d="M795.75,180.76c1.94-.06,2.75.89,2.85,2.36.11,1.77-.65,2.94-2.63,2.93-1.57-.01-2.51-.91-2.62-2.35-.14-1.79.88-2.82,2.4-2.95Z"/>
                         <path class="cls-4_circulo" d="M856.39,154.48c2.2.39,3.17,1.41,3.02,3.23-.14,1.61-1.29,2.23-2.72,2.18-1.41-.05-2.52-.63-2.61-2.31-.1-1.95,1.24-2.55,2.31-3.11Z"/>
                       </g>
-                      <image width="1394" text-anchor="middle" dominant-baseline="middle" height="929" xlink:href="/img/anuncio6.png"/>
+                      <image width="1394" text-anchor="middle" dominant-baseline="middle" height="929" xlink:href="/img/anuncio11.png"/>
                       <g>
                         <rect class="cls-1" x="128.31" y="315.52" width="796.3" height="180" rx="13.59" ry="13.59"/>
                         <text class="cls-7" transform="translate(165.47 384.62)"><tspan text-anchor="middle" dominant-baseline="middle" x="355" y="0">{values.nombre.length >= 15 ? values.nombre.substring(0, 15) + "..." : values.nombre}</tspan></text>
                         <text class="cls-6" transform="translate(206.29 459.42)" text-anchor="middle" dominant-baseline="middle" ><tspan x="320" y="-15">Disponible {values.stock === 0 ? "pronto" : ""}</tspan></text>
                         <rect class="cls-10" x="387.42" y="477.47" width="278.08" height="70.11" rx="13.59" ry="13.59"/>
-                        <text class="cls-5" transform="translate(456.7 558.76)" text-anchor="middle" dominant-baseline="middle"><tspan x="70" y="-45">$ {values.precio}</tspan></text>
+                        <text class="cls-5" transform="translate(456.7 558.76)" text-anchor="middle" dominant-baseline="middle"><tspan x="70" y="-45">$ {values.precio} /{values.unidad_producto}</tspan></text>
                       </g>
                       {#if values.is_promocion === true}
                       <g>

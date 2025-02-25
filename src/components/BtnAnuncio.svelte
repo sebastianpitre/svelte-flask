@@ -29,7 +29,7 @@
 }
 
 .bg-morado{
-    background-color: #bd46ff;
+    background-color: #39a900;
 }
 
 
@@ -37,7 +37,7 @@
 /* Efecto de desvanecimiento y expansión hacia afuera */
 @keyframes expandFade {
         0% {
-            box-shadow: 0 0 0 0 #bd46ff;
+            box-shadow: 0 0 0 0 #39a900;
         }
         100% {
             box-shadow: 0 0 0px 10px rgba(0, 255, 0, 0);
