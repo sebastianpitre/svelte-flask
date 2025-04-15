@@ -50,7 +50,7 @@
   );
 
   // Verificar si hay productos en promoción
-  $: productosEnPromocion = filteredProducts.filter(producto => producto.is_activo && producto.is_promocion);
+  $: productosEnPromocion = filteredProducts.filter(producto => producto.is_activo && producto.is_promocion && producto.stock > 0);
   $: productosAnunciados = filteredProducts.filter(producto => producto.anunciar && producto.is_activo);
   $: productosNoactivos = filteredProducts.filter(producto => producto.is_activo === false);
 
