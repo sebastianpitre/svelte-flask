@@ -33,7 +33,7 @@
             });
 
             if (result.isConfirmed) {
-                await fetchWithAuth(`http://127.0.0.1:5000/api/admin/banner/${id_banner}`, {
+                await fetchWithAuth(`https://vitribackendflask.onrender.com/api/admin/banner/${id_banner}`, {
                     method: 'DELETE',
                 });
 

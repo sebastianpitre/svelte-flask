@@ -14,7 +14,7 @@ export function getToken() {
 // Función para realizar el login y guardar el token
 export async function login(credentials) {
     try {
-        const response = await fetch('http://127.0.0.1:5000/api/auth/login', {
+        const response = await fetch('https://vitribackendflask.onrender.com/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ export async function logout() {
         const token = localStorage.getItem('access_token');
 
         // Realizar la solicitud de logout al backend con el token en el encabezado
-        const response = await fetch('http://127.0.0.1:5000/api/auth/logout', {
+        const response = await fetch('https://vitribackendflask.onrender.com/api/auth/logout', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`, // Enviar el token en los encabezados
@@ -100,7 +100,7 @@ export async function logout() {
 
 export async function createUser(userData) {
     try {
-        const response = await fetch('http://127.0.0.1:5000/api/auth/registro', {
+        const response = await fetch('https://vitribackendflask.onrender.com/api/auth/registro', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

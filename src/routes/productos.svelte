@@ -26,10 +26,9 @@
             if (productos.length > 0) {
                 jQuery('#tablaPedidos').DataTable({
                     order: [
-                        [1, 'dsc'] // Ordenar por estado (Pendiente primero)
+                        [1, 'dsc'], // Ordenar ultima actualizacion
                     ],
                     language: {
-                        order: [[0, 'desc']],
                         search: "Busqueda Dinámica",
                         lengthMenu: "Mostrar  _MENU_",
                         info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
@@ -49,20 +48,28 @@
         }, 100); // Revisa cada 300ms hasta que los pedidos se hayan cargado
     });
 
-    // Función para formatear la fecha en español
-    function formatearFecha(fechaISO) {
-        const fecha = new Date(fechaISO);
-        
-        // Formatear la fecha en español
-        const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric' };
-        const fechaFormateada = new Intl.DateTimeFormat('es-ES', opcionesFecha).format(fecha);
-        
-        // Obtener la hora por separado
-        const opcionesHora = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
-        const horaFormateada = new Intl.DateTimeFormat('es-ES', opcionesHora).format(fecha);
+// Función para formatear la fecha en español con "-"
+function formatearFecha(fechaISO) {
+    const fecha = new Date(fechaISO);
 
-        return { fechaFormateada, horaFormateada };
-    }
+    if (isNaN(fecha.getTime())) return { fechaFormateada: "Fecha inválida", horaFormateada: "" };
+
+    // Obtener la fecha en UTC
+    const dia = String(fecha.getUTCDate()).padStart(2, '0');
+    const mes = String(fecha.getUTCMonth() + 1).padStart(2, '0'); // +1 porque los meses van de 0 a 11
+    const anio = fecha.getUTCFullYear();
+
+    // Obtener la hora en UTC
+    const horas = String(fecha.getUTCHours()).padStart(2, '0');
+    const minutos = String(fecha.getUTCMinutes()).padStart(2, '0');
+    const segundos = String(fecha.getUTCSeconds()).padStart(2, '0');
+
+    return { 
+        fechaFormateada: `${anio}-${mes}-${dia}`, 
+        horaFormateada: `${horas}:${minutos}:${segundos}`
+    };
+}
+
 
 </script>
 
@@ -107,7 +114,7 @@
                                     
                                 </td>
                                 <td class="d-none">
-                                    <p class="text-sm mb-0"><span class="font-weight-bold">{formatearFecha(values.fecha_actualizacion).fechaFormateada} {formatearFecha(values.fecha_actualizacion).horaFormateada}</span></p>
+                                    <p class=" mb-0"><span class="font-weight-bold">{formatearFecha(values.fecha_actualizacion).fechaFormateada} {formatearFecha(values.fecha_actualizacion).horaFormateada}</span></p>
                                     
                                 </td>
 

@@ -14,7 +14,7 @@
 
         // Si hay un id, obtener detalles del producto (ya como JSON)
         if (id) {
-          const producto = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/banner/${id}`);
+          const producto = await fetchWithAuth(`https://vitribackendflask.onrender.com/api/admin/banner/${id}`);
           if (producto) {
 
             posicion_y = producto.posicion_y;
@@ -37,8 +37,8 @@
     try {
       const method = id ? "PATCH" : "POST";
       const url = id
-        ? `http://127.0.0.1:5000/api/admin/banner/${id}`
-        : "http://127.0.0.1:5000/api/admin/banner";
+        ? `https://vitribackendflask.onrender.com/api/admin/banner/${id}`
+        : "https://vitribackendflask.onrender.com/api/admin/banner";
 
       // Usar fetchWithAuth en lugar de fetch
       const data = await fetchWithAuth(url, {

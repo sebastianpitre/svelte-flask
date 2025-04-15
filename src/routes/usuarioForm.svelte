@@ -22,7 +22,7 @@
 
         // Si hay un id, obtener detalles del producto (ya como JSON)
         if (id) {
-          const user = await fetchWithAuth(`http://127.0.0.1:5000/api/admin/usuarios/${id}`);
+          const user = await fetchWithAuth(`https://vitribackendflask.onrender.com/api/admin/usuarios/${id}`);
           if (user) {
 
             nombres = user.nombres || "";
@@ -63,7 +63,7 @@
 
     try {
       const method = id ? "PATCH" : "POST";
-      const url = id ? `http://127.0.0.1:5000/api/admin/usuarios/${id}` : "http://127.0.0.1:5000/api/admin/usuarios/";
+      const url = id ? `https://vitribackendflask.onrender.com/api/admin/usuarios/${id}` : "https://vitribackendflask.onrender.com/api/admin/usuarios/";
 
       const response = await fetchWithAuth(url, {
         method,
