@@ -37,6 +37,7 @@
 </script>
 
 
+<div class="mt-5">
     <div class="position-fixed bottom-1 d-md-none mb-n1" style="z-index: 999; width: 100%;">
         <div class="container-fluid">
             <div class="row mx-sebas" style="border-radius: 0.60rem;">
@@ -151,6 +152,8 @@
         </div>
     </div>
 
+</div>
+    
     
 
 <style>

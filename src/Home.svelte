@@ -152,7 +152,13 @@
                 <div class="{clasesCard} {cantidadProductoEnHistorial(producto.id) >= producto.max_usuario && producto.max_usuario > 0 ? 'order-last' : ''}">
                   <Card {producto} addToCart={handleAddToCart}/>
                 </div>
+                {:else}
+              <div class="text-center my-2">
+                <img class="opacity-4" src="./img/unavailable_icon.webp" alt="No products available" style="width: 50px; height: auto;">
+                <p class="text-muted mt-3">No hay productos disponibles en esta categoría.</p>
+              </div>
               {/if}
+              
             {/each}
           </div>
         {/each}
@@ -186,7 +192,8 @@
       <BtnAnuncio/>
     {/if}
 
-    <Menufooter/>
+      <Menufooter/>
+    
 
     <Footer/>
 </main>
